@@ -14,6 +14,10 @@ bundle install
 rake db:create
 rake db:migrate
 ```
+*start your server in your console:
+```
+rails s
+```
 
 ### PUSHING CODE TO STAGING ENVIRONMENTS
 Email Hova or Andreas to get added to the heroku apps. Once you are added, you can add remotes by running these commands in your console:
