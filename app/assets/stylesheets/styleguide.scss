@@ -3,6 +3,7 @@
 //BASE STYLES
 html{
   color: $base-font-color;
+  font-family: $base-font-family;
   p{
     font-family: $base-font-family;
     font-size: $base-p-font-size;
@@ -47,6 +48,7 @@ button{
     }
   }
   p{
+    font-family: $base-font-family;
     letter-spacing: $standard-padding/10;
   }
 }
@@ -66,7 +68,6 @@ button{
   ul{
     float: right;
     li{
-      font-family: $base-font-family;
       font-size: $base-p-font-size;
       letter-spacing: $base-letter-spacing;
       display: inline-block;
@@ -87,11 +88,13 @@ footer{
   text-align: center;
   padding: $standard-padding;
   p{
-    line-height: $standard-padding;
+    line-height: $standard-padding/1.5;
     margin: 0;
     padding: 0;
+    font-family: $base-font-family;
+    font-size: $standard-padding/2.5;
     &.ecf{
-      font-size: $standard-padding/1.5;
+      font-size: $standard-padding/2;
     }
   }
 }
