@@ -1,0 +1,28 @@
+//COLORS:
+//style guide colors
+$moonbeam:        #0e2045;
+$moonbeam-light:  #224269;
+$ocean:           #10b4ac;
+$ocean-light:     #61c5bc;
+$camero:          #c5203d;
+$camero-light:    #d4466d;
+//other colors
+$white:           #ffffff;
+$dark-gray:       #1e2021;
+$light-gray:      #5f6669;
+
+
+//MARGIN & PADDING
+$standard-padding: 30px;
+
+//FONTS
+$base-font-color:         $dark-gray;
+$base-line-height:        $standard-padding;
+$base-letter-spacing:     $standard-padding/10;
+//headers
+$base-h-font-family:    "Space Mono";
+$base-h-letter-spacing: $standard-padding/10;
+//paragraphs
+$base-font-family:      "Open Sans";
+$base-p-font-size:      $standard-padding/2;
+$base-p-letter-spacing: $standard-padding/30;
