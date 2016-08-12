@@ -8,9 +8,9 @@
   <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
-</body>
+  <body id="<%= params[:controller]%>" class="<%= params[:action]%>">
+    <%= render partial: "layouts/topnav" %>
+    <%= yield %>
+    <%= render partial: "layouts/footer" %>
+  </body>
 </html>

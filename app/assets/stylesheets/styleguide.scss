@@ -22,8 +22,8 @@ button{
   padding: $standard-padding/1.5 $standard-padding*1.5;
   letter-spacing: $base-letter-spacing;
   &.cta{
-    background-color: $camero;
-    border-bottom: $standard-padding/3 solid $camero-dark;
+    background-color: $camero-dark;
+    border-bottom: $standard-padding/3 solid $camero-darker;
   }
 }
 
@@ -34,7 +34,7 @@ button{
   background-position: center;
   background-size: cover;
   text-align: center;
-  padding: $standard-padding*5 $standard-padding;
+  padding: $standard-padding*4 $standard-padding;
   color: $white;
   button{
     margin-top: $standard-padding;
@@ -51,7 +51,47 @@ button{
   }
 }
 
+//TOP NAV
+#top-nav{
+  position: absolute;
+  width: 100%;
+  img{
+    &.logo{
+      max-width: $standard-padding*2;
+      position: relative;
+      top: $standard-padding/2;
+      float: left;
+    }
+  }
+  ul{
+    float: right;
+    li{
+      font-family: $base-font-family;
+      font-size: $base-p-font-size;
+      letter-spacing: $base-letter-spacing;
+      display: inline-block;
+      padding: $standard-padding $standard-padding/2;
+      color: $white;
+    }
+  }
+}
+
 //FOOTER
 footer{
-
+  background-color: $moonbeam-dark;
+  height: $standard-padding*2;
+}
+#lower-footer{
+  color: $moonbeam-light;
+  background-color: $moonbeam-regular;
+  text-align: center;
+  padding: $standard-padding;
+  p{
+    line-height: $standard-padding;
+    margin: 0;
+    padding: 0;
+    &.ecf{
+      font-size: $standard-padding/1.5;
+    }
+  }
 }
