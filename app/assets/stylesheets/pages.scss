@@ -1,0 +1,9 @@
+@import "styleguide-variables";
+
+#pages{
+  &.index{
+    #hero{
+      background-image: url(asset_path("pages/home/hero.jpg"));
+    }
+  }
+}
