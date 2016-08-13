@@ -1,5 +1,17 @@
 @import "styleguide-variables";
 
+//AREA STYLES
+.area{
+  padding:$area-padding;
+  h1{
+    text-align: center;
+    margin-top: 0;
+  }
+  p{
+    margin-bottom: 0;
+  }
+}
+
 //BASE STYLES
 html{
   color: $base-font-color;
@@ -17,7 +29,6 @@ html{
 }
 
 //BUTTON STYLES
-
 button{
   border: 0;
   padding: $standard-padding/1.5 $standard-padding*1.5;
@@ -28,15 +39,63 @@ button{
   }
 }
 
-.area{
-  padding:$area-padding;
-  h1{
-    text-align: center;
-    margin-top: 0;
-  }
+//FOOTER
+footer{
+  background-color: $moonbeam-dark;
+  height: $standard-padding*2;
+}
+#lower-footer{
+  color: $moonbeam-light;
+  background-color: $moonbeam-regular;
+  text-align: center;
+  padding: $standard-padding;
   p{
-    margin-bottom: 0;
+    line-height: $standard-padding/1.5;
+    margin: 0;
+    padding: 0;
+    font-family: $base-font-family;
+    font-size: $standard-padding/2.5;
+    &.ecf{
+      font-size: $standard-padding/2;
+    }
   }
+}
+
+//FORM STYLES
+p{
+  &.label{
+    color: $base-font-color;
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    padding: $standard-padding/2 0 $standard-padding/3;
+    margin: 0;
+  }
+  &.nested-label{
+    padding-top: 0;
+  }
+}
+
+input{
+  border: 1px solid $moonbeam-light;
+  border-radius: 0;
+  padding: $standard-padding/3;
+  width: 100%;
+  &[type=submit] {
+    background-color: $camero-dark;
+    color: $white;
+    margin-top: $standard-padding;
+    border: none;
+    padding: $standard-padding - 10;
+    letter-spacing: $base-letter-spacing;
+  }
+}
+
+select{
+  width: 100%;
+  padding: $standard-padding/3;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 //HERO STYLES
@@ -48,6 +107,9 @@ button{
   text-align: center;
   padding: $standard-padding*4 $standard-padding $standard-padding*2;
   color: $white;
+  a{
+    color: $white;
+  }
   button{
     margin-top: $standard-padding/2;
   }
@@ -62,6 +124,18 @@ button{
     font-family: $base-font-family;
     letter-spacing: $standard-padding/10;
   }
+}
+
+//MODAL STYLES
+
+.modal{
+  img{
+    width: 100%;
+  }
+}
+
+.modal-toggle{
+  cursor: pointer;
 }
 
 //TOP NAV
@@ -84,28 +158,6 @@ button{
       display: inline-block;
       padding: $standard-padding $standard-padding/2;
       color: $white;
-    }
-  }
-}
-
-//FOOTER
-footer{
-  background-color: $moonbeam-dark;
-  height: $standard-padding*2;
-}
-#lower-footer{
-  color: $moonbeam-light;
-  background-color: $moonbeam-regular;
-  text-align: center;
-  padding: $standard-padding;
-  p{
-    line-height: $standard-padding/1.5;
-    margin: 0;
-    padding: 0;
-    font-family: $base-font-family;
-    font-size: $standard-padding/2.5;
-    &.ecf{
-      font-size: $standard-padding/2;
     }
   }
 }
