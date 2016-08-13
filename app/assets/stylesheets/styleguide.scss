@@ -28,6 +28,17 @@ button{
   }
 }
 
+.area{
+  padding:$area-padding;
+  h1{
+    text-align: center;
+    margin-top: 0;
+  }
+  p{
+    margin-bottom: 0;
+  }
+}
+
 //HERO STYLES
 #hero{
   background-image: url(asset_path("pages/home/hero.jpg"));
@@ -35,10 +46,10 @@ button{
   background-position: center;
   background-size: cover;
   text-align: center;
-  padding: $standard-padding*4 $standard-padding;
+  padding: $standard-padding*4 $standard-padding $standard-padding*2;
   color: $white;
   button{
-    margin-top: $standard-padding;
+    margin-top: $standard-padding/2;
   }
   h1{
     font-size: $standard-padding*3;
