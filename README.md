@@ -28,10 +28,20 @@ staging 1
 git remote add staging1 https://git.heroku.com/limbforge-staging1.git
 ```
 
+to push to it on local:
+
+```
+git push staging1 name-of-your-branch:master
+```
+
 staging 2
 
 ```
 git remote add staging2 https://git.heroku.com/limbforge-staging2.git
+```
+
+```
+git push staging2 name-of-your-branch:master
 ```
 
 Make sure you are logged into heroku in your console:
