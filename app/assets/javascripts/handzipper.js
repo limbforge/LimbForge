@@ -1,15 +1,58 @@
+var specs = {
+  hand: "left",
+  design: "EbeArm/Ebe_forearm",
+  size: 100,
+  fname: "Max",
+  lname: "Hova",
+  l1: 23,
+  c4: 23,
+  design: {
+    name: "",
+    directory: ""
+  }
+};
+
 $( "#limbforge" ).ready(function() {
   $("#limbforge-submit").click(function(){
+    specs.hand = $('#handedness-selector').val().charAt(0).toUpperCase();
+    specs.fname = $("#fname").val();
+    specs.lname = $("#lname").val();
+    specs.design = $('#design-selector').val();
+    specs.l1 = translateValueL1(Math.round($("#L1").val() * 10));
+    specs.c4 = translateValueC4(Math.round($("#C4").val() * 10));
     create_zip();
   });
 });
 
+function translateValueL1(input){
+  // removing decimal from number
+  var base_num = parseFloat(input.toFixed(1).toString().replace(".", ""));
+  // round up to nearest 5
+  var result = ((Math.ceil(base_num/5)*5)/10);
+  return result
+}
+
+function translateValueC4(input){
+  // removing decimal from number
+  var base_num = parseFloat(input.toFixed(1).toString().replace(".", ""));
+  // round down to nearest 5
+  var result = ((Math.floor(base_num/5)*5)/10);
+  return result
+}
+
+function zipFileName(specs){
+  var today = new Date();
+  var formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+  var zip_name = specs.lname.replace(/ /g,'') + "_" + specs.fname.replace(/ /g,'') + "_forearm_" + specs.hand.charAt(0).toUpperCase() + "_" + formatted_date + ".zip";
+  return zip_name;
+}
+
 function create_zip() {
   var zip = new JSZip();
-  var zipFilename = "super-legit.zip";
+  var zipFilename = zipFileName(specs);
+  var url1 = 'https://s3.amazonaws.com/limbforge/' + specs.design + "_" + specs.hand + "/forearm_" + specs.hand + "_C4-" + specs.c4 + "_L1-" + specs.l1+ '.stl';
   var urls = [
-    'https://s3.amazonaws.com/limbforge/EbeArm/Ebe_forearm_L/forearm_L_C4-200_L1-220.stl',
-    'https://s3-us-west-2.amazonaws.com/test-dcc67e4a-9949-42c3-9609-666e4dd87e48/disco.stl',
+    url1
   ];
 
   var count = 0;
