@@ -2,8 +2,8 @@ var specs = {
   hand: "left",
   design: "EbeArm/Ebe_forearm",
   size: 100,
-  fname: "Max",
-  lname: "Hova",
+  fname: "Forge",
+  lname: "Limb",
   l1: 23,
   c4: 23,
   design: {
@@ -15,11 +15,13 @@ var specs = {
 $( "#limbforge" ).ready(function() {
   $("#limbforge-submit").click(function(){
     specs.hand = $('#handedness-selector').val().charAt(0).toUpperCase();
-    specs.fname = $("#fname").val();
-    specs.lname = $("#lname").val();
+    specs.fname = $("#fname").val() == "" ? specs.fname : $("#fname").val();
+    specs.lname = $("#lname").val() == "" ? specs.lname : $("#lname").val();
     specs.design = $('#design-selector').val();
     specs.l1 = translateValueL1(Math.round($("#L1").val() * 10));
     specs.c4 = translateValueC4(Math.round($("#C4").val() * 10));
+    if (typeof specs.l1 != "number" ||specs.l1 > 300 || specs.l1 < 220) throw alert("Expected L1 size to be a number between 22cm - 30cm");
+    if (typeof specs.c4 != "number" ||specs.c4 > 300 || specs.c4 < 200) throw alert("Expected C4 size to be a number between 20cm - 30cm");
     create_zip();
   });
 });
