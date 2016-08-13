@@ -1,15 +1,15 @@
 <div id="limbforge">
   <h1>LIMBFORGE</h1>
-  <form>
+  <form id="limbforge-form">
     <div class="handedness">
       <p class="label">Hand</p>
-      <select id="designSelector">
+      <select id="handedness-selector">
         <option value="r">Right</option>
         <option value="l">Left</option>
       </select>
     </div>
     <p class="label">Model</p>
-    <select id="designSelector">
+    <select id="design-selector">
       <option value="Ebearm">ebearm</option>
     </select>
     <div class="row">
@@ -40,6 +40,6 @@
         <input id="C4"  type="number" min="20" max="30" step='0.5' placeholder="20.0" name="c4"><br>
       </div>
     </div>
-    <input type="submit" value="Download">
+    <div id="limbforge-submit">Download</div>
   </form>
 </div>

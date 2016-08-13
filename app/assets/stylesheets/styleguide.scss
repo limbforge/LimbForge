@@ -107,6 +107,9 @@ select{
   text-align: center;
   padding: $standard-padding*4 $standard-padding $standard-padding*2;
   color: $white;
+  a{
+    color: $white;
+  }
   button{
     margin-top: $standard-padding/2;
   }

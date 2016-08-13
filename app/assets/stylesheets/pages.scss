@@ -21,4 +21,16 @@
   .lname{
     padding-left: 0;
   }
+  #limbforge-submit{
+    border-radius: 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    background-color: $camero-dark;
+    color: $white;
+    margin-top: $standard-padding;
+    border: none;
+    padding: $standard-padding - 10;
+    letter-spacing: $base-letter-spacing;
+  }
 }
