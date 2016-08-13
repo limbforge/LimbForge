@@ -27,7 +27,7 @@
         <input id="lname" type="text" placeholder="Hova" name="name"><br>
       </div>
     </div>
-    <p class="label">Sizing Measurements <span class="question" data-toggle="modal" data-target="#measurementModal">?</span></p>
+    <p class="label">Sizing Measurements <span class="modal-toggle" data-toggle="modal" data-target="#measurementModal">?</span></p>
     <div class="row">
       <div class="measurement-1 col-xs-6">
         <p class="label nested-label">Sound Limb</p>
@@ -43,3 +43,5 @@
     <div id="limbforge-submit">Download</div>
   </form>
 </div>
+
+<%= render partial: "modalMeasurement"%>

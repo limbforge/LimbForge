@@ -126,6 +126,18 @@ select{
   }
 }
 
+//MODAL STYLES
+
+.modal{
+  img{
+    width: 100%;
+  }
+}
+
+.modal-toggle{
+  cursor: pointer;
+}
+
 //TOP NAV
 #top-nav{
   position: absolute;
