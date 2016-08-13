@@ -1,9 +1,24 @@
 @import "styleguide-variables";
-
 #pages{
   &.index{
     #hero{
       background-image: url(asset_path("pages/home/hero.jpg"));
     }
+  }
+}
+
+#limbforge{
+  background-color: #f5f5f5;
+  max-width: 350px;
+  padding: $standard-padding/2;
+  position: relative;
+  .fname{
+    padding-right: 0;
+    input{
+      border-right: 0;
+    }
+  }
+  .lname{
+    padding-left: 0;
   }
 }
