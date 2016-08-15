@@ -18,4 +18,9 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require handLoader/three.js
+//= require handLoader/STLLoader.js
+//= require handLoader/Detector.js
+//= require handLoader/OrbitControls.js
+//= require handLoader/handLoader.js
 //= require_tree .
