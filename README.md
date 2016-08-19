@@ -9,7 +9,7 @@ Check it out live [HERE](http://limbforge.herokuapp.com/)
     
 2.You will need to have the most reccent version of xcode & xcode developer tools installed.
 
-3.You will also need to have [Postgres installed](http://postgresapp.com/) on your local before starting step 4. Run:
+3.You will also need to have [Postgres installed](http://postgresapp.com/) on your local before starting step 4. Download and install the app, and then in your project's folder run:
 
 ```
 brew install libpqxx
