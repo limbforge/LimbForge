@@ -12,7 +12,7 @@ var specs = {
   }
 };
 
-$( "#limbforge" ).ready(function() {
+$(document).on('turbolinks:load', function() {
   $("#limbforge-submit").click(function(){
     specs.hand = $('#handedness-selector').val().charAt(0).toUpperCase();
     specs.fname = $("#fname").val() == "" ? specs.fname : $("#fname").val();
@@ -52,10 +52,19 @@ function zipFileName(specs){
 function create_zip() {
   var zip = new JSZip();
   var zipFilename = zipFileName(specs);
-  var url1 = 'https://s3.amazonaws.com/limbforge/' + specs.design + "_" + specs.hand + "/forearm_" + specs.hand + "_C4-" + specs.c4 + "_L1-" + specs.l1+ '.stl';
-  var urls = [
-    url1
-  ];
+  var urls = [];
+  populateURLS();
+  console.log(specs);
+
+  //generate AWS urls for zip file
+  function populateURLS() {
+    urls.push('https://s3.amazonaws.com/limbforge/' + this.specs.design + "/Ebe_forearm_" + this.specs.hand + "/forearm_" + this.specs.hand + "_C4-" + this.specs.c4 + "_L1-" + this.specs.l1+ '.stl');
+    // add on terminal device adaptor
+    if (this.specs.design == "EbeArm"){
+      urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/EbeArm_wrist_unit+v1.stl');
+    }
+  }
+
 
   var count = 0;
   // We're asynchronously asking for all of the files
