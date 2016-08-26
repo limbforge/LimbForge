@@ -1,3 +1,8 @@
-// Place all the styles related to the measurements controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "styleguide-variables";
+
+.form-container{
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+  padding: $standard-padding*2 0;
+}

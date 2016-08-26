@@ -1,44 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @measurement.name %>
-</p>
+<div class="container">
+  <h1><%= @measurement.name %></h1>
 
-<p>
-  <strong>Step:</strong>
-  <%= @measurement.step %>
-</p>
+  <p>
+    <strong>Step:</strong>
+    <%= @measurement.step %>
+  </p>
 
-<p>
-  <strong>Measurement unit:</strong>
-  <%= @measurement.measurement_unit %>
-</p>
+  <p>
+    <strong>Measurement unit:</strong>
+    <%= @measurement.measurement_unit %>
+  </p>
 
-<p>
-  <strong>Diagram:</strong>
-  <%= @measurement.diagram %>
-</p>
+  <p>
+    <strong>Diagram:</strong>
+    <%= @measurement.diagram %>
+  </p>
 
-<p>
-  <strong>Lower range:</strong>
-  <%= @measurement.lower_range %>
-</p>
+  <p>
+    <strong>Lower range:</strong>
+    <%= @measurement.lower_range %>
+  </p>
 
-<p>
-  <strong>Upper range:</strong>
-  <%= @measurement.upper_range %>
-</p>
+  <p>
+    <strong>Upper range:</strong>
+    <%= @measurement.upper_range %>
+  </p>
 
-<p>
-  <strong>Default:</strong>
-  <%= @measurement.default %>
-</p>
+  <p>
+    <strong>Default:</strong>
+    <%= @measurement.default %>
+  </p>
 
-<p>
-  <strong>Instructions:</strong>
-  <%= @measurement.instructions %>
-</p>
-
-<%= link_to 'Edit', edit_measurement_path(@measurement) %> |
-<%= link_to 'Back', measurements_path %>
+  <p>
+    <strong>Instructions:</strong>
+    <%= @measurement.instructions %>
+  </p>
+  <%= link_to 'Edit', edit_measurement_path(@measurement) %> |
+  <%= link_to 'Back', measurements_path %>
+</div>

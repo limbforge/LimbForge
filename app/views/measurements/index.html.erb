@@ -1,41 +1,31 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <h1>Limb Measurements</h1>
+  <div class="row">
+    <div class="col-xs-3">
+      <h3> Name</h3>
+    </div>
+    <div class="col-xs-9">
+      <h3>Actions</h3>
+    </div>
+  </div>
 
-<h1>Listing Measurements</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Step</th>
-      <th>Measurement unit</th>
-      <th>Diagram</th>
-      <th>Lower range</th>
-      <th>Upper range</th>
-      <th>Default</th>
-      <th>Instructions</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @measurements.each do |measurement| %>
-      <tr>
-        <td><%= measurement.name %></td>
-        <td><%= measurement.step %></td>
-        <td><%= measurement.measurement_unit %></td>
-        <td><%= measurement.diagram %></td>
-        <td><%= measurement.lower_range %></td>
-        <td><%= measurement.upper_range %></td>
-        <td><%= measurement.default %></td>
-        <td><%= measurement.instructions %></td>
-        <td><%= link_to 'Show', measurement %></td>
-        <td><%= link_to 'Edit', edit_measurement_path(measurement) %></td>
-        <td><%= link_to 'Destroy', measurement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+  <% @measurements.order('name ASC').each do |measurement| %>
+    <div class="row">
+      <div class="col-xs-3">
+        <p><strong><%= measurement.name %></strong></p>
+      </div>
+      <div class="col-xs-9">
+        <p>
+          <%= link_to 'Show', measurement , class: "link"%>
+          <%= link_to 'Edit', edit_measurement_path(measurement), class: "link" %>
+          <%= link_to 'Delete', measurement, method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <a href="<%= new_measurement_path%>">
+    <button>Add new Measurement</button>
+  </a>
+</div>
 <br>
-
-<%= link_to 'New Measurement', new_measurement_path %>
