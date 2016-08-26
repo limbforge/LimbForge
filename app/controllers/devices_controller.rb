@@ -14,20 +14,27 @@ class DevicesController < ApplicationController
 
   # GET /devices/new
   def new
+    @measurements = Measurement.all
     @device = Device.new
   end
 
   # GET /devices/1/edit
   def edit
+    @measurements = Measurement.all
   end
 
   # POST /devices
   # POST /devices.json
   def create
     @device = Device.new(device_params)
-
     respond_to do |format|
       if @device.save
+        # add to join tables
+        @device.measurements.clear
+        params[:measurements].each do |measurement|
+          @device.measurements.push(Measurement.find(measurement))
+        end
+        #redirects
         format.html { redirect_to @device, notice: 'Device was successfully created.' }
         format.json { render :show, status: :created, location: @device }
       else
@@ -42,6 +49,11 @@ class DevicesController < ApplicationController
   def update
     respond_to do |format|
       if @device.update(device_params)
+        # add to join tables
+        @device.measurements.clear
+        params[:measurements].each do |measurement|
+          @device.measurements.push(Measurement.find(measurement))
+        end
         format.html { redirect_to @device, notice: 'Device was successfully updated.' }
         format.json { render :show, status: :ok, location: @device }
       else

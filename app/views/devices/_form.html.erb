@@ -19,10 +19,11 @@
     <%= f.label :icon %><br>
     <%= f.text_field :icon %>
   </div>
-  <div class="field">
-    <%= f.label :orientations %><br>
-    <%= f.text_field :orientations %>
-  </div>
+  <%= f.label "measurements you will need" %><br>
+  <% @measurements.order(:name).each do |measurement| %>
+    <%= check_box_tag "measurements[]" , measurement.id , @device.measurements.include?(measurement) ? true : false %>
+     <p> <%= measurement.name%></p>
+   <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
