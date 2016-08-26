@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Measurements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Step</th>
+      <th>Measurement unit</th>
+      <th>Diagram</th>
+      <th>Lower range</th>
+      <th>Upper range</th>
+      <th>Default</th>
+      <th>Instructions</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @measurements.each do |measurement| %>
+      <tr>
+        <td><%= measurement.name %></td>
+        <td><%= measurement.step %></td>
+        <td><%= measurement.measurement_unit %></td>
+        <td><%= measurement.diagram %></td>
+        <td><%= measurement.lower_range %></td>
+        <td><%= measurement.upper_range %></td>
+        <td><%= measurement.default %></td>
+        <td><%= measurement.instructions %></td>
+        <td><%= link_to 'Show', measurement %></td>
+        <td><%= link_to 'Edit', edit_measurement_path(measurement) %></td>
+        <td><%= link_to 'Destroy', measurement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Measurement', new_measurement_path %>

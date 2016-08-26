@@ -11,10 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811045523) do
+ActiveRecord::Schema.define(version: 20160826181632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "devices", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devices_measurements", id: false, force: :cascade do |t|
+    t.integer "device_id"
+    t.integer "measurement_id"
+  end
+
+  add_index "devices_measurements", ["device_id", "measurement_id"], name: "index_devices_measurements_on_device_id_and_measurement_id", using: :btree
+
+  create_table "measurements", force: :cascade do |t|
+    t.string   "name"
+    t.float    "step"
+    t.string   "measurement_unit"
+    t.string   "diagram"
+    t.float    "lower_range"
+    t.float    "upper_range"
+    t.float    "default"
+    t.string   "instructions"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "pages", force: :cascade do |t|
     t.datetime "created_at", null: false
