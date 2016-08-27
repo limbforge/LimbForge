@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
+gem 'dotenv-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem "recaptcha", require: "recaptcha/rails"
 # Use devise for user sessions
 gem 'devise'
 # Use pry for debugging Ruby
