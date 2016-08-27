@@ -11,6 +11,9 @@ gem "recaptcha", require: "recaptcha/rails"
 gem 'devise'
 # Use pry for debugging Ruby
 gem 'pry'
+gem 'paperclip'
+gem 'aws-sdk', '< 2.0'
+gem 'rmagick'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
