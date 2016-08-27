@@ -4,9 +4,10 @@
   <title>Limbforge</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <% #google fonts %>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+  <% #typekit fonts %>  
+  <script src="https://use.typekit.net/jdg6lwz.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
   <% #meta tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tags %>

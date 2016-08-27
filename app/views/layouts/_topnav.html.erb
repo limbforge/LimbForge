@@ -1,8 +1,9 @@
 <div id="top-nav" class="<%= params[:controller] + params[:action] %>">
   <div class="container">
-    <img class="logo" src="<%= asset_path("brand/logo.svg") %>">
+    <a href="<%= root_path %>">
+      <img class="logo" src="<%= asset_path("brand/logo.svg") %>">
+    </a>
     <ul>
-      <li>Contact us</li>
       <% if user_signed_in?%>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %>   </li>
       <% else %>
