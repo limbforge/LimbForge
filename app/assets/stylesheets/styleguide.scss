@@ -48,6 +48,7 @@ html{
 button{
   border: 0;
   color: $white;
+  font-weight: bold;
   background: $camero-dark;
   padding: $standard-padding/1.5 $standard-padding*1.5;
   letter-spacing: $base-letter-spacing;
@@ -59,13 +60,28 @@ button{
 
 //FOOTER
 footer{
-  background-color: $moonbeam-dark;
-  height: $standard-padding*2;
-  margin-top: $standard-padding*3;
+  background-color: $regular-gray;
+  padding: $standard-padding*2 0;
+  ul{
+    display: block;
+    margin: 0 auto;
+    max-width: 340px;
+    padding-left: 0;
+    li {
+      display: inline-block;
+    }
+  }
+  .circle{
+    background-color: $camero-dark;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: 0 $standard-padding;
+  }
 }
 #lower-footer{
-  color: $moonbeam-light;
-  background-color: $moonbeam-regular;
+  color: $light-gray;
+  background-color: $dark-gray;
   text-align: center;
   padding: $standard-padding;
   p{
@@ -95,6 +111,12 @@ p{
   }
 }
 
+label{
+  text-transform: uppercase;
+  margin-top: $standard-padding/2;
+  letter-spacing: 1px;
+}
+
 input{
   border: 1px solid $moonbeam-light;
   border-radius: 0;
@@ -103,6 +125,8 @@ input{
   &[type=submit] {
     background-color: $camero-dark;
     color: $white;
+    text-transform: uppercase;
+    font-weight: bold;
     margin-top: $standard-padding;
     border: none;
     padding: $standard-padding - 10;
@@ -133,15 +157,24 @@ select{
     margin-top: $standard-padding/2;
   }
   h1{
-    font-size: $standard-padding*3;
+    font-size: $standard-padding*4;
+    font-weight: bold;
     letter-spacing: $standard-padding/2;
     @media (max-width: $screen-sm-max) {
-      font-size: $standard-padding;
+      font-size: $standard-padding*3;
+    }
+    @media (max-width: $screen-xs-max) {
+      font-size: $standard-padding*1.2;
     }
   }
   p{
     font-family: $base-font-family;
     letter-spacing: $standard-padding/10;
+    font-size: $standard-padding;
+    margin-top: $standard-padding/2 * -1;
+    @media (max-width: $screen-sm-max) {
+      font-size: $standard-padding/2;
+    }
   }
 }
 
@@ -170,14 +203,25 @@ select{
   &.pagesindex{
     background: none;
     box-shadow: none;
+    a{
+      color: $white;
+    }
     li{
       color: $white;
+    }
+  }
+  a{
+    &:hover{
+      background: none;
+      text-decoration: none;
+      color: $camero-dark;
     }
   }
   img{
     &.logo{
       max-width: $standard-padding*2;
       position: relative;
+      fill: $camero-dark;
       top: $standard-padding/2;
       float: left;
     }

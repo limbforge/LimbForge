@@ -12,8 +12,9 @@ $camero-regular:  #d4466d;
 $camero-light:    #f3c4cf;
 //other colors
 $white:           #ffffff;
-$dark-gray:       #1e2021;
-$light-gray:      #5f6669;
+$dark-gray:       #1c1d22;
+$regular-gray:    #2a2b30;
+$light-gray:      #bdbdbd;
 
 //MARGIN & PADDING
 $standard-padding: 30px;
@@ -24,11 +25,11 @@ $base-font-color:         $dark-gray;
 $base-line-height:        $standard-padding;
 $base-letter-spacing:     $standard-padding/10;
 //headers
-$base-h-font-family:    "Space Mono";
-$base-h-letter-spacing: $standard-padding/10;
+$base-h-font-family:    "ff-tisa-sans-web-pro";
+$base-h-letter-spacing: $standard-padding/30;
 //paragraphs
-$base-font-family:      "Open Sans";
-$base-p-font-size:      $standard-padding/2;
+$base-font-family:      "ff-tisa-sans-web-pro";
+$base-p-font-size:      18px;
 $base-p-letter-spacing: $standard-padding/30;
 
 
