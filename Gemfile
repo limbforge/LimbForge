@@ -7,7 +7,9 @@ gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-
+# Use devise for user sessions
+gem 'devise'
+# Use pry for debugging Ruby
 gem 'pry'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
