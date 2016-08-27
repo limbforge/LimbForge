@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :icon %><br>
-    <%= f.text_field :icon %>
+    <%= f.file_field :icon %>
   </div>
   <%= f.label "measurements you will need" %><br>
   <% @measurements.order(:name).each do |measurement| %>
