@@ -1,0 +1,8 @@
+@import "styleguide-variables";
+
+.form-container{
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+  padding: $standard-padding*2 0;
+}

@@ -1,0 +1,30 @@
+<%= form_for(@device) do |f| %>
+  <% if @device.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+
+      <ul>
+      <% @device.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :icon %><br>
+    <%= f.text_field :icon %>
+  </div>
+  <%= f.label "measurements you will need" %><br>
+  <% @measurements.order(:name).each do |measurement| %>
+    <%= check_box_tag "measurements[]" , measurement.id , @device.measurements.include?(measurement) ? true : false %>
+     <p> <%= measurement.name%></p>
+   <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

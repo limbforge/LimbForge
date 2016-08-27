@@ -21,16 +21,34 @@ html{
     font-size: $base-p-font-size;
     letter-spacing: $base-p-letter-spacing;
     line-height: $base-line-height;
+    .link{
+      color: $white;
+      background: $moonbeam-dark;
+      padding: $standard-padding/6;
+    }
   }
   h1,h2,h3,h4,h5,h6{
     font-family: $base-h-font-family;
     letter-spacing: $base-h-letter-spacing;
+  }
+  body{
+    margin-top: $standard-padding*3;
+    &#pages{
+      &.index{
+        margin-top: 0;
+      }
+      &.limbforge{
+        margin-top: 0;
+      }
+    }
   }
 }
 
 //BUTTON STYLES
 button{
   border: 0;
+  color: $white;
+  background: $camero-dark;
   padding: $standard-padding/1.5 $standard-padding*1.5;
   letter-spacing: $base-letter-spacing;
   &.cta{
@@ -43,6 +61,7 @@ button{
 footer{
   background-color: $moonbeam-dark;
   height: $standard-padding*2;
+  margin-top: $standard-padding*3;
 }
 #lower-footer{
   color: $moonbeam-light;
@@ -141,7 +160,20 @@ select{
 //TOP NAV
 #top-nav{
   position: absolute;
+  top: 0;
   width: 100%;
+  background: $white;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.15);
+  &.pageslimbforge{
+    display: none;
+  }
+  &.pagesindex{
+    background: none;
+    box-shadow: none;
+    li{
+      color: $white;
+    }
+  }
   img{
     &.logo{
       max-width: $standard-padding*2;
@@ -157,7 +189,7 @@ select{
       letter-spacing: $base-letter-spacing;
       display: inline-block;
       padding: $standard-padding $standard-padding/2;
-      color: $white;
+      color: $base-font-color;
     }
   }
 }
