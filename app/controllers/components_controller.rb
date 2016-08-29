@@ -18,16 +18,20 @@ class ComponentsController < ApplicationController
   # GET /components/new
   def new
     @measurements = Measurement.all
+    @options = Option.all
     @amputation_levels  = AmputationLevel.all
     @component = Component.new
     @component_measurements = @component.measurements
     @component_amputation_level = @component.amputation_levels
+    @component_options = @component.options
   end
 
   # GET /components/1/edit
   def edit
     @amputation_levels  = AmputationLevel.all
     @component_amputation_level = @component.amputation_levels
+    @options = Option.all
+    @component_options = @component.options
     @measurements = Measurement.all
     @component_measurements = @component.measurements
   end
@@ -50,6 +54,13 @@ class ComponentsController < ApplicationController
           @component.amputation_levels.clear
           params[:levels].each do |level|
             @component.amputation_levels.push(AmputationLevel.find(level))
+          end
+        end
+        #reset options
+        if params[:options]
+          @component.options.clear
+          params[:options].each do |option|
+            @component.options.push(Option.find(option))
           end
         end
         format.html { redirect_to @component, notice: 'Component was successfully created.' }
@@ -78,6 +89,13 @@ class ComponentsController < ApplicationController
           @component.amputation_levels.clear
           params[:levels].each do |level|
             @component.amputation_levels.push(AmputationLevel.find(level))
+          end
+        end
+        #reset options
+        if params[:options]
+          @component.options.clear
+          params[:options].each do |option|
+            @component.options.push(Option.find(option))
           end
         end
         format.html { redirect_to @component, notice: 'Component was successfully updated.' }

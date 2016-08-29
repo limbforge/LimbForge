@@ -33,6 +33,11 @@
      <%= check_box_tag "levels[]" , level.id , @component_amputation_level.include?(level) ? true : false %>
       <p> <%= level.name%></p>
     <% end %>
+    <%= f.label "Options available" %><br>
+    <% @options.order(:name).each do |option| %>
+      <%= check_box_tag "options[]" , option.id , @component_options.include?(option) ? true : false %>
+       <p> <%= option.name%></p>
+    <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

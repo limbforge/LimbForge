@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :options
   resources :amputation_levels
   resources :components
   devise_for :users

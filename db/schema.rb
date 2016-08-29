@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829013357) do
+ActiveRecord::Schema.define(version: 20160829021556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20160829013357) do
 
   add_index "components_measurements", ["component_id", "measurement_id"], name: "components_measurements_unique", unique: true, using: :btree
 
+  create_table "components_options", id: false, force: :cascade do |t|
+    t.integer "component_id"
+    t.integer "option_id"
+  end
+
+  add_index "components_options", ["component_id", "option_id"], name: "components_options_unique", unique: true, using: :btree
+
   create_table "devices", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
@@ -82,6 +89,17 @@ ActiveRecord::Schema.define(version: 20160829013357) do
     t.string   "diagram_content_type"
     t.integer  "diagram_file_size"
     t.datetime "diagram_updated_at"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string   "name"
+    t.string   "photo"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "pages", force: :cascade do |t|
