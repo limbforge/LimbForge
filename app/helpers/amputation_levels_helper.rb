@@ -1,0 +1,2 @@
+module AmputationLevelsHelper
+end

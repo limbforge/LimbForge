@@ -21,9 +21,14 @@
   </div>
   <%= f.label "measurements you will need" %><br>
   <% @measurements.order(:name).each do |measurement| %>
-    <%= check_box_tag "measurements[]" , measurement.id , @component.measurements.include?(measurement) ? true : false %>
+    <%= check_box_tag "measurements[]" , measurement.id , @component_measurements.include?(measurement) ? true : false %>
      <p> <%= measurement.name%></p>
    <% end %>
+   <%= f.label "Level of Amputation" %><br>
+   <% @amputation_levels.order(:name).each do |level| %>
+     <%= check_box_tag "levels[]" , level.id , @component_amputation_level.include?(level) ? true : false %>
+      <p> <%= level.name%></p>
+    <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

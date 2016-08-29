@@ -18,12 +18,18 @@ class ComponentsController < ApplicationController
   # GET /components/new
   def new
     @measurements = Measurement.all
+    @amputation_levels  = AmputationLevel.all
     @component = Component.new
+    @component_measurements = @component.measurements
+    @component_amputation_level = @component.amputation_levels
   end
 
   # GET /components/1/edit
   def edit
+    @amputation_levels  = AmputationLevel.all
+    @component_amputation_level = @component.amputation_levels
     @measurements = Measurement.all
+    @component_measurements = @component.measurements
   end
 
   # POST /components
@@ -33,12 +39,19 @@ class ComponentsController < ApplicationController
 
     respond_to do |format|
       if @component.save
-        binding.pry
-        @component.measurements.clear
-        params[:measurements].each do |measurement|
-          @component.measurements.push(Measurement.find(measurement))
+        #reset measurements
+        if params[:measurements]
+          params[:measurements].each do |measurement|
+            @component.measurements.push(Measurement.find(measurement))
+          end
         end
-
+        #reset levels
+        if params[:levels]
+          @component.amputation_levels.clear
+          params[:levels].each do |level|
+            @component.amputation_levels.push(AmputationLevel.find(level))
+          end
+        end
         format.html { redirect_to @component, notice: 'Component was successfully created.' }
         format.json { render :show, status: :created, location: @component }
       else
@@ -53,6 +66,20 @@ class ComponentsController < ApplicationController
   def update
     respond_to do |format|
       if @component.update(component_params)
+        @component.measurements.clear
+        #reset measurements
+        if params[:measurements]
+          params[:measurements].each do |measurement|
+            @component.measurements.push(Measurement.find(measurement))
+          end
+        end
+        #reset levels
+        if params[:levels]
+          @component.amputation_levels.clear
+          params[:levels].each do |level|
+            @component.amputation_levels.push(AmputationLevel.find(level))
+          end
+        end
         format.html { redirect_to @component, notice: 'Component was successfully updated.' }
         format.json { render :show, status: :ok, location: @component }
       else
