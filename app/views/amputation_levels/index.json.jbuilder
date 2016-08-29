@@ -1,0 +1,1 @@
+json.array! @amputation_levels, partial: 'amputation_levels/amputation_level', as: :amputation_level

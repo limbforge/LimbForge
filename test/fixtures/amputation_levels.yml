@@ -2,10 +2,8 @@
 
 one:
   name: MyString
-  icon: MyString
-  orientations: 
+  description: MyString
 
 two:
   name: MyString
-  icon: MyString
-  orientations: 
+  description: MyString

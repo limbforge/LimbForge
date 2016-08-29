@@ -1,0 +1,1 @@
+json.partial! "amputation_levels/amputation_level", amputation_level: @amputation_level

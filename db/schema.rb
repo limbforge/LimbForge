@@ -11,10 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827190912) do
+ActiveRecord::Schema.define(version: 20160829021556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "amputation_levels", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "amputation_levels_components", id: false, force: :cascade do |t|
+    t.integer "amputation_level_id"
+    t.integer "component_id"
+  end
+
+  add_index "amputation_levels_components", ["amputation_level_id", "component_id"], name: "amputation_levels_components_unique", unique: true, using: :btree
+
+  create_table "components", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.float    "version"
+  end
+
+  create_table "components_measurements", id: false, force: :cascade do |t|
+    t.integer "component_id"
+    t.integer "measurement_id"
+  end
+
+  add_index "components_measurements", ["component_id", "measurement_id"], name: "components_measurements_unique", unique: true, using: :btree
+
+  create_table "components_options", id: false, force: :cascade do |t|
+    t.integer "component_id"
+    t.integer "option_id"
+  end
+
+  add_index "components_options", ["component_id", "option_id"], name: "components_options_unique", unique: true, using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +89,17 @@ ActiveRecord::Schema.define(version: 20160827190912) do
     t.string   "diagram_content_type"
     t.integer  "diagram_file_size"
     t.datetime "diagram_updated_at"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string   "name"
+    t.string   "photo"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "pages", force: :cascade do |t|
