@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :components
   devise_for :users
-  resources :devices
   resources :measurements
   resources :pages
   # The priority is based upon order of creation: first created -> highest priority.
