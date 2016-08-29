@@ -8647,3 +8647,503 @@ Processing by ComponentsController#edit as HTML
   Rendered layouts/_topnav.html.erb (0.7ms)
   Rendered layouts/_footer.html.erb (0.0ms)
 Completed 200 OK in 78ms (Views: 72.8ms | ActiveRecord: 1.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddVersionToComponents (20160829013357)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "components" ADD "version" float[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160829013357"]]
+  [1m[36m (10.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'amputation_levels'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.3ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'amputation_levels_components'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'components'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'components_measurements'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'devices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'devices_measurements'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.7ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'measurements'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'pages'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.9ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/" for ::1 at 2016-08-28 18:36:26 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (1.5ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered layouts/_topnav.html.erb (23.3ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 558ms (Views: 541.2ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/amputation_levels.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/bootstrap_and_overrides.self-b85ec57930a7e57658a355f494c8fca5e2691f1a1ed6bfd67ddfbf962e55a7ac.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/measurements.self-09363b19e1fcb0413824c19e6d14a1fde512ab5ca7845e3ba8482592532b48ed.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/pages.self-27dc5868945c9b3a7d63ade5900dc69dbf17624012bd89abd7311f75e6150fc1.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/scaffolds.self-4d76ec709e7ef369dcbe489701ff641d47f55b49eca0b33b49bc4233d37dcdc0.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/styleguide-variables.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/styleguide.self-6fcab5adfe0808fb1778f5ffc76ce158e9ddc0727819b54a23da24dfd15c406f.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/twitter/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/twitter/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react.self-e3251ec4ec5e08041151d49a171f772e6b6236b38ad62c101e29be367138f487.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_mount.self-529311908dc83d0737d62f1a5eb4e2fa326f2040e2d2755b4fd78d2c09c5cc15.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_turbolinks.self-19cb50a828b179c80e0ef6463ceb612ae3e75f377fb2dd6f4afdc3b46ae75d56.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_turbolinks_classic.self-763df8fa4c0b0551840f5244b265843641523ad3bf7bb308d20801ac5cde2acb.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_turbolinks_classic_deprecated.self-f93fc4217cec084020eaf90b0425c454ba18d4ee1a054f254f5dba461eaab1a4.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_pjax.self-e8fc58103934b6c8054d5fbfe37ec92f2ef7719bc90566026fe9fe19e0e2cf45.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_native.self-69da92af440ae3f522e7294876ed2bae234447ee564d1619c9f69d53e1020a8a.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs_event_setup.self-0cd254aea0ec32dd175eff42a443f912c283295c0235384ae7cd425cd8f7c3e5.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/react_ujs.self-538d6440534fa5f615e8a26932792a82a2e4a33a97886e2d815eab8fc216d415.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/components.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/handLoader/three.self-388298fb5f57d88882eade96e9bdd35dcf1cdb501722f7502fe4ae9fde556e0c.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/handLoader/STLLoader.self-ecd1e51e6dd974849b7ae1a3edd990d408af10cd0daf20c06eee7d5aec208e01.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/handLoader/Detector.self-baf3dce712d19890a9bb27d310c6403573253b95cccfe38f8463c763a1f9e206.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/handLoader/OrbitControls.self-8a48df4251f5f9eb19253ea1add4139a12485478e04c70bfa106e4377562a257.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/handLoader/handLoader.self-9eb9f6455af1a6aabae7a1c316177d09cf42880de06ad15dff8d140fbd41c0f6.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/FileSaver.min.self-f4eb6fbef4494b3d66fd079022ef8f3d800e478e0516ab3898b14aac135393fd.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/amputation_levels.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/handzipper.self-74752bb491d49d40e8e8b041aa5fa900fd48ea9d57bcaed25dfc12444670c14e.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/jszip-utils.min.self-d53c8f8036e0333437dad77cd0db01707f56e64f87c3a81f185fd51e20c0f1c4.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/jszip.min.self-973142d06c4e0e0741925ce19b866ddb29af4df578fbbb4efa003766a475ba4d.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/measurements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/assets/application.self-e088abdec24c652728c331cc53f5d2286e096b6080fa2bacfba79c56847e932e.js?body=1" for ::1 at 2016-08-28 18:36:27 -0700
+
+
+Started GET "/components" for ::1 at 2016-08-28 18:36:30 -0700
+Processing by ComponentsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mComponent Load (0.8ms)[0m  SELECT "components".* FROM "components"  ORDER BY name ASC
+  Rendered components/index.html.erb within layouts/application (11.9ms)
+  Rendered layouts/_topnav.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 95ms (Views: 72.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/components/2" for ::1 at 2016-08-28 18:36:33 -0700
+Processing by ComponentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mComponent Load (0.3ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered components/show.html.erb within layouts/application (1.8ms)
+  Rendered layouts/_topnav.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 72ms (Views: 63.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/components/2/edit" for ::1 at 2016-08-28 18:36:36 -0700
+Processing by ComponentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mComponent Load (0.4ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mMeasurement Load (0.7ms)[0m  [1mSELECT "measurements".* FROM "measurements"  ORDER BY "measurements"."name" ASC[0m
+  [1m[35mMeasurement Exists (0.3ms)[0m  SELECT  1 AS one FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1 AND "measurements"."id" = $2 LIMIT 1  [["component_id", 2], ["id", 1]]
+  [1m[36mAmputationLevel Load (0.4ms)[0m  [1mSELECT "amputation_levels".* FROM "amputation_levels"  ORDER BY "amputation_levels"."name" ASC[0m
+  [1m[35mAmputationLevel Exists (0.4ms)[0m  SELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1  [["component_id", 2], ["id", 1]]
+  [1m[36mAmputationLevel Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1[0m  [["component_id", 2], ["id", 2]]
+  Rendered components/_form.html.erb (49.5ms)
+  Rendered components/edit.html.erb within layouts/application (51.1ms)
+  Rendered layouts/_topnav.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 168ms (Views: 120.5ms | ActiveRecord: 8.1ms)
+
+
+Started PATCH "/components/2" for ::1 at 2016-08-28 18:36:38 -0700
+Processing by ComponentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"D/IbB/Tvwic3f3D1U1QBdEC67sWFTykC+iUFWFuqGBtj3mDjxBZefM43MXaLT6XMe7BbaVnqbJOPnIM/SD6G2w==", "component"=>{"name"=>"derp", "version"=>"2"}, "measurements"=>["1"], "levels"=>["1", "2"], "commit"=>"Update Component", "id"=>"2"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Unpermitted parameter: version
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mMeasurement Load (0.4ms)[0m  SELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1  [["component_id", 2]]
+  [1m[36mSQL (5.4ms)[0m  [1mDELETE FROM "components_measurements" WHERE "components_measurements"."component_id" = $1 AND "components_measurements"."measurement_id" = 1[0m  [["component_id", 2]]
+  [1m[35mMeasurement Load (0.2ms)[0m  SELECT  "measurements".* FROM "measurements" WHERE "measurements"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "components_measurements" ("component_id", "measurement_id") VALUES ($1, $2)  [["component_id", 2], ["measurement_id", 1]]
+  [1m[36m (5.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mAmputationLevel Load (0.3ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1  [["component_id", 2]]
+  [1m[36mSQL (5.4ms)[0m  [1mDELETE FROM "amputation_levels_components" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels_components"."amputation_level_id" IN (1, 2)[0m  [["component_id", 2]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 2], ["amputation_level_id", 1]]
+  [1m[36m (4.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 2], ["amputation_level_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/components/2
+Completed 302 Found in 49ms (ActiveRecord: 24.7ms)
+
+
+Started GET "/components/2" for ::1 at 2016-08-28 18:36:38 -0700
+Processing by ComponentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered components/show.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_topnav.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 71ms (Views: 69.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/components/2" for ::1 at 2016-08-28 18:36:43 -0700
+Processing by ComponentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mComponent Load (0.3ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered components/show.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_topnav.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 76ms (Views: 73.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/components/2/edit" for ::1 at 2016-08-28 18:36:56 -0700
+Processing by ComponentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mMeasurement Load (0.3ms)[0m  SELECT "measurements".* FROM "measurements"  ORDER BY "measurements"."name" ASC
+  [1m[36mMeasurement Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1 AND "measurements"."id" = $2 LIMIT 1[0m  [["component_id", 2], ["id", 1]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"  ORDER BY "amputation_levels"."name" ASC
+  [1m[36mAmputationLevel Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1[0m  [["component_id", 2], ["id", 1]]
+  [1m[35mAmputationLevel Exists (0.3ms)[0m  SELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1  [["component_id", 2], ["id", 2]]
+  Rendered components/_form.html.erb (21.5ms)
+  Rendered components/edit.html.erb within layouts/application (22.5ms)
+  Rendered layouts/_topnav.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 131ms (Views: 75.4ms | ActiveRecord: 7.6ms)
+
+
+Started PATCH "/components/2" for ::1 at 2016-08-28 18:37:00 -0700
+Processing by ComponentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VGc6zBbRhznvunPHEPiKCCUTvaco9iCQFCGOHw3JEB84S0EoJigbYhbyMkTI4y6wHhkIC/RTZQFhmAh4Hl2O3w==", "component"=>{"name"=>"derp", "version"=>"2"}, "levels"=>["1", "2"], "commit"=>"Update Component", "id"=>"2"}
+  [1m[36mComponent Load (0.2ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE "components" SET "version" = $1, "updated_at" = $2 WHERE "components"."id" = $3  [["version", 2.0], ["updated_at", "2016-08-29 01:37:00.106636"], ["id", 2]]
+  [1m[36m (5.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mMeasurement Load (0.3ms)[0m  SELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1  [["component_id", 2]]
+  [1m[36mSQL (4.3ms)[0m  [1mDELETE FROM "components_measurements" WHERE "components_measurements"."component_id" = $1 AND "components_measurements"."measurement_id" = 1[0m  [["component_id", 2]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1  [["component_id", 2]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "amputation_levels_components" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels_components"."amputation_level_id" IN (1, 2)[0m  [["component_id", 2]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 2], ["amputation_level_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 2], ["amputation_level_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/components/2
+Completed 302 Found in 29ms (ActiveRecord: 13.5ms)
+
+
+Started GET "/components/2" for ::1 at 2016-08-28 18:37:00 -0700
+Processing by ComponentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered components/show.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_topnav.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 60ms (Views: 57.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/components" for ::1 at 2016-08-28 18:37:03 -0700
+Processing by ComponentsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mComponent Load (0.3ms)[0m  [1mSELECT "components".* FROM "components"  ORDER BY name ASC[0m
+  Rendered components/index.html.erb within layouts/application (1.6ms)
+  Rendered layouts/_topnav.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 76ms (Views: 73.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/components/3/edit" for ::1 at 2016-08-28 18:37:05 -0700
+Processing by ComponentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mMeasurement Load (0.3ms)[0m  SELECT "measurements".* FROM "measurements"  ORDER BY "measurements"."name" ASC
+  [1m[36mMeasurement Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1 AND "measurements"."id" = $2 LIMIT 1[0m  [["component_id", 3], ["id", 1]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"  ORDER BY "amputation_levels"."name" ASC
+  [1m[36mAmputationLevel Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1[0m  [["component_id", 3], ["id", 1]]
+  [1m[35mAmputationLevel Exists (0.2ms)[0m  SELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1  [["component_id", 3], ["id", 2]]
+  Rendered components/_form.html.erb (7.9ms)
+  Rendered components/edit.html.erb within layouts/application (9.1ms)
+  Rendered layouts/_topnav.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 81ms (Views: 75.0ms | ActiveRecord: 1.7ms)
+
+
+Started PATCH "/components/3" for ::1 at 2016-08-28 18:37:08 -0700
+Processing by ComponentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZObSltWB6ebhE/l44RbevNXSYI0L2Ptw7uzLzts6tOYIyqly5Xh1vRhbuPs5DXoE7tjVIdd9vuGbVU2pyK4qJg==", "component"=>{"name"=>"derp2", "version"=>"2"}, "measurements"=>["1"], "levels"=>["2"], "commit"=>"Update Component", "id"=>"3"}
+  [1m[36mComponent Load (0.2ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "components" SET "version" = $1, "updated_at" = $2 WHERE "components"."id" = $3  [["version", 2.0], ["updated_at", "2016-08-29 01:37:08.836070"], ["id", 3]]
+  [1m[36m (5.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mMeasurement Load (0.4ms)[0m  SELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1  [["component_id", 3]]
+  [1m[36mSQL (4.3ms)[0m  [1mDELETE FROM "components_measurements" WHERE "components_measurements"."component_id" = $1 AND "components_measurements"."measurement_id" = 1[0m  [["component_id", 3]]
+  [1m[35mMeasurement Load (0.2ms)[0m  SELECT  "measurements".* FROM "measurements" WHERE "measurements"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "components_measurements" ("component_id", "measurement_id") VALUES ($1, $2)  [["component_id", 3], ["measurement_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1  [["component_id", 3]]
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "amputation_levels_components" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels_components"."amputation_level_id" = 2[0m  [["component_id", 3]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 3], ["amputation_level_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/components/3
+Completed 302 Found in 26ms (ActiveRecord: 13.4ms)
+
+
+Started GET "/components/3" for ::1 at 2016-08-28 18:37:08 -0700
+Processing by ComponentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered components/show.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_topnav.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 68ms (Views: 65.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/components" for ::1 at 2016-08-28 18:37:11 -0700
+Processing by ComponentsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mComponent Load (0.3ms)[0m  [1mSELECT "components".* FROM "components"  ORDER BY name ASC[0m
+  Rendered components/index.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_topnav.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 72ms (Views: 68.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/components/2/edit" for ::1 at 2016-08-28 18:37:12 -0700
+Processing by ComponentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mMeasurement Load (0.5ms)[0m  SELECT "measurements".* FROM "measurements"  ORDER BY "measurements"."name" ASC
+  [1m[36mMeasurement Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1 AND "measurements"."id" = $2 LIMIT 1[0m  [["component_id", 2], ["id", 1]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"  ORDER BY "amputation_levels"."name" ASC
+  [1m[36mAmputationLevel Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1[0m  [["component_id", 2], ["id", 1]]
+  [1m[35mAmputationLevel Exists (0.1ms)[0m  SELECT  1 AS one FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels"."id" = $2 LIMIT 1  [["component_id", 2], ["id", 2]]
+  Rendered components/_form.html.erb (9.1ms)
+  Rendered components/edit.html.erb within layouts/application (10.3ms)
+  Rendered layouts/_topnav.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 78ms (Views: 72.9ms | ActiveRecord: 1.6ms)
+
+
+Started PATCH "/components/2" for ::1 at 2016-08-28 18:37:14 -0700
+Processing by ComponentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"C0cxqNSh09PhcOfSpsU7kEORHxwEYstaGQVT/XyI5Ixna0pM5FhPiBg4plF+3p8oeJuqsNjHjstsvNWabxx6TA==", "component"=>{"name"=>"derp", "version"=>"1"}, "levels"=>["1", "2"], "commit"=>"Update Component", "id"=>"2"}
+  [1m[36mComponent Load (0.2ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "components" SET "version" = $1, "updated_at" = $2 WHERE "components"."id" = $3  [["version", 1.0], ["updated_at", "2016-08-29 01:37:14.987287"], ["id", 2]]
+  [1m[36m (5.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mMeasurement Load (0.2ms)[0m  SELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1  [["component_id", 2]]
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "components_measurements" WHERE "components_measurements"."component_id" = $1 AND 1=0[0m  [["component_id", 2]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels" INNER JOIN "amputation_levels_components" ON "amputation_levels"."id" = "amputation_levels_components"."amputation_level_id" WHERE "amputation_levels_components"."component_id" = $1  [["component_id", 2]]
+  [1m[36mSQL (4.2ms)[0m  [1mDELETE FROM "amputation_levels_components" WHERE "amputation_levels_components"."component_id" = $1 AND "amputation_levels_components"."amputation_level_id" IN (1, 2)[0m  [["component_id", 2]]
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 2], ["amputation_level_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mAmputationLevel Load (0.1ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "amputation_levels_components" ("component_id", "amputation_level_id") VALUES ($1, $2)  [["component_id", 2], ["amputation_level_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/components/2
+Completed 302 Found in 22ms (ActiveRecord: 12.4ms)
+
+
+Started GET "/components/2" for ::1 at 2016-08-28 18:37:15 -0700
+Processing by ComponentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered components/show.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_topnav.html.erb (0.6ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 60ms (Views: 57.8ms | ActiveRecord: 0.3ms)
