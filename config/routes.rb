@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'pages#index'
 
+  get '/dashboard' => 'pages#dashboard', as: :admin_dashboard
   get '/limbforge' => 'pages#limbforge', as: :limbforge
 
   # Example of regular route:

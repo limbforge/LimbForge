@@ -32,7 +32,7 @@ html{
     letter-spacing: $base-h-letter-spacing;
   }
   body{
-    margin-top: $standard-padding*3;
+    margin-top: 85px;
     &#pages{
       &.index{
         margin-top: 0;
@@ -228,6 +228,7 @@ select{
   }
   ul{
     float: right;
+    margin-bottom: 0;
     li{
       font-size: $base-p-font-size;
       letter-spacing: $base-letter-spacing;
