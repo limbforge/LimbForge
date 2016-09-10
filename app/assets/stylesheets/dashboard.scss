@@ -1,5 +1,8 @@
 @import "styleguide-variables";
 
+#dashboard{
+  min-height: 500px;
+}
 #dashboard-nav{
   background-color: $regular-gray;
   ul{
