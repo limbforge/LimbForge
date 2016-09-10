@@ -1,19 +1,21 @@
+<%= render 'pages/dashboardnav'%>
 <p id="notice"><%= notice %></p>
+<div class="container form-padding">
+  <p>
+    <strong>Name:</strong>
+    <%= @component.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @component.name %>
-</p>
+  <p>
+    <strong>Version:</strong>
+    <%= @component.version %>
+  </p>
 
-<p>
-  <strong>Version:</strong>
-  <%= @component.version %>
-</p>
+  <p>
+    <strong>Icon:</strong>
+    <img src="<%= @component.icon.url(:square)%>">
+  </p>
 
-<p>
-  <strong>Icon:</strong>
-  <img src="<%= @component.icon.url(:square)%>">
-</p>
-
-<%= link_to 'Edit', edit_component_path(@component) %> |
-<%= link_to 'Back', components_path %>
+  <%= link_to 'Edit', edit_component_path(@component) %> |
+  <%= link_to 'Back', components_path %>
+</div>

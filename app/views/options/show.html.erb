@@ -1,14 +1,16 @@
+<%= render 'pages/dashboardnav'%>
 <p id="notice"><%= notice %></p>
+<div class="container form-padding">
+  <p>
+    <strong>Name:</strong>
+    <%= @option.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @option.name %>
-</p>
+  <p>
+    <strong>Photo:</strong>
+    <%= @option.photo %>
+  </p>
 
-<p>
-  <strong>Photo:</strong>
-  <%= @option.photo %>
-</p>
-
-<%= link_to 'Edit', edit_option_path(@option) %> |
-<%= link_to 'Back', options_path %>
+  <%= link_to 'Edit', edit_option_path(@option) %> |
+  <%= link_to 'Back', options_path %>
+</div>

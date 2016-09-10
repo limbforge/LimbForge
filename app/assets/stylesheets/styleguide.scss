@@ -27,12 +27,17 @@ html{
       padding: $standard-padding/6;
     }
   }
+  a{
+    &:hover{
+      text-decoration: none;
+    }
+  }
   h1,h2,h3,h4,h5,h6{
     font-family: $base-h-font-family;
     letter-spacing: $base-h-letter-spacing;
   }
   body{
-    margin-top: $standard-padding*3;
+    margin-top: 85px;
     &#pages{
       &.index{
         margin-top: 0;
@@ -211,23 +216,27 @@ select{
     }
   }
   a{
+    color: $dark-gray;
     &:hover{
       background: none;
       text-decoration: none;
       color: $camero-dark;
+      text-decoration: none;
     }
   }
   img{
     &.logo{
-      max-width: $standard-padding*2;
+      max-width: 50px;
       position: relative;
       fill: $camero-dark;
       top: $standard-padding/2;
       float: left;
+      left: $standard-padding/2;
     }
   }
   ul{
     float: right;
+    margin-bottom: 0;
     li{
       font-size: $base-p-font-size;
       letter-spacing: $base-letter-spacing;
