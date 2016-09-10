@@ -27,6 +27,11 @@ html{
       padding: $standard-padding/6;
     }
   }
+  a{
+    &:hover{
+      text-decoration: none;
+    }
+  }
   h1,h2,h3,h4,h5,h6{
     font-family: $base-h-font-family;
     letter-spacing: $base-h-letter-spacing;
@@ -211,19 +216,22 @@ select{
     }
   }
   a{
+    color: $dark-gray;
     &:hover{
       background: none;
       text-decoration: none;
       color: $camero-dark;
+      text-decoration: none;
     }
   }
   img{
     &.logo{
-      max-width: $standard-padding*2;
+      max-width: 50px;
       position: relative;
       fill: $camero-dark;
       top: $standard-padding/2;
       float: left;
+      left: $standard-padding/2;
     }
   }
   ul{

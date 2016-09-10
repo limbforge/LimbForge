@@ -11,10 +11,34 @@
       color: $white;
       padding: $standard-padding/2;
       display: inline-block;
+      @media (max-width: $screen-xs-max) {
+        padding: $standard-padding/2 9.7px;
+      }
       a{
         color: $white;
+        font-family: $base-font-family;
         letter-spacing: 2px;
+        @media (max-width: $screen-xs-max) {
+          font-size: 12px;
+          letter-spacing: 1;
+        }
+      }
+      &.active{
+        background-color: $white;
+        a{
+          color: $regular-gray;
+        }
       }
     }
+  }
+}
+
+.form-padding{
+  padding: $standard-padding*2 0;
+  @media (max-width: $screen-xs-max) {
+    padding: $standard-padding*2 $standard-padding;
+  }
+  .col-xs-3{
+    margin-bottom: 10px;
   }
 }

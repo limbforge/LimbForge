@@ -1,8 +1,8 @@
 <div id="dashboard-nav">
   <ul>
-    <li><%= link_to "Components", components_path %></li>
-    <li><%= link_to "Measurements", measurements_path %></li>
-    <li><%= link_to "Options",options_path %></li>
-    <li><%= link_to "Levels", amputation_levels_path %></li>
+    <li class="<%= params[:controller] == "components" ? "active" : ""%>"> <%= link_to "Components", components_path %></li>
+    <li class="<%= params[:controller] == "measurements" ? "active" : ""%>"><%= link_to "Measurements", measurements_path %></li>
+    <li class="<%= params[:controller] == "options" ? "active" : ""%>"><%= link_to "Options",options_path %></li>
+    <li class="<%= params[:controller] == "amputation_levels" ? "active" : ""%>"><%= link_to "Levels", amputation_levels_path %></li>
   </ul>
 </div>
