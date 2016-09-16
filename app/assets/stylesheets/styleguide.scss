@@ -12,6 +12,18 @@
   }
 }
 
+//LINKS
+
+a{
+  border-bottom: 3px solid $camero-dark;
+  box-shadow: inset 0 -2px 0 $camero-dark;
+  color: $base-font-color;
+  &:hover{
+    color: $base-font-color;
+    background-color: $camero-dark;
+  }
+}
+
 //BASE STYLES
 html{
   color: $base-font-color;
@@ -118,7 +130,6 @@ p{
 
 label{
   text-transform: uppercase;
-  margin-top: $standard-padding/2;
   letter-spacing: 1px;
 }
 
@@ -129,6 +140,7 @@ input{
   letter-spacing: 2px;
   padding: $standard-padding/3;
   width: 100%;
+  margin-bottom: $standard-padding/1.5;
   &:focus{
     outline: none;
   }
@@ -222,6 +234,8 @@ select{
   }
   a{
     color: $dark-gray;
+    border-bottom: 0px;
+    box-shadow:  none;
     @media (max-width: $screen-xs-max) {
       font-size: 15px;
     }
