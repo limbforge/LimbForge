@@ -36,6 +36,8 @@ html{
     .link{
       color: $white;
       background: $moonbeam-dark;
+      border-bottom: 0px;
+      box-shadow: none;
       padding: $standard-padding/6;
     }
   }

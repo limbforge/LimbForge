@@ -23,6 +23,11 @@
     <%= f.label :icon %><br>
     <%= f.file_field :icon %>
   </div>
+  <%= f.label "Component Type" %><br>
+  <% @component_types.order(:name).each do |type| %>
+    <%= check_box_tag "component_types[]" , type.id , @current_component_types.include?(type) ? true : false %>
+     <p> <%=  type.name%></p>
+   <% end %>
   <%= f.label "measurements you will need" %><br>
   <% @measurements.order(:name).each do |measurement| %>
     <%= check_box_tag "measurements[]" , measurement.id , @component_measurements.include?(measurement) ? true : false %>

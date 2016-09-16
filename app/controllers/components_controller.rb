@@ -20,9 +20,11 @@ class ComponentsController < ApplicationController
     @measurements = Measurement.all
     @options = Option.all
     @amputation_levels  = AmputationLevel.all
+    @component_types = ComponentType.all
     @component = Component.new
     @component_measurements = @component.measurements
     @component_amputation_level = @component.amputation_levels
+    @current_component_types= @component.component_types
     @component_options = @component.options
   end
 
@@ -34,6 +36,8 @@ class ComponentsController < ApplicationController
     @component_options = @component.options
     @measurements = Measurement.all
     @component_measurements = @component.measurements
+    @component_types = ComponentType.all
+    @current_component_types= @component.component_types
   end
 
   # POST /components
@@ -51,16 +55,20 @@ class ComponentsController < ApplicationController
         end
         #reset levels
         if params[:levels]
-          @component.amputation_levels.clear
           params[:levels].each do |level|
             @component.amputation_levels.push(AmputationLevel.find(level))
           end
         end
         #reset options
         if params[:options]
-          @component.options.clear
           params[:options].each do |option|
             @component.options.push(Option.find(option))
+          end
+        end
+        #set component Types
+        if params[:component_types]
+          params[:component_types].each do |type|
+            @component.component_types.push(ComponentType.find(type))
           end
         end
         format.html { redirect_to @component, notice: 'Component was successfully created.' }
@@ -96,6 +104,13 @@ class ComponentsController < ApplicationController
           @component.options.clear
           params[:options].each do |option|
             @component.options.push(Option.find(option))
+          end
+        end
+        #reset component Types
+        if params[:component_types]
+          @component.component_types.clear
+          params[:component_types].each do |type|
+            @component.component_types.push(ComponentType.find(type))
           end
         end
         format.html { redirect_to @component, notice: 'Component was successfully updated.' }
