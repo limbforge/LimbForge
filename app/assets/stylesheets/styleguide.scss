@@ -33,7 +33,7 @@ html{
     }
   }
   h1,h2,h3,h4,h5,h6{
-    font-family: $base-h-font-family;
+    font-family: $base-font-family;
     letter-spacing: $base-h-letter-spacing;
   }
   body{
@@ -123,10 +123,15 @@ label{
 }
 
 input{
-  border: 1px solid $moonbeam-light;
+  border: 0;
+  border-bottom: 3px solid $dark-gray;
   border-radius: 0;
+  letter-spacing: 2px;
   padding: $standard-padding/3;
   width: 100%;
+  &:focus{
+    outline: none;
+  }
   &[type=submit] {
     background-color: $camero-dark;
     color: $white;
@@ -217,6 +222,9 @@ select{
   }
   a{
     color: $dark-gray;
+    @media (max-width: $screen-xs-max) {
+      font-size: 15px;
+    }
     &:hover{
       background: none;
       text-decoration: none;
@@ -237,12 +245,16 @@ select{
   ul{
     float: right;
     margin-bottom: 0;
+    margin-left: 0;
     li{
       font-size: $base-p-font-size;
       letter-spacing: $base-letter-spacing;
       display: inline-block;
       padding: $standard-padding $standard-padding/2;
       color: $base-font-color;
+      @media (max-width: $screen-xs-max) {
+        padding: $standard-padding $standard-padding/5;
+      }
     }
   }
 }

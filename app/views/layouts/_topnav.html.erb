@@ -3,6 +3,7 @@
     <img class="logo" src="<%= asset_path("brand/logo.svg") %>">
   </a>
   <ul>
+    <li><%= link_to('Make', limbforge_path) %> </li>
     <% if user_signed_in?%>
       <% if current_user.admin %>
         <li><%= link_to('Dashboard', admin_dashboard_path) %> </li>
