@@ -145,6 +145,7 @@ var LimbforgeForm = React.createClass({
 
     return (
       <div id="limbforge">
+        <img className="logo" src={this.props.logo_img} />
         <h1 id="title">LIMBFORGE</h1>
         <div className="row">
           <div className="col-xs-12">

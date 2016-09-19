@@ -39,6 +39,12 @@
       cursor: pointer;
       padding: 0 $standard-padding/2 $standard-padding/2;
     }
+    &.logo{
+      max-width: 27px;
+      float: left;
+      margin-right: 10px;
+      margin-top: 7px;
+    }
   }
   #limbforge-submit{
     border-radius: 0;
