@@ -100,19 +100,20 @@ var LimbforgeForm = React.createClass({
     var newSpecs = self.state.specs;
     newSpecs.TD = event.target.value;
     self.state.specs = newSpecs;
+    if self.state.specs.TD != undefined {
+      loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + event.target.value + '.stl', function ( geometry ) {
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set( 0, 0, 0 );
+        mesh.rotation.set(0, Math.PI, Math.PI/2 );
+        mesh.scale.set( .02, .02, .02 );
 
-    loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + event.target.value + '.stl', function ( geometry ) {
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( 0, 0, 0 );
-      mesh.rotation.set(0, Math.PI, Math.PI/2 );
-      mesh.scale.set( .02, .02, .02 );
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
 
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-
-      scene.add( mesh );
-      render();
-    });
+        scene.add( mesh );
+        render();
+      });
+    }
   },
   updateDisplay: function() {
     var self = this;
