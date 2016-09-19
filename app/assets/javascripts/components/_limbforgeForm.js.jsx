@@ -1,14 +1,5 @@
 var loader = new THREE.STLLoader();
 var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 100 } );
-var updateParameters= function(event){
-  // look if C4 or L1
-  // check if it's a valid number
-  //if valid, update the state
-  if (event.target.name == "L1"){
-
-  }
-  debugger;
-};
 
 var LimbforgeForm = React.createClass({
   componentWillMount(){
@@ -81,11 +72,9 @@ var LimbforgeForm = React.createClass({
     });
   },
   getMeasurements: function(event) {
-    debugger;
     var newSpecs = this.state.specs;
     newSpecs.component = event.target.value;
     this.setState({specs: newSpecs});
-    debugger;
     this.showModelDefault();
     this.getTDs(event.target.value);
     $.ajax({
@@ -102,12 +91,13 @@ var LimbforgeForm = React.createClass({
     var newSpecs = this.state.specs;
     newSpecs.orientation = event.target.value.charAt(0).toUpperCase();
     this.setState({specs: newSpecs});
+    scene.remove(scene.children[3]);
     this.updateDisplay();
   },
   updateDisplay: function() {
     var self = this;
     scene.remove(scene.children[3]);
-    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-200_L1-230.stl', function ( geometry ) {
+    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
       var mesh = new THREE.Mesh( geometry, material );
 
       if (self.state.specs.orientation == "R"){
@@ -126,7 +116,36 @@ var LimbforgeForm = React.createClass({
       render();
     });
   },
+  updateParameters: function(event){
+    // look if C4 or L1
+    // check if it's a valid number
+    //if valid, update the state
+    if (event.target.name == "L1"){
+      var L1Value = Number(event.target.value);
+      var L1Measurements = this.state.measurements.find(function(measurement) {
+        return measurement.name == "L1";
+      });
+      if (L1Measurements && L1Measurements.lower_range < L1Value && L1Measurements.upper_range > L1Value) {
+        var newSpecs = this.state.specs;
+        newSpecs.L1 = L1Value;
+        this.state.specs = newSpecs;
+        this.updateDisplay();
+      }
+    } else if (event.target.name == "C4") {
+      var C4Value = Number(event.target.value);
+      var C4Measurements = this.state.measurements.find(function(measurement) {
+        return measurement.name == "C4";
+      });
+      if (C4Measurements && C4Measurements.lower_range < C4Value && C4Measurements.upper_range > C4Value) {
+        var newSpecs = this.state.specs;
+        newSpecs.C4 = C4Value;
+        this.state.specs = newSpecs;
+        this.updateDisplay();
+      }
+    }
+  },
   render: function() {
+    var self = this;
     var amputationLevelOptions = this.props.levels.map(function(option) {
       return (
         <option value={option.name} key={option.name} >
@@ -167,7 +186,7 @@ var LimbforgeForm = React.createClass({
         return (
           <div key={option.name} className="col-xs-6">
             <p className="label nested-label">{option.name}</p>
-            <input id={option.name} type="text" onChange={updateParameters} max={option.upper_range} min={option.lower_range} placeholder={option.default} name={option.name}/>
+            <input id={option.name} type="text" onChange={self.updateParameters} max={option.upper_range} min={option.lower_range} placeholder={option.default} name={option.name}/>
           </div>
         );
       });
