@@ -89,7 +89,7 @@ var LimbforgeForm = React.createClass({
     var self = this;
     var loader = new THREE.STLLoader();
     var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
-    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_L/forearm_L_C4-200_L1-230.stl', function ( geometry ) {
+    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_L/forearm_L_C4-250_L1-250.stl', function ( geometry ) {
       var mesh = new THREE.Mesh( geometry, material );
       mesh.position.set( 0, 0, 0 );
       mesh.rotation.set( 0, 0, 0 );
@@ -153,21 +153,37 @@ var LimbforgeForm = React.createClass({
     var self = this;
     scene.remove(scene.children[4]);
     var newSpecs = self.state.specs;
-    newSpecs.TD = event.target.value;
+    if (event.target.value == ""){
+      newSpecs.TD = undefined;
+    }
+    else{
+      newSpecs.TD = event.target.value;
+    }
     self.state.specs = newSpecs;
     if (self.state.specs.TD != undefined) {
       loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + event.target.value + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set( 0, 0, 0 );
+        mesh.position.set( 0, 0, 3.3 );
         mesh.rotation.set(0, Math.PI, Math.PI/2 );
         mesh.scale.set( .02, .02, .02 );
 
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-
+        if (self.state.specs.orientation == "R" && self.state.specs.TD != undefined){
+          scene.children[3].position.set( -2.4, 0, 3.3 );
+        }
+        if (self.state.specs.orientation == "L" && self.state.specs.TD != undefined){
+          scene.children[3].position.set( 0, 0, 3.3 );
+        }
         scene.add( mesh );
         render();
       });
+    }
+    if (self.state.specs.orientation == "R" && self.state.specs.TD == undefined){
+      scene.children[3].position.set( -2.4, 0, 0 );
+    }
+    if (self.state.specs.orientation == "L" && self.state.specs.TD == undefined){
+      scene.children[3].position.set( 0, 0, 0 );
     }
   },
   updateDisplay: function() {
@@ -176,12 +192,19 @@ var LimbforgeForm = React.createClass({
     loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
       var mesh = new THREE.Mesh( geometry, material );
 
-      if (self.state.specs.orientation == "R"){
-        mesh.position.set( -2.3, 0, 0 );
+      if (self.state.specs.orientation == "R" && self.state.specs.TD == undefined){
+        mesh.position.set( -2.4, 0, 0 );
       }
-      else{
+      if (self.state.specs.orientation == "R" && self.state.specs.TD != undefined){
+        mesh.position.set( -2.4, 0, 3.3 );
+      }
+      if (self.state.specs.orientation == "L" && self.state.specs.TD != undefined){
+        mesh.position.set( 0, 0, 3.3 );
+      }
+      if (self.state.specs.orientation == "L" && self.state.specs.TD == undefined){
         mesh.position.set( 0, 0, 0 );
       }
+
       mesh.rotation.set( 0, 0, 0 );
       mesh.scale.set( .02, .02, .02 );
 
@@ -194,7 +217,7 @@ var LimbforgeForm = React.createClass({
     if (self.state.specs.TD !== undefined){
       loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set( 0, 0, 0 );
+        mesh.position.set( 0, 0, 3.3 );
         mesh.rotation.set(0, Math.PI, Math.PI/2 );
         mesh.scale.set( .02, .02, .02 );
 
@@ -289,8 +312,7 @@ var LimbforgeForm = React.createClass({
           <div className="col-xs-12">
             <p className="label">Orientation</p>
             <select id="handedness-selector" onChange={this.updateOrientation}>
-              <option value="" key="default" >Select Orientation</option>
-              <option value="left" key="left" >Left</option>
+              <option selected="selected" value="left" key="left" >Left</option>
               <option value="right" key="right" >Right</option>
             </select>
           </div>
