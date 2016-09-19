@@ -34,9 +34,9 @@ var LimbforgeForm = React.createClass({
     var self = this;
     var loader = new THREE.STLLoader();
     var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
-    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_R/forearm_R_C4-200_L1-230.stl', function ( geometry ) {
+    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_L/forearm_L_C4-200_L1-230.stl', function ( geometry ) {
       var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set(-2.3,0,0);
+      mesh.position.set( 0, 0, 0 );
       mesh.rotation.set( 0, 0, 0 );
       mesh.scale.set( .02, .02, .02 );
 
@@ -94,6 +94,26 @@ var LimbforgeForm = React.createClass({
     scene.remove(scene.children[3]);
     this.updateDisplay();
   },
+  updateTerminalDevice: function(event){
+    var self = this;
+    scene.remove(scene.children[4]);
+    var newSpecs = self.state.specs;
+    newSpecs.TD = event.target.value;
+    self.state.specs = newSpecs;
+
+    loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + event.target.value + '.stl', function ( geometry ) {
+      var mesh = new THREE.Mesh( geometry, material );
+      mesh.position.set( 0, 0, 0 );
+      mesh.rotation.set(0, Math.PI, Math.PI/2 );
+      mesh.scale.set( .02, .02, .02 );
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+      scene.add( mesh );
+      render();
+    });
+  },
   updateDisplay: function() {
     var self = this;
     scene.remove(scene.children[3]);
@@ -115,6 +135,21 @@ var LimbforgeForm = React.createClass({
       scene.add( mesh );
       render();
     });
+    debugger;
+    if (self.state.specs.TD !== undefined){
+      loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set( 0, 0, 0 );
+        mesh.rotation.set(0, Math.PI, Math.PI/2 );
+        mesh.scale.set( .02, .02, .02 );
+
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+
+        scene.add( mesh );
+        render();
+      });
+    }
   },
   updateParameters: function(event){
     // look if C4 or L1
@@ -225,7 +260,7 @@ var LimbforgeForm = React.createClass({
       <div className="row">
         <div className="col-xs-12">
           <p className="label">Terminal Devices</p>
-          <select>
+          <select id="terminal-devices-select" onChange={this.updateTerminalDevice}>
             <option value="" >Select a Terminal Device</option>
             {tdOptions}
           </select>
