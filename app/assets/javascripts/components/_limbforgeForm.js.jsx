@@ -4,6 +4,61 @@ var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x11111
 var LimbforgeForm = React.createClass({
   componentWillMount(){
   },
+  create_zip: function() {
+    var self = this;
+    var zip = new JSZip();
+    var today = new Date();
+    var formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+    var zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + self.state.specs.orientation + "_" + formatted_date + ".zip";
+    var urls = [];
+    populateURLS();
+
+    //generate AWS urls for zip file
+    function populateURLS() {
+      urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + self.state.specs.orientation + '/forearm_'+ self.state.specs.orientation + '_C4-'+ (self.state.specs.C4 *10) +'_L1-'+ (self.state.specs.L1 *10) + '.stl');
+      urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/EbeArm_wrist_unit+v1.stl');
+      // add on terminal device adaptor
+      if (self.state.specs.TD != undefined){
+        urls.push('https://s3.amazonaws.com/limbforgestls/TD/' + self.state.specs.orientation + '_' + self.state.specs.TD + '.stl');
+      }
+    }
+
+
+    var count = 0;
+    // We're asynchronously asking for all of the files
+    // We increment the count once each file is completely downloaded
+    // Once the last file is downloaded (aka count == urls.length) then zip it and download it
+    urls.forEach(function (url) {
+      // Grab the filename from the url
+      // For example if the url is http://google.com/awesome/foo.stl
+      // We set filename = foo.stl
+      var indexOfLastSlash = url.lastIndexOf('/');
+      var filename = url.substring(indexOfLastSlash + 1);
+
+      // Load a file from an external url and add it in a zip file
+      // Beware! This will fail if the file is not binary
+      // aka if it is a text file or an ascii stl model
+      JSZipUtils.getBinaryContent(url, function (err, data) {
+        if(err) {
+          // Probably should do something better here...
+          // For example if the file server is down, provide some kind of info to the user
+          throw err;
+        }
+
+        // Add the file to the zip
+        zip.file(filename, data, { binary: true });
+        count++;
+
+        // We're all done! Zip it and ship it
+        if (count == urls.length) {
+          zip.generateAsync({ type: "blob" })
+          .then(function(zipFile) {
+            saveAs(zipFile, zipFilename);
+          });
+        }
+      });
+    });
+  },
   downloadFiles: function(){
     alert("wooo");
     specs.hand = $('#handedness-selector').val().charAt(0).toUpperCase();
@@ -100,7 +155,7 @@ var LimbforgeForm = React.createClass({
     var newSpecs = self.state.specs;
     newSpecs.TD = event.target.value;
     self.state.specs = newSpecs;
-    if self.state.specs.TD != undefined {
+    if (self.state.specs.TD != undefined) {
       loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + event.target.value + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set( 0, 0, 0 );
@@ -136,7 +191,6 @@ var LimbforgeForm = React.createClass({
       scene.add( mesh );
       render();
     });
-    debugger;
     if (self.state.specs.TD !== undefined){
       loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
@@ -217,7 +271,7 @@ var LimbforgeForm = React.createClass({
       var submitArea =
         <div className="row">
           <div className="col-xs-12">
-            <input type="submit" onClick={this.downloadFiles} value="Submit"/>
+            <input type="submit" onClick={this.create_zip} value="Submit"/>
           </div>
         </div>;
       var measurementInputs = this.state.measurements.map(function(option) {
