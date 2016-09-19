@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap/transition
+//= require twitter/bootstrap/modal
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require components
+//= require handLoader/three.js
+//= require handLoader/STLLoader.js
+//= require handLoader/Detector.js
+//= require handLoader/OrbitControls.js
+//= require handLoader/handLoader.js
 //= require_tree .

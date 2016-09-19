@@ -1,0 +1,43 @@
+<%= render 'pages/dashboardnav'%>
+<p id="notice"><%= notice %></p>
+
+<div class="container form-padding">
+  <h1><%= @measurement.name %></h1>
+
+  <p>
+    <strong>Step:</strong>
+    <%= @measurement.step %>
+  </p>
+
+  <p>
+    <strong>Measurement unit:</strong>
+    <%= @measurement.measurement_unit %>
+  </p>
+
+  <p>
+    <strong>Diagram:</strong>
+    <img src="<%= @measurement.diagram.url(:square)%>">
+  </p>
+
+  <p>
+    <strong>Lower range:</strong>
+    <%= @measurement.lower_range %>
+  </p>
+
+  <p>
+    <strong>Upper range:</strong>
+    <%= @measurement.upper_range %>
+  </p>
+
+  <p>
+    <strong>Default:</strong>
+    <%= @measurement.default %>
+  </p>
+
+  <p>
+    <strong>Instructions:</strong>
+    <%= @measurement.instructions %>
+  </p>
+  <%= link_to 'Edit', edit_measurement_path(@measurement) %> |
+  <%= link_to 'Back', measurements_path %>
+</div>

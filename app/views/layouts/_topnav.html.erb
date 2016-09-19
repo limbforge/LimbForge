@@ -1,0 +1,16 @@
+<div id="top-nav" class="<%= params[:controller] + params[:action] %>">
+  <a href="<%= root_path %>">
+    <img class="logo" src="<%= asset_path("brand/logo.svg") %>">
+  </a>
+  <ul>
+    <li><%= link_to('Make', limbforge_path) %> </li>
+    <% if user_signed_in?%>
+      <% if current_user.admin %>
+        <li><%= link_to('Dashboard', admin_dashboard_path) %> </li>
+      <% end %>
+      <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %>   </li>
+    <% else %>
+      <li><%= link_to('Signin', new_user_session_path) %> / <%= link_to('Signup', new_user_registration_path) %>   </li>
+    <% end %>
+  </ul>
+</div>

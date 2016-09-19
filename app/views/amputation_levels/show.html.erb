@@ -1,0 +1,15 @@
+<%= render 'pages/dashboardnav'%>
+<p id="notice"><%= notice %></p>
+<div class="container form-padding">
+  <p>
+    <strong>Name:</strong>
+    <%= @amputation_level.name %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @amputation_level.description %>
+  </p>
+
+  <%= link_to 'Edit', edit_amputation_level_path(@amputation_level) %> |
+  <%= link_to 'Back', amputation_levels_path %>
+</div>

@@ -1,0 +1,2 @@
+json.extract! measurement, :id, :name, :step, :measurement_unit, :diagram, :lower_range, :upper_range, :default, :instructions, :created_at, :updated_at
+json.url measurement_url(measurement, format: :json)

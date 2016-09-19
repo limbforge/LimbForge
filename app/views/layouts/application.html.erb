@@ -4,11 +4,17 @@
   <title>Limbforge</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <% #typekit fonts %>  
+  <script src="https://use.typekit.net/jdg6lwz.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+  <% #meta tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
-</body>
+  <body id="<%= params[:controller]%>" class="<%= params[:action] %>">
+    <%= render partial: "layouts/topnav" %>
+    <%= yield %>
+    <%= render partial: "layouts/footer" %>
+  </body>
 </html>

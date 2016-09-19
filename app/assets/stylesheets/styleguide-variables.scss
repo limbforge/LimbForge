@@ -1,0 +1,42 @@
+//COLORS:
+//style guide colors
+$moonbeam-dark:   #0e2045;
+$moonbeam-regular:#224269;
+$moonbeam-light:  #a0abc2;
+$ocean-dark:      #10b4ac;
+$ocean-regular:   #61c5bc;
+$ocean-light:     #cceae7;
+$camero-darker:   #931a35;
+$camero-dark:     #c5203d;
+$camero-regular:  #d4466d;
+$camero-light:    #f3c4cf;
+//other colors
+$white:           #ffffff;
+$dark-gray:       #1c1d22;
+$regular-gray:    #2a2b30;
+$light-gray:      #bdbdbd;
+
+//MARGIN & PADDING
+$standard-padding: 30px;
+$area-padding: $standard-padding*2 $standard-padding;
+
+//FONTS
+$base-font-color:         $dark-gray;
+$base-line-height:        $standard-padding;
+$base-letter-spacing:     $standard-padding/10;
+//headers
+$base-h-font-family:    "ff-tisa-sans-web-pro";
+$base-h-letter-spacing: $standard-padding/30;
+//paragraphs
+$base-font-family:      "ff-tisa-sans-web-pro";
+$base-p-font-size:      18px;
+$base-p-letter-spacing: $standard-padding/30;
+
+
+// BREAKPOINTS
+$screen-sm-min: 768px;
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-md-min: 992px;
+$screen-sm-max: ($screen-md-min - 1);
+$screen-lg-min: 1200px;
+$screen-md-max: ($screen-lg-min - 1);

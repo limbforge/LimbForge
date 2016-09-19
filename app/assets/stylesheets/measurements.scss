@@ -1,0 +1,12 @@
+@import "styleguide-variables";
+
+.form-container{
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+  padding: $standard-padding*2 0;
+  h2{
+    font-size: $standard-padding*2;
+    font-weight: bold;
+  }
+}
