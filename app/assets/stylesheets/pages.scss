@@ -6,20 +6,45 @@
     }
   }
 }
+#display-hand{
+  height: 100vh;
+  position:fixed;
+  z-index: 1;
+}
 
 #limbforge{
-  background-color: #f5f5f5;
+  webkit-transform: translateZ(0);
+  overflow-y: scroll;
+  height: 100vh;
+  background-color: $white;
   max-width: 350px;
   padding: $standard-padding/2;
   position:  fixed;
+  z-index: 2;
   .fname{
     padding-right: 0;
     input{
       border-right: 0;
     }
   }
+  .modal-content{
+    z-index: 9999;
+  }
   .lname{
     padding-left: 0;
+  }
+  img{
+    width: 100%;
+    &.documentation{
+      cursor: pointer;
+      padding: 0 $standard-padding/2 $standard-padding/2;
+    }
+    &.logo{
+      max-width: 27px;
+      float: left;
+      margin-right: 10px;
+      margin-top: 7px;
+    }
   }
   #limbforge-submit{
     border-radius: 0;

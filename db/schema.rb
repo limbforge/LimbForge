@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829021556) do
+ActiveRecord::Schema.define(version: 20160918015934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 20160829021556) do
   end
 
   add_index "amputation_levels_components", ["amputation_level_id", "component_id"], name: "amputation_levels_components_unique", unique: true, using: :btree
+
+  create_table "component_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "component_types_components", id: false, force: :cascade do |t|
+    t.integer "component_id"
+    t.integer "component_type_id"
+  end
+
+  add_index "component_types_components", ["component_id", "component_type_id"], name: "component_types_components_unique", unique: true, using: :btree
 
   create_table "components", force: :cascade do |t|
     t.string   "name"
@@ -55,6 +68,13 @@ ActiveRecord::Schema.define(version: 20160829021556) do
   end
 
   add_index "components_options", ["component_id", "option_id"], name: "components_options_unique", unique: true, using: :btree
+
+  create_table "components_terminal_devices", id: false, force: :cascade do |t|
+    t.integer "component_id"
+    t.integer "terminal_device_id"
+  end
+
+  add_index "components_terminal_devices", ["component_id", "terminal_device_id"], name: "components_terminal_devices_unique", unique: true, using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
@@ -103,6 +123,12 @@ ActiveRecord::Schema.define(version: 20160829021556) do
   end
 
   create_table "pages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "terminal_devices", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

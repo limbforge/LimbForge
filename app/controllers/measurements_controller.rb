@@ -1,9 +1,7 @@
 class MeasurementsController < ApplicationController
   before_action :set_measurement, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
-  before_filter do
-   redirect_to :root unless current_user && current_user.admin?
-  end
+  skip_before_filter :authenticate_user!, only: [:search]
   # GET /measurements
   # GET /measurements.json
   def index
@@ -61,6 +59,15 @@ class MeasurementsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to measurements_url, notice: 'Measurement was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def search
+    @measurements = Component.find_by_name(params[:query]).measurements
+    if request.xhr?
+      render :json => @measurements.to_json
+    else
+      render :index
     end
   end
 

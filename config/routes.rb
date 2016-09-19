@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :terminal_devices
+  resources :component_types
   resources :options
   resources :amputation_levels
   resources :components
@@ -13,6 +15,9 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'pages#dashboard', as: :admin_dashboard
   get '/limbforge' => 'pages#limbforge', as: :limbforge
+  get '/search_components' => 'components#search', as: :search_components
+  get '/search_measurements' => 'measurements#search', as: :search_measurements
+  get '/search_tds' => 'terminal_devices#search', as: :search_tds
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,1 @@
+json.partial! "terminal_devices/terminal_device", terminal_device: @terminal_device

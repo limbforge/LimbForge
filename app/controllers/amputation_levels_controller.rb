@@ -1,6 +1,6 @@
 class AmputationLevelsController < ApplicationController
   before_action :set_amputation_level, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /amputation_levels
   # GET /amputation_levels.json
   def index
