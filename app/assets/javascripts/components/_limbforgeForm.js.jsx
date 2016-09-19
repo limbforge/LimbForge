@@ -1,7 +1,30 @@
+var updateDisplay = function(){
+  var loader = new THREE.STLLoader();
+  var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
+  loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_R/forearm_R_C4-200_L1-230.stl', function ( geometry ) {
+    var mesh = new THREE.Mesh( geometry, material );
+    mesh.name.set("thing");
+    mesh.position.set( -2.3, 0, 0 );
+    mesh.rotation.set( 0, 0, 0 );
+    mesh.scale.set( .02, .02, .02 );
+
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+
+    scene.add( mesh );
+    render();
+  });
+  debugger;
+};
+
 var LimbforgeForm = React.createClass({
   componentWillMount(){
   },
+  updateDisplay: function(){
+    debugger;
+  },
   downloadFiles: function(){
+    alert("wooo");
     specs.hand = $('#handedness-selector').val().charAt(0).toUpperCase();
     specs.fname = $("#fname").val() == "" ? specs.fname : $("#fname").val();
     specs.lname = $("#lname").val() == "" ? specs.lname : $("#lname").val();
@@ -18,6 +41,24 @@ var LimbforgeForm = React.createClass({
       tds: undefined,
       measurements:undefined
     };
+  },
+  showModelDefault: function(){
+    debugger;
+    var loader = new THREE.STLLoader();
+    var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
+    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_R/forearm_R_C4-200_L1-230.stl', function ( geometry ) {
+      var mesh = new THREE.Mesh( geometry, material );
+
+      mesh.position.set( -2.3, 0, 0 );
+      mesh.rotation.set( 0, 0, 0 );
+      mesh.scale.set( .02, .02, .02 );
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+      scene.add( mesh );
+      render();
+    });
   },
   getComponents: function(event) {
     $.ajax({
@@ -44,6 +85,8 @@ var LimbforgeForm = React.createClass({
     });
   },
   getMeasurements: function(event) {
+    debugger;
+    this.showModelDefault();
     this.getTDs(event.target.value);
     $.ajax({
       url: this.props.measurements_search_path + "?query="+event.target.value,
@@ -53,6 +96,24 @@ var LimbforgeForm = React.createClass({
       }.bind(this),
       error: function(data) {
       }.bind(this)
+    });
+  },
+  flipModel: function(event) {
+    debugger;
+    var loader = new THREE.STLLoader();
+    var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
+    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_L/forearm_L_C4-200_L1-230.stl', function ( geometry ) {
+      var mesh = new THREE.Mesh( geometry, material );
+
+      mesh.position.set( -2.3, 0, 0 );
+      mesh.rotation.set( 0, 0, 0 );
+      mesh.scale.set( .02, .02, .02 );
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+      scene.add( mesh );
+      render();
     });
   },
   render: function() {
@@ -77,7 +138,7 @@ var LimbforgeForm = React.createClass({
         <div className="col-xs-12">
           <p className="label">Components</p>
           <select id="design-selector" onChange={this.getMeasurements}>
-            <option value="" >Select a Component</option>
+            <option value="">Select a Component</option>
             {componentOptions}
           </select>
         </div>
@@ -94,9 +155,9 @@ var LimbforgeForm = React.createClass({
         </div>;
       var measurementInputs = this.state.measurements.map(function(option) {
         return (
-          <div className="col-xs-6">
+          <div key={option.name} className="col-xs-6">
             <p className="label nested-label">{option.name}</p>
-            <input id="{option.name}" type="text" placeholder={option.default} name={option.name}/>
+            <input id={option.name} type="text" onChange={updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.default} name={option.name}/>
           </div>
         );
       });
@@ -105,10 +166,10 @@ var LimbforgeForm = React.createClass({
         <div className="row">
           <div className="col-xs-12">
             <p className="label">Orientation</p>
-            <select id="handedness-selector">
-              <option value="" >Select Orientation</option>
-              <option value="left" >Left</option>
-              <option value="right" >Right</option>
+            <select id="handedness-selector" onChange={this.flipModel}>
+              <option value="" key="default" >Select Orientation</option>
+              <option value="left" key="left" >Left</option>
+              <option value="right" key="right" >Right</option>
             </select>
           </div>
         </div>
