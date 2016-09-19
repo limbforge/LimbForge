@@ -58,6 +58,12 @@ html{
       }
       &.limbforge{
         margin-top: 0;
+        footer{
+          display: none;
+        }
+        .lower-footer{
+          display: none;
+        }
       }
     }
   }
@@ -129,7 +135,7 @@ p{
     }
   }
   &.nested-label{
-    padding-top: 0;
+    padding: 0;
   }
 }
 
@@ -163,9 +169,16 @@ input{
 
 select{
   width: 100%;
+  font-family: $base-font-family;
+  background-color: $white;
+  background-repeat: no-repeat;
   padding: $standard-padding/3;
   -webkit-appearance: none;
   border-radius: 0;
+  border: 3px solid $dark-gray;
+  background-image: url(asset_path("limbforge/dropdown.svg"));
+  background-size: 30px;
+  background-position: 98%;
 }
 
 //HERO STYLES
