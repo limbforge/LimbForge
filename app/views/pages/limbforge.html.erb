@@ -1,5 +1,3 @@
-<%= react_component('LimbforgeForm',{logo_img: asset_path("brand/logo.svg"), documentation_img: asset_path("limbforge/documentation.jpg"), levels: AmputationLevel.all , components_search_path: search_components_path, tds_search_path: search_tds_path, measurements_search_path: search_measurements_path }) %>
+<%= react_component('LimbforgeForm',{logo_img: asset_path("brand/logo.svg"), documentation_img_L: asset_path("limbforge/L_diagram.jpg"), documentation_img_R: asset_path("limbforge/R_diagram.jpg"), levels: AmputationLevel.all , components_search_path: search_components_path, tds_search_path: search_tds_path, measurements_search_path: search_measurements_path }) %>
 
 <div id="display-hand"></div>
-
-<%= render partial: "modalMeasurement"%>

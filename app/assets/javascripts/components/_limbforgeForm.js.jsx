@@ -164,6 +164,7 @@ var LimbforgeForm = React.createClass({
         var newSpecs = this.state.specs;
         newSpecs.L1 = L1Value;
         this.state.specs = newSpecs;
+        scene.remove(scene.children[3]);
         this.updateDisplay();
       }
     } else if (event.target.name == "C4") {
@@ -175,6 +176,7 @@ var LimbforgeForm = React.createClass({
         var newSpecs = this.state.specs;
         newSpecs.C4 = C4Value;
         this.state.specs = newSpecs;
+        scene.remove(scene.children[3]);
         this.updateDisplay();
       }
     }
@@ -225,6 +227,7 @@ var LimbforgeForm = React.createClass({
           </div>
         );
       });
+      var imageURL = this.state.specs.orientation === "R" ? this.props.documentation_img_L : this.props.documentation_img_R
       var measurementArea = this.state.measurements === undefined ? '' :
       <div>
         <div className="row">
@@ -240,7 +243,7 @@ var LimbforgeForm = React.createClass({
         <div className="row">
           <div>
             <p className="label measurements">Measurements</p>
-            <img className="documentation" data-toggle="modal" data-target="#measurementModal" src={this.props.documentation_img}/>
+            <img className="documentation" data-toggle="modal" data-target="#measurementModal" src={imageURL}/>
             {measurementInputs}
           </div>
         </div>
@@ -269,41 +272,61 @@ var LimbforgeForm = React.createClass({
     }
 
     return (
-      <div id="limbforge">
-        <img className="logo" src={this.props.logo_img} />
-        <h1 id="title">LIMBFORGE</h1>
-        <div className="row">
-          <div className="col-xs-12">
-            <p className="nested-label">Patient Name</p>
+      <div>
+        <div id="limbforge">
+          <img className="logo" src={this.props.logo_img} />
+          <h1 id="title">LIMBFORGE</h1>
+          <div className="row">
+            <div className="col-xs-12">
+              <p className="nested-label">Patient Name</p>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="fname col-xs-6">
+              <p className="label nested-label">First</p>
+              <input id="fname" type="text" placeholder="Max" name="name"/>
+            </div>
+            <div className="lname col-xs-6">
+              <p className="label nested-label">Last</p>
+              <input id="lname" type="text" placeholder="Hova" name="name"/>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-xs-12">
+              <p className="label">Amputation Level</p>
+              <select onChange={this.getComponents}>
+                <option value="" >
+                  Select a level
+                </option>
+                {amputationLevelOptions}
+              </select>
+            </div>
+          </div>
+          {componentArea}
+          {measurementArea}
+          {tdArea}
+          {submitArea}
+        </div>
+
+        <div className="modal fade" id="measurementModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">How to measure</h4>
+              </div>
+              <div className="modal-body">
+                <img src={imageURL}/>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="row">
-          <div className="fname col-xs-6">
-            <p className="label nested-label">First</p>
-            <input id="fname" type="text" placeholder="Max" name="name"/>
-          </div>
-          <div className="lname col-xs-6">
-            <p className="label nested-label">Last</p>
-            <input id="lname" type="text" placeholder="Hova" name="name"/>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-xs-12">
-            <p className="label">Amputation Level</p>
-            <select onChange={this.getComponents}>
-              <option value="" >
-                Select a level
-              </option>
-              {amputationLevelOptions}
-            </select>
-          </div>
-        </div>
-        {componentArea}
-        {measurementArea}
-        {tdArea}
-        {submitArea}
       </div>
     );
   }
