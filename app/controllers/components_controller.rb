@@ -2,7 +2,6 @@ class ComponentsController < ApplicationController
   before_action :set_component, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   skip_before_filter :authenticate_user!, only: [:search]
-
   # GET /components
   # GET /components.json
   def index
@@ -156,7 +155,7 @@ class ComponentsController < ApplicationController
   		render :index
   	end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_component

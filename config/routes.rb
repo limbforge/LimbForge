@@ -15,8 +15,6 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'pages#dashboard', as: :admin_dashboard
   get '/limbforge' => 'pages#limbforge', as: :limbforge
-
-
   get '/search_components' => 'components#search', as: :search_components
   get '/search_measurements' => 'measurements#search', as: :search_measurements
   get '/search_tds' => 'terminal_devices#search', as: :search_tds

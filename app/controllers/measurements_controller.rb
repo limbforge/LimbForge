@@ -2,7 +2,6 @@ class MeasurementsController < ApplicationController
   before_action :set_measurement, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   skip_before_filter :authenticate_user!, only: [:search]
-  
   # GET /measurements
   # GET /measurements.json
   def index

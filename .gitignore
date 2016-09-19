@@ -24,6 +24,7 @@
 *.cache
 
 *.cache
+<<<<<<< HEAD
 
 tmp/cache/assets/sprockets/v3.0/Xs/Xs4gBg3sQq9A31cbf8nSgTjMNHB8yqabIvf4HDzYJaI.cache
 
@@ -32,3 +33,5 @@ tmp/cache/assets/sprockets/v3.0/DS/DSOLSc6A5RVSmvM415eEWAWG_AgOvZcLZOXQjsXyWQA.c
 tmp/cache/assets/sprockets/v3.0/DS/DSOLSc6A5RVSmvM415eEWAWG_AgOvZcLZOXQjsXyWQA.cache
 
 tmp/cache/assets/sprockets/v3.0/OI/OI6uxGcnsKavdWTtwDAasU3wPx8QXhzBgV0X2n1KjMQ.cache
+=======
+>>>>>>> origin/updates

@@ -145,6 +145,7 @@ input{
   letter-spacing: 2px;
   padding: $standard-padding/3;
   width: 100%;
+  margin-bottom: $standard-padding/1.5;
   &:focus{
     outline: none;
   }
