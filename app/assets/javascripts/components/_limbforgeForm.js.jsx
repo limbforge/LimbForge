@@ -132,12 +132,12 @@ var LimbforgeForm = React.createClass({
   },
   updateDisplay: function(event) {
     var self = this;
-    debugger;
     //if orientation selector changed
     if (event.target.value == "right" || event.target.value == "left") {
       var newSpecs = this.state.specs;
       newSpecs.orientation = event.target.value.charAt(0).toUpperCase();
       this.setState({specs: newSpecs});
+      scene.remove(scene.children[3]);
     }
     //if terminal devices selector changed
     if (event.target.id == "terminal-devices-select"){
@@ -155,28 +155,30 @@ var LimbforgeForm = React.createClass({
       }
     }
     //if L1 Changed
-    if (event.target.value == "L1") {
+    if (event.target.name == "L1") {
+      var L1Value = Number(event.target.value);
       var L1Measurements = this.state.measurements.find(function(measurement) {
         return measurement.name == "L1";
       });
       if (L1Measurements && L1Measurements.lower_range < L1Value && L1Measurements.upper_range > L1Value) {
         var newSpecs = this.state.specs;
         newSpecs.L1 = L1Value;
-        this.state.specs = newSpecs;
         scene.remove(scene.children[3]);
+        this.setState({specs: newSpecs});
       }
     }
 
     //if C4 Changed
-    if (event.target.value == "C4") {
+    if (event.target.name == "C4") {
+      var C4Value = Number(event.target.value);
       var C4Measurements = this.state.measurements.find(function(measurement) {
         return measurement.name == "C4";
       });
       if (C4Measurements && C4Measurements.lower_range < C4Value && C4Measurements.upper_range > C4Value) {
         var newSpecs = this.state.specs;
         newSpecs.C4 = C4Value;
-        this.state.specs = newSpecs;
         scene.remove(scene.children[3]);
+        this.setState({specs: newSpecs});
       }
     }
   },
@@ -206,7 +208,6 @@ var LimbforgeForm = React.createClass({
       loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
 
-        debugger;
         if (self.state.specs.orientation == "R") {
           if (self.state.specs.TD == undefined || self.state.specs.TD == "" ){
             mesh.position.set( -2.4, 0, 0 );
@@ -234,9 +235,9 @@ var LimbforgeForm = React.createClass({
     }
   },
   render: function() {
+    console.log(this.state.specs);
     this.loadNewDevices();
     this.loadTD();
-    console.log(this.state.specs);
     var self = this;
     var amputationLevelOptions = this.props.levels.map(function(option) {
       return (
