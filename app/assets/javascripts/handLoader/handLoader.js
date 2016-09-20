@@ -7,6 +7,7 @@ init();
 function init() {
 
   scene = new THREE.Scene();
+
   scene.add( new THREE.AmbientLight( 0x999999 ) );
 
   camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
@@ -20,8 +21,11 @@ function init() {
   camera.add( new THREE.PointLight( 0xffffff, 1 ) );
   camera.add( new THREE.PointLight( 0xffffff, 1 ) );
 
-  scene.add( camera );
+  scene.add( camera);
 
+  var grid = new THREE.GridHelper( 25, 50, 0xffffff, 0x555555 );
+  grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
+  scene.add(grid);
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setClearColor( 0x999999 );
