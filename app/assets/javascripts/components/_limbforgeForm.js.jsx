@@ -182,7 +182,6 @@ var LimbforgeForm = React.createClass({
     }
   },
   loadNewDevices: function(){
-    scene.remove(scene.children[2]);
     scene.remove(scene.children[3]);
     scene.remove(scene.children[4]);
     var self = this;
