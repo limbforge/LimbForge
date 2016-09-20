@@ -155,7 +155,6 @@ var LimbforgeForm = React.createClass({
     var newSpecs = self.state.specs;
     if (event.target.value == ""){
       newSpecs.TD = undefined;
-      scene.remove(scene.children[4]);
     }
     else{
       newSpecs.TD = event.target.value;
