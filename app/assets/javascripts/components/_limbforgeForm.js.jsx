@@ -272,7 +272,6 @@ var LimbforgeForm = React.createClass({
       var submitArea =
         <div className="row">
           <div className="col-xs-12">
-            <input type="submit" onClick={this.create_zip} value="Submit"/>
           </div>
         </div>;
       var measurementInputs = this.state.measurements.map(function(option) {

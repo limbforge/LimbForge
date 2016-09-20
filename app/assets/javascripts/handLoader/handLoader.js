@@ -20,9 +20,6 @@ function init() {
 
   scene.add( camera );
 
-  var grid = new THREE.GridHelper( 25, 50, 0xffffff, 0x555555 );
-  grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
-  scene.add( grid );
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setClearColor( 0x999999 );
