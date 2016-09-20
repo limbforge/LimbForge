@@ -73,23 +73,6 @@ var LimbforgeForm = React.createClass({
       }
     };
   },
-  showModelDefault: function(){
-    var self = this;
-    var loader = new THREE.STLLoader();
-    var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
-    loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_L/forearm_L_C4-250_L1-250.stl', function ( geometry ) {
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( 0, 0, 0 );
-      mesh.rotation.set( 0, 0, 0 );
-      mesh.scale.set( .02, .02, .02 );
-
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-
-      scene.add( mesh );
-      render();
-    });
-  },
   getComponents: function(event) {
     $.ajax({
       url: this.props.components_search_path + "?query="+event.target.value,
@@ -118,7 +101,6 @@ var LimbforgeForm = React.createClass({
     var newSpecs = this.state.specs;
     newSpecs.component = event.target.value;
     this.setState({specs: newSpecs});
-    this.showModelDefault();
     this.getTDs(event.target.value);
     $.ajax({
       url: this.props.measurements_search_path + "?query="+event.target.value,
@@ -184,6 +166,7 @@ var LimbforgeForm = React.createClass({
   },
   loadTD: function(){
     if (this.state.specs.TD != undefined){
+      scene.remove(scene.children[4]);
       loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set( 0, 0, 3.3 );
@@ -199,12 +182,14 @@ var LimbforgeForm = React.createClass({
     }
   },
   loadNewDevices: function(){
-    scene.remove(scene.children[4]);
+    scene.remove(scene.children[2]);
     scene.remove(scene.children[3]);
+    scene.remove(scene.children[4]);
     var self = this;
 
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
+      console.log("loading forearm");
       loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
 
@@ -272,6 +257,7 @@ var LimbforgeForm = React.createClass({
       var submitArea =
         <div className="row">
           <div className="col-xs-12">
+            <input type="submit" onClick={this.create_zip} value="Submit"/>
           </div>
         </div>;
       var measurementInputs = this.state.measurements.map(function(option) {
