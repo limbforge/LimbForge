@@ -170,7 +170,7 @@ var LimbforgeForm = React.createClass({
       loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set( 0, 0, 3.3 );
-        mesh.rotation.set(0, Math.PI, Math.PI/2 );
+        mesh.rotation.set(0, Math.PI, -Math.PI/2 );
         mesh.scale.set( .02, .02, .02 );
 
         mesh.castShadow = true;
