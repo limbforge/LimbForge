@@ -78,12 +78,9 @@ var LimbforgeForm = React.createClass({
       url: this.props.components_search_path + "?query="+event.target.value,
       dataType: 'json',
       success: function(data) {
-        var newState = {
-          components: data,
-          tds: undefined,
-          measurements: undefined
-        };
-        this.setState(newState);
+        this.setState({components: data});
+        this.setState({tds: undefined});
+        this.setState({measurements: undefined});
       }.bind(this),
       error: function(data) {
       }.bind(this)
@@ -103,16 +100,13 @@ var LimbforgeForm = React.createClass({
   getMeasurements: function(event) {
     var newSpecs = this.state.specs;
     newSpecs.component = event.target.value;
+    this.setState({specs: newSpecs});
     this.getTDs(event.target.value);
     $.ajax({
       url: this.props.measurements_search_path + "?query="+event.target.value,
       dataType: 'json',
       success: function(data) {
-        var newState = {
-          specs: newSpecs,
-          measurements: data,
-        }
-        this.setState(newState);
+        this.setState({measurements: data});
       }.bind(this),
       error: function(data) {
       }.bind(this)
@@ -125,10 +119,13 @@ var LimbforgeForm = React.createClass({
       var newSpecs = this.state.specs;
       newSpecs.orientation = event.target.value.charAt(0).toUpperCase();
       this.setState({specs: newSpecs});
+      scene.remove(scene.children[3]);
     }
     //if terminal devices selector changed
-    else if (event.target.id == "terminal-devices-select"){
+    if (event.target.id == "terminal-devices-select"){
       if (this.state.specs.TD != undefined || this.state.specs.TD != ""){
+        scene.remove(scene.children[4]);
+        scene.remove(scene.children[3]);
         var newSpecs = this.state.specs;
         newSpecs.TD = event.target.value;
         this.setState({specs: newSpecs});
@@ -140,7 +137,7 @@ var LimbforgeForm = React.createClass({
       }
     }
     //if L1 Changed
-    else if (event.target.name == "L1") {
+    if (event.target.name == "L1") {
       var L1Value = Number(event.target.value);
       var L1Measurements = this.state.measurements.find(function(measurement) {
         return measurement.name == "L1";
@@ -148,12 +145,13 @@ var LimbforgeForm = React.createClass({
       if (L1Measurements && L1Measurements.lower_range < L1Value && L1Measurements.upper_range > L1Value) {
         var newSpecs = this.state.specs;
         newSpecs.L1 = L1Value;
+        scene.remove(scene.children[3]);
         this.setState({specs: newSpecs});
       }
     }
 
     //if C4 Changed
-    else if (event.target.name == "C4") {
+    if (event.target.name == "C4") {
       var C4Value = Number(event.target.value);
       var C4Measurements = this.state.measurements.find(function(measurement) {
         return measurement.name == "C4";
@@ -161,6 +159,7 @@ var LimbforgeForm = React.createClass({
       if (C4Measurements && C4Measurements.lower_range < C4Value && C4Measurements.upper_range > C4Value) {
         var newSpecs = this.state.specs;
         newSpecs.C4 = C4Value;
+        scene.remove(scene.children[3]);
         this.setState({specs: newSpecs});
       }
     }
@@ -183,11 +182,14 @@ var LimbforgeForm = React.createClass({
     }
   },
   loadNewDevices: function(){
+    scene.remove(scene.children[2]);
+    scene.remove(scene.children[3]);
+    scene.remove(scene.children[4]);
     var self = this;
 
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      scene.remove(scene.children[3]);
+      console.log("loading forearm");
       loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
 
@@ -218,7 +220,7 @@ var LimbforgeForm = React.createClass({
     }
   },
   render: function() {
-    console.log(this.state.specs, scene.children.length);
+    console.log(this.state.specs);
     this.loadNewDevices();
     this.loadTD();
     var self = this;
