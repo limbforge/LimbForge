@@ -16,7 +16,9 @@ function init() {
   camera.up.set( 0, 0, 1 );
   camera.position.set( 0, -9, 6 );
 
-  camera.add( new THREE.PointLight( 0xffffff, 0.8 ) );
+  camera.add( new THREE.PointLight( 0xffffff, 1 ) );
+  camera.add( new THREE.PointLight( 0xffffff, 1 ) );
+  camera.add( new THREE.PointLight( 0xffffff, 1 ) );
 
   scene.add( camera );
 
