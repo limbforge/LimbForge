@@ -142,54 +142,57 @@ var LimbforgeForm = React.createClass({
       }.bind(this)
     });
   },
-  updateOrientation: function(event){
-    var newSpecs = this.state.specs;
-    newSpecs.orientation = event.target.value.charAt(0).toUpperCase();
-    this.setState({specs: newSpecs});
-    scene.remove(scene.children[3]);
-    this.updateDisplay();
-  },
-  updateTerminalDevice: function(event){
+  updateDisplay: function(event) {
     var self = this;
-    scene.remove(scene.children[4]);
-    var newSpecs = self.state.specs;
-    if (event.target.value == ""){
-      newSpecs.TD = undefined;
-      scene.remove(scene.children[4]);
+    debugger;
+    //if orientation selector changed
+    if (event.target.value == "right" || event.target.value == "left") {
+      var newSpecs = this.state.specs;
+      newSpecs.orientation = event.target.value.charAt(0).toUpperCase();
+      this.setState({specs: newSpecs});
+      scene.remove(scene.children[3]);
+      this.loadNewDevices();
     }
-    else{
+    //if terminal devices selector changed
+    if (event.target.id == "terminal-devices-select"){
+      var newSpecs = this.state.specs;
       newSpecs.TD = event.target.value;
-    }
-    self.state.specs = newSpecs;
-    if (self.state.specs.TD != undefined) {
-      loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + event.target.value + '.stl', function ( geometry ) {
-        var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set( 0, 0, 3.3 );
-        mesh.rotation.set(0, Math.PI, Math.PI/2 );
-        mesh.scale.set( .02, .02, .02 );
+      this.setState({specs: newSpecs});
+      scene.remove(scene.children[4]);
+      scene.remove(scene.children[3]);
+      if (this.state.TD != undefined || this.state.TD != ""){
+        loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
+          var mesh = new THREE.Mesh( geometry, material );
+          mesh.position.set( 0, 0, 3.3 );
+          mesh.rotation.set(0, Math.PI, Math.PI/2 );
+          mesh.scale.set( .02, .02, .02 );
 
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        if (self.state.specs.orientation == "R" && self.state.specs.TD != undefined){
-          scene.children[3].position.set( -2.4, 0, 3.3 );
-        }
-        if (self.state.specs.orientation == "L" && self.state.specs.TD != undefined){
-          scene.children[3].position.set( 0, 0, 3.3 );
-        }
-        scene.add( mesh );
-        render();
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+
+          scene.add( mesh );
+          render();
+        });
+        this.loadNewDevices();
+      }
+    }
+    //if L1 Changed
+    if (event.target.value == "L1") {
+      var L1Measurements = this.state.measurements.find(function(measurement) {
+        return measurement.name == "L1";
       });
-    }
-    if (self.state.specs.orientation == "R" && self.state.specs.TD == undefined){
-      scene.children[3].position.set( -2.4, 0, 0 );
-    }
-    if (self.state.specs.orientation == "L" && self.state.specs.TD == undefined){
-      scene.children[3].position.set( 0, 0, 0 );
+      if (L1Measurements && L1Measurements.lower_range < L1Value && L1Measurements.upper_range > L1Value) {
+        var newSpecs = this.state.specs;
+        newSpecs.L1 = L1Value;
+        this.state.specs = newSpecs;
+        scene.remove(scene.children[3]);
+        this.loadNewDevices();
+      }
     }
   },
-  updateDisplay: function() {
+  loadNewDevices: function(){
     var self = this;
-    scene.remove(scene.children[3]);
+    // LOAD NEW devices
     loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
       var mesh = new THREE.Mesh( geometry, material );
 
@@ -215,20 +218,6 @@ var LimbforgeForm = React.createClass({
       scene.add( mesh );
       render();
     });
-    if (self.state.specs.TD !== undefined){
-      loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
-        var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set( 0, 0, 3.3 );
-        mesh.rotation.set(0, Math.PI, Math.PI/2 );
-        mesh.scale.set( .02, .02, .02 );
-
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-
-        scene.add( mesh );
-        render();
-      });
-    }
   },
   updateParameters: function(event){
     // look if C4 or L1
@@ -312,7 +301,7 @@ var LimbforgeForm = React.createClass({
         <div className="row">
           <div className="col-xs-12">
             <p className="label">Orientation</p>
-            <select id="handedness-selector" onChange={this.updateOrientation}>
+            <select id="handedness-selector" onChange={this.updateDisplay}>
               <option selected="selected" value="left" key="left" >Left</option>
               <option value="right" key="right" >Right</option>
             </select>
@@ -341,7 +330,7 @@ var LimbforgeForm = React.createClass({
       <div className="row">
         <div className="col-xs-12">
           <p className="label">Terminal Devices</p>
-          <select id="terminal-devices-select" onChange={this.updateTerminalDevice}>
+          <select id="terminal-devices-select" onChange={this.updateDisplay}>
             <option value="" >Select a Terminal Device</option>
             {tdOptions}
           </select>
