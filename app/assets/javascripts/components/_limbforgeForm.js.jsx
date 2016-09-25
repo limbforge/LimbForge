@@ -5,8 +5,9 @@ var LimbforgeForm = React.createClass({
   componentWillMount(){
   },
   create_zip: function() {
-    if (typeof specs.l1 != "number" ||specs.l1 > 320 || specs.l1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
-    if (typeof specs.c4 != "number" ||specs.c4 > 280 || specs.c4 < 200) throw alert("Expected C4 size to be a number between 20cm - 28cm");
+    debugger;
+    if (typeof this.state.specs.L1 != "number" || this.state.specs.L1 > 320 || this.state.specs.L1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
+    if (typeof this.state.specs.C4 != "number" || this.state.specs.C4 > 280 || this.state.specs.C4 < 200) throw alert("Expected C4 size to be a number between 20cm - 28cm");
 
     var self = this;
     var zip = new JSZip();
@@ -18,7 +19,7 @@ var LimbforgeForm = React.createClass({
 
     //generate AWS urls for zip file
     function populateURLS() {
-      urls.push('https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ self.state.specs.orientation + '/forearm_ebearm_' + self.state.specs.orientation + '_C4-'+ (self.state.specs.C4 *10) +'_L1-'+ (self.state.specs.L1 *10) + '.stl');
+      urls.push('https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ self.state.specs.orientation + '/forearm_ebearm_' + self.state.specs.orientation + '_C4-'+ self.state.specs.C4 +'_L1-'+ self.state.specs.L1 + '.stl');
       urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/EbeArm_wrist_unit+v1.stl');
       // add on terminal device adaptor
       if (self.state.specs.TD != undefined){
@@ -70,8 +71,8 @@ var LimbforgeForm = React.createClass({
       specs: {
         component: undefined,
         orientation: "left",
-        C4: 25,
-        L1: 25,
+        C4: 250,
+        L1: 250,
         TD: undefined
       }
     };
@@ -125,14 +126,14 @@ var LimbforgeForm = React.createClass({
     // removing decimal from number
     var base_num = parseFloat(input.toFixed(1).toString().replace(".", ""));
     // round up to nearest 5
-    var result = ((Math.ceil(base_num/5)*5)/10);
+    var result = (((Math.ceil(base_num/5)*5)/10)*10);
     return result
   },
   translateValueC4: function(input){
     // removing decimal from number
     var base_num = parseFloat(input.toFixed(1).toString().replace(".", ""));
     // round down to nearest 5
-    var result = ((Math.floor(base_num/5)*5)/10);
+    var result = (((Math.floor(base_num/5)*5)/10)*10);
     return result
   },
   updateDisplay: function(event) {
@@ -163,8 +164,9 @@ var LimbforgeForm = React.createClass({
         return measurement.name == "L1";
       });
       if (L1Measurements && L1Measurements.lower_range < L1Value && L1Measurements.upper_range > L1Value) {
+        var self = this;
         var newSpecs = this.state.specs;
-        newSpecs.L1 = translateValueL1(L1Value);
+        newSpecs.L1 = self.translateValueL1(L1Value);
         this.setState({specs: newSpecs});
       }
     }
@@ -176,8 +178,9 @@ var LimbforgeForm = React.createClass({
         return measurement.name == "C4";
       });
       if (C4Measurements && C4Measurements.lower_range < C4Value && C4Measurements.upper_range > C4Value) {
+        var self = this;
         var newSpecs = this.state.specs;
-        newSpecs.C4 = translateValueC4(C4Value);
+        newSpecs.C4 = self.translateValueC4(C4Value);
         this.setState({specs: newSpecs});
       }
     }
@@ -205,7 +208,7 @@ var LimbforgeForm = React.createClass({
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
       scene.remove(scene.children[3]);
-      loader.load( 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ self.state.specs.orientation + '/forearm_ebearm_' + self.state.specs.orientation + '_C4-'+ (self.state.specs.C4 *10) +'_L1-'+ (self.state.specs.L1 *10) + '.stl', function ( geometry ) {
+      loader.load( 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ self.state.specs.orientation + '/forearm_ebearm_' + self.state.specs.orientation + '_C4-'+ self.state.specs.C4 +'_L1-'+ self.state.specs.L1  + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
         if (self.state.specs.TD == undefined || self.state.specs.TD == "" ) {
           mesh.position.set( 0, 0, 0.0 );
