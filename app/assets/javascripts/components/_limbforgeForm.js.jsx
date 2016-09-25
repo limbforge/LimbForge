@@ -15,11 +15,11 @@ var LimbforgeForm = React.createClass({
 
     //generate AWS urls for zip file
     function populateURLS() {
-      urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + self.state.specs.orientation + '/forearm_'+ self.state.specs.orientation + '_C4-'+ (self.state.specs.C4 *10) +'_L1-'+ (self.state.specs.L1 *10) + '.stl');
+      urls.push('https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ self.state.specs.orientation + '/forearm_ebearm_' + self.state.specs.orientation + '_C4-'+ (self.state.specs.C4 *10) +'_L1-'+ (self.state.specs.L1 *10) + '.stl');
       urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/EbeArm_wrist_unit+v1.stl');
       // add on terminal device adaptor
       if (self.state.specs.TD != undefined){
-        urls.push('https://s3.amazonaws.com/limbforgestls/TD/' + self.state.specs.orientation + '_' + self.state.specs.TD + '.stl');
+        urls.push('https://s3.amazonaws.com/limbforgestls/td/' + self.state.specs.TD + '/' + self.state.specs.orientation + '/td_' + self.state.specs.TD + '_' + self.state.specs.orientation + '.stl');
       }
     }
 
@@ -66,7 +66,7 @@ var LimbforgeForm = React.createClass({
       measurements:undefined,
       specs: {
         component: undefined,
-        orientation: "L",
+        orientation: "left",
         C4: 25,
         L1: 25,
         TD: undefined
@@ -123,7 +123,7 @@ var LimbforgeForm = React.createClass({
     //if orientation selector changed
     if (event.target.value == "right" || event.target.value == "left") {
       var newSpecs = this.state.specs;
-      newSpecs.orientation = event.target.value.charAt(0).toUpperCase();
+      newSpecs.orientation = event.target.value;
       this.setState({specs: newSpecs});
     }
     //if terminal devices selector changed
@@ -168,7 +168,7 @@ var LimbforgeForm = React.createClass({
   loadTD: function(){
     if (this.state.specs.TD != undefined){
       scene.remove(scene.children[4]);
-      loader.load( 'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.orientation + '_' + this.state.specs.TD + '.stl', function ( geometry ) {
+      loader.load( 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.orientation + '/td_' + this.state.specs.TD + '_' + this.state.specs.orientation + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set( 0, 0, 3.3 );
         mesh.rotation.set(0, Math.PI, -Math.PI/2 );
@@ -188,22 +188,12 @@ var LimbforgeForm = React.createClass({
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
       scene.remove(scene.children[3]);
-      loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_' + this.state.specs.orientation + '/forearm_'+ this.state.specs.orientation + '_C4-'+ (this.state.specs.C4 *10) +'_L1-'+ (this.state.specs.L1 *10) + '.stl', function ( geometry ) {
+      loader.load( 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ self.state.specs.orientation + '/forearm_ebearm_' + self.state.specs.orientation + '_C4-'+ (self.state.specs.C4 *10) +'_L1-'+ (self.state.specs.L1 *10) + '.stl', function ( geometry ) {
         var mesh = new THREE.Mesh( geometry, material );
-
-        if (self.state.specs.orientation == "R") {
-          if (self.state.specs.TD == undefined || self.state.specs.TD == "" ){
-            mesh.position.set( -2.4, 0, 0 );
-          } else {
-            mesh.position.set( -2.4, 0, 3.3 );
-          }
-        }
-        if (self.state.specs.orientation == "L") {
-          if (self.state.specs.TD == undefined || self.state.specs.TD == "" ) {
-            mesh.position.set( 0, 0, 0.0 );
-          } else {
-            mesh.position.set( 0, 0, 3.3 );
-          }
+        if (self.state.specs.TD == undefined || self.state.specs.TD == "" ) {
+          mesh.position.set( 0, 0, 0.0 );
+        } else {
+          mesh.position.set( 0, 0, 3.3 );
         }
 
         mesh.rotation.set( 0, 0, 0 );
@@ -218,7 +208,6 @@ var LimbforgeForm = React.createClass({
     }
   },
   render: function() {
-    console.log(this.state.specs, scene.children.length);
     scene.remove(scene.children[3]);
     scene.remove(scene.children[4]);
     this.loadNewDevices();
@@ -268,7 +257,7 @@ var LimbforgeForm = React.createClass({
           </div>
         );
       });
-      var imageURL = this.state.specs.orientation === "R" ? this.props.documentation_img_L : this.props.documentation_img_R
+      var imageURL = this.state.specs.orientation === "right" ? this.props.documentation_img_L : this.props.documentation_img_R
       var measurementArea = this.state.measurements === undefined ? '' :
       <div>
         <div className="row">
