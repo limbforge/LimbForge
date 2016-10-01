@@ -235,8 +235,8 @@ var LimbforgeForm = React.createClass({
     var self = this;
     var amputationLevelOptions = this.props.levels.map(function(option) {
       return (
-        <option value={option.id} key={option.id} >
-          {option.name}
+        <option disabled={option.name == "20-80% Transradial" ? "" : "disabled"} value={option.id} key={option.id} >
+          {option.name} {option.name != "20-80% Transradial" ? "(coming soon)" : ""}
         </option>
       )
     });
