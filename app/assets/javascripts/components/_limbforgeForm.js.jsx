@@ -1,5 +1,5 @@
 var loader = new THREE.STLLoader();
-var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 100 } );
+var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 0 } );
 
 var LimbforgeForm = React.createClass({
   componentWillMount(){
