@@ -63,7 +63,7 @@ class MeasurementsController < ApplicationController
   end
 
   def search
-    @measurements = Component.find_by_name(params[:query]).measurements
+    @measurements = Component.find(params[:query]).measurements
     if request.xhr?
       render :json => @measurements.to_json
     else

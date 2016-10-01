@@ -1,11 +1,10 @@
 var loader = new THREE.STLLoader();
-var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 100 } );
+var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 0 } );
 
 var LimbforgeForm = React.createClass({
   componentWillMount(){
   },
   create_zip: function() {
-    debugger;
     if (typeof this.state.specs.L1 != "number" || this.state.specs.L1 > 320 || this.state.specs.L1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
     if (typeof this.state.specs.C4 != "number" || this.state.specs.C4 > 280 || this.state.specs.C4 < 200) throw alert("Expected C4 size to be a number between 20cm - 28cm");
 
@@ -235,8 +234,8 @@ var LimbforgeForm = React.createClass({
     var self = this;
     var amputationLevelOptions = this.props.levels.map(function(option) {
       return (
-        <option value={option.name} key={option.name} >
-          {option.name}
+        <option disabled={option.name == "20-80% Transradial" ? "" : "disabled"} value={option.id} key={option.id} >
+          {option.name} {option.name != "20-80% Transradial" ? "(coming soon)" : ""}
         </option>
       )
     });
@@ -244,7 +243,7 @@ var LimbforgeForm = React.createClass({
     if (Array.isArray(this.state.components)) {
       var componentOptions = this.state.components.map(function(option) {
         return (
-          <option value={option.name} key={option.name} >
+          <option value={option.id} key={option.name} >
             {option.name}
           </option>
         );
@@ -273,7 +272,7 @@ var LimbforgeForm = React.createClass({
         return (
           <div key={option.name} className="col-xs-6">
             <p className="label nested-label">{option.name}</p>
-            <input id={option.name} type="text" onChange={self.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.default} name={option.name}/>
+            <input id={option.name} type="text" onChange={self.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + option.measurement_unit.toLowerCase()} name={option.name}/>
           </div>
         );
       });

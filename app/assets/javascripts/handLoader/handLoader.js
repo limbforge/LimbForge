@@ -18,8 +18,8 @@ function init() {
   camera.position.set( 0, -9, 6 );
 
   camera.add( new THREE.PointLight( 0xffffff, 1 ) );
-  camera.add( new THREE.PointLight( 0xffffff, 1 ) );
-  camera.add( new THREE.PointLight( 0xffffff, 1 ) );
+  camera.add( new THREE.AmbientLight( 0xffffff ) );
+  camera.add( new THREE.AmbientLight( 0xffffff ) );
 
   scene.add( camera);
 
@@ -45,8 +45,8 @@ function init() {
     mesh.rotation.set( 0, 0, 0 );
     mesh.scale.set( .02, .02, .02 );
 
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    mesh.castShadow = false;
+    mesh.receiveShadow = false;
 
     render();
   });
