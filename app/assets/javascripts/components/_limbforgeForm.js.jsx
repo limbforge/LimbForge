@@ -271,7 +271,7 @@ var LimbforgeForm = React.createClass({
       var measurementInputs = this.state.measurements.map(function(option) {
         return (
           <div key={option.name} className="col-xs-6">
-            <p className="label nested-label">{option.name} <span className="more-info" data-toggle="modal" data-target="#{option.name}">?</span></p>
+            <p className="label nested-label">{option.name}</p>
             <input id={option.name} type="text" onChange={self.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + option.measurement_unit.toLowerCase()} name={option.name}/>
           </div>
         );
