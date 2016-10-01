@@ -5,7 +5,6 @@ var LimbforgeForm = React.createClass({
   componentWillMount(){
   },
   create_zip: function() {
-    debugger;
     if (typeof this.state.specs.L1 != "number" || this.state.specs.L1 > 320 || this.state.specs.L1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
     if (typeof this.state.specs.C4 != "number" || this.state.specs.C4 > 280 || this.state.specs.C4 < 200) throw alert("Expected C4 size to be a number between 20cm - 28cm");
 
