@@ -64,7 +64,7 @@ class TerminalDevicesController < ApplicationController
   end
 
   def search
-    @tds = Component.find_by_name(params[:query]).terminal_devices
+    @tds = Component.find(params[:query]).terminal_devices
     if request.xhr?
       render :json => @tds.to_json
     else

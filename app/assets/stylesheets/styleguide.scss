@@ -169,6 +169,7 @@ input{
 
 select{
   width: 100%;
+  text-transform: capitalize;
   font-family: $base-font-family;
   background-color: $white;
   background-repeat: no-repeat;
