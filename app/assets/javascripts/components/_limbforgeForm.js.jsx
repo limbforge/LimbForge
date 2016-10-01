@@ -235,7 +235,7 @@ var LimbforgeForm = React.createClass({
     var self = this;
     var amputationLevelOptions = this.props.levels.map(function(option) {
       return (
-        <option value={option.name} key={option.name} >
+        <option value={option.id} key={option.id} >
           {option.name}
         </option>
       )
@@ -244,7 +244,7 @@ var LimbforgeForm = React.createClass({
     if (Array.isArray(this.state.components)) {
       var componentOptions = this.state.components.map(function(option) {
         return (
-          <option value={option.name} key={option.name} >
+          <option value={option.id} key={option.name} >
             {option.name}
           </option>
         );

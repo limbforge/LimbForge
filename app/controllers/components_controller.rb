@@ -148,14 +148,14 @@ class ComponentsController < ApplicationController
   end
 
   def search
-  	@components = AmputationLevel.find_by_name(params[:query]).component
+  	@components = AmputationLevel.find(params[:query]).component
   	if request.xhr?
   		render :json => @components.to_json
   	else
   		render :index
   	end
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_component
