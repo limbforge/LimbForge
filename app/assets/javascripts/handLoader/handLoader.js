@@ -17,18 +17,25 @@ function init() {
   camera.up.set( 0, 0, 1 );
   camera.position.set( 0, -9, 6 );
 
-  camera.add( new THREE.PointLight( 0xffffff, 1 ) );
-  camera.add( new THREE.AmbientLight( 0xffffff ) );
-  camera.add( new THREE.AmbientLight( 0xffffff ) );
+  var light1 = new THREE.PointLight( 0xffffff, 1 );
+  light1.position.set( 0, 0, -10);
+  var light2 = new THREE.PointLight( 0xffffff, 1 );
+  light2.position.set( 20, -25, 0);
+  var light3 = new THREE.PointLight( 0xffffff, 1 );
+  var light4 = new THREE.PointLight( 0xffffff, 1 );
 
-  scene.add( camera);
+  camera.add(light1);
+  camera.add(light2);
+  camera.add(light3);
+  camera.add(light4);
+  scene.add(camera);
 
-  var grid = new THREE.GridHelper( 25, 50, 0xffffff, 0x555555 );
+  var grid = new THREE.GridHelper( 25, 50, 0x0f2045, 0x0f2045 );
   grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
   scene.add(grid);
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
-  renderer.setClearColor( 0x999999 );
+  renderer.setClearColor( 0xffffff );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -37,7 +44,7 @@ function init() {
 
   // Binary files
 
-  var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 200 } );
+  var material = new THREE.MeshPhongMaterial( { color: 0x0f2045, specular: 0x111111, shininess: 200 } );
   loader.load( 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_L/forearm_L_C4-200_L1-230.stl', function ( geometry ) {
     var mesh = new THREE.Mesh( geometry, material );
 
