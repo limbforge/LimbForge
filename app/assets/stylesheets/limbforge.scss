@@ -13,7 +13,9 @@
   z-index: 1;
   button{
     float: right;
+    color: $moonbeam-dark;
     font-family: $base-h-font-family;
-    font-weight: 200;
+    font-weight: 600;
+    background-color: $ocean-regular;
   }
 }
