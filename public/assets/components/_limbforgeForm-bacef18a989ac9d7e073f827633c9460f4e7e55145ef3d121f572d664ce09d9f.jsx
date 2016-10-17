@@ -1,5 +1,5 @@
 var loader = new THREE.STLLoader();
-var material = new THREE.MeshPhongMaterial( { color: 0x0f2045, specular: 0x0f2045, shininess: 0 } );
+var material = new THREE.MeshPhongMaterial( { color: 0x0e2045, specular: 0x111111, shininess: 0 } );
 
 var LimbforgeForm = React.createClass({
   componentWillMount(){
@@ -194,7 +194,7 @@ var LimbforgeForm = React.createClass({
         mesh.scale.set( .02, .02, .02 );
 
         mesh.castShadow = true;
-        mesh.receiveShadow = false;
+        mesh.receiveShadow = true;
 
         scene.add( mesh );
         render();
@@ -219,7 +219,7 @@ var LimbforgeForm = React.createClass({
         mesh.scale.set( .02, .02, .02 );
 
         mesh.castShadow = true;
-        mesh.receiveShadow = false;
+        mesh.receiveShadow = true;
 
         scene.add( mesh );
         render();

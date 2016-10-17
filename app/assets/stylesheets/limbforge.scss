@@ -1,3 +1,21 @@
+@import "styleguide-variables";
+
 #title{
   margin: 0;
+}
+
+#limbforge-links{
+  position: absolute;
+  color: $white;
+  bottom: 0;
+  width: 100%;
+  background-color: $moonbeam-dark;
+  z-index: 1;
+  button{
+    float: right;
+    color: $moonbeam-dark;
+    font-family: $base-h-font-family;
+    font-weight: 600;
+    background-color: $ocean-regular;
+  }
 }
