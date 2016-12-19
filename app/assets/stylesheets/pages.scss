@@ -71,11 +71,9 @@
       color: $blue;
       font-family: $base-h-font-family;
       font-size: 100px;
+      font-weight: bold;
       @media (max-width: $screen-md-min) {
         font-size: 11vw;
-      }
-      @media (max-width: $screen-sm-min) {
-        font-size: 8vw;
       }
       span{
         &.forge{
@@ -83,6 +81,7 @@
         }
         &.project{
           font-size: 50px;
+          font-weight: 500;
           @media (max-width: $screen-md-min) {
             font-size: 5vw;
           }
@@ -90,10 +89,12 @@
       }
     }
     p{
-      color: $gray;
+      color: $white;
       font-family: $base-font-family;
       text-align: justify;
-      max-width: 810px;
+      max-width: 700px;
+      font-weight: 200;
+      font-size: 18px;
       display: block;
       margin: 0 auto;
     }
@@ -105,6 +106,8 @@
   #mailing-list{
     p{
       text-align: center;
+      color: $white;
+      font-style: italic;
     }
     label{
       padding-top: $standard-padding/2;
@@ -116,7 +119,7 @@
       margin: 0 auto;
       -webkit-appearance: none;
       background-color: black;
-      border-bottom: 3px solid $white;
+      border-bottom: 1px solid $white;
       text-align: center;
       font-size: 16px;
       color: $white;
@@ -137,9 +140,12 @@
         }
       }
       &[type=submit]{
-        background-color: $blue;
+        background-color: transparent;
         border-bottom: 0px;
         margin-top: $standard-padding;
+        border: 1px solid $white;
+        padding: $standard-padding/3;
+        width:  $standard-padding*4;
       }
     }
   }
