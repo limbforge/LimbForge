@@ -1,5 +1,10 @@
 //COLORS:
-//style guide colors
+
+//official working colors
+$blue:            #1578b5;
+$gray:            #b3b4b4;
+
+//old style guide colors
 $moonbeam-darker: #0b1830;
 $moonbeam-dark:   #0e2045;
 $moonbeam-regular:#224269;
@@ -16,6 +21,8 @@ $dark-gray:       #1c1d22;
 $regular-gray:    #2a2b30;
 $light-gray:      #bdbdbd;
 
+$black:           #000000;
+
 //MARGIN & PADDING
 $standard-padding: 30px;
 $area-padding: $standard-padding*2 $standard-padding;
@@ -25,10 +32,10 @@ $base-font-color:         $dark-gray;
 $base-line-height:        $standard-padding;
 $base-letter-spacing:     $standard-padding/10;
 //headers
-$base-h-font-family:    "ff-tisa-sans-web-pro";
+$base-h-font-family:    "din-2014";
 $base-h-letter-spacing: $standard-padding/30;
 //paragraphs
-$base-font-family:      "ff-tisa-sans-web-pro";
+$base-font-family:      "freight-sans-pro";
 $base-p-font-size:      18px;
 $base-p-letter-spacing: $standard-padding/30;
 

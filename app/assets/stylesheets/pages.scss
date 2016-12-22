@@ -59,3 +59,103 @@
     letter-spacing: $base-letter-spacing;
   }
 }
+
+#landing-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content-area{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: $standard-padding*2 $standard-padding;
+    h1{
+      color: $blue;
+      font-family: $base-h-font-family;
+      font-size: 100px;
+      font-weight: bold;
+      @media (max-width: $screen-md-min) {
+        font-size: 11vw;
+      }
+      span{
+        &.forge{
+          color: $gray;
+        }
+        &.project{
+          font-size: 50px;
+          font-weight: 500;
+          @media (max-width: $screen-md-min) {
+            font-size: 5vw;
+          }
+        }
+      }
+    }
+    p{
+      color: $white;
+      font-family: $base-font-family;
+      text-align: justify;
+      max-width: 700px;
+      font-weight: 200;
+      font-size: 18px;
+      display: block;
+      margin: 0 auto;
+    }
+    img{
+      width: $standard-padding*3;
+      margin: $standard-padding 0;
+    }
+    .limbforge-link{
+      background-color: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+  #mailing-list{
+    p{
+      text-align: center;
+      color: $white;
+      font-style: italic;
+    }
+    label{
+      padding-top: $standard-padding/2;
+      color: $white;
+    }
+    input{
+      max-width: $standard-padding*10;
+      display: block;
+      margin: 0 auto;
+      -webkit-appearance: none;
+      background-color: black;
+      border-bottom: 1px solid $white;
+      text-align: center;
+      font-size: 16px;
+      color: $white;
+      &[type=email]{
+        &:focus{
+          &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: $black;
+          }
+          &::-moz-placeholder { /* Firefox 19+ */
+            color: $black;
+          }
+          &:-ms-input-placeholder { /* IE 10+ */
+            color: $black;
+          }
+          &:-moz-placeholder { /* Firefox 18- */
+            color: $black;
+          }
+        }
+      }
+      &[type=submit]{
+        background-color: transparent;
+        border-bottom: 0px;
+        margin-top: $standard-padding;
+        border: 1px solid $white;
+        padding: $standard-padding/3;
+        width:  $standard-padding*4;
+      }
+    }
+  }
+}
