@@ -65,6 +65,10 @@
   justify-content: center;
   align-items: center;
   .content-area{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     padding: $standard-padding*2 $standard-padding;
     h1{
@@ -101,6 +105,11 @@
     img{
       width: $standard-padding*3;
       margin: $standard-padding 0;
+    }
+    .limbforge-link{
+      background-color: transparent;
+      border: 0;
+      box-shadow: none;
     }
   }
   #mailing-list{
