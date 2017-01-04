@@ -12522,3 +12522,911 @@ Processing by MeasurementsController#search as JSON
   [1m[35mComponent Load (0.9ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."name" = $1 LIMIT 1  [["name", "EbeArm"]]
   [1m[36mMeasurement Load (0.4ms)[0m  [1mSELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1[0m  [["component_id", 4]]
 Completed 200 OK in 49ms (Views: 0.2ms | ActiveRecord: 3.2ms)
+  [1m[36m (37.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (9.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePages (20160811045523)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (28.0ms)[0m  [1mCREATE TABLE "pages" ("id" serial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160811045523"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMeasurements (20160826175954)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (10.6ms)[0m  [1mCREATE TABLE "measurements" ("id" serial primary key, "name" character varying, "step" float, "measurement_unit" character varying, "diagram" character varying, "lower_range" float, "upper_range" float, "default" float, "instructions" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160826175954"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateDevices (20160826180439)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "devices" ("id" serial primary key, "name" character varying, "icon" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160826180439"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateDevicesMeasurementsJoinTable (20160826181632)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "devices_measurements" ("device_id" integer, "measurement_id" integer) [0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX  "index_devices_measurements_on_device_id_and_measurement_id" ON "devices_measurements"  ("device_id", "measurement_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160826181632"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to DeviseCreateUsers (20160827002157)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/cquinonez/repos/Limbforge/db/migrate/20160827002157_devise_create_users.rb:34)
+  [1m[35m (2.6ms)[0m  CREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160827002157"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+Migrating to AddAdminToUsers (20160827002311)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (25.7ms)[0m  ALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160827002311"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Migrating to AddAttachmentDiagramToMeasurements (20160827183202)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "measurements" ADD "diagram_file_name" character varying
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "measurements" ADD "diagram_content_type" character varying[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "measurements" ADD "diagram_file_size" integer
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "measurements" ADD "diagram_updated_at" timestamp[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160827183202"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddAttachmentIconToDevices (20160827190912)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "devices" ADD "icon_file_name" character varying[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "devices" ADD "icon_content_type" character varying
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "devices" ADD "icon_file_size" integer[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "devices" ADD "icon_updated_at" timestamp
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160827190912"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to CreateComponents (20160829000050)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (9.8ms)[0m  CREATE TABLE "components" ("id" serial primary key, "name" character varying, "icon" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160829000050"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to ComponentAndMeasurementSharedTable (20160829000226)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "components_measurements" ("component_id" integer, "measurement_id" integer) 
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX  "components_measurements_unique" ON "components_measurements"  ("component_id", "measurement_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160829000226"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddAttachmentIconToComponents (20160829001009)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "components" ADD "icon_file_name" character varying[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "components" ADD "icon_content_type" character varying
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "components" ADD "icon_file_size" integer[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "components" ADD "icon_updated_at" timestamp
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160829001009"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateAmputationLevels (20160829005006)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "amputation_levels" ("id" serial primary key, "name" character varying, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160829005006"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to AmputationLevelComponentSharedTable (20160829010612)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "amputation_levels_components" ("amputation_level_id" integer, "component_id" integer) 
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX  "amputation_levels_components_unique" ON "amputation_levels_components"  ("amputation_level_id", "component_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160829010612"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddVersionToComponents (20160829013357)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "components" ADD "version" float[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160829013357"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOptions (20160829015242)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "options" ("id" serial primary key, "name" character varying, "photo" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160829015242"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to ComponentAndOptionSharedTable (20160829015406)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "components_options" ("component_id" integer, "option_id" integer) [0m
+  [1m[35m (0.6ms)[0m  CREATE UNIQUE INDEX  "components_options_unique" ON "components_options"  ("component_id", "option_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160829015406"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to AddAttachmentPhotoToOptions (20160829021556)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "options" ADD "photo_file_name" character varying
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "options" ADD "photo_content_type" character varying[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "options" ADD "photo_file_size" integer
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "options" ADD "photo_updated_at" timestamp[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160829021556"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateComponentTypes (20160916220039)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "component_types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160916220039"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to ComponentComponentTypeSharedTable (20160916222302)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "component_types_components" ("component_id" integer, "component_type_id" integer) [0m
+  [1m[35m (0.6ms)[0m  CREATE UNIQUE INDEX  "component_types_components_unique" ON "component_types_components"  ("component_id", "component_type_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160916222302"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to CreateTerminalDevices (20160918015809)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "terminal_devices" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160918015809"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to ComponentTerminalDeviceSharedTable (20160918015934)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "components_terminal_devices" ("component_id" integer, "terminal_device_id" integer) 
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX  "components_terminal_devices_unique" ON "components_terminal_devices"  ("component_id", "terminal_device_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160918015934"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (12.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'amputation_levels'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.3ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'amputation_levels_components'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'component_types'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'component_types_components'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'components'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'components_measurements'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'components_options'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'components_terminal_devices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'devices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'devices_measurements'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'measurements'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'options'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'pages'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.2ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'terminal_devices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/" for ::1 at 2017-01-04 08:36:23 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (2695.5ms)
+Completed 200 OK in 2991ms (Views: 2978.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/amputation_levels.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/component_types.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/bootstrap_and_overrides.self-b85ec57930a7e57658a355f494c8fca5e2691f1a1ed6bfd67ddfbf962e55a7ac.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/dashboard.self-7a76ab2443a70bf9e7f4a2d06cc02a5f7b1ac92d0482baec301254e70bbd3347.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/measurements.self-1c1b953e335f27480f9e326e9360d33d33f2e04e3290d394faae67a7c8960b85.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/limbforge.self-3873b8897794e9beb42c1bcf2f2df5d2ae908dfae0532ebd26a079ec3cca9fe5.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/options.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/pages.self-4d4f6728bce8fa940371d82009501ef5af5de075880ae07310be5d40215ba112.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/styleguide-variables.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/styleguide.self-c939692ddc5cb1ea76dc095e3a42a607c803b404e51984a3e88fb82ee6823778.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/twitter/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/twitter/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react.self-e3251ec4ec5e08041151d49a171f772e6b6236b38ad62c101e29be367138f487.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_mount.self-529311908dc83d0737d62f1a5eb4e2fa326f2040e2d2755b4fd78d2c09c5cc15.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks.self-19cb50a828b179c80e0ef6463ceb612ae3e75f377fb2dd6f4afdc3b46ae75d56.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks_classic.self-763df8fa4c0b0551840f5244b265843641523ad3bf7bb308d20801ac5cde2acb.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks_classic_deprecated.self-f93fc4217cec084020eaf90b0425c454ba18d4ee1a054f254f5dba461eaab1a4.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_pjax.self-e8fc58103934b6c8054d5fbfe37ec92f2ef7719bc90566026fe9fe19e0e2cf45.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_native.self-69da92af440ae3f522e7294876ed2bae234447ee564d1619c9f69d53e1020a8a.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs_event_setup.self-0cd254aea0ec32dd175eff42a443f912c283295c0235384ae7cd425cd8f7c3e5.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/react_ujs.self-538d6440534fa5f615e8a26932792a82a2e4a33a97886e2d815eab8fc216d415.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/handLoader/three.self-388298fb5f57d88882eade96e9bdd35dcf1cdb501722f7502fe4ae9fde556e0c.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/handLoader/STLLoader.self-ecd1e51e6dd974849b7ae1a3edd990d408af10cd0daf20c06eee7d5aec208e01.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/handLoader/Detector.self-baf3dce712d19890a9bb27d310c6403573253b95cccfe38f8463c763a1f9e206.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/handLoader/OrbitControls.self-8a48df4251f5f9eb19253ea1add4139a12485478e04c70bfa106e4377562a257.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/handLoader/handLoader.self-ff489fa21433e042227b4e29922a60f2646c8f8226e1f02d983abcfbcbeb04bb.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/FileSaver.min.self-f4eb6fbef4494b3d66fd079022ef8f3d800e478e0516ab3898b14aac135393fd.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/amputation_levels.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/component_types.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_amputationLevelArea.self-a1d92a37950d37a1dfce5e0ef32d46e2e4f2c57c5d744f571f1fdb2e07fe7c3f.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_componentArea.self-ce271e7916bda355079343b2c5e33a2cff2517f22ddcd2ce5b15df6da5c7b3e4.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_limbforgeForm.self-bbc538ac4d1db5c202ac714347489843c263585724931e170007a9b0e44aef6f.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_measurementArea.self-8443d4688cb49edb8fbbdca53e6fdc20abbff2013314ccdfb3032038bae285a6.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_measurementModal.self-2b2869e6e51be74c968ee2d13164c7a0b114f1306f5a47393b8d435ae416d58c.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_nameArea.self-ebaecb1d1c1c80e230458b55f318f121717c0558b25e581c81ed2a64c81c3d53.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_submitArea.self-69bd1c358c2c3a919db55aab94015872d0f7975c0f323240e6e51e8979393430.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/components/_tdArea.self-81d2356dd9c5dd1e356f101d08bacd5e13a57312ba3c526d5dcd929bf61a7c19.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/handzipper.self-74752bb491d49d40e8e8b041aa5fa900fd48ea9d57bcaed25dfc12444670c14e.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/jszip-utils.min.self-d53c8f8036e0333437dad77cd0db01707f56e64f87c3a81f185fd51e20c0f1c4.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/jszip.min.self-973142d06c4e0e0741925ce19b866ddb29af4df578fbbb4efa003766a475ba4d.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/measurements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/options.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/application.self-e088abdec24c652728c331cc53f5d2286e096b6080fa2bacfba79c56847e932e.js?body=1" for ::1 at 2017-01-04 08:36:26 -0800
+
+
+Started GET "/assets/brand/logo-89678cf73fb15d51b2cfabdea56ddeba0830292afb288615a6d65fa6dc2ec65b.svg" for ::1 at 2017-01-04 08:36:27 -0800
+
+
+Started GET "/limbforge" for ::1 at 2017-01-04 08:36:31 -0800
+Processing by PagesController#limbforge as HTML
+  [1m[35mAmputationLevel Load (0.5ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"
+  Rendered pages/limbforge.html.erb within layouts/application (34.3ms)
+Completed 200 OK in 110ms (Views: 108.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/search_components" for ::1 at 2017-01-04 08:47:32 -0800
+Processing by ComponentsController#search as HTML
+  [1m[36mAmputationLevel Load (0.2ms)[0m  [1mSELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 257ms (ActiveRecord: 2.0ms)
+
+ActiveRecord::RecordNotFound (Couldn't find AmputationLevel with 'id'=):
+  app/controllers/components_controller.rb:151:in `search'
+
+
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.9ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (50.3ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (100.1ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/cquinonez/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (157.9ms)
+
+
+Started GET "/limbforge" for ::1 at 2017-01-04 08:47:38 -0800
+Processing by PagesController#limbforge as HTML
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"
+  Rendered pages/limbforge.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 76ms (Views: 75.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/limbforge" for ::1 at 2017-01-04 08:49:30 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#limbforge as HTML
+  [1m[35mAmputationLevel Load (0.4ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"
+  Rendered pages/limbforge.html.erb within layouts/application (326.7ms)
+Completed 200 OK in 567ms (Views: 542.4ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/assets/amputation_levels.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/limbforge.self-3873b8897794e9beb42c1bcf2f2df5d2ae908dfae0532ebd26a079ec3cca9fe5.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/component_types.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/bootstrap_and_overrides.self-b85ec57930a7e57658a355f494c8fca5e2691f1a1ed6bfd67ddfbf962e55a7ac.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/dashboard.self-7a76ab2443a70bf9e7f4a2d06cc02a5f7b1ac92d0482baec301254e70bbd3347.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/measurements.self-1c1b953e335f27480f9e326e9360d33d33f2e04e3290d394faae67a7c8960b85.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/options.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:49:31 -0800
+
+
+Started GET "/assets/styleguide-variables.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/pages.self-4d4f6728bce8fa940371d82009501ef5af5de075880ae07310be5d40215ba112.css?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/styleguide.self-c939692ddc5cb1ea76dc095e3a42a607c803b404e51984a3e88fb82ee6823778.css?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/twitter/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react.self-e3251ec4ec5e08041151d49a171f772e6b6236b38ad62c101e29be367138f487.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/twitter/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_mount.self-529311908dc83d0737d62f1a5eb4e2fa326f2040e2d2755b4fd78d2c09c5cc15.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_event_setup.self-0cd254aea0ec32dd175eff42a443f912c283295c0235384ae7cd425cd8f7c3e5.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks_classic.self-763df8fa4c0b0551840f5244b265843641523ad3bf7bb308d20801ac5cde2acb.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks.self-19cb50a828b179c80e0ef6463ceb612ae3e75f377fb2dd6f4afdc3b46ae75d56.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks_classic_deprecated.self-f93fc4217cec084020eaf90b0425c454ba18d4ee1a054f254f5dba461eaab1a4.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_native.self-69da92af440ae3f522e7294876ed2bae234447ee564d1619c9f69d53e1020a8a.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs_pjax.self-e8fc58103934b6c8054d5fbfe37ec92f2ef7719bc90566026fe9fe19e0e2cf45.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/react_ujs.self-538d6440534fa5f615e8a26932792a82a2e4a33a97886e2d815eab8fc216d415.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/handLoader/OrbitControls.self-8a48df4251f5f9eb19253ea1add4139a12485478e04c70bfa106e4377562a257.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/handLoader/three.self-388298fb5f57d88882eade96e9bdd35dcf1cdb501722f7502fe4ae9fde556e0c.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/handLoader/Detector.self-baf3dce712d19890a9bb27d310c6403573253b95cccfe38f8463c763a1f9e206.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/handLoader/handLoader.self-ff489fa21433e042227b4e29922a60f2646c8f8226e1f02d983abcfbcbeb04bb.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/handLoader/STLLoader.self-ecd1e51e6dd974849b7ae1a3edd990d408af10cd0daf20c06eee7d5aec208e01.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/amputation_levels.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/FileSaver.min.self-f4eb6fbef4494b3d66fd079022ef8f3d800e478e0516ab3898b14aac135393fd.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/component_types.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_amputationLevelArea.self-a1d92a37950d37a1dfce5e0ef32d46e2e4f2c57c5d744f571f1fdb2e07fe7c3f.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_limbforgeForm.self-bbc538ac4d1db5c202ac714347489843c263585724931e170007a9b0e44aef6f.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_nameArea.self-ebaecb1d1c1c80e230458b55f318f121717c0558b25e581c81ed2a64c81c3d53.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_measurementArea.self-8443d4688cb49edb8fbbdca53e6fdc20abbff2013314ccdfb3032038bae285a6.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_submitArea.self-69bd1c358c2c3a919db55aab94015872d0f7975c0f323240e6e51e8979393430.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_measurementModal.self-2b2869e6e51be74c968ee2d13164c7a0b114f1306f5a47393b8d435ae416d58c.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/jszip-utils.min.self-d53c8f8036e0333437dad77cd0db01707f56e64f87c3a81f185fd51e20c0f1c4.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_componentArea.self-ce271e7916bda355079343b2c5e33a2cff2517f22ddcd2ce5b15df6da5c7b3e4.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/handzipper.self-74752bb491d49d40e8e8b041aa5fa900fd48ea9d57bcaed25dfc12444670c14e.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/components/_tdArea.self-81d2356dd9c5dd1e356f101d08bacd5e13a57312ba3c526d5dcd929bf61a7c19.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/measurements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/jszip.min.self-973142d06c4e0e0741925ce19b866ddb29af4df578fbbb4efa003766a475ba4d.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/options.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/application.self-e088abdec24c652728c331cc53f5d2286e096b6080fa2bacfba79c56847e932e.js?body=1" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/assets/brand/logo-89678cf73fb15d51b2cfabdea56ddeba0830292afb288615a6d65fa6dc2ec65b.svg" for ::1 at 2017-01-04 08:49:32 -0800
+
+
+Started GET "/" for ::1 at 2017-01-04 09:13:04 -0800
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 367ms (Views: 366.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/limbforge" for ::1 at 2017-01-04 09:13:05 -0800
+Processing by PagesController#limbforge as HTML
+  [1m[36mAmputationLevel Load (0.6ms)[0m  [1mSELECT "amputation_levels".* FROM "amputation_levels"[0m
+  Rendered pages/limbforge.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 88ms (Views: 87.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2017-01-04 09:13:19 -0800
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 60ms (Views: 59.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/limbforge" for ::1 at 2017-01-04 09:13:21 -0800
+Processing by PagesController#limbforge as HTML
+  [1m[35mAmputationLevel Load (0.3ms)[0m  SELECT "amputation_levels".* FROM "amputation_levels"
+  Rendered pages/limbforge.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 59ms (Views: 58.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/search_components?query=4" for ::1 at 2017-01-04 09:13:24 -0800
+Processing by ComponentsController#search as JSON
+  Parameters: {"query"=>"4"}
+  [1m[36mAmputationLevel Load (0.3ms)[0m  [1mSELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1[0m  [["id", 4]]
+  [1m[35mComponent Load (0.4ms)[0m  SELECT "components".* FROM "components" INNER JOIN "amputation_levels_components" ON "components"."id" = "amputation_levels_components"."component_id" WHERE "amputation_levels_components"."amputation_level_id" = $1  [["amputation_level_id", 4]]
+Completed 200 OK in 72ms (Views: 0.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/search_tds?query=1" for ::1 at 2017-01-04 09:13:26 -0800
+Processing by TerminalDevicesController#search as JSON
+  Parameters: {"query"=>"1"}
+  [1m[36mComponent Load (0.1ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mTerminalDevice Load (0.3ms)[0m  SELECT "terminal_devices".* FROM "terminal_devices" INNER JOIN "components_terminal_devices" ON "terminal_devices"."id" = "components_terminal_devices"."terminal_device_id" WHERE "components_terminal_devices"."component_id" = $1  [["component_id", 1]]
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/search_measurements?query=1" for ::1 at 2017-01-04 09:13:26 -0800
+Processing by MeasurementsController#search as JSON
+  Parameters: {"query"=>"1"}
+  [1m[36mComponent Load (0.2ms)[0m  [1mSELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mMeasurement Load (0.4ms)[0m  SELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1  [["component_id", 1]]
+Completed 200 OK in 18ms (Views: 0.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for ::1 at 2017-01-04 09:20:24 -0800
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 141ms (Views: 140.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/amputation_levels.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 09:20:24 -0800
+
+
+Started GET "/assets/bootstrap_and_overrides.self-b85ec57930a7e57658a355f494c8fca5e2691f1a1ed6bfd67ddfbf962e55a7ac.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/component_types.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/dashboard.self-7a76ab2443a70bf9e7f4a2d06cc02a5f7b1ac92d0482baec301254e70bbd3347.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/limbforge.self-3873b8897794e9beb42c1bcf2f2df5d2ae908dfae0532ebd26a079ec3cca9fe5.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/measurements.self-1c1b953e335f27480f9e326e9360d33d33f2e04e3290d394faae67a7c8960b85.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/options.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/pages.self-4d4f6728bce8fa940371d82009501ef5af5de075880ae07310be5d40215ba112.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/styleguide-variables.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/styleguide.self-c939692ddc5cb1ea76dc095e3a42a607c803b404e51984a3e88fb82ee6823778.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/twitter/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/twitter/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react.self-e3251ec4ec5e08041151d49a171f772e6b6236b38ad62c101e29be367138f487.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_mount.self-529311908dc83d0737d62f1a5eb4e2fa326f2040e2d2755b4fd78d2c09c5cc15.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks.self-19cb50a828b179c80e0ef6463ceb612ae3e75f377fb2dd6f4afdc3b46ae75d56.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks_classic.self-763df8fa4c0b0551840f5244b265843641523ad3bf7bb308d20801ac5cde2acb.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_turbolinks_classic_deprecated.self-f93fc4217cec084020eaf90b0425c454ba18d4ee1a054f254f5dba461eaab1a4.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_pjax.self-e8fc58103934b6c8054d5fbfe37ec92f2ef7719bc90566026fe9fe19e0e2cf45.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_native.self-69da92af440ae3f522e7294876ed2bae234447ee564d1619c9f69d53e1020a8a.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs_event_setup.self-0cd254aea0ec32dd175eff42a443f912c283295c0235384ae7cd425cd8f7c3e5.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/react_ujs.self-538d6440534fa5f615e8a26932792a82a2e4a33a97886e2d815eab8fc216d415.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/handLoader/three.self-388298fb5f57d88882eade96e9bdd35dcf1cdb501722f7502fe4ae9fde556e0c.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/handLoader/STLLoader.self-ecd1e51e6dd974849b7ae1a3edd990d408af10cd0daf20c06eee7d5aec208e01.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/handLoader/Detector.self-baf3dce712d19890a9bb27d310c6403573253b95cccfe38f8463c763a1f9e206.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/handLoader/OrbitControls.self-8a48df4251f5f9eb19253ea1add4139a12485478e04c70bfa106e4377562a257.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/handLoader/handLoader.self-ff489fa21433e042227b4e29922a60f2646c8f8226e1f02d983abcfbcbeb04bb.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/FileSaver.min.self-f4eb6fbef4494b3d66fd079022ef8f3d800e478e0516ab3898b14aac135393fd.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/amputation_levels.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/component_types.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_amputationLevelArea.self-a1d92a37950d37a1dfce5e0ef32d46e2e4f2c57c5d744f571f1fdb2e07fe7c3f.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_componentArea.self-ce271e7916bda355079343b2c5e33a2cff2517f22ddcd2ce5b15df6da5c7b3e4.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_limbforgeForm.self-bbc538ac4d1db5c202ac714347489843c263585724931e170007a9b0e44aef6f.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_measurementArea.self-8443d4688cb49edb8fbbdca53e6fdc20abbff2013314ccdfb3032038bae285a6.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_measurementModal.self-2b2869e6e51be74c968ee2d13164c7a0b114f1306f5a47393b8d435ae416d58c.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_nameArea.self-ebaecb1d1c1c80e230458b55f318f121717c0558b25e581c81ed2a64c81c3d53.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_submitArea.self-69bd1c358c2c3a919db55aab94015872d0f7975c0f323240e6e51e8979393430.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/components/_tdArea.self-81d2356dd9c5dd1e356f101d08bacd5e13a57312ba3c526d5dcd929bf61a7c19.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/handzipper.self-74752bb491d49d40e8e8b041aa5fa900fd48ea9d57bcaed25dfc12444670c14e.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/jszip-utils.min.self-d53c8f8036e0333437dad77cd0db01707f56e64f87c3a81f185fd51e20c0f1c4.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/jszip.min.self-973142d06c4e0e0741925ce19b866ddb29af4df578fbbb4efa003766a475ba4d.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/measurements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/options.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/application.self-e088abdec24c652728c331cc53f5d2286e096b6080fa2bacfba79c56847e932e.js?body=1" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/assets/brand/logo-89678cf73fb15d51b2cfabdea56ddeba0830292afb288615a6d65fa6dc2ec65b.svg" for ::1 at 2017-01-04 09:20:25 -0800
+
+
+Started GET "/limbforge" for ::1 at 2017-01-04 09:20:26 -0800
+Processing by PagesController#limbforge as HTML
+  [1m[36mAmputationLevel Load (0.2ms)[0m  [1mSELECT "amputation_levels".* FROM "amputation_levels"[0m
+  Rendered pages/limbforge.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 77ms (Views: 76.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/search_components?query=4" for ::1 at 2017-01-04 09:20:29 -0800
+Processing by ComponentsController#search as JSON
+  Parameters: {"query"=>"4"}
+  [1m[35mAmputationLevel Load (0.2ms)[0m  SELECT  "amputation_levels".* FROM "amputation_levels" WHERE "amputation_levels"."id" = $1 LIMIT 1  [["id", 4]]
+  [1m[36mComponent Load (0.2ms)[0m  [1mSELECT "components".* FROM "components" INNER JOIN "amputation_levels_components" ON "components"."id" = "amputation_levels_components"."component_id" WHERE "amputation_levels_components"."amputation_level_id" = $1[0m  [["amputation_level_id", 4]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/search_tds?query=1" for ::1 at 2017-01-04 09:20:30 -0800
+Processing by TerminalDevicesController#search as JSON
+  Parameters: {"query"=>"1"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mTerminalDevice Load (0.2ms)[0m  [1mSELECT "terminal_devices".* FROM "terminal_devices" INNER JOIN "components_terminal_devices" ON "terminal_devices"."id" = "components_terminal_devices"."terminal_device_id" WHERE "components_terminal_devices"."component_id" = $1[0m  [["component_id", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/search_measurements?query=1" for ::1 at 2017-01-04 09:20:30 -0800
+Processing by MeasurementsController#search as JSON
+  Parameters: {"query"=>"1"}
+  [1m[35mComponent Load (0.2ms)[0m  SELECT  "components".* FROM "components" WHERE "components"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mMeasurement Load (0.2ms)[0m  [1mSELECT "measurements".* FROM "measurements" INNER JOIN "components_measurements" ON "measurements"."id" = "components_measurements"."measurement_id" WHERE "components_measurements"."component_id" = $1[0m  [["component_id", 1]]
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms)
