@@ -20,6 +20,7 @@ class LimbforgeForm extends React.Component {
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
+    this.getStls = this.getStls.bind(this);
   }
 
   // When we select a component, we want to grab the components list of measurements and tds
@@ -74,14 +75,24 @@ class LimbforgeForm extends React.Component {
       }
     });
   }
-  //generate AWS urls for zip file
-  populateURLS(urls) {
-    urls.push('https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.orientation + '/forearm_ebearm_' + this.state.specs.orientation + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1 + '.stl');
-    urls.push('https://s3.amazonaws.com/limbforgestls/EbeArm/EbeArm_wrist_unit+v1.stl');
-    // add on terminal device adaptor
-    if (this.state.specs.TD != undefined){
-      urls.push('https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.orientation + '/td_' + this.state.specs.TD + '_' + this.state.specs.orientation + '.stl');
-    }
+
+  //GET STLS
+  getStls(stls) {
+    return new Promise((resolve, reject) => {
+      let data = JSON.stringify({
+        component: this.state.specs.component,
+        orientation: this.state.specs.orientation,
+        C4: this.state.specs.C4,
+        L1: this.state.specs.L1,
+        TD: this.state.specs.TD
+      });
+      // }).replace("\"", "\\\"");
+      console.log('sending parameters as '+data)
+      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge">');
+      form.append($("<input type='hidden' name='parameters' value='"+data+"''>"));
+      $('body').append(form);
+      form.submit();
+    });
   }
 
   createZip() {
@@ -92,42 +103,10 @@ class LimbforgeForm extends React.Component {
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
     const zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + this.state.specs.orientation + "_" + formatted_date + ".zip";
-    const urls = [];
-    this.populateURLS(urls);
+    const stls = [];
 
-    let count = 0;
-    // We're asynchronously asking for all of the files
-    // We increment the count once each file is completely downloaded
-    // Once the last file is downloaded (aka count == urls.length) then zip it and download it
-    urls.forEach((url) => {
-      // Grab the filename from the url
-      // For example if the url is http://google.com/awesome/foo.stl
-      // We set filename = foo.stl
-      const indexOfLastSlash = url.lastIndexOf('/');
-      const filename = url.substring(indexOfLastSlash + 1);
-
-      // Load a file from an external url and add it in a zip file
-      // Beware! This will fail if the file is not binary
-      // aka if it is a text file or an ascii stl model
-      JSZipUtils.getBinaryContent(url, (err, data) => {
-        if(err) {
-          // Probably should do something better here...
-          // For example if the file server is down, provide some kind of info to the user
-          throw err;
-        }
-
-        // Add the file to the zip
-        zip.file(filename, data, { binary: true });
-        count++;
-
-        // We're all done! Zip it and ship it
-        if (count == urls.length) {
-          zip.generateAsync({ type: "blob" })
-          .then((zipFile) => {
-            saveAs(zipFile, zipFilename);
-          });
-        }
-      });
+    this.getStls(stls).then(() => {
+      console.log('it worked!');
     });
   }
 
@@ -165,7 +144,7 @@ class LimbforgeForm extends React.Component {
         newSpecs.TD = undefined;
         this.setState({specs: newSpecs});
       }
-    //if L1 Changed
+      //if L1 Changed
     } else if (event.target.name == "L1") {
       const L1Value = Number(event.target.value);
       const L1Measurements = this.state.measurements.find((measurement) => {

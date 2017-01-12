@@ -6,7 +6,6 @@ class MeasurementArea extends React.Component {
     //this.setState(nextProps);
   }
   render() {
-    debugger;
     var measurementInputs = this.props.measurements == undefined ? "" : this.props.measurements.map((option) => {
       return (
         <div key={option.name} className="col-xs-6">
