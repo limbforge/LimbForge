@@ -128,6 +128,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -229,6 +230,7 @@ DEPENDENCIES
   paperclip
   pg (~> 0.15)
   pry
+  rack-cors
   rails (= 4.2.5)
   react-rails
   recaptcha
@@ -243,4 +245,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.2
+   1.13.7

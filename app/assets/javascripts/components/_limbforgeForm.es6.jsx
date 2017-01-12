@@ -88,28 +88,10 @@ class LimbforgeForm extends React.Component {
       });
       // }).replace("\"", "\\\"");
       console.log('sending parameters as '+data)
-      var form = $('<form method="GET" action="http://localhost:3100/api/submit">');
+      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge">');
       form.append($("<input type='hidden' name='parameters' value='"+data+"''>"));
       $('body').append(form);
-      debugger;
       form.submit();
-
-      // $.ajax({
-      //   type: 'GET',
-      //   url: 'http://localhost:3100/api/submit',
-      //   data : {parameters : JSON.stringify(data)},
-      //   dataType: 'json',
-      //   success: (data) => {
-      //     console.log(data);
-      //     //will it return an array of STLS? If so, add them to the stl array:
-      //     stls.push(data);
-      //     // resolve promise
-      //     resolve();
-      //   },
-      //   error: (error) => {
-      //     console.log('get stls error', error);
-      //   }
-      // });
     });
   }
 
@@ -125,19 +107,6 @@ class LimbforgeForm extends React.Component {
 
     this.getStls(stls).then(() => {
       console.log('it worked!');
-
-      // // generate each stl based on this.state.specs
-      // stls.forEach((stl) => {
-      //   // Add the file to the zip. FIX: Need to know how the file will be recieved.
-      //   zip.file("STLNAMEGOESHERE.stl", stl);
-      //   // We're all done! Zip it and ship it
-      //   if (count == stls.length) {
-      //     zip.generateAsync({ type: "blob" })
-      //     .then((zipFile) => {
-      //       saveAs(zipFile, zipFilename);
-      //     });
-      //   }
-      // });
     });
   }
 
