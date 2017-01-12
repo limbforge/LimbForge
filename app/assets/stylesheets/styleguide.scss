@@ -151,8 +151,7 @@ label{
 }
 
 input{
-  border: 0;
-  border-bottom: 3px solid $dark-gray;
+  border: 3px solid $dark-gray;
   border-radius: 0;
   letter-spacing: 2px;
   padding: $standard-padding/3;
@@ -171,6 +170,15 @@ input{
     padding: $standard-padding - 10;
     letter-spacing: $base-letter-spacing;
   }
+}
+
+textarea{
+  -webkit-appearance: none;
+  resize: none;
+  width: 100%;
+  outline: none;
+  height: 200px;
+  border: 3px solid $dark-gray;
 }
 
 select{

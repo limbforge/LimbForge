@@ -8,6 +8,9 @@ class LimbforgeForm extends React.Component {
       components: undefined,
       tds: undefined,
       measurements: undefined,
+      showNameArea: true,
+      showAmputationLevelArea: false,
+      showComponentArea: false,
       specs: {
         component: undefined,
         orientation: "left",
@@ -21,6 +24,7 @@ class LimbforgeForm extends React.Component {
     this.updateDisplay = this.updateDisplay.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
+    this.toggleNameArea = this.toggleNameArea.bind(this);
   }
 
   // When we select a component, we want to grab the components list of measurements and tds
@@ -47,6 +51,7 @@ class LimbforgeForm extends React.Component {
         dataType: 'json',
         success: (data) => {
           newState.measurements = data;
+          newState.showComponentArea = false;
           console.log('just received new measurements', newState);
           this.setState(newState);
         },
@@ -66,8 +71,11 @@ class LimbforgeForm extends React.Component {
         const newState = {
           components: data,
           tds: undefined,
-          measurements: undefined
+          measurements: undefined,
+          showAmputationLevelArea: false,
+          showComponentArea: true
         };
+
         this.setState(newState);
       },
       error: (error) => {
@@ -88,7 +96,7 @@ class LimbforgeForm extends React.Component {
       });
       // }).replace("\"", "\\\"");
       console.log('sending parameters as '+data)
-      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge">');
+      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge/submit">');
       form.append($("<input type='hidden' name='parameters' value='"+data+"''>"));
       $('body').append(form);
       form.submit();
@@ -215,6 +223,15 @@ class LimbforgeForm extends React.Component {
     }
   }
 
+  toggleNameArea(){
+    this.setState({showNameArea: false});
+    this.setState({showAmputationLevelArea: true});
+  }
+  toggleComponentArea(){
+    this.updateMeasurementsAndTds();
+    this.setState({showComponentArea: false});
+  }
+
   render() {
     scene.remove(scene.children[3]);
     scene.remove(scene.children[4]);
@@ -226,13 +243,18 @@ class LimbforgeForm extends React.Component {
         <div id="limbforge">
           <img className="logo" src={this.props.logo_img} />
           <h1 id="title">LIMBFORGE</h1>
-          <NameArea/>
+          <NameArea
+            toggleNameArea={this.toggleNameArea}
+            showNameArea={this.state.showNameArea}/>
           <AmputationLevelArea
+            showAmputationLevelArea={this.state.showAmputationLevelArea}
             getComponents={this.getComponents}
             levels={this.props.levels}
             components_search_path={this.props.components_search_path}
           />
           <ComponentArea
+            showComponentArea={this.state.showComponentArea}
+            toggleComponentArea={this.toggleComponentArea}
             updateMeasurementsAndTds={this.updateMeasurementsAndTds}
             updateDisplay={this.updateDisplay}
             components={this.state.components}

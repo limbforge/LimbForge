@@ -13,6 +13,7 @@ gem 'devise'
 gem 'pry'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
+gem 'jquery-ui-rails'
 gem 'rmagick'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

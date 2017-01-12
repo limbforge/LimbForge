@@ -14,16 +14,19 @@ class ComponentArea extends React.Component {
         );
       });
     }
-    var components = this.props.components == undefined ? "" :
-      <div className="row">
-        <div className="col-xs-12">
-          <p className="label">Components</p>
-          <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
-            <option value="">Select a Component</option>
-            {componentOptions}
-          </select>
-        </div>
-      </div>;
+    var components = <div></div>;
+    if (this.props.showComponentArea){
+      components = this.props.components == undefined ? "" :
+        <div className="row">
+          <div className="col-xs-12">
+            <p className="label">Components</p>
+            <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
+              <option value="">Select a Component</option>
+              {componentOptions}
+            </select>
+          </div>
+        </div>;
+    };
 
     return(
       <div>
