@@ -15,6 +15,7 @@ class LimbforgeForm extends React.Component {
       specs: {
         gender: "male",
         component: undefined,
+        amputation_level: "transradial",
         orientation: "left",
         C4: 250,
         L1: 250,
@@ -25,6 +26,7 @@ class LimbforgeForm extends React.Component {
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.updateGender = this.updateGender.bind(this);
+    this.updateAmputationLevel = this.updateAmputationLevel.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
     this.toggleNameArea = this.toggleNameArea.bind(this);
@@ -68,6 +70,7 @@ class LimbforgeForm extends React.Component {
 
   getComponents(event) {
     const url = this.props.components_search_path + "?query="+event.target.value;
+    this.updateAmputationLevel(event);
     $.ajax({
       url,
       dataType: 'json',
@@ -231,6 +234,11 @@ class LimbforgeForm extends React.Component {
     newState.specs.gender = e.target.value;
     this.setState(newState);
   }
+  updateAmputationLevel(e){
+    newState = this.state;
+    newState.specs.amputation_level = e.target.options[e.target.options.selectedIndex].text.toLowerCase();
+    this.setState(newState);
+  }
 
   toggleNameArea(){
     this.setState({showNameArea: false});
@@ -242,7 +250,10 @@ class LimbforgeForm extends React.Component {
     scene.remove(scene.children[4]);
     this.loadNewDevices();
     this.loadTD();
-    var imageURL = this.state.specs.orientation === "right" ? this.props.documentation_img_L : this.props.documentation_img_R;
+
+    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputation_level + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
+    var imageURL = this.props[imageName];
+    debugger;
     return (
       <div>
         <div id="limbforge">
