@@ -10,6 +10,7 @@ class NameArea extends React.Component {
 
   render() {
     var nameArea = <div></div>
+    var selected_gender = this.props.gender;
     var classes =  this.props.showNameArea ? 'accordion-head active' : 'accordion-head';
     if (this.props.showNameArea) {
       var nameArea = (
@@ -31,15 +32,21 @@ class NameArea extends React.Component {
           </div>
           <div className="row">
             <div className="col-xs-12">
-              <p className="nested-label">Gender</p>
+              <p className="nested-label">Select Gender</p>
             </div>
           </div>
-          <div className="row">
+          <div id="gender-select" className="row">
             <div className="col-xs-6">
-              <input type="radio" name="gender" value="male"/> Male
+              <label>
+                <input onChange={this.props.updateGender} type="radio" name="fb" value="male" checked={selected_gender == "male" ? "checked" : ""}/>
+                <img src={this.props.man_diagram }/>
+              </label>
             </div>
             <div className="col-xs-6">
-              <input type="radio" name="gender" value="female"/> Female
+              <label>
+                <input onChange={this.props.updateGender} type="radio" name="fb" value="female" checked={selected_gender == "female" ? "checked" : ""}/>
+                <img src={this.props.woman_diagram }/>
+              </label>
             </div>
           </div>
           <div className="row">

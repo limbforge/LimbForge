@@ -13,6 +13,7 @@ class LimbforgeForm extends React.Component {
       showComponentArea: false,
       showMeasurementArea: false,
       specs: {
+        gender: "male",
         component: undefined,
         orientation: "left",
         C4: 250,
@@ -23,6 +24,7 @@ class LimbforgeForm extends React.Component {
     this.createZip = this.createZip.bind(this);
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
+    this.updateGender = this.updateGender.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
     this.toggleNameArea = this.toggleNameArea.bind(this);
@@ -224,6 +226,11 @@ class LimbforgeForm extends React.Component {
       });
     }
   }
+  updateGender(e){
+    newState = this.state;
+    newState.specs.gender = e.target.value;
+    this.setState(newState);
+  }
 
   toggleNameArea(){
     this.setState({showNameArea: false});
@@ -242,8 +249,13 @@ class LimbforgeForm extends React.Component {
           <img className="logo" src={this.props.logo_img} />
           <h1 id="title">LIMBFORGE</h1>
           <NameArea
+            gender={this.state.specs.gender}
             toggleNameArea={this.toggleNameArea}
-            showNameArea={this.state.showNameArea}/>
+            showNameArea={this.state.showNameArea}
+            man_diagram={this.props.man_diagram}
+            woman_diagram={this.props.woman_diagram}
+            updateGender={this.updateGender}
+            />
           <AmputationLevelArea
             showAmputationLevelArea={this.state.showAmputationLevelArea}
             getComponents={this.getComponents}
