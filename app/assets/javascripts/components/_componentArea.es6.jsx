@@ -4,6 +4,7 @@ class ComponentArea extends React.Component {
   }
 
   render() {
+    var classes =  this.props.showComponentArea ? 'accordion-head active' : 'accordion-head';
     const componentOptions = [];
     if (this.props.components != undefined){
       this.props.components.map((option) => {
@@ -29,7 +30,10 @@ class ComponentArea extends React.Component {
     };
 
     return(
-      <div>
+      <div className={classes}>
+        <h2>Prosthesis</h2>
+        <span className="arrow"></span>
+        <span className="line"></span>
         {components}
       </div>
     )

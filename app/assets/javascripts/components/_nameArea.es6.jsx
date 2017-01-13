@@ -10,6 +10,7 @@ class NameArea extends React.Component {
 
   render() {
     var nameArea = <div></div>
+    var classes =  this.props.showNameArea ? 'accordion-head active' : 'accordion-head';
     if (this.props.showNameArea) {
       var nameArea = (
         <div>
@@ -67,6 +68,11 @@ class NameArea extends React.Component {
     }
     return (
       <div>
+        <div className={classes}>
+          <h2>Patient</h2>
+          <span className="arrow"></span>
+          <span className="line"></span>
+        </div>
         {nameArea}
       </div>
     )

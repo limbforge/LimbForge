@@ -4,6 +4,7 @@ class AmputationLevelArea extends React.Component {
   }
 
   render() {
+    var classes =  this.props.showAmputationLevelArea ? 'accordion-head active' : 'accordion-head';
     const amputationLevelOptions = this.props.levels.map((option) => {
       return (
         <option disabled={option.name == "Transradial" ? "" : "disabled"} value={option.id} key={option.id} >
@@ -30,7 +31,10 @@ class AmputationLevelArea extends React.Component {
     }
 
     return (
-      <div>
+      <div className={classes}>
+        <h2>Amputation</h2>
+        <span className="arrow"></span>
+        <span className="line"></span>
         {amputationLevelArea}
       </div>
     )

@@ -96,8 +96,8 @@ class LimbforgeForm extends React.Component {
       });
       // }).replace("\"", "\\\"");
       console.log('sending parameters as '+data)
-      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge/submit">');
-      form.append($("<input type='hidden' name='parameters' value='"+data+"''>"));
+      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge/">');
+      form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
       $('body').append(form);
       form.submit();
     });

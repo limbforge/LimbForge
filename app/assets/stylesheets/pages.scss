@@ -17,7 +17,7 @@
   overflow-y: scroll;
   height: 100vh;
   background-color: $white;
-  max-width: 350px;
+  width: 350px;
   padding: $standard-padding/2;
   position:  fixed;
   z-index: 2;
@@ -32,6 +32,45 @@
   }
   .lname{
     padding-left: 0;
+  }
+  .accordion-head{
+    padding-top: $standard-padding;
+    &.active{
+      .arrow{
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+      }
+    }
+    h2{
+      display: inline;
+      background-color: $white;
+      padding-right: $standard-padding/2;
+      padding-left: $standard-padding/3;
+    }
+    span{
+      &.arrow{
+        background-image: url(asset_path("limbforge/dropdown.svg"));
+        width: 25px;
+        float: left;
+        height: 25px;
+        background-color: $white;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+        top: $standard-padding/6;
+        -ms-transform: rotate(-90deg); /* IE 9 */
+        -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+        transform: rotate(-90deg);
+      }
+      &.line{
+        border-bottom: 3px solid $black;
+        position: relative;
+        display: block;
+        top: $standard-padding/-2;
+        z-index: - 1;
+      }
+    }
   }
   img{
     width: 100%;
