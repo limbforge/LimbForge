@@ -11,6 +11,7 @@ class LimbforgeForm extends React.Component {
       showNameArea: true,
       showAmputationLevelArea: false,
       showComponentArea: false,
+      showMeasurementArea: false,
       specs: {
         component: undefined,
         orientation: "left",
@@ -52,6 +53,7 @@ class LimbforgeForm extends React.Component {
         success: (data) => {
           newState.measurements = data;
           newState.showComponentArea = false;
+          newState.showMeasurementArea = true;
           console.log('just received new measurements', newState);
           this.setState(newState);
         },
@@ -227,11 +229,7 @@ class LimbforgeForm extends React.Component {
     this.setState({showNameArea: false});
     this.setState({showAmputationLevelArea: true});
   }
-  toggleComponentArea(){
-    this.updateMeasurementsAndTds();
-    this.setState({showComponentArea: false});
-  }
-
+  
   render() {
     scene.remove(scene.children[3]);
     scene.remove(scene.children[4]);
@@ -254,12 +252,12 @@ class LimbforgeForm extends React.Component {
           />
           <ComponentArea
             showComponentArea={this.state.showComponentArea}
-            toggleComponentArea={this.toggleComponentArea}
             updateMeasurementsAndTds={this.updateMeasurementsAndTds}
             updateDisplay={this.updateDisplay}
             components={this.state.components}
           />
           <MeasurementArea
+            showMeasurementArea={this.state.showMeasurementArea}
             imageURL={imageURL}
             measurements={this.state.measurements}
             updateDisplay={this.updateDisplay}

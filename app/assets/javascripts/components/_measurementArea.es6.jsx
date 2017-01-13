@@ -6,6 +6,7 @@ class MeasurementArea extends React.Component {
     //this.setState(nextProps);
   }
   render() {
+    var classes =  this.props.showMeasurementArea ? 'accordion-head active' : 'accordion-head';
     var measurementInputs = this.props.measurements == undefined ? "" : this.props.measurements.map((option) => {
       return (
         <div key={option.name} className="col-xs-6">
@@ -36,7 +37,10 @@ class MeasurementArea extends React.Component {
       </div>;
 
     return (
-      <div>
+      <div className={classes}>
+        <h2>Measurements</h2>
+        <span className="arrow"></span>
+        <span className="line"></span>
         {measurementArea}
       </div>
     )
