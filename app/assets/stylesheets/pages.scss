@@ -117,6 +117,16 @@
       text-align: center;
       color: $white;
       font-style: italic;
+      &.powered-by{
+        color: $white;
+        margin-top: $standard-padding;
+        a{
+          color: $white;
+          font-weight: bold;
+          border-bottom: 0;
+          box-shadow: none;
+        }
+      }
     }
     label{
       padding-top: $standard-padding/2;
