@@ -40,12 +40,14 @@ class NameArea extends React.Component {
               <label>
                 <input onChange={this.props.updateGender} type="radio" name="fb" value="male" checked={selected_gender == "male" ? "checked" : ""}/>
                 <img src={this.props.man_diagram }/>
+                <p>Male</p>
               </label>
             </div>
             <div className="col-xs-6">
               <label>
                 <input onChange={this.props.updateGender} type="radio" name="fb" value="female" checked={selected_gender == "female" ? "checked" : ""}/>
                 <img src={this.props.woman_diagram }/>
+                <p>Female</p>
               </label>
             </div>
           </div>
