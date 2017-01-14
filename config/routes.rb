@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/search_measurements' => 'measurements#search', as: :search_measurements
   get '/search_tds' => 'terminal_devices#search', as: :search_tds
 
+  get '/google6c79871a733902b4.html' => proc { |env| [200, {}, ["google-site-verification: google6c79871a733902b4.html"]] }
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
