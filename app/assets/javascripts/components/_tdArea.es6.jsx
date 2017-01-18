@@ -16,7 +16,6 @@ class TdArea extends React.Component {
       <div className="col-xs-12">
         <p className="label">Terminal Devices</p>
         <select id="terminal-devices-select" onChange={this.props.updateDisplay}>
-          <option value="" >Select a Terminal Device</option>
           {tdOptions}
         </select>
       </div>

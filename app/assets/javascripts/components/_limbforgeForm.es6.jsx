@@ -36,6 +36,7 @@ class LimbforgeForm extends React.Component {
   updateMeasurementsAndTds(event) {
     const newState = this.state;
     newState.specs.component = event.target.value;
+    newState.specs.TD = "phone";
 
     const tdsUrl = this.props.tds_search_path + "?query=" + event.target.value;
     const measurementsUrl = this.props.measurements_search_path + "?query=" + event.target.value;
