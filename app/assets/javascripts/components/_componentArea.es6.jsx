@@ -22,7 +22,7 @@ class ComponentArea extends React.Component {
           <div className="col-xs-12">
             <p className="label">Components</p>
             <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
-              <option value="">Select a Component</option>
+              <option value="">Select a Design</option>
               {componentOptions}
             </select>
           </div>
