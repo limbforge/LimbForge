@@ -1,9 +1,6 @@
 # See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 #
-<<<<<<< HEAD
 # To allow all spiders on the entire site, comment out the next two lines:
-=======
 To allow spiders, comment out the next two lines:
->>>>>>> master
 User-agent: *
 Disallow: /
