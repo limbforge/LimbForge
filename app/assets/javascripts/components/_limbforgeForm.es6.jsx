@@ -250,7 +250,6 @@ class LimbforgeForm extends React.Component {
     scene.remove(scene.children[4]);
     this.loadNewDevices();
     this.loadTD();
-
     var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputation_level + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
     var imageURL = this.props[imageName];
     return (
@@ -263,7 +262,9 @@ class LimbforgeForm extends React.Component {
             toggleNameArea={this.toggleNameArea}
             showNameArea={this.state.showNameArea}
             man_diagram={this.props.man_diagram}
+            man_diagram_selected={this.props.man_diagram_selected}
             woman_diagram={this.props.woman_diagram}
+            woman_diagram_selected={this.props.woman_diagram_selected}
             updateGender={this.updateGender}
             />
           <AmputationLevelArea
