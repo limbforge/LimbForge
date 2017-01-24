@@ -183,6 +183,7 @@ textarea{
 
 select{
   width: 100%;
+  outline: none;
   text-transform: capitalize;
   font-family: $base-font-family;
   background-color: $white;
@@ -194,6 +195,7 @@ select{
   background-image: url(asset_path("limbforge/dropdown.svg"));
   background-size: 30px;
   background-position: 98%;
+  margin-bottom: $standard-padding/2;
 }
 
 //HERO STYLES

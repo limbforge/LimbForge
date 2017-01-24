@@ -15,6 +15,7 @@ class NameArea extends React.Component {
     if (this.props.showNameArea) {
       var nameArea = (
         <div>
+          <AmputationCause />
           <div className="row">
             <div className="col-xs-12">
               <p className="nested-label">Patient Name</p>
