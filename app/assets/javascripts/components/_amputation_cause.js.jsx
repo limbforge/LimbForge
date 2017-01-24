@@ -8,7 +8,7 @@ class AmputationCause extends React.Component {
   }
 
   updateSelect(event){
-    const new_show_other_input = event.target.value == "Unknown" ? true : false;
+    const new_show_other_input = event.target.value == "Other" ? true : false;
     this.setState({show_other_input: new_show_other_input});
   }
 
@@ -24,7 +24,8 @@ class AmputationCause extends React.Component {
       "Natural disaster",
       "Infection",
       "Conflict",
-      "Unknown"
+      "Unknown",
+      "Other"
     ];
     var other_input =  this.state.show_other_input ? <div><p className="label nested-label">Describe</p><input type="text" key="other" placeholder="Give more information" /></div> : "";
 
