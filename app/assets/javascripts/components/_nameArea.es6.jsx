@@ -60,12 +60,6 @@ class NameArea extends React.Component {
           </div>
           <div className="row">
             <div className="col-xs-12">
-              <p className="nested-label">Cause of Amputation</p>
-              <textarea></textarea>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12">
               <p className="nested-label">City of Residence</p>
             </div>
           </div>
