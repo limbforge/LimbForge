@@ -80,7 +80,7 @@ button{
   border: 0;
   color: $white;
   font-weight: bold;
-  background: $camero-regular;
+  background: $blue;
   padding: $standard-padding/1.5 $standard-padding*1.5;
   letter-spacing: $base-letter-spacing;
   &.cta{
@@ -161,7 +161,7 @@ input{
     outline: none;
   }
   &[type=submit] {
-    background-color: $camero-regular;
+    background-color: $blue;
     color: $white;
     text-transform: uppercase;
     font-weight: bold;
