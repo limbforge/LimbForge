@@ -9,6 +9,8 @@ gem 'sass-rails', '~> 5.0'
 gem "recaptcha", require: "recaptcha/rails"
 # Use devise for user sessions
 gem 'devise'
+
+gem 'sprockets', '3.6.3'
 # Use pry for debugging Ruby
 gem 'pry'
 gem 'paperclip'

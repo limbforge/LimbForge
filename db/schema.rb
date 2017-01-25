@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918015934) do
+ActiveRecord::Schema.define(version: 20170125060108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,9 @@ ActiveRecord::Schema.define(version: 20160918015934) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.float    "version"
+    t.string   "creator"
+    t.string   "uses"
+    t.string   "print_time"
   end
 
   create_table "components_measurements", id: false, force: :cascade do |t|
