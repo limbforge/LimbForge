@@ -40,7 +40,7 @@ brew services start postgresql
 #  pg_ctl -D /usr/local/var/postgres start
 rake db:create
 rake db:migrate
-pg_restore -cOd limbforge_development ~/Desktop/latest.dump 
+pg_restore -cOd limbforge_development ~/Desktop/latest.dump
 ```
 
 4. Start the Limbforge App and check it out in your browser at [localhost:3000](http://localhost:3000)
@@ -78,6 +78,16 @@ staging 2
 
 ```
 git remote add staging2 https://git.heroku.com/limbforge-staging2.git
+```
+
+```
+git push staging2 name-of-your-branch:master
+```
+
+demo
+
+```
+git remote add demo https://git.heroku.com/limbforge-demo.git
 ```
 
 ```
