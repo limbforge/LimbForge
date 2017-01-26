@@ -24,7 +24,7 @@
   label{
     display: block;
     &:first-of-type{
-      margin-top: $standard-padding;
+      margin-top: $standard-padding/3;
     }
     input {
       display: none;/* <-- hide the default checkbox */
