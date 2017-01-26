@@ -5,7 +5,8 @@ class MeasurementArea extends React.Component {
   componentWillReceiveProps(nextProps) {
     //this.setState(nextProps);
   }
-  render() {
+
+  renderMeasurementArea() {
     var C_measurements = [];
     var L_measurements = [];
     if (this.props.measurements){
@@ -20,7 +21,6 @@ class MeasurementArea extends React.Component {
         }).filter(function(n){ return n != undefined })
       );
     };
-    var classes =  this.props.showMeasurementArea ? 'accordion-head active' : 'accordion-head';
 
     var cMeasurementInputs = C_measurements == undefined ? "" : C_measurements.map((option) => {
       return (
@@ -39,7 +39,7 @@ class MeasurementArea extends React.Component {
       );
     });
 
-    var measurementArea = this.props.measurements == undefined ? "" :
+    var measurementArea = this.props.measurements === undefined ? "measurements" :
       <div>
         <div className="row">
           <div className="col-xs-12">
@@ -64,12 +64,18 @@ class MeasurementArea extends React.Component {
         </div>
       </div>;
 
+      return measurementArea;
+  }
+
+  render() {
+    var classes =  this.props.showMeasurementArea ? 'accordion-head active' : 'accordion-head';
+
     return (
-      <div className={classes}>
+      <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>
         <h2>Measurements</h2>
         <span className="arrow"></span>
         <span className="line"></span>
-        {measurementArea}
+        {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
       </div>
     )
   }

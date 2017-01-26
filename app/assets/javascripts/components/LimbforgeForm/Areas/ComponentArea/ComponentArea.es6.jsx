@@ -3,8 +3,7 @@ class ComponentArea extends React.Component {
     super(props);
   }
 
-  render() {
-    var classes =  this.props.showComponentArea ? 'accordion-head active' : 'accordion-head';
+  renderComponents() {
     const componentOptions = [];
     if (this.props.components != undefined){
       this.props.components.map((option) => {
@@ -15,26 +14,31 @@ class ComponentArea extends React.Component {
         );
       });
     }
-    var components = <div></div>;
-    if (this.props.showComponentArea){
-      components = this.props.components == undefined ? "" :
-        <div className="row">
-          <div className="col-xs-12">
-            <p className="label">Components</p>
-            <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
-              <option value="">Select a Design</option>
-              {componentOptions}
-            </select>
-          </div>
-        </div>;
-    };
+
+    const components = this.props.components === undefined ?
+    "prosthesis" :
+    <div className="row">
+      <div className="col-xs-12">
+        <p className="label">Components</p>
+        <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
+          <option value="">Select a Design</option>
+          {componentOptions}
+        </select>
+      </div>
+    </div>;
+
+    return components;
+  }
+
+  render() {
+    var classes =  this.props.showComponentArea ? 'accordion-head active' : 'accordion-head';
 
     return(
-      <div className={classes}>
+      <div onClick={()=> this.props.updateSelectedArea('prosthesis')} className={classes}>
         <h2>Prosthesis</h2>
         <span className="arrow"></span>
         <span className="line"></span>
-        {components}
+        {this.props.availableAreas.prosthesis.selected ? this.renderComponents() : ''}
       </div>
     )
   }
