@@ -31,7 +31,7 @@ class ComponentArea extends React.Component {
   }
 
   render() {
-    var classes =  this.props.showComponentArea ? 'accordion-head active' : 'accordion-head';
+    var classes =  this.props.availableAreas.prosthesis.selected ? 'accordion-head active' : 'accordion-head';
 
     return(
       <div onClick={()=> this.props.updateSelectedArea('prosthesis')} className={classes}>

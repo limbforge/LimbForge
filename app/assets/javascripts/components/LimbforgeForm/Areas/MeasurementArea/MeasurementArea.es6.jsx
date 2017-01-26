@@ -68,7 +68,7 @@ class MeasurementArea extends React.Component {
   }
 
   render() {
-    var classes =  this.props.showMeasurementArea ? 'accordion-head active' : 'accordion-head';
+    var classes =  this.props.availableAreas.measurements.selected ? 'accordion-head active' : 'accordion-head';
 
     return (
       <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>

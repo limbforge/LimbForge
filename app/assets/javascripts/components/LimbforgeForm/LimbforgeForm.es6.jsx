@@ -38,6 +38,14 @@ class LimbforgeForm extends React.Component {
           selected: false,
           available: false,
         },
+        td: {
+          selected: false,
+          available: false,
+        },
+        submit: {
+          selected: false,
+          available: false,
+        },
       }
     };
 
@@ -269,17 +277,24 @@ class LimbforgeForm extends React.Component {
   updateAvailableAreas(area) {
     const availableAreas = this.state.availableAreas;
     availableAreas[area].available = true;
-    this.setState({ availableAreas });
-  }
-
-  updateSelectedArea(area) {
-    const availableAreas = this.state.availableAreas;
-    // Reset each area to not selected, then the passed area to selected
     for (const [key, value] of Object.entries(availableAreas)) {
       value.selected = false;
     }
     availableAreas[area].selected = true;
     this.setState({ availableAreas });
+  }
+
+  updateSelectedArea(area) {
+    // Don't update unless the areas being passed in is available
+    if (this.state.availableAreas[area].available) {
+      const availableAreas = this.state.availableAreas;
+      // Reset each area to not selected, then the passed area to selected
+      for (const [key, value] of Object.entries(availableAreas)) {
+        value.selected = false;
+      }
+      availableAreas[area].selected = true;
+      this.setState({ availableAreas });
+    }
   }
 
   render() {

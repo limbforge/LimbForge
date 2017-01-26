@@ -28,7 +28,7 @@ class AmputationLevelArea extends React.Component {
   }
 
   render() {
-    var classes =  this.props.showAmputationLevelArea ? 'accordion-head active' : 'accordion-head';
+    var classes =  this.props.availableAreas.amputation.selected ? 'accordion-head active' : 'accordion-head';
 
     return (
       <div onClick={()=>this.props.updateSelectedArea('amputation')} className={classes}>

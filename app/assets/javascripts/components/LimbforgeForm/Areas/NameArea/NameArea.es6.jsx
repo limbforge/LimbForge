@@ -65,13 +65,13 @@ class NameArea extends React.Component {
         <div className="ui-widget">
           <input id="tags" />
         </div>
-        <button onClick={this.props.toggleNameArea}>CONTINUE</button>
+        <button onClick={() => {this.props.updateAvailableAreas('amputation')}}>CONTINUE</button>
       </div>
     );
   }
 
   render() {
-    var classes =  this.props.showNameArea ? 'accordion-head active' : 'accordion-head';
+    var classes =  this.props.availableAreas.patient.selected ? 'accordion-head active' : 'accordion-head';
     return (
       <div>
         <div onClick={()=>this.props.updateSelectedArea('patient')} className={classes}>
