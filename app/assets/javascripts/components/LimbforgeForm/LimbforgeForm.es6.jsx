@@ -19,9 +19,28 @@ class LimbforgeForm extends React.Component {
         orientation: "left",
         C4: 250,
         L1: 250,
-        TD: undefined
+        TD: undefined,
       },
+      availableAreas: {
+        patient: {
+          selected: true,
+          available: true,
+        },
+        amputation: {
+          selected: false,
+          available: false,
+        },
+        prosthesis: {
+          selected: false,
+          available: false,
+        },
+        measurements: {
+          selected: false,
+          available: false,
+        },
+      }
     };
+
     this.createZip = this.createZip.bind(this);
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
@@ -29,7 +48,8 @@ class LimbforgeForm extends React.Component {
     this.updateAmputationLevel = this.updateAmputationLevel.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
-    this.toggleNameArea = this.toggleNameArea.bind(this);
+    this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
+    this.updateSelectedArea = this.updateSelectedArea.bind(this);
   }
 
   // When we select a component, we want to grab the components list of measurements and tds
@@ -245,6 +265,23 @@ class LimbforgeForm extends React.Component {
     this.setState({showAmputationLevelArea: true});
   }
 
+  // Whenever the form reaches a checkpoint, update the ability for that part of the form to be selected
+  updateAvailableAreas(area) {
+    const availableAreas = this.state.availableAreas;
+    availableAreas[area].available = true;
+    this.setState({ availableAreas });
+  }
+
+  updateSelectedArea(area) {
+    const availableAreas = this.state.availableAreas;
+    // Reset each area to not selected, then the passed area to selected
+    for (const [key, value] of Object.entries(availableAreas)) {
+      value.selected = false;
+    }
+    availableAreas[area].selected = true;
+    this.setState({ availableAreas });
+  }
+
   render() {
     scene.remove(scene.children[3]);
     scene.remove(scene.children[4]);
@@ -259,7 +296,9 @@ class LimbforgeForm extends React.Component {
           <h1 id="title">LIMBFORGE</h1>
           <NameArea
             gender={this.state.specs.gender}
-            toggleNameArea={this.toggleNameArea}
+            availableAreas={this.state.availableAreas}
+            updateAvailableAreas={this.updateAvailableAreas}
+            updateSelectedArea={this.updateSelectedArea}
             showNameArea={this.state.showNameArea}
             man_diagram={this.props.man_diagram}
             man_diagram_selected={this.props.man_diagram_selected}
@@ -268,19 +307,25 @@ class LimbforgeForm extends React.Component {
             updateGender={this.updateGender}
             />
           <AmputationLevelArea
-            showAmputationLevelArea={this.state.showAmputationLevelArea}
+            availableAreas={this.state.availableAreas}
+            updateAvailableAreas={this.updateAvailableAreas}
+            updateSelectedArea={this.updateSelectedArea}
             getComponents={this.getComponents}
             levels={this.props.levels}
             components_search_path={this.props.components_search_path}
           />
           <ComponentArea
-            showComponentArea={this.state.showComponentArea}
+            availableAreas={this.state.availableAreas}
+            updateAvailableAreas={this.updateAvailableAreas}
+            updateSelectedArea={this.updateSelectedArea}
             updateMeasurementsAndTds={this.updateMeasurementsAndTds}
             updateDisplay={this.updateDisplay}
             components={this.state.components}
           />
           <MeasurementArea
-            showMeasurementArea={this.state.showMeasurementArea}
+            availableAreas={this.state.availableAreas}
+            updateAvailableAreas={this.updateAvailableAreas}
+            updateSelectedArea={this.updateSelectedArea}
             imageURL={imageURL}
             measurements={this.state.measurements}
             updateDisplay={this.updateDisplay}
