@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125060108) do
+ActiveRecord::Schema.define(version: 20170126042329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170125060108) do
     t.string   "creator"
     t.string   "uses"
     t.string   "print_time"
+    t.string   "weight"
   end
 
   create_table "components_measurements", id: false, force: :cascade do |t|
