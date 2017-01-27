@@ -4,6 +4,10 @@ const material = new THREE.MeshPhongMaterial( { color: 0x0f2045, specular: 0x0f2
 class LimbforgeForm extends React.Component {
   constructor(props) {
     super(props);
+    this.downloaded = {
+      td: undefined,
+      devices: undefined,
+    };
     this.state = {
       components: undefined,
       tds: undefined,
@@ -54,7 +58,6 @@ class LimbforgeForm extends React.Component {
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.updateGender = this.updateGender.bind(this);
-    this.updateAmputationLevel = this.updateAmputationLevel.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -95,7 +98,6 @@ class LimbforgeForm extends React.Component {
           newState.measurements = data;
           newState.showComponentArea = false;
           newState.showMeasurementArea = true;
-          console.log('just received new measurements', newState);
           this.setState(newState);
         },
         error: (error) => {
@@ -105,14 +107,13 @@ class LimbforgeForm extends React.Component {
     });
   }
 
-  getComponents(event) {
-    const url = this.props.components_search_path + "?query="+event.target.value;
-    this.updateAmputationLevel(event);
+  getComponents(componentType) {
+    const url = this.props.components_search_path + "?query="+componentType;
     $.ajax({
       url,
       dataType: 'json',
       success: (data) => {
-        const newState = {
+          const newState = {
           components: data,
           tds: undefined,
           measurements: undefined,
@@ -224,55 +225,56 @@ class LimbforgeForm extends React.Component {
 
   loadTD() {
     if (this.state.specs.TD != undefined){
-      scene.remove(scene.children[4]);
       const s3url = 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.orientation + '/td_' + this.state.specs.TD + '_' + this.state.specs.orientation + '.stl';
-      loader.load(s3url, (geometry) => {
-        const mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set( 0, 0, 3.3 );
-        mesh.rotation.set(0, Math.PI, -Math.PI/2 );
-        mesh.scale.set( .02, .02, .02 );
+      if (this.downloaded.td !== s3url) {
+        this.downloaded.td = s3url;
+        loader.load(s3url, (geometry) => {
+          const mesh = new THREE.Mesh( geometry, material );
+          mesh.name = 'terminalDevice';
+          mesh.position.set( 0, 0, 3.3 );
+          mesh.rotation.set(0, Math.PI, -Math.PI/2 );
+          mesh.scale.set( .02, .02, .02 );
 
-        mesh.castShadow = true;
-        mesh.receiveShadow = false;
-
-        scene.add( mesh );
-        render();
-      });
+          mesh.castShadow = true;
+          mesh.receiveShadow = false;
+          scene.remove(scene.getObjectByName('terminalDevice'));
+          scene.add( mesh );
+          renderThreeJS();
+        });
+      }
     }
   }
 
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      scene.remove(scene.children[3]);
       const s3url = 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.orientation + '/forearm_ebearm_' + this.state.specs.orientation + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
-      loader.load(s3url, (geometry) => {
-        const mesh = new THREE.Mesh( geometry, material );
-        if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
-          mesh.position.set( 0, 0, 0.0 );
-        } else {
-          mesh.position.set( 0, 0, 3.3 );
-        }
+      if (this.downloaded.devices !== s3url) {
+        this.downloaded.devices = s3url;
+        loader.load(s3url, (geometry) => {
+          const mesh = new THREE.Mesh( geometry, material );
+          mesh.name = 'device';
+          if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
+            mesh.position.set( 0, 0, 0.0 );
+          } else {
+            mesh.position.set( 0, 0, 3.3 );
+          }
 
-        mesh.rotation.set( 0, 0, 0 );
-        mesh.scale.set( .02, .02, .02 );
+          mesh.rotation.set( 0, 0, 0 );
+          mesh.scale.set( .02, .02, .02 );
 
-        mesh.castShadow = true;
-        mesh.receiveShadow = false;
-
-        scene.add( mesh );
-        render();
-      });
+          mesh.castShadow = true;
+          mesh.receiveShadow = false;
+          scene.remove(scene.getObjectByName('device'));
+          scene.add( mesh );
+          renderThreeJS();
+        });
+      }
     }
   }
   updateGender(e){
     newState = this.state;
     newState.specs.gender = e.target.value;
-    this.setState(newState);
-  }
-  updateAmputationLevel(e){
-    newState = this.state;
-    newState.specs.amputationLevel = e.target.options[e.target.options.selectedIndex].text.toLowerCase();
     this.setState(newState);
   }
 
@@ -312,8 +314,6 @@ class LimbforgeForm extends React.Component {
   }
 
   render() {
-    scene.remove(scene.children[3]);
-    scene.remove(scene.children[4]);
     this.loadNewDevices();
     this.loadTD();
     var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
