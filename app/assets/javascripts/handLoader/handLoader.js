@@ -83,6 +83,7 @@ function render() {
 
 }
 
+var renderThreeJS = render;
 
   $(document).on('turbolinks:load', function() {
     document.getElementById('display-hand').appendChild( renderer.domElement );
