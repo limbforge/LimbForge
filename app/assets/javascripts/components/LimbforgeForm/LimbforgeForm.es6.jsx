@@ -15,7 +15,7 @@ class LimbforgeForm extends React.Component {
       specs: {
         gender: "male",
         component: undefined,
-        amputation_level: "transradial",
+        amputationLevel: "transradial",
         orientation: "left",
         C4: 250,
         L1: 250,
@@ -272,7 +272,7 @@ class LimbforgeForm extends React.Component {
   }
   updateAmputationLevel(e){
     newState = this.state;
-    newState.specs.amputation_level = e.target.options[e.target.options.selectedIndex].text.toLowerCase();
+    newState.specs.amputationLevel = e.target.options[e.target.options.selectedIndex].text.toLowerCase();
     this.setState(newState);
   }
 
@@ -290,11 +290,11 @@ class LimbforgeForm extends React.Component {
   // Whenever the form reaches a checkpoint, update the ability for that part of the form to be selected
   updateAvailableAreas(area) {
     const availableAreas = this.state.availableAreas;
-    availableAreas[area].available = true;
     for (const [key, value] of Object.entries(availableAreas)) {
       value.selected = false;
     }
     availableAreas[area].selected = true;
+    availableAreas[area].available = true;
     this.setState({ availableAreas });
   }
 
@@ -316,7 +316,7 @@ class LimbforgeForm extends React.Component {
     scene.remove(scene.children[4]);
     this.loadNewDevices();
     this.loadTD();
-    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputation_level + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
+    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
     var imageURL = this.props.images[imageName];
     return (
       <div>
