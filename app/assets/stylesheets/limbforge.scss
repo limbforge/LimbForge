@@ -23,6 +23,7 @@
 .device{
   border: 3px solid $black;
   cursor: pointer;
+  margin-bottom: $standard-padding/2;
   .description{
     padding: 21px $standard-padding/2 0 $standard-padding/2;
   }
