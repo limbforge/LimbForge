@@ -4,7 +4,7 @@ class AmputationLevelArea extends React.Component {
     this.state = {
       y: 0,
       percentSelected: 0,
-      areaSelected: '',
+      areaSelected: 'transradial',
     };
 
     this.updatePercent = this.updatePercent.bind(this);
@@ -21,8 +21,14 @@ class AmputationLevelArea extends React.Component {
   }
 
   loadSvg() {
-    const imageName = "diagram_" + this.props.specs.gender + "_" + this.props.specs.amputation_level + "_" + this.props.specs.orientation.charAt(0).toUpperCase();
+    const imageName = this.isSupportedAmputationLevel({ name: this.state.areaSelected }) ?
+    "diagram_" + this.props.specs.gender + "_" +
+    (this.state.areaSelected === '' ? 'none' : this.state.areaSelected.toLowerCase()) +
+    "_" + this.props.specs.orientation.charAt(0).toUpperCase() :
+    "diagram_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
+    console.log(imageName);
     const imageURL = this.props.images[imageName];
+
     const imageStyle = {
       pointerEvents: 'none',
       userSelect: 'none',
@@ -105,10 +111,12 @@ class AmputationLevelArea extends React.Component {
     const classes = this.props.availableAreas.amputation.selected ? 'accordion-head active' : 'accordion-head';
 
     return (
-      <div className={classes}>
-        <h2>Amputation</h2>
-        <span className="arrow"></span>
-        <span className="line"></span>
+      <div>
+        <div onClick={()=>this.props.updateSelectedArea('amputation')} className={classes}>
+          <h2>Amputation</h2>
+          <span className="arrow"></span>
+          <span className="line"></span>
+        </div>
         {this.props.availableAreas.amputation.selected ? this.loadAmutationLevelArea() : ""}
       </div>
     );
