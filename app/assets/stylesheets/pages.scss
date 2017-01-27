@@ -52,6 +52,8 @@
       padding-left: $standard-padding/3;
       position: relative;
       top: $standard-padding/6;
+      position: relative;
+      z-index: -1;
     }
     span{
       &.arrow{
