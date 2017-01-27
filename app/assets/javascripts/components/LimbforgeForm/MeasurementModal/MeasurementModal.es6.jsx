@@ -2,8 +2,7 @@ class MeasurementModal extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  renderMeasurements() {
+  render() {
     var modal = this.props.measurements == undefined ?
     <div>stuff goes here</div> :
     <div className="modal-dialog">
@@ -20,13 +19,10 @@ class MeasurementModal extends React.Component {
         </div>
       </div>
     </div>;
-    return modal;
-  }
-
-  render() {
     return (
       <div className="modal fade" id="measurementModal" role="dialog">
         {this.props.mod}
+        {modal}
       </div>
     )
   }

@@ -81,6 +81,7 @@ button{
   color: $white;
   font-weight: bold;
   background: $blue;
+  margin-top: $standard-padding;
   padding: $standard-padding/1.5 $standard-padding*1.5;
   letter-spacing: $base-letter-spacing;
   &.cta{
@@ -133,7 +134,8 @@ p{
     color: $base-font-color;
     display: block;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
     padding: $standard-padding/2 0 $standard-padding/3;
     margin: 0;
     &.measurements{
@@ -142,6 +144,32 @@ p{
   }
   &.nested-label{
     padding: 0;
+    margin-top: $standard-padding/2;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+    &.c{
+      background-color: $blue;
+      color: $white;
+      padding: 7px;
+      width: $standard-padding;
+      text-align: center;
+      border-radius: 100%;
+      margin-bottom: 7px;
+    }
+    &.l{
+      color: $white;
+      background-image: url(asset_path('limbforge/triangle.svg'));
+      background-repeat: no-repeat;
+      width: 62px;
+      height: 3px;
+      background-position: 8px 5px;
+      text-align: center;
+      padding: 24px;
+      margin-left: -9px;
+      margin-top: 0px;
+      margin-bottom: 4px;
+    }
   }
 }
 
@@ -151,12 +179,11 @@ label{
 }
 
 input{
-  border: 3px solid $dark-gray;
+  border: 1px solid $dark-gray;
   border-radius: 0;
   letter-spacing: 2px;
   padding: $standard-padding/3;
   width: 100%;
-  margin-bottom: $standard-padding/1.5;
   &:focus{
     outline: none;
   }
@@ -178,7 +205,7 @@ textarea{
   width: 100%;
   outline: none;
   height: 200px;
-  border: 3px solid $dark-gray;
+  border: 1px solid $dark-gray;
 }
 
 select{
@@ -191,7 +218,7 @@ select{
   padding: $standard-padding/3;
   -webkit-appearance: none;
   border-radius: 0;
-  border: 3px solid $dark-gray;
+  border: 1px solid $dark-gray;
   background-image: url(asset_path("limbforge/dropdown.svg"));
   background-size: 30px;
   background-position: 98%;

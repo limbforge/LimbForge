@@ -30,7 +30,7 @@ class MeasurementArea extends React.Component {
     var cMeasurementInputs = C_measurements === undefined ? "" : C_measurements.map((option) => {
       return (
         <div key={option.name}>
-          <p className="label nested-label">{option.name}</p>
+          <p className="label nested-label c">{option.name}</p>
           <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + 'cm'} name={option.name}/>
         </div>
       );
@@ -38,12 +38,12 @@ class MeasurementArea extends React.Component {
     var lMeasurementInputs = L_measurements == undefined ? "" : L_measurements.map((option) => {
       return (
         <div key={option.name}>
-          <p className="label nested-label">{option.name}</p>
+          <p className="label nested-label l">{option.name}</p>
           <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + 'cm'} name={option.name}/>
+          <span></span>
         </div>
       );
     });
-
     var measurementArea = this.props.measurements === undefined ? "measurements" :
       <div>
         <div className="row">
@@ -70,7 +70,6 @@ class MeasurementArea extends React.Component {
       <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>
         <h2>Measurements</h2>
         <span className="arrow"></span>
-        <span className="line"></span>
         {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
       </div>
     )

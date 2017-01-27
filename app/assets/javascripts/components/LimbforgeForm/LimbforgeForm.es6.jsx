@@ -97,8 +97,9 @@ class LimbforgeForm extends React.Component {
         dataType: 'json',
         success: (data) => {
           newState.measurements = data;
-          newState.showComponentArea = false;
-          newState.showMeasurementArea = true;
+          newState.availableAreas.prosthesis.selected = false;
+          newState.availableAreas.prosthesis.available = true;
+          newState.availableAreas.measurements.selected = true;
           this.setState(newState);
         },
         error: (error) => {
@@ -321,7 +322,8 @@ class LimbforgeForm extends React.Component {
   render() {
     this.loadNewDevices();
     this.loadTD();
-    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
+    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel.toLowerCase() + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
+    console.log(this.state);
     var imageURL = this.props.images[imageName];
     return (
       <div>

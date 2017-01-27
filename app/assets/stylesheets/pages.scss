@@ -35,6 +35,7 @@
     padding-left: 0;
   }
   .accordion-head{
+    cursor: pointer;
     padding-top: $standard-padding;
     &.active{
       .arrow{
@@ -45,9 +46,12 @@
     }
     h2{
       display: inline;
+      font-size: 20px;
       background-color: $white;
       padding-right: $standard-padding/2;
       padding-left: $standard-padding/3;
+      position: relative;
+      top: $standard-padding/6;
     }
     span{
       &.arrow{
@@ -63,13 +67,6 @@
         -ms-transform: rotate(-90deg); /* IE 9 */
         -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
         transform: rotate(-90deg);
-      }
-      &.line{
-        border-bottom: 3px solid $black;
-        position: relative;
-        display: block;
-        top: $standard-padding/-2;
-        z-index: - 1;
       }
     }
   }

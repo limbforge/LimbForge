@@ -40,6 +40,7 @@ class AmputationLevelArea extends React.Component {
     const imageStyle = {
       pointerEvents: 'none',
       userSelect: 'none',
+      marginBottom: '-50px'
     };
 
     const yOffset = 290;
@@ -56,7 +57,6 @@ class AmputationLevelArea extends React.Component {
 
     return (
       <div>
-        <div className="row">
           <div className="col-xs-12">
             <p className="label">Orientation:</p>
             <select onChange={this.updateOrientation} value={this.props.specs.orientation}>
@@ -64,7 +64,6 @@ class AmputationLevelArea extends React.Component {
               <option value="right">Right</option>
             </select>
           </div>
-        </div>
         <MouseDragger amountScrolled={this.props.amountScrolled} updatePercent={this.updatePercent}>
           <div className="outer-drag-container" style={outerContainerStyle}></div>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
@@ -121,15 +120,15 @@ class AmputationLevelArea extends React.Component {
         {this.loadSvg()}
         <div className="col-xs-12">
           <p className="label">Amputation Level: {this.props.specs.amputationLevel}</p>
+          <button
+            style={buttonStyle}
+            onClick={() => {
+              this.props.updateAvailableAreas('prosthesis');
+              this.props.getComponents(levelSelected.id);
+            }}
+            disabled={buttonDisabled}>CONTINUE
+          </button>
         </div>
-        <button
-          style={buttonStyle}
-          onClick={() => {
-            this.props.updateAvailableAreas('prosthesis');
-            this.props.getComponents(levelSelected.id);
-          }}
-          disabled={buttonDisabled}>CONTINUE
-        </button>
       </div>
     );
   }
@@ -142,7 +141,6 @@ class AmputationLevelArea extends React.Component {
         <div onClick={()=>this.props.updateSelectedArea('amputation')} className={classes}>
           <h2>Amputation</h2>
           <span className="arrow"></span>
-          <span className="line"></span>
         </div>
         {this.props.availableAreas.amputation.selected ? this.loadAmutationLevelArea() : ""}
       </div>

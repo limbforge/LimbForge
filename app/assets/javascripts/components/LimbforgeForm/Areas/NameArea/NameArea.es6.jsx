@@ -14,7 +14,6 @@ class NameArea extends React.Component {
 
     return (
       <div>
-        <AmputationCause />
         <div className="row">
           <div className="col-xs-12">
             <p className="nested-label">Patient Name</p>
@@ -22,14 +21,13 @@ class NameArea extends React.Component {
         </div>
         <div className="row">
           <div className="fname col-xs-6">
-            <p className="label nested-label">First</p>
-            <input id="fname" type="text" placeholder="Max" name="name"/>
+            <input id="fname" type="text" placeholder="First" name="name"/>
           </div>
           <div className="lname col-xs-6">
-            <p className="label nested-label">Last</p>
-            <input id="lname" type="text" placeholder="Hova" name="name"/>
+            <input id="lname" type="text" placeholder="Last" name="name"/>
           </div>
         </div>
+        <AmputationCause />
         <div className="row">
           <div className="col-xs-12">
             <p className="nested-label">Select Gender</p>
@@ -77,7 +75,6 @@ class NameArea extends React.Component {
         <div onClick={()=>this.props.updateSelectedArea('patient')} className={classes}>
           <h2>Patient</h2>
           <span className="arrow"></span>
-          <span className="line"></span>
         </div>
         {this.props.availableAreas.patient.selected ? this.renderNameArea() : ''}
       </div>

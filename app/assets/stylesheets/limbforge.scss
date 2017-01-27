@@ -21,7 +21,7 @@
 }
 
 .device{
-  border: 3px solid $black;
+  border: 1px solid $black;
   cursor: pointer;
   margin-bottom: $standard-padding/2;
   .description{
@@ -63,7 +63,7 @@
     span {/* <-- style the artificial checkbox */
       height: $standard-padding;
       width: $standard-padding;
-      border: 3px solid $black;
+      border: 1px solid $black;
       display: inline-block;
       position: relative;
       top: 8px;
@@ -73,8 +73,8 @@
   [type=checkbox]:checked + span:before {/* <-- style its checked state..with a ticked icon */
     content: '\2715';
     position: absolute;
-    top: -5px;
-    left: 2px;
+    top: -4px;
+    left: 4px;
     font-size: 25px;
   }
 

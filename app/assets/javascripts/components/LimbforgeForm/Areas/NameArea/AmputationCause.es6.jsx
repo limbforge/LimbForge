@@ -39,7 +39,7 @@ class AmputationCause extends React.Component {
 
     return (
       <div>
-        <p className="nested-label">Reason For Amputation</p>
+        <p className="nested-label">Cause of Amputation</p>
         <select onChange={this.updateSelect}>
           <option value="" key="other" >
             Please select
