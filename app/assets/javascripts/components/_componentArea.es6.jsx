@@ -9,9 +9,18 @@ class ComponentArea extends React.Component {
     if (this.props.components != undefined){
       this.props.components.map((option) => {
         componentOptions.push(
-          <option value={option.id} key={option.name} >
-            {option.name}
-          </option>
+          <div className="device"  onClick={() => this.props.updateMeasurementsAndTds(option.id)} value={option.id} key={option.name}>
+            <div className="device-img" style={{ backgroundImage: 'url(' + option.icon + ")" }}></div>
+            <h2>{option.name}</h2>
+            <p className="description">{option.description}</p>
+            <div className="meta">
+              <p><strong>by:</strong> {option.creator} </p>
+              <p><strong>uses:</strong> {option.uses} </p>
+              <p><strong>type:</strong> {option.component_type} </p>
+              <p><strong>weight:</strong> {option.weight} </p>
+              <p><strong>printTime:</strong> {option.print_time} </p>
+            </div>
+          </div>
         );
       });
     }
@@ -20,11 +29,8 @@ class ComponentArea extends React.Component {
       components = this.props.components == undefined ? "" :
         <div className="row">
           <div className="col-xs-12">
-            <p className="label">Components</p>
-            <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
-              <option value="">Select a Design</option>
-              {componentOptions}
-            </select>
+            <p className="label">Select a Component</p>
+            {componentOptions}
           </div>
         </div>;
     };

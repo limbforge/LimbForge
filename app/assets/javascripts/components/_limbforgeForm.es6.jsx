@@ -33,13 +33,13 @@ class LimbforgeForm extends React.Component {
   }
 
   // When we select a component, we want to grab the components list of measurements and tds
-  updateMeasurementsAndTds(event) {
+  updateMeasurementsAndTds(component_id) {
     const newState = this.state;
-    newState.specs.component = event.target.value;
+    newState.specs.component = component_id;
     newState.specs.TD = "phone";
 
-    const tdsUrl = this.props.tds_search_path + "?query=" + event.target.value;
-    const measurementsUrl = this.props.measurements_search_path + "?query=" + event.target.value;
+    const tdsUrl = this.props.tds_search_path + "?query=" + component_id;
+    const measurementsUrl = this.props.measurements_search_path + "?query=" + component_id;
 
     $.ajax({
       url: tdsUrl,
