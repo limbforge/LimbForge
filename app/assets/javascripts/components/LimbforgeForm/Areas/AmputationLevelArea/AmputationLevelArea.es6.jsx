@@ -30,17 +30,16 @@ class AmputationLevelArea extends React.Component {
   }
 
   loadSvg() {
-    const imageName = this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ?
-    "al_" + this.props.specs.gender + "_" +
-    (this.props.specs.amputationLevel === '' ? 'none' : this.props.specs.amputationLevel.toLowerCase()) +
-    "_" + this.props.specs.orientation.charAt(0).toUpperCase() :
-    "al_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
+
+    const imageName = "al_" + this.props.specs.gender + "_" + this.props.specs.amputationLevel.toLowerCase().split(' ').join('_') + "_" + this.props.specs.orientation.charAt(0).toUpperCase();
+
     const imageURL = this.props.images[imageName];
     const imageStyle = {
       pointerEvents: 'none',
       userSelect: 'none',
       marginBottom: '-25px'
     };
+    console.log(imageName);
 
     const yOffset = 160;
     const outerContainerStyle = {
@@ -57,7 +56,7 @@ class AmputationLevelArea extends React.Component {
 
     const outerContainerArrowStyle= {
       position: "relative",
-      top: `${this.state.y - (yOffset + 115)}px`,
+      top: `${this.state.y - (yOffset + 155)}px`,
       zIndex: 100,
       left: "265px",
       width: "30px",
@@ -75,6 +74,7 @@ class AmputationLevelArea extends React.Component {
               <option value="left">Left</option>
               <option value="right">Right</option>
             </select>
+            <p className="label">Select Amputation Level</p>
           </div>
         <MouseDragger amountScrolled={this.props.amountScrolled} updatePercent={this.updatePercent}>
           <div className="outer-drag-container" style={outerContainerStyle}></div>
@@ -132,7 +132,8 @@ class AmputationLevelArea extends React.Component {
       <div className="row tab-padding">
         {this.loadSvg()}
         <div className="col-xs-12">
-          <p className="label">Amputation Level: {this.props.specs.amputationLevel}</p>
+          <p className="label">Selected Level: </p>
+          <p><strong>{this.props.specs.amputationLevel}</strong></p>
           <button
             style={buttonStyle}
             onClick={() => {

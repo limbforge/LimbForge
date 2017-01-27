@@ -19,7 +19,7 @@ class LimbforgeForm extends React.Component {
       specs: {
         gender: "male",
         component: undefined,
-        amputationLevel: "",
+        amputationLevel: "Transcarpal",
         orientation: "left",
         C4: 250,
         L1: 250,

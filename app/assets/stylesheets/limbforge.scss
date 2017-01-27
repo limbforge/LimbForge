@@ -98,6 +98,9 @@
   visibility: hidden;
   position: absolute;
   }
+  label > p{
+    font-weight: 500;
+  }
   label > input + img{
     cursor:pointer;
     border:2px solid transparent;
