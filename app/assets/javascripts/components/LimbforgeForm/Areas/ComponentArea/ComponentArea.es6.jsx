@@ -16,11 +16,16 @@ class ComponentArea extends React.Component {
     }
 
     const components = this.props.components === undefined ?
-    "prosthesis" :
+    "" :
     <div className="row">
       <div className="col-xs-12">
         <p className="label">Components</p>
-        <select id="design-selector" onChange={this.props.updateMeasurementsAndTds}>
+        <select
+          id="design-selector"
+          onChange={event => {
+            this.props.updateMeasurementsAndTds(event);
+            this.props.updateAvailableAreas('measurements');
+          }}>
           <option value="">Select a Design</option>
           {componentOptions}
         </select>
