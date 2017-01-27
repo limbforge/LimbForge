@@ -63,7 +63,8 @@ class AmputationLevelArea extends React.Component {
       width: "30px",
       display: "inline-block",
       height: "30px",
-      backgroundColor: "black"
+      backgroundColor: "black",
+      pointerEvents: "none"
     };
 
     return (
