@@ -20,6 +20,36 @@
   }
 }
 
+.device{
+  border: 3px solid $black;
+  cursor: pointer;
+  .description{
+    padding: 21px $standard-padding/2 0 $standard-padding/2;
+  }
+  .device-img{
+    width: 73px;
+    height: 73px;
+    float: left;
+    background-size: cover;
+  }
+  p{
+    line-height: 20px;
+    font-size: $standard-padding/2;
+  }
+  h2{
+    font-size: 25px;
+    padding-left: 0;
+    margin-bottom: 5px;
+    display: block !important;
+  }
+  .meta{
+    padding: 0 $standard-padding/2 $standard-padding/2 $standard-padding/2;
+    p{
+      line-height: $standard-padding/3;
+    }
+  }
+}
+
 #download-area{
   label{
     display: block;
