@@ -63,6 +63,7 @@ class LimbforgeForm extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
+    this.updateSpecs = this.updateSpecs.bind(this);
   }
 
   componentWillMount() {
@@ -87,7 +88,7 @@ class LimbforgeForm extends React.Component {
         newState.tds = data;
       },
       error: (error) => {
-        console.log('getTD error', error, url);
+        console.log('getTD error', error, tdsUrl);
       }
     })
     .then(() => {
@@ -176,6 +177,10 @@ class LimbforgeForm extends React.Component {
     // round down to nearest 5
     const result = ((Math.floor(base_num / 5) * 5) / 10) * 10;
     return result
+  }
+
+  updateSpecs(specs) {
+    this.setState({ specs });
   }
 
   updateDisplay(event) {
@@ -339,6 +344,7 @@ class LimbforgeForm extends React.Component {
             availableAreas={this.state.availableAreas}
             updateAvailableAreas={this.updateAvailableAreas}
             updateSelectedArea={this.updateSelectedArea}
+            updateSpecs={this.updateSpecs}
             getComponents={this.getComponents}
             levels={this.props.levels}
             components_search_path={this.props.components_search_path}

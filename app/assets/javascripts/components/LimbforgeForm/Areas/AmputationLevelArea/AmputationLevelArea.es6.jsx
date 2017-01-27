@@ -2,10 +2,8 @@ class AmputationLevelArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      orientation: 'left',
       y: 700,
       percentSelected: 100,
-      areaSelected: 'transradial',
     };
 
     this.updatePercent = this.updatePercent.bind(this);
@@ -13,7 +11,7 @@ class AmputationLevelArea extends React.Component {
   }
 
   isSupportedAmputationLevel(level) {
-    switch (level.name.toLowerCase()) {
+    switch (level.toLowerCase()) {
       case 'transradial':
       case 'transhumeral':
         return true;
@@ -24,15 +22,19 @@ class AmputationLevelArea extends React.Component {
 
   updateOrientation(event) {
     const orientation = event.target.value;
-    this.setState({ orientation });
+    if (this.props.specs.orientation !== orientation) {
+      const newSpecs = this.props.specs;
+      newSpecs.orientation = orientation;
+      this.props.updateSpecs(newSpecs);
+    }
   }
 
   loadSvg() {
-    const imageName = this.isSupportedAmputationLevel({ name: this.state.areaSelected }) ?
+    const imageName = this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ?
     "diagram_" + this.props.specs.gender + "_" +
-    (this.state.areaSelected === '' ? 'none' : this.state.areaSelected.toLowerCase()) +
-    "_" + this.state.orientation.charAt(0).toUpperCase() :
-    "diagram_" + this.props.specs.gender + "_none_" + this.state.orientation.charAt(0).toUpperCase()
+    (this.props.specs.amputationLevel === '' ? 'none' : this.props.specs.amputationLevel.toLowerCase()) +
+    "_" + this.props.specs.orientation.charAt(0).toUpperCase() :
+    "diagram_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
     const imageURL = this.props.images[imageName];
 
     const imageStyle = {
@@ -57,7 +59,7 @@ class AmputationLevelArea extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <p className="label">Orientation:</p>
-            <select onChange={this.updateOrientation} value={this.state.orientation}>
+            <select onChange={this.updateOrientation} value={this.props.specs.orientation}>
               <option value="left">Left</option>
               <option value="right">Right</option>
             </select>
@@ -72,6 +74,7 @@ class AmputationLevelArea extends React.Component {
   }
 
   updatePercent(percentSelected, y) {
+    let areaSelected;
     if (percentSelected !== this.state.percentSelected) {
       if (percentSelected < 19) {
         areaSelected = '';
@@ -89,30 +92,35 @@ class AmputationLevelArea extends React.Component {
         areaSelected = 'Transcarpal';
       }
 
-      this.setState({ percentSelected, y, areaSelected });
+      this.setState({ percentSelected, y });
+      if (this.props.specs.amputationLevel !== areaSelected) {
+        const newSpecs = this.props.specs;
+        newSpecs.amputationLevel = areaSelected;
+        this.props.updateSpecs(newSpecs);
+      }
     }
   }
 
   loadAmutationLevelArea() {
     let levelSelected = undefined;
     const amputationLevelOptions = this.props.levels.map(level => {
-      if (level.name === this.state.areaSelected) {
+      if (level.name === this.props.specs.amputationLevel) {
         levelSelected = level;
       }
       return (
-        <option disabled={this.isSupportedAmputationLevel(level) ? "" : "disabled"} value={level.name} key={level.id} >
-          {level.name} {this.isSupportedAmputationLevel(level) ? "" : "(coming soon)"}
+        <option disabled={this.isSupportedAmputationLevel(level.name) ? "" : "disabled"} value={level.name} key={level.id} >
+          {level.name} {this.isSupportedAmputationLevel(level.name) ? "" : "(coming soon)"}
         </option>
       );
     });
 
-    const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected) ? {} : { background: "grey" };
-    const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected);
+    const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected.name) ? {} : { background: "grey" };
+    const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected.name);
     return (
       <div className="row">
         {this.loadSvg()}
         <div className="col-xs-12">
-          <p className="label">Amputation Level: {this.state.areaSelected}</p>
+          <p className="label">Amputation Level: {this.props.specs.amputationLevel}</p>
         </div>
         <button
           style={buttonStyle}

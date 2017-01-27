@@ -22,8 +22,8 @@ class ComponentArea extends React.Component {
         <p className="label">Components</p>
         <select
           id="design-selector"
-          onChange={event => {
-            this.props.updateMeasurementsAndTds(event);
+          onChange={ event => {
+            this.props.updateMeasurementsAndTds(event.target.value);
             this.props.updateAvailableAreas('measurements');
           }}>
           <option value="">Select a Design</option>
