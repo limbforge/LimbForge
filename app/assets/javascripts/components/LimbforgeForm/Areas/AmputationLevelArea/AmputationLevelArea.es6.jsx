@@ -40,10 +40,10 @@ class AmputationLevelArea extends React.Component {
     const imageStyle = {
       pointerEvents: 'none',
       userSelect: 'none',
-      marginBottom: '-50px'
+      marginBottom: '-25px'
     };
 
-    const yOffset = 290;
+    const yOffset = 160;
     const outerContainerStyle = {
       top: `${this.state.y - yOffset}px`,
       position: "relative",
@@ -53,6 +53,17 @@ class AmputationLevelArea extends React.Component {
       zIndex: 100,
       display: 'block',
       margin: '0 auto'
+    };
+
+    const outerContainerArrowStyle= {
+      position: "relative",
+      top: `${this.state.y - (yOffset + 115)}px`,
+      zIndex: 100,
+      left: "265px",
+      width: "30px",
+      display: "inline-block",
+      height: "30px",
+      backgroundColor: "black"
     };
 
     return (
@@ -66,6 +77,7 @@ class AmputationLevelArea extends React.Component {
           </div>
         <MouseDragger amountScrolled={this.props.amountScrolled} updatePercent={this.updatePercent}>
           <div className="outer-drag-container" style={outerContainerStyle}></div>
+          <div className="outer-drag-container-arrow" style={outerContainerArrowStyle}></div>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
         </MouseDragger>
       </div>

@@ -17,7 +17,15 @@
     font-family: $base-h-font-family;
     font-weight: 600;
     background-color: $blue;
+    margin-top: 0;
   }
+}
+
+.outer-drag-container-arrow{
+  background-image: url(asset_path('limbforge/white-arrow.svg'));
+  background-size: $standard-padding/1.5;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .device{
