@@ -7,8 +7,8 @@ class AmputationLevelArea extends React.Component {
     var classes =  this.props.showAmputationLevelArea ? 'accordion-head active' : 'accordion-head';
     const amputationLevelOptions = this.props.levels.map((option) => {
       return (
-        <option disabled={option.name == "Transradial" ? "" : "disabled"} value={option.id} key={option.id} >
-          {option.name} {option.name != "Transradial" ? "(coming soon)" : ""}
+        <option disabled={(option.name == "Transradial" || option.name == "Transhumeral") ? "" : "disabled"} value={option.id} key={option.id} >
+          {option.name} {(option.name == "Transradial" || option.name == "Transhumeral") ? "" : "(coming soon)"}
         </option>
       )
     });
