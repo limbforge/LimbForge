@@ -31,11 +31,12 @@ class AmputationLevelArea extends React.Component {
 
   loadSvg() {
     const imageName = this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ?
-    "diagram_" + this.props.specs.gender + "_" +
+    "al_" + this.props.specs.gender + "_" +
     (this.props.specs.amputationLevel === '' ? 'none' : this.props.specs.amputationLevel.toLowerCase()) +
     "_" + this.props.specs.orientation.charAt(0).toUpperCase() :
-    "diagram_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
+    "al_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
     const imageURL = this.props.images[imageName];
+    console.log(imageURL);
 
     const imageStyle = {
       pointerEvents: 'none',
