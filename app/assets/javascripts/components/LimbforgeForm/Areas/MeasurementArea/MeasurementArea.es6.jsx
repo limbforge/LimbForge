@@ -10,23 +10,28 @@ class MeasurementArea extends React.Component {
     var C_measurements = [];
     var L_measurements = [];
     if (this.props.measurements){
-      C_measurements = (
-        this.props.measurements.map(function(x){
-         if (x.name.charAt(0) == "C") { return x}
-        }).filter(function(n){ return n != undefined })
-      );
-      L_measurements = (
-        this.props.measurements.map(function(x){
-         if (x.name.charAt(0) == "L") { return x}
-        }).filter(function(n){ return n != undefined })
-      );
+      C_measurements = this.props.measurements.map(x => {
+        if (x.name.charAt(0) == "C") {
+          return x;
+        }
+      }).filter(n => {
+        return n != undefined;
+      });
+
+      L_measurements = this.props.measurements.map(x => {
+        if (x.name.charAt(0) == "L") {
+          return x;
+        }
+      }).filter(n => {
+        return n != undefined
+      });
     };
 
-    var cMeasurementInputs = C_measurements == undefined ? "" : C_measurements.map((option) => {
+    var cMeasurementInputs = C_measurements === undefined ? "" : C_measurements.map((option) => {
       return (
         <div key={option.name}>
           <p className="label nested-label">{option.name}</p>
-          <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + option.measurement_unit.toLowerCase()} name={option.name}/>
+          <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + 'cm'} name={option.name}/>
         </div>
       );
     });
@@ -34,22 +39,13 @@ class MeasurementArea extends React.Component {
       return (
         <div key={option.name}>
           <p className="label nested-label">{option.name}</p>
-          <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + option.measurement_unit.toLowerCase()} name={option.name}/>
+          <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + 'cm'} name={option.name}/>
         </div>
       );
     });
 
     var measurementArea = this.props.measurements === undefined ? "measurements" :
       <div>
-        <div className="row">
-          <div className="col-xs-12">
-            <p className="label">Orientation</p>
-            <select id="handedness-selector" onChange={this.props.updateDisplay}>
-              <option selected="selected" value="left" key="left" >Left</option>
-              <option value="right" key="right" >Right</option>
-            </select>
-          </div>
-        </div>
         <div className="row">
           <div>
             <p className="label measurements">Measurements (cm)</p>
