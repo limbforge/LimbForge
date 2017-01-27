@@ -13,7 +13,7 @@ class NameArea extends React.Component {
     var selected_gender = this.props.gender;
 
     return (
-      <div>
+      <div className="tab-padding">
         <div className="row">
           <div className="col-xs-12">
             <p className="nested-label">Patient Name</p>

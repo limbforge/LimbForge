@@ -28,7 +28,7 @@ class ComponentArea extends React.Component {
     if (this.props.availableAreas.prosthesis.selected){
       components = this.props.components == undefined ? "" :
         <div className="row">
-          <div className="col-xs-12">
+          <div className="col-xs-12 tab-padding">
             <p className="label">Select a Component</p>
             {componentOptions}
           </div>

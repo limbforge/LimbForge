@@ -36,8 +36,6 @@ class AmputationLevelArea extends React.Component {
     "_" + this.props.specs.orientation.charAt(0).toUpperCase() :
     "al_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
     const imageURL = this.props.images[imageName];
-    console.log(imageURL);
-
     const imageStyle = {
       pointerEvents: 'none',
       userSelect: 'none',
@@ -89,17 +87,17 @@ class AmputationLevelArea extends React.Component {
   updatePercent(percentSelected, y) {
     let areaSelected;
     if (percentSelected !== this.state.percentSelected) {
-      if (percentSelected < 19) {
+      if (percentSelected < 21) {
         areaSelected = '';
-      } else if (percentSelected < 32) {
+      } else if (percentSelected < 30) {
         areaSelected = 'Shoulder Disarticulation';
-      } else if (percentSelected < 52) {
+      } else if (percentSelected < 51) {
         areaSelected = 'Transhumeral';
-      } else if (percentSelected < 60) {
+      } else if (percentSelected < 58) {
         areaSelected = 'Elbow Disarticulation';
-      } else if (percentSelected < 76) {
+      } else if (percentSelected < 70) {
         areaSelected = 'Transradial';
-      } else if (percentSelected < 82) {
+      } else if (percentSelected < 76) {
         areaSelected = 'Wrist Disarticulation';
       } else {
         areaSelected = 'Transcarpal';
@@ -130,7 +128,7 @@ class AmputationLevelArea extends React.Component {
     const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected.name) ? {} : { background: "grey" };
     const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected.name);
     return (
-      <div className="row">
+      <div className="row tab-padding">
         {this.loadSvg()}
         <div className="col-xs-12">
           <p className="label">Amputation Level: {this.props.specs.amputationLevel}</p>

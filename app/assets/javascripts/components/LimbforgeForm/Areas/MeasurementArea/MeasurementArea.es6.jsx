@@ -45,10 +45,9 @@ class MeasurementArea extends React.Component {
       );
     });
     var measurementArea = this.props.measurements === undefined ? "measurements" :
-      <div>
+      <div className="tab-padding">
         <div className="row">
           <div>
-            <p className="label measurements">Measurements (cm)</p>
             <img className="documentation" data-toggle="modal" data-target="#measurementModal" src={this.props.imageURL}/>
             <div className="col-xs-6">
               {cMeasurementInputs}
@@ -68,9 +67,11 @@ class MeasurementArea extends React.Component {
 
     return (
       <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>
-        <h2>Measurements</h2>
-        <span className="arrow"></span>
-        {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
+        <div>
+          <h2>Measurements</h2>
+          <span className="arrow"></span>
+          {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
+        </div>
       </div>
     )
   }

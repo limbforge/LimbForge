@@ -5,7 +5,7 @@ class SubmitArea extends React.Component {
 
   render() {
     var submitArea = this.props.measurements == undefined ? '' :
-      <div id="download-area" className="row">
+      <div id="download-area" className="row tab-padding">
         <div className="col-xs-12">
           <label>
             <input type='checkbox'/>

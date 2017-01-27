@@ -23,7 +23,7 @@ class TdArea extends React.Component {
     </div>;
 
     return (
-      <div>
+      <div className="tab-padding">
         {tdArea}
       </div>
     )

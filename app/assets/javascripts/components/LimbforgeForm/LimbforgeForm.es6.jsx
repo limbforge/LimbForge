@@ -323,7 +323,6 @@ class LimbforgeForm extends React.Component {
     this.loadNewDevices();
     this.loadTD();
     var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel.toLowerCase() + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
-    console.log(this.state);
     var imageURL = this.props.images[imageName];
     return (
       <div>
