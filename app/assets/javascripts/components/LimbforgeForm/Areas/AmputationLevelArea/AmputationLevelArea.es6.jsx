@@ -70,7 +70,11 @@ class AmputationLevelArea extends React.Component {
   }
 
   loadAmutationLevelArea() {
+    let levelSelected = undefined;
     const amputationLevelOptions = this.props.levels.map(level => {
+      if (level.name === this.state.areaSelected) {
+        levelSelected = level;
+      }
       return (
         <option disabled={this.isSupportedAmputationLevel(level) ? "" : "disabled"} value={level.name} key={level.id} >
           {level.name} {this.isSupportedAmputationLevel(level) ? "" : "(coming soon)"}
@@ -78,6 +82,8 @@ class AmputationLevelArea extends React.Component {
       );
     });
 
+    const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected) ? {} : { background: "grey" };
+    const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected);
     return (
       <div className="row">
         {this.loadSvg()}
@@ -90,8 +96,7 @@ class AmputationLevelArea extends React.Component {
             {amputationLevelOptions}
           </select>
         </div>
-        // continue button should be grey if the feature is "coming soon"
-        <button onClick={() => {this.props.updateAvailableAreas('prosthesis')}}>CONTINUE</button>
+        <button style={buttonStyle} onClick={() => {this.props.updateAvailableAreas('prosthesis')}} disabled={buttonDisabled}>CONTINUE</button>
       </div>
     );
   }
