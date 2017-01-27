@@ -2,12 +2,14 @@ class AmputationLevelArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      y: 0,
-      percentSelected: 0,
+      orientation: 'left',
+      y: 700,
+      percentSelected: 100,
       areaSelected: 'transradial',
     };
 
     this.updatePercent = this.updatePercent.bind(this);
+    this.updateOrientation = this.updateOrientation.bind(this);
   }
 
   isSupportedAmputationLevel(level) {
@@ -20,13 +22,17 @@ class AmputationLevelArea extends React.Component {
     }
   }
 
+  updateOrientation(event) {
+    const orientation = event.target.value;
+    this.setState({ orientation });
+  }
+
   loadSvg() {
     const imageName = this.isSupportedAmputationLevel({ name: this.state.areaSelected }) ?
     "diagram_" + this.props.specs.gender + "_" +
     (this.state.areaSelected === '' ? 'none' : this.state.areaSelected.toLowerCase()) +
-    "_" + this.props.specs.orientation.charAt(0).toUpperCase() :
-    "diagram_" + this.props.specs.gender + "_none_" + this.props.specs.orientation.charAt(0).toUpperCase()
-    console.log(imageName);
+    "_" + this.state.orientation.charAt(0).toUpperCase() :
+    "diagram_" + this.props.specs.gender + "_none_" + this.state.orientation.charAt(0).toUpperCase()
     const imageURL = this.props.images[imageName];
 
     const imageStyle = {
@@ -34,8 +40,9 @@ class AmputationLevelArea extends React.Component {
       userSelect: 'none',
     };
 
+    const yOffset = 290;
     const outerContainerStyle = {
-      top: `${this.state.y - 190}px`,
+      top: `${this.state.y - yOffset}px`,
       position: "relative",
       width: "240px",
       height: "3px",
@@ -46,26 +53,37 @@ class AmputationLevelArea extends React.Component {
     };
 
     return (
-      <MouseDragger amountScrolled={this.props.amountScrolled} updatePercent={this.updatePercent}>
-        <div className="outer-drag-container" style={outerContainerStyle}></div>
-        <img id="limb-select-img" style={imageStyle} src={imageURL}/>
-      </MouseDragger>
+      <div>
+        <div className="row">
+          <div className="col-xs-12">
+            <p className="label">Orientation:</p>
+            <select onChange={this.updateOrientation} value={this.state.orientation}>
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+            </select>
+          </div>
+        </div>
+        <MouseDragger amountScrolled={this.props.amountScrolled} updatePercent={this.updatePercent}>
+          <div className="outer-drag-container" style={outerContainerStyle}></div>
+          <img id="limb-select-img" style={imageStyle} src={imageURL}/>
+        </MouseDragger>
+      </div>
     );
   }
 
   updatePercent(percentSelected, y) {
     if (percentSelected !== this.state.percentSelected) {
-      if (percentSelected < 10) {
+      if (percentSelected < 19) {
         areaSelected = '';
-      } else if (percentSelected < 20) {
+      } else if (percentSelected < 32) {
         areaSelected = 'Shoulder Disarticulation';
-      } else if (percentSelected < 40) {
+      } else if (percentSelected < 52) {
         areaSelected = 'Transhumeral';
       } else if (percentSelected < 60) {
         areaSelected = 'Elbow Disarticulation';
-      } else if (percentSelected < 70) {
+      } else if (percentSelected < 76) {
         areaSelected = 'Transradial';
-      } else if (percentSelected < 80) {
+      } else if (percentSelected < 82) {
         areaSelected = 'Wrist Disarticulation';
       } else {
         areaSelected = 'Transcarpal';
@@ -94,15 +112,16 @@ class AmputationLevelArea extends React.Component {
       <div className="row">
         {this.loadSvg()}
         <div className="col-xs-12">
-          <p className="label">Amputation Level</p>
-          <select onChange={this.props.getComponents} value={this.state.areaSelected}>
-            <option value="" >
-              Select a level
-            </option>
-            {amputationLevelOptions}
-          </select>
+          <p className="label">Amputation Level: {this.state.areaSelected}</p>
         </div>
-        <button style={buttonStyle} onClick={() => {this.props.updateAvailableAreas('prosthesis')}} disabled={buttonDisabled}>CONTINUE</button>
+        <button
+          style={buttonStyle}
+          onClick={() => {
+            this.props.updateAvailableAreas('prosthesis');
+            this.props.getComponents(levelSelected.id);
+          }}
+          disabled={buttonDisabled}>CONTINUE
+        </button>
       </div>
     );
   }
