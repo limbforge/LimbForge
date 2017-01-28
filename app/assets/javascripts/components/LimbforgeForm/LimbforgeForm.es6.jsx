@@ -25,7 +25,6 @@ class LimbforgeForm extends React.Component {
         L1: 250,
         TD: undefined,
       },
-      amountScrolled: 0,
       availableAreas: {
         patient: {
           selected: true,
@@ -60,16 +59,9 @@ class LimbforgeForm extends React.Component {
     this.updateGender = this.updateGender.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
     this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
     this.updateSpecs = this.updateSpecs.bind(this);
-  }
-
-  componentWillMount() {
-    setTimeout(() => {
-      this.componentDiv = document.getElementById("limbforge");
-    }, 100);
   }
 
   // When we select a component, we want to grab the components list of measurements and tds
@@ -289,16 +281,11 @@ class LimbforgeForm extends React.Component {
     this.setState({showAmputationLevelArea: true});
   }
 
-  handleScroll() {
-    if (this.componentDiv) {
-      this.setState({ amountScrolled: this.componentDiv.scrollTop });
-    }
-  }
-
   // Whenever the form reaches a checkpoint, update the ability for that part of the form to be selected
   updateAvailableAreas(area) {
     const availableAreas = this.state.availableAreas;
-    for (const [key, value] of Object.entries(availableAreas)) {
+    for (const key of Object.keys(availableAreas)) {
+      const value = availableAreas[key];
       value.selected = false;
     }
     availableAreas[area].selected = true;
@@ -311,7 +298,8 @@ class LimbforgeForm extends React.Component {
     if (this.state.availableAreas[area].available) {
       const availableAreas = this.state.availableAreas;
       // Reset each area to not selected, then the passed area to selected
-      for (const [key, value] of Object.entries(availableAreas)) {
+      for (const key of Object.keys(availableAreas)) {
+        const value = availableAreas[key];
         value.selected = false;
       }
       availableAreas[area].selected = true;
@@ -326,7 +314,7 @@ class LimbforgeForm extends React.Component {
     var imageURL = this.props.images[imageName];
     return (
       <div>
-        <div onScroll={this.handleScroll} id="limbforge">
+        <div id="limbforge">
           <img className="logo" src={this.props.logo_img} />
           <h1 id="title">LIMBFORGE</h1>
           <NameArea
@@ -351,7 +339,6 @@ class LimbforgeForm extends React.Component {
             components_search_path={this.props.components_search_path}
             images={this.props.images}
             specs={this.state.specs}
-            amountScrolled={this.state.amountScrolled}
           />
           <ComponentArea
             availableAreas={this.state.availableAreas}

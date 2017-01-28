@@ -8,6 +8,11 @@ class AmputationLevelArea extends React.Component {
 
     this.updatePercent = this.updatePercent.bind(this);
     this.updateOrientation = this.updateOrientation.bind(this);
+    this.handleAreaClick = this.handleAreaClick.bind(this);
+  }
+
+  handleAreaClick(area) {
+    console.log('woo!', area);
   }
 
   isSupportedAmputationLevel(level) {
@@ -39,31 +44,11 @@ class AmputationLevelArea extends React.Component {
       userSelect: 'none',
       marginBottom: '-25px'
     };
-    console.log(imageName);
 
-    const yOffset = 160;
-    const outerContainerStyle = {
-      top: `${this.state.y - yOffset}px`,
-      position: "relative",
-      width: "240px",
-      height: "3px",
-      background: "#000000",
-      zIndex: 100,
-      display: 'block',
-      margin: '0 auto',
-      pointerEvents: "none"
-    };
-
-    const outerContainerArrowStyle= {
-      position: "relative",
-      top: `${this.state.y - (yOffset + 155)}px`,
-      zIndex: 100,
-      left: "265px",
-      width: "30px",
-      display: "inline-block",
-      height: "30px",
-      backgroundColor: "black",
-      pointerEvents: "none"
+    const selectorStyle = {
+      marginBottom: '-25px',
+      position: 'relative',
+      top: '-330px',
     };
 
     return (
@@ -76,11 +61,22 @@ class AmputationLevelArea extends React.Component {
             </select>
             <p className="label">Select Amputation Level</p>
           </div>
-        <MouseDragger amountScrolled={this.props.amountScrolled} updatePercent={this.updatePercent}>
-          <div className="outer-drag-container" style={outerContainerStyle}></div>
-          <div className="outer-drag-container-arrow" style={outerContainerArrowStyle}></div>
+        <div>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
-        </MouseDragger>
+          <svg style={selectorStyle} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
+            <rect onClick = { () => { this.handleAreaClick(1) }} y="175.8" opacity="0.3" fill="#1578B5" width="600.1" height="201.1"/>
+            <rect onClick = { () => { this.handleAreaClick(2) }} id="al_select_2" x="-0.4" y="376.9" opacity="0.4" fill="#1578B5" width="600.1" height="57.3"/>
+            <rect onClick = { () => { this.handleAreaClick(3) }} id="al_select_3" x="-0.4" y="434.3" opacity="0.5" fill="#1578B5" width="600.1" height="122.5"/>
+            <rect onClick = { () => { this.handleAreaClick(4) }} id="al_select_4" y="556.8" opacity="0.6" fill="#1578B5" width="600.1" height="44.6"/>
+            <rect onClick = { () => { this.handleAreaClick(5) }} id="al_select_5" x="-0.4" y="601.3" opacity="0.7" fill="#1578B5" width="600.1" height="91.4"/>
+            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="647" r="16.1"/>
+            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="579" r="16.1"/>
+            <circle stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="495.8" r="16.1"/>
+            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="405.6" r="16.1"/>
+            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="276.4" r="16.1"/>
+            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="84.6" r="16.1"/>
+          </svg>
+        </div>
       </div>
     );
   }
