@@ -1,18 +1,8 @@
 class AmputationLevelArea extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      y: 700,
-      percentSelected: 100,
-    };
-
-    this.updatePercent = this.updatePercent.bind(this);
     this.updateOrientation = this.updateOrientation.bind(this);
     this.handleAreaClick = this.handleAreaClick.bind(this);
-  }
-
-  handleAreaClick(area) {
-    console.log('woo!', area);
   }
 
   isSupportedAmputationLevel(level) {
@@ -64,48 +54,71 @@ class AmputationLevelArea extends React.Component {
         <div>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
           <svg style={selectorStyle} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
-            <rect onClick = { () => { this.handleAreaClick(1) }} y="175.8" opacity="0.3" fill="#1578B5" width="600.1" height="201.1"/>
-            <rect onClick = { () => { this.handleAreaClick(2) }} id="al_select_2" x="-0.4" y="376.9" opacity="0.4" fill="#1578B5" width="600.1" height="57.3"/>
-            <rect onClick = { () => { this.handleAreaClick(3) }} id="al_select_3" x="-0.4" y="434.3" opacity="0.5" fill="#1578B5" width="600.1" height="122.5"/>
-            <rect onClick = { () => { this.handleAreaClick(4) }} id="al_select_4" y="556.8" opacity="0.6" fill="#1578B5" width="600.1" height="44.6"/>
-            <rect onClick = { () => { this.handleAreaClick(5) }} id="al_select_5" x="-0.4" y="601.3" opacity="0.7" fill="#1578B5" width="600.1" height="91.4"/>
-            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="647" r="16.1"/>
-            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="579" r="16.1"/>
-            <circle stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="495.8" r="16.1"/>
-            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="405.6" r="16.1"/>
-            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="276.4" r="16.1"/>
-            <circle fill="none" stroke="#000000" strokeMiterlimit="10" cx="40.6" cy="84.6" r="16.1"/>
+            <rect onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }} x="-0.4" y="0.000" opacity="0.2" fill="#1578B5" width="600.1" height="175.8"/>
+            <rect onClick = { () => { this.handleAreaClick('Transhumeral') }}             x="-0.4" y="175.8" opacity="0.3" fill="#1578B5" width="600.1" height="201.1"/>
+            <rect onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}    x="-0.4" y="376.9" opacity="0.4" fill="#1578B5" width="600.1" height="57.3"/>
+            <rect onClick = { () => { this.handleAreaClick('Transradial') }}              x="-0.4" y="434.3" opacity="0.5" fill="#1578B5" width="600.1" height="122.5"/>
+            <rect onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}    x="-0.4" y="556.8" opacity="0.6" fill="#1578B5" width="600.1" height="44.6"/>
+            <rect onClick = { () => { this.handleAreaClick('Transcarpal') }}              x="-0.4" y="601.3" opacity="0.7" fill="#1578B5" width="600.1" height="91.4"/>
+            <circle
+              fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#000000' : 'none'}
+              stroke="#000000"
+              strokeMiterlimit="10"
+              cx="40.6"
+              cy="84.6"
+              r="16.1"
+            />
+            <circle
+              fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#000000' : 'none'}
+              stroke="#000000"
+              strokeMiterlimit="10"
+              cx="40.6"
+              cy="276.4"
+              r="16.1"
+            />
+            <circle
+              fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#000000' : 'none'}
+              stroke="#000000"
+              strokeMiterlimit="10"
+              cx="40.6"
+              cy="405.6"
+              r="16.1"
+            />
+            <circle
+              fill={this.props.specs.amputationLevel === 'Transradial' ? '#000000' : 'none'}
+              stroke="#000000"
+              strokeMiterlimit="10"
+              cx="40.6"
+              cy="495.8"
+              r="16.1"
+            />
+            <circle
+              fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#000000' : 'none'}
+              stroke="#000000"
+              strokeMiterlimit="10"
+              cx="40.6"
+              cy="579"
+              r="16.1"
+            />
+            <circle
+              fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#000000' : 'none'}
+              stroke="#000000"
+              strokeMiterlimit="10"
+              cx="40.6"
+              cy="647"
+              r="16.1"
+            />
           </svg>
         </div>
       </div>
     );
   }
 
-  updatePercent(percentSelected, y) {
-    let areaSelected;
-    if (percentSelected !== this.state.percentSelected) {
-      if (percentSelected < 21) {
-        areaSelected = '';
-      } else if (percentSelected < 30) {
-        areaSelected = 'Shoulder Disarticulation';
-      } else if (percentSelected < 51) {
-        areaSelected = 'Transhumeral';
-      } else if (percentSelected < 58) {
-        areaSelected = 'Elbow Disarticulation';
-      } else if (percentSelected < 70) {
-        areaSelected = 'Transradial';
-      } else if (percentSelected < 76) {
-        areaSelected = 'Wrist Disarticulation';
-      } else {
-        areaSelected = 'Transcarpal';
-      }
-
-      this.setState({ percentSelected, y });
-      if (this.props.specs.amputationLevel !== areaSelected) {
-        const newSpecs = this.props.specs;
-        newSpecs.amputationLevel = areaSelected;
-        this.props.updateSpecs(newSpecs);
-      }
+  handleAreaClick(area) {
+    if (this.props.specs.amputationLevel !== area) {
+      const newSpecs = this.props.specs;
+      newSpecs.amputationLevel = area;
+      this.props.updateSpecs(newSpecs);
     }
   }
 
