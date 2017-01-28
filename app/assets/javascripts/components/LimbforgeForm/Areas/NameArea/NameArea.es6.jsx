@@ -52,7 +52,7 @@ class NameArea extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <p className="nested-label">Date of Birth</p>
-            <input type="date" name="bday"/>
+            <input type="text" data-provide='datepicker' />
           </div>
         </div>
         <div className="row">

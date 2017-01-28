@@ -187,6 +187,9 @@ input{
   &:focus{
     outline: none;
   }
+  &{
+    line-height: 22px !important;
+  }
   &[type=submit] {
     background-color: $blue;
     color: $white;
