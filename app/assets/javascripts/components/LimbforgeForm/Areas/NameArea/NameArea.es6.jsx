@@ -63,7 +63,7 @@ class NameArea extends React.Component {
         <div className="ui-widget">
           <input id="tags" />
         </div>
-        <button onClick={() => {this.props.updateAvailableAreas('amputation')}}>CONTINUE</button>
+        <button style={{cursor: "pointer"}} onClick={() => {this.props.updateAvailableAreas('amputation')}}>CONTINUE</button>
       </div>
     );
   }
