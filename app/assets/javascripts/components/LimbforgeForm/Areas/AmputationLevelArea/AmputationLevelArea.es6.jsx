@@ -15,8 +15,7 @@ class AmputationLevelArea extends React.Component {
     }
   }
 
-  updateSide(event) {
-    const side = event.target.value;
+  updateSide(side) {
     if (this.props.specs.side !== side) {
       const newSpecs = this.props.specs;
       newSpecs.side = side;
@@ -56,15 +55,11 @@ class AmputationLevelArea extends React.Component {
               <div className="col-xs-4">
                 <p className="label">SIDE:</p>
               </div>
-              <div className="col-xs-4">
-                <div className="row">
-                  <input type="radio" name="side" value="left" defaultChecked={this.props.specs.side === 'left'} />Left
-                </div>
+              <div className="col-xs-4" onClick={() => {this.updateSide('left')}}>
+                <div className="row" style={{background: this.props.specs.side === "left" ? "#ff0000" : ''}}>Left</div>
               </div>
-              <div className="col-xs-4">
-                <div className="row">
-                  <input type="radio" name="side" value="right" defaultChecked={this.props.specs.side === 'right'} />Right
-                </div>
+              <div className="col-xs-4" onClick={() => {this.updateSide('right')}}>
+                <div className="row" style={{background: this.props.specs.side === "right" ? "#ff0000" : ''}}>Right</div>
               </div>
             </form>
           </div>
