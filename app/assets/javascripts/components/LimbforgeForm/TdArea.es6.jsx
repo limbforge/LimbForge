@@ -12,7 +12,7 @@ class TdArea extends React.Component {
       );
     });
 
-    var tdArea = this.props.tds == undefined ? '' :
+    var tdArea = (this.props.tds == undefined && Array.isArray(this.props.tds) && this.props.tds.length > 0) ? '' :
     <div className="row">
       <div className="col-xs-12">
         <p className="label">Terminal Devices</p>
