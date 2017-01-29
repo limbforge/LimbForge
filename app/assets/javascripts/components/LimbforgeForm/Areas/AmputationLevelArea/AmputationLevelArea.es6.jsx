@@ -32,7 +32,11 @@ class AmputationLevelArea extends React.Component {
     const imageStyle = {
       pointerEvents: 'none',
       userSelect: 'none',
-      marginBottom: '-25px'
+      marginBottom: '-75px'
+    };
+
+    const imagedivStyle = {
+      marginBottom: '-300px'
     };
 
     const selectorStyle = {
@@ -51,7 +55,7 @@ class AmputationLevelArea extends React.Component {
             </select>
             <p className="label">Select Amputation Level</p>
           </div>
-        <div>
+        <div style={imagedivStyle}>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
           <svg style={selectorStyle} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
             <rect onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }} x="-0.4" y="0.000" opacity="0.2" fill="#1578B5" width="600.1" height="175.8"/>
