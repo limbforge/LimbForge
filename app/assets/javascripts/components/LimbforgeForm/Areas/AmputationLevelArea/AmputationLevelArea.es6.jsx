@@ -161,8 +161,7 @@ class AmputationLevelArea extends React.Component {
       <div className="row tab-padding">
         {this.loadSvg()}
         <div className="col-xs-12">
-          <p className="label">Selected Level: </p>
-          <p><strong>{this.props.specs.amputationLevel}</strong></p>
+          <p>{this.props.specs.amputationLevel}</p>
           <button
             style={buttonStyle}
             onClick={() => {
