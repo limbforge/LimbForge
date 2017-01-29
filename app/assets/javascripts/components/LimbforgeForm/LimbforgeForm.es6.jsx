@@ -299,10 +299,18 @@ class LimbforgeForm extends React.Component {
       const availableAreas = this.state.availableAreas;
       // Reset each area to not selected, then the passed area to selected
       for (const key of Object.keys(availableAreas)) {
-        const value = availableAreas[key];
-        value.selected = false;
+        // Toggle the selected area and set everything else to false
+        if (key === area) {
+        // If we click on an open area, this will make sure it closes
+          if (availableAreas[area].selected) {
+            availableAreas[key].selected = false;
+          } else {
+            availableAreas[key].selected = true;
+          }
+        } else {
+          availableAreas[key].selected = false;
+        }
       }
-      availableAreas[area].selected = true;
       this.setState({ availableAreas });
     }
   }
