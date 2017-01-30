@@ -15,7 +15,8 @@ function init() {
   // Z is up for objects intended to be 3D printed.
 
   camera.up.set( 0, 0, 1 );
-  camera.position.set( 0, -9, 6 );
+  camera.position.set(0, -43.94561965412779, 19.70416457024617);
+
 
   var light1 = new THREE.PointLight( 0xffffff, 1 );
   light1.position.set( 0, 0, -10);
