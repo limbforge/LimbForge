@@ -47,25 +47,41 @@ class AmputationLevelArea extends React.Component {
       top: '-311px',
     };
 
+    const selectedSide = {
+      background: '#1578b5',
+      cursor: 'pointer',
+      color: '#ffffff',
+      padding: '12px',
+      textAlign: 'center'
+    };
+
+    const notSelectedSide = {
+      background: '#ffffff',
+      cursor: 'pointer',
+      color: '#000000',
+      padding: '12px',
+      textAlign: 'center'
+    };
+
     return (
       <div>
         <div className="col-xs-12">
-          <div className="row">
+          <div id="sides" className="row">
             <form action="" onChange={this.updateSide}>
-              <div className="col-xs-4">
+              <div className="label col-xs-4">
                 <p className="label">SIDE:</p>
               </div>
               <div className="col-xs-4" onClick={() => {this.updateSide('left')}}>
-                <div className="row" style={{background: this.props.specs.side === "left" ? "#ff0000" : ''}}>Left</div>
+                <div className="row" style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>Left</div>
               </div>
               <div className="col-xs-4" onClick={() => {this.updateSide('right')}}>
-                <div className="row" style={{background: this.props.specs.side === "right" ? "#ff0000" : ''}}>Right</div>
+                <div className="row" style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>Right</div>
               </div>
             </form>
           </div>
-          <p className="label">Select Amputation Level</p>
         </div>
         <div className="col-xs-12" style={imagedivStyle}>
+          <p className="label amputation">Select Amputation Level</p>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
           <svg style={selectorStyle} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
             <rect  x="-0.4" y="601.3" opacity="0.1" strokeWidth="5px" stroke="#000000" fill="#ffffff" width="600.1" height="91.4"/>
@@ -158,7 +174,7 @@ class AmputationLevelArea extends React.Component {
     const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected.name) ? {} : { background: "grey" };
     const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected.name);
     return (
-      <div className="row tab-padding">
+      <div id="AmputationLevel" className="row tab-padding">
         {this.loadSvg()}
         <div className="col-xs-12">
           <p>{this.props.specs.amputationLevel}</p>
