@@ -230,7 +230,7 @@ class LimbforgeForm extends React.Component {
 
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url = 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.side + '/td_' + this.state.specs.TD + '_' + this.state.specs.side + '.stl';
+      const s3url =  this.state.specs.component_object.folder == "xhparm" ? "" : 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.side + '/td_' + this.state.specs.TD + '_' + this.state.specs.side + '.stl';
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
