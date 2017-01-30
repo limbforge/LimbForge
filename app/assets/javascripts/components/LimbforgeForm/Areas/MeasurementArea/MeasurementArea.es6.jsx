@@ -66,12 +66,14 @@ class MeasurementArea extends React.Component {
     var classes =  this.props.availableAreas.measurements.selected ? 'accordion-head active' : 'accordion-head';
 
     return (
-      <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>
-        <div>
-          <h2>Measurements</h2>
-          <span className="arrow"></span>
-          {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
+      <div>
+        <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>
+          <div>
+            <h2>Measurements</h2>
+            <span className="arrow"></span>
+          </div>
         </div>
+        {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
       </div>
     )
   }
