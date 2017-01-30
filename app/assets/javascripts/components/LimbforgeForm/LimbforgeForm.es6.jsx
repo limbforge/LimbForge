@@ -20,7 +20,7 @@ class LimbforgeForm extends React.Component {
         gender: "male",
         component: undefined,
         amputationLevel: "Transcarpal",
-        orientation: "left",
+        side: "left",
         C4: 250,
         L1: 250,
         TD: undefined,
@@ -128,7 +128,7 @@ class LimbforgeForm extends React.Component {
     return new Promise((resolve, reject) => {
       let data = JSON.stringify({
         component: this.state.specs.component,
-        orientation: this.state.specs.orientation,
+        side: this.state.specs.side,
         C4: this.state.specs.C4,
         L1: this.state.specs.L1,
         TD: this.state.specs.TD
@@ -148,7 +148,7 @@ class LimbforgeForm extends React.Component {
     const zip = new JSZip();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
-    const zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + this.state.specs.orientation + "_" + formatted_date + ".zip";
+    const zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + this.state.specs.side + "_" + formatted_date + ".zip";
     const stls = [];
 
     this.getStls(stls).then(() => {
@@ -177,10 +177,10 @@ class LimbforgeForm extends React.Component {
   }
 
   updateDisplay(event) {
-    //if orientation selector changed
+    //if side selector changed
     if (event.target.value == "right" || event.target.value == "left") {
       const newSpecs = this.state.specs;
-      newSpecs.orientation =event.target.value;
+      newSpecs.side =event.target.value;
       this.setState({specs: newSpecs});
     }
     //if terminal devices selector changed
@@ -223,7 +223,7 @@ class LimbforgeForm extends React.Component {
 
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url = 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.orientation + '/td_' + this.state.specs.TD + '_' + this.state.specs.orientation + '.stl';
+      const s3url = 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.side + '/td_' + this.state.specs.TD + '_' + this.state.specs.side + '.stl';
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
@@ -246,7 +246,7 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      const s3url = 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.orientation + '/forearm_ebearm_' + this.state.specs.orientation + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
+      const s3url = 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.side + '/forearm_ebearm_' + this.state.specs.side + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
@@ -299,10 +299,18 @@ class LimbforgeForm extends React.Component {
       const availableAreas = this.state.availableAreas;
       // Reset each area to not selected, then the passed area to selected
       for (const key of Object.keys(availableAreas)) {
-        const value = availableAreas[key];
-        value.selected = false;
+        // Toggle the selected area and set everything else to false
+        if (key === area) {
+        // If we click on an open area, this will make sure it closes
+          if (availableAreas[area].selected) {
+            availableAreas[key].selected = false;
+          } else {
+            availableAreas[key].selected = true;
+          }
+        } else {
+          availableAreas[key].selected = false;
+        }
       }
-      availableAreas[area].selected = true;
       this.setState({ availableAreas });
     }
   }
@@ -310,7 +318,7 @@ class LimbforgeForm extends React.Component {
   render() {
     this.loadNewDevices();
     this.loadTD();
-    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel.toLowerCase() + "_" + this.state.specs.orientation.charAt(0).toUpperCase();
+    var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel.toLowerCase() + "_" + this.state.specs.side.charAt(0).toUpperCase();
     var imageURL = this.props.images[imageName];
     return (
       <div>

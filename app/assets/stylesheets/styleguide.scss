@@ -82,7 +82,8 @@ button{
   font-weight: bold;
   background: $blue;
   margin-top: $standard-padding;
-  padding: $standard-padding/1.5 $standard-padding*1.5;
+  padding: 12px $standard-padding/1.5;
+  width: 100%;
   letter-spacing: $base-letter-spacing;
   &.cta{
     background-color: $camero-regular;
@@ -197,7 +198,7 @@ input{
     font-weight: bold;
     margin-top: $standard-padding;
     border: none;
-    padding: $standard-padding - 10;
+    padding: $standard-padding/3 $standard-padding/1.5;
     letter-spacing: $base-letter-spacing;
   }
 }

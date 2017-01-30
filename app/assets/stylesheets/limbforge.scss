@@ -4,6 +4,15 @@
   margin: 0;
 }
 
+#AmputationLevel{
+  button{
+    margin-top: $standard-padding/3;
+  }
+  .label{
+    margin-top: $standard-padding/2;
+  }
+}
+
 #limbforge-links{
   position: absolute;
   color: $white;
@@ -17,6 +26,16 @@
     font-family: $base-h-font-family;
     font-weight: 600;
     background-color: $blue;
+    margin-top: 0;
+    width: auto;
+  }
+}
+
+#sides{
+  margin: 0;
+  margin-top: $standard-padding;
+  .label{
+    padding-left: 0;
     margin-top: 0;
   }
 }
