@@ -19,6 +19,7 @@ class LimbforgeForm extends React.Component {
       specs: {
         gender: "male",
         component: undefined,
+        component_object: undefined,
         amputationLevel: "Transcarpal",
         side: "left",
         C4: 250,
@@ -62,14 +63,20 @@ class LimbforgeForm extends React.Component {
     this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
     this.updateSpecs = this.updateSpecs.bind(this);
+    this.updateComponentSpec = this.updateComponentSpec.bind(this);
   }
-
+  updateComponentSpec(component_id){
+    var newState = this.state;
+    var component_object = $.grep(this.state.components, function(e){ return e.id == component_id; });
+    newState.specs.component_object = component_object[0];
+    this.setState({specs: newState.specs});
+  }
   // When we select a component, we want to grab the components list of measurements and tds
   updateMeasurementsAndTds(component_id) {
     const newState = this.state;
     newState.specs.component = component_id;
     newState.specs.TD = "phone";
-
+    this.updateComponentSpec(component_id);
     const tdsUrl = this.props.tds_search_path + "?query=" + component_id;
     const measurementsUrl = this.props.measurements_search_path + "?query=" + component_id;
 
@@ -246,7 +253,7 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      const s3url = 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.side + '/forearm_ebearm_' + this.state.specs.side + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
+      const s3url =  this.state.specs.component_object.folder == "xhparm" ? 'https://s3.amazonaws.com/limbforgestls/forearm/xhparm/xhparm.stl' : 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.side + '/forearm_ebearm_' + this.state.specs.side + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
