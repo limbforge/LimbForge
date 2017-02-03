@@ -31,7 +31,9 @@ class MeasurementArea extends React.Component {
       return (
         <div key={option.name}>
           <p className="label nested-label c">{option.name}</p>
-          <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + 'cm'} name={option.name}/>
+          <div className="measurement-container">
+            <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range} name={option.name}/>
+          </div>
         </div>
       );
     });
@@ -39,8 +41,9 @@ class MeasurementArea extends React.Component {
       return (
         <div key={option.name}>
           <p className="label nested-label l">{option.name}</p>
-          <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range + 'cm'} name={option.name}/>
-          <span></span>
+          <div className="measurement-container">
+            <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range } name={option.name}/>
+          </div>
         </div>
       );
     });
@@ -57,6 +60,7 @@ class MeasurementArea extends React.Component {
             </div>
           </div>
         </div>
+        <p className="note">* All measurements are in cm</p>
       </div>;
 
       return measurementArea;

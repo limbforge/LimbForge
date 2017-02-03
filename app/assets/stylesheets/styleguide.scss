@@ -156,7 +156,7 @@ p{
       width: $standard-padding;
       text-align: center;
       border-radius: 100%;
-      margin-bottom: 7px;
+      margin-bottom: -40px;
     }
     &.l{
       color: $white;
@@ -169,9 +169,13 @@ p{
       padding: 24px;
       margin-left: -8px;
       margin-top: 0px;
-      margin-bottom: 4px;
+      margin-bottom: -40px;
     }
   }
+}
+
+.measurement-container{
+  padding-left: 55px;
 }
 
 label{

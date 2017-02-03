@@ -13,7 +13,7 @@
 }
 
 .tab-padding{
-  padding-left: $standard-padding;
+  padding: 0 $standard-padding;
 }
 
 #limbforge{
@@ -22,7 +22,7 @@
   overflow-x: hidden;
   height: 100vh;
   background-color: $white;
-  width: 350px;
+  width: 380px;
   padding: $standard-padding/2;
   position:  fixed;
   z-index: 2;
@@ -31,6 +31,9 @@
     input{
       border-right: 0;
     }
+  }
+  .note{
+    padding-top: $standard-padding;
   }
   .modal-content{
     z-index: 9999;
