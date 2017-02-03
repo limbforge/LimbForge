@@ -10,7 +10,7 @@ class ComponentArea extends React.Component {
     }
 
     return (
-      <div className="row">
+      <div id="components-list" className="row">
         <div className="col-xs-12 tab-padding">
           <p className="label">Select a Component</p>
           {componentOptions}
