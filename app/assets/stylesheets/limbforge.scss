@@ -52,9 +52,11 @@
   cursor: pointer;
   margin-bottom: $standard-padding/2;
   .description{
-    padding: 21px $standard-padding/2 0 $standard-padding/2;
+    padding-top: $standard-padding/3;
   }
   .device-img{
+    background-color: $blue;
+    margin-right: $standard-padding/3;
     width: 73px;
     height: 73px;
     float: left;
@@ -68,12 +70,38 @@
     font-size: 25px;
     padding-left: 0;
     margin-bottom: 5px;
+    margin-top: $standard-padding/2;
     display: block !important;
   }
   .meta{
     padding: 0 $standard-padding/2 $standard-padding/2 $standard-padding/2;
     p{
       line-height: 18px;
+    }
+  }
+  .show-more{
+    margin-bottom: $standard-padding/6;
+    cursor: pointer;
+    span{
+      &.down{
+        background-image: url(asset_path('limbforge/dropdown.svg'));
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        position: relative;
+        top: 5px;
+      }
+      &.up{
+        background-image: url(asset_path('limbforge/dropdown.svg'));
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        position: relative;
+        top: 5px;
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+        transform: rotate(180deg);
+      }
     }
   }
 }

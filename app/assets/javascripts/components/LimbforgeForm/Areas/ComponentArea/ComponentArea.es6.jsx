@@ -1,24 +1,30 @@
 class ComponentArea extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showMeta: false
+      }
+    this.toggleMeta = this.toggleMeta.bind(this);
+    };
+  toggleMeta(){
+    debugger;
+    if (this.state.showMeta){
+      this.setState({showMeta: false});
+    }
+    else{
+      this.setState({showMeta: true});
+    }
   }
-
   renderComponents() {
     const componentOptions = [];
     if (this.props.components != undefined){
       this.props.components.map((option) => {
         componentOptions.push(
-          <div className="device"  onClick={() => this.props.updateMeasurementsAndTds(option.id)} value={option.id} key={option.name}>
-            <div className="device-img" style={{ backgroundImage: 'url(' + option.icon + ")" }}></div>
-            <h2>{option.name}</h2>
-            <p className="description">{option.description}</p>
-            <div className="meta">
-              <p><strong>by:</strong> {option.creator} </p>
-              <p><strong>uses:</strong> {option.uses} </p>
-              <p><strong>type:</strong> {option.component_type} </p>
-              <p><strong>weight:</strong> {option.weight} </p>
-              <p><strong>printTime:</strong> {option.print_time} </p>
-            </div>
+          <div className="device" value={option.id} key={option.name}>
+            <div className="device-img" onClick={() => this.props.updateMeasurementsAndTds(option.id)} style={{ backgroundImage: 'url(' + option.icon + ")" }}></div>
+            <h2 onClick={() => this.props.updateMeasurementsAndTds(option.id)} >{option.name}</h2>
+            <p className="show-more" onClick={this.toggleMeta}>show more <span className={this.state.showMeta ? "up" : "down"}></span></p>
+            <MetaToggle showMeta={this.state.showMeta} option={option}/>
           </div>
         );
       });
