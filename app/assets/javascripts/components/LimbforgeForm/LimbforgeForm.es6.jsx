@@ -141,7 +141,7 @@ class LimbforgeForm extends React.Component {
         TD: this.state.specs.TD
       });
       console.log('sending parameters as '+data)
-      var form = $('<form method="GET" action="http://fusion360.io/api/limbforge">');
+      var form = $('<form method="GET" action="http://lf.fusion360.io/api/limbforge">');
       form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
       $('body').append(form);
       form.submit();
