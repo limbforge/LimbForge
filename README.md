@@ -1,5 +1,5 @@
 ## LimbForge Web App
-Check it out live [HERE](http://limbforge.herokuapp.com/)
+Check it out live [HERE](http://limbforge-demo.herokuapp.com/)
 
 ### GETTING APP STARTED ON LOCAL
 
