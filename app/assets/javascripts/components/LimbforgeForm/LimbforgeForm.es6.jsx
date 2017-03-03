@@ -135,7 +135,7 @@ class LimbforgeForm extends React.Component {
     return new Promise((resolve, reject) => {
       let data = JSON.stringify({
         component: this.state.specs.component,
-        side: this.state.specs.side,
+        orientation: this.state.specs.side,
         C4: this.state.specs.C4,
         L1: this.state.specs.L1,
         TD: this.state.specs.TD
