@@ -22,12 +22,15 @@ Rails.application.configure do
   #     s3_region: ENV.fetch('AWS_REGION'),
   #   }
   # }
-  
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+
+  binding.pry
+  config.action_mailer.default_url_options = { :host => request.host }
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
