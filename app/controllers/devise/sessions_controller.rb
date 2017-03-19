@@ -14,13 +14,13 @@ class Devise::SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create
-    if verify_recaptcha
+    if is_spam(params)
+      redirect_to root
+    else
       self.resource = warden.authenticate!(auth_options)
       sign_in(resource_name, resource)
       yield resource if block_given?
       respond_with resource, location: after_sign_in_path_for(resource)
-    else
-      redirect_to root_path
     end
   end
 
@@ -77,5 +77,9 @@ class Devise::SessionsController < DeviseController
       format.all { head :no_content }
       format.any(*navigational_formats) { redirect_to after_sign_out_path_for(resource_name) }
     end
+  end
+
+  def is_spam(params)
+    params[:user][:nickname].length > 0
   end
 end

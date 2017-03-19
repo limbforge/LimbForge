@@ -13,26 +13,25 @@
 }
 
 body{
-  &#pages{
-    background-color: $black;
-  }
+  background-color: $black;
 }
 
 //LINKS
 
 a{
-  border-bottom: 3px solid $camero-regular;
-  box-shadow: inset 0 -2px 0 $camero-regular;
+  border-bottom: 3px solid $blue;
+  box-shadow: inset 0 -2px 0 $blue;
   color: $base-font-color;
   &:hover{
     color: $base-font-color;
-    background-color: $camero-regular;
+    background-color: $blue;
   }
 }
 
 //BASE STYLES
 html{
-  color: $base-font-color;
+  background-color: $black;
+  color: $white;
   font-family: $base-font-family;
   p{
     font-family: $base-font-family;
@@ -41,7 +40,6 @@ html{
     line-height: $base-line-height;
     .link{
       color: $white;
-      background: $moonbeam-dark;
       border-bottom: 0px;
       box-shadow: none;
       padding: $standard-padding/6;
@@ -57,7 +55,6 @@ html{
     letter-spacing: $base-h-letter-spacing;
   }
   body{
-    margin-top: 85px;
     &#pages{
       &.index{
         margin-top: 0;
@@ -86,14 +83,12 @@ button{
   width: 100%;
   letter-spacing: $base-letter-spacing;
   &.cta{
-    background-color: $camero-regular;
-    border-bottom: $standard-padding/3 solid $camero-dark;
+    background-color: $blue;
   }
 }
 
 //FOOTER
 footer{
-  background-color: $moonbeam-dark;
   padding: $standard-padding*2 0;
   ul{
     display: block;
@@ -105,7 +100,7 @@ footer{
     }
   }
   .circle{
-    background-color: $ocean-regular;
+    background-color: $blue;
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -114,7 +109,6 @@ footer{
 }
 #lower-footer{
   color: $light-gray;
-  background-color: $moonbeam-darker;
   text-align: center;
   padding: $standard-padding;
   p{
@@ -312,7 +306,7 @@ select{
     &:hover{
       background: none;
       text-decoration: none;
-      color: $camero-regular;
+      color: $blue;
       text-decoration: none;
     }
   }
@@ -320,7 +314,7 @@ select{
     &.logo{
       max-width: 50px;
       position: relative;
-      fill: $camero-regular;
+      fill: $blue;
       top: $standard-padding/2;
       float: left;
       left: $standard-padding/2;

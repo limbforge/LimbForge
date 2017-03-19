@@ -332,6 +332,7 @@ class LimbforgeForm extends React.Component {
         <div id="limbforge">
           <img className="logo" src={this.props.logo_img} />
           <h1 id="title">LIMBFORGE</h1>
+          <a href={this.props.sign_out_path} data-method="delete"> sign out </a>
           <NameArea
             gender={this.state.specs.gender}
             availableAreas={this.state.availableAreas}

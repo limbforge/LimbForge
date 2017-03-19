@@ -4,19 +4,9 @@
 $blue:            #1578b5;
 $gray:            #b3b4b4;
 
-//old style guide colors
-$moonbeam-darker: #0b1830;
-$moonbeam-dark:   #0e2045;
-$moonbeam-regular:#224269;
-$moonbeam-light:  #a0abc2;
-$ocean-dark:      #10b4ac;
-$ocean-regular:   #61c5bc;
-$ocean-light:     #ea688a;
-$camero-dark:     #ce3a61;
-$camero-regular:  #ef3e66;
-$camero-light:    #f3c4cf;
 //other colors
 $white:           #ffffff;
+$off-white:       #f3f3f3;
 $dark-gray:       #1c1d22;
 $regular-gray:    #2a2b30;
 $light-gray:      #bdbdbd;
@@ -34,10 +24,12 @@ $base-letter-spacing:     $standard-padding/10;
 //headers
 $base-h-font-family:    "din-2014";
 $base-h-letter-spacing: $standard-padding/30;
+$base-h-font-size:      20px;
 //paragraphs
 $base-font-family:      "freight-sans-pro";
 $base-p-font-size:      18px;
 $base-p-letter-spacing: $standard-padding/30;
+$mobile-p-font-size:    16px;
 
 
 // BREAKPOINTS
