@@ -4,9 +4,13 @@ class Devise::RegistrationsController < DeviseController
 
   # GET /resource/sign_up
   def new
-    build_resource({})
-    yield resource if block_given?
-    respond_with resource
+    if current_user
+      redirect_to limbforge_path
+    else
+      build_resource({})
+      yield resource if block_given?
+      respond_with resource
+    end
   end
 
   # POST /resource
