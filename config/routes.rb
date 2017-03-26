@@ -11,7 +11,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'pages#index'
+
+  devise_scope :user do
+    authenticated :user do
+      root 'pages#limbforge', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
 
   get '/dashboard' => 'pages#dashboard', as: :admin_dashboard
   get '/limbforge' => 'pages#limbforge', as: :limbforge

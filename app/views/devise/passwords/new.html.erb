@@ -1,17 +1,19 @@
-<div class="container">
-  <div class="form-container">
-    <h2>Forgot your password?</h2>
+<div id='devise' class="container">
+  <div class="form-container center password">
+    <a class="blue-txt home" href='http://enablecommunityfoundation.org/'>home</a>
+    <a class="blue-txt new-account" href="<%= new_session_path(resource_name) %>"> login</a>
+    <img src="<%= asset_path('brand/logo.svg')%>">
+    <p class="header">Limbforge_password_reset</p>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <%= devise_error_messages! %>
 
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.email_field :email, placeholder: 'email', autocomplete: "off" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Email me instructions" %>
+        <%= f.submit "Email me instructions", class: 'password-reset' %>
       </div>
     <% end %>
 

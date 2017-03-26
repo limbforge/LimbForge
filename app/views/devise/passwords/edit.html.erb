@@ -1,19 +1,20 @@
-<div class="container">
-  <div class="form-container">
-    <h2>Change your password</h2>
+<div id='devise' class="container">
+  <div class="form-container center password-reset">
+    <a class="blue-txt home" href='http://enablecommunityfoundation.org/'>home</a>
+    <a class="blue-txt new-account" href="<%= new_session_path(resource_name) %>"> login</a>
+    <img src="<%= asset_path('brand/logo.svg')%>">
+    <p class="header">Limbforge_password_edit</p>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
       <%= f.hidden_field :reset_password_token %>
 
       <div class="field">
-        <%= f.label :password, "New password" %><br />
-        <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+        <%= f.password_field :password, autofocus: true, placeholder: 'password', autocomplete: "off" %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation, "Confirm new password" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        <%= f.password_field :password_confirmation, placeholder: 'password confirmation', autocomplete: "off" %>
       </div>
 
       <div class="actions">
