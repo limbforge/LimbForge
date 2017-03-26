@@ -11,6 +11,7 @@ class LimbforgeForm extends React.Component {
     this.state = {
       components: undefined,
       tds: undefined,
+      isLoading: false,
       measurements: undefined,
       showNameArea: true,
       showAmputationLevelArea: false,
@@ -64,6 +65,7 @@ class LimbforgeForm extends React.Component {
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
     this.updateSpecs = this.updateSpecs.bind(this);
     this.updateComponentSpec = this.updateComponentSpec.bind(this);
+    this.updateLoading = this.updateLoading.bind(this);
   }
   updateComponentSpec(component_id){
     var newState = this.state;
@@ -108,6 +110,15 @@ class LimbforgeForm extends React.Component {
     });
   }
 
+  updateLoading(){
+    if (this.state.isLoading){
+      this.setState({isLoading: false});
+    }
+    else{
+      this.setState({isLoading: true});
+    }
+  }
+
   getComponents(componentType) {
     const url = this.props.components_search_path + "?query="+componentType;
     $.ajax({
@@ -140,11 +151,65 @@ class LimbforgeForm extends React.Component {
         L1: this.state.specs.L1,
         TD: this.state.specs.TD
       });
-      console.log('sending parameters as '+data)
+      let params = {
+        component: this.state.specs.component,
+        orientation: this.state.specs.side,
+        C4: this.state.specs.C4,
+        L1: this.state.specs.L1,
+        TD: this.state.specs.TD,
+      };
+      // console.log('sending parameters as '+data)
+      // const url = 'http://lf.fusion360.io/api/limbforge'
+      // + `?parameters="${data}"`;
+      // console.log('the url', url);
+      // + `?component=${this.state.specs.component}`
+      // + `&orientation=${this.state.specs.side}`
+      // + `&C4=${this.state.specs.C4}`
+      // + `&L1=${this.state.specs.L1}`
+      // + `&TD=${this.state.specs.TD}`;
+
+      // fetch(url, {
+      //   method: 'GET',
+      //   mode: 'no-cors',
+      //   headers: new Headers({
+      //     'Accept': '*/*',
+      //     'Content-Type': 'text/plain',
+      //   }),
+      // })
+      // .then(() => {
+      //   console.log('eyyy');
+      // })
+      // .catch((er) => {
+      //   console.log('dang', er);
+      // })
       var form = $('<form method="GET" action="http://lf.fusion360.io/api/limbforge">');
       form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
       $('body').append(form);
-      form.submit();
+
+
+      //form.submit();
+      debugger;
+      const url = 'http://lf.fusion360.io/api/limbforge?' + form.serialize();
+      fetch(url, {
+        mode: 'no-cors',
+      })
+      .then(() => {
+        console.log('eyy');
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+      // fetch('http://lf.fusion360.io/api/limbforge', {
+      //   method: 'get',
+      //   mode: 'no-cors',
+      //   params: form.serialize(),
+      //   headers: new Headers({
+      //     'Content-Type': 'text/plain'
+      //   })
+      // })
+      //   form.submit(function() {
+      //     console.log('cool');
+      //   });
     });
   }
 
@@ -157,10 +222,8 @@ class LimbforgeForm extends React.Component {
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
     const zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + this.state.specs.side + "_" + formatted_date + ".zip";
     const stls = [];
-
-    this.getStls(stls).then(() => {
-      console.log('it worked!');
-    });
+    this.updateLoading();
+    this.getStls(stls);
   }
 
   translateValueL1(input) {
@@ -385,6 +448,10 @@ class LimbforgeForm extends React.Component {
         <MeasurementModal
           imageURL={imageURL}
           measurements={this.state.measurements}
+        />
+        <LimbforgeFooter
+          loadingImg={this.props.images.loading_img}
+          isLoading={this.state.isLoading}
         />
       </div>
     );
