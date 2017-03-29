@@ -141,77 +141,22 @@ class LimbforgeForm extends React.Component {
     });
   }
 
-  //GET STLS
   getStls(stls) {
-    return new Promise((resolve, reject) => {
-      let data = JSON.stringify({
-        component: this.state.specs.component,
-        orientation: this.state.specs.side,
-        C4: this.state.specs.C4,
-        L1: this.state.specs.L1,
-        TD: this.state.specs.TD
-      });
-      let params = {
-        component: this.state.specs.component,
-        orientation: this.state.specs.side,
-        C4: this.state.specs.C4,
-        L1: this.state.specs.L1,
-        TD: this.state.specs.TD,
-      };
-      // console.log('sending parameters as '+data)
-      // const url = 'http://lf.fusion360.io/api/limbforge'
-      // + `?parameters="${data}"`;
-      // console.log('the url', url);
-      // + `?component=${this.state.specs.component}`
-      // + `&orientation=${this.state.specs.side}`
-      // + `&C4=${this.state.specs.C4}`
-      // + `&L1=${this.state.specs.L1}`
-      // + `&TD=${this.state.specs.TD}`;
-
-      // fetch(url, {
-      //   method: 'GET',
-      //   mode: 'no-cors',
-      //   headers: new Headers({
-      //     'Accept': '*/*',
-      //     'Content-Type': 'text/plain',
-      //   }),
-      // })
-      // .then(() => {
-      //   console.log('eyyy');
-      // })
-      // .catch((er) => {
-      //   console.log('dang', er);
-      // })
-      var form = $('<form method="GET" action="http://lf.fusion360.io/api/limbforge">');
-      form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
-      $('body').append(form);
-
-
-      //form.submit();
-      debugger;
-      const url = 'http://lf.fusion360.io/api/limbforge?' + form.serialize();
-      fetch(url, {
-        mode: 'no-cors',
-      })
-      .then(() => {
-        console.log('eyy');
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-      // fetch('http://lf.fusion360.io/api/limbforge', {
-      //   method: 'get',
-      //   mode: 'no-cors',
-      //   params: form.serialize(),
-      //   headers: new Headers({
-      //     'Content-Type': 'text/plain'
-      //   })
-      // })
-      //   form.submit(function() {
-      //     console.log('cool');
-      //   });
+  return new Promise((resolve, reject) => {
+    let data = JSON.stringify({
+      component: this.state.specs.component,
+      orientation: this.state.specs.side,
+      C4: this.state.specs.C4,
+      L1: this.state.specs.L1,
+      TD: this.state.specs.TD
     });
-  }
+    console.log('sending parameters as '+data)
+    var form = $('<form method="GET" action="http://lf.fusion360.io/api/limbforge">');
+    form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
+    $('body').append(form);
+    form.submit();
+  });
+}
 
   createZip() {
     if (typeof this.state.specs.L1 != "number" || this.state.specs.L1 > 320 || this.state.specs.L1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
