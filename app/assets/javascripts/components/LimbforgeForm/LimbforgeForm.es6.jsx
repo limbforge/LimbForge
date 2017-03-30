@@ -142,7 +142,6 @@ class LimbforgeForm extends React.Component {
   }
 
   getStls(stls) {
-  return new Promise((resolve, reject) => {
     let data = JSON.stringify({
       component: this.state.specs.component,
       orientation: this.state.specs.side,
@@ -150,13 +149,19 @@ class LimbforgeForm extends React.Component {
       L1: this.state.specs.L1,
       TD: this.state.specs.TD
     });
-    console.log('sending parameters as '+data)
-    var form = $('<form method="GET" action="http://lf.fusion360.io/api/limbforge">');
-    form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
-    $('body').append(form);
-    form.submit();
-  });
-}
+    debugger;
+    $.ajax({
+      url: "http://lf.fusion360.io/api/limbforge",
+      type: 'GET',
+      data: {parameters:data},
+      success: (data) => {
+        this.updateLoading();
+      },
+      error: (error) => {
+        console.log('getTD error', error, data);
+      }
+    })
+  }
 
   createZip() {
     if (typeof this.state.specs.L1 != "number" || this.state.specs.L1 > 320 || this.state.specs.L1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
