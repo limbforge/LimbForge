@@ -24,7 +24,7 @@ class TdArea extends React.Component {
     : '';
 
     return (
-      <div className="tab-padding">
+      <div className="tab-padding td-area">
         {tdArea}
       </div>
     )

@@ -165,11 +165,162 @@ p{
       margin-top: 0px;
       margin-bottom: -40px;
     }
+    &.measurement-icon{
+      display: none;
+      @media (max-width: $screen-xs-max) {
+        display: block;
+      }
+    }
   }
 }
 
 .measurement-container{
   padding-left: 55px;
+  input{
+   padding: $standard-padding/6;
+   max-width: 80px;
+   position: relative;
+   font-size: 16px;
+   @media (max-width: $screen-xs-max) {
+     top: auto !important;
+     right: auto !important;
+     left: auto !important;
+   }
+   &#C1{
+     &.left{
+       top: -99px;
+       right: -188px;
+       &.Transradial{
+         top: -173px;
+         right: 46px;
+       }
+     }
+     &.right{
+       top: -186px;
+       right: -146px;
+     }
+   }
+   &#C2{
+     &.left{
+       top: -176px;
+       right: -187px;
+       &.Transradial{
+         top: -168px;
+         left: -45px;
+       }
+     }
+     &.right{
+       top: -177px;
+       right: -146px;
+     }
+   }
+   &#C3{
+     &.left{
+       top: -255px;
+       left: 186px;
+       &.Transradial{
+         top: -162px;
+         left: -46px;
+       }
+     }
+     &.right{
+       top: -163px;
+       left: -45px;
+     }
+   }
+   &#C4{
+     &.left{
+       top: -321px;
+       right: 48px;
+       &.Transradial{
+         top: -256px;
+         right: -364px;
+       }
+     }
+     &.right{
+       top: -319px;
+       right: -374px;
+     }
+   }
+   &#C5{
+     &.left{
+       top: -403px;
+       left: -58px;
+     }
+     &.right{
+       top: -403px;
+       left: -58px;
+     }
+   }
+   &#C6{
+     &.left{
+       top: -490px;
+       left: -58px;
+     }
+     &.right{
+       top: -490px;
+       left: -58px;
+     }
+   }
+   &#C7{
+     &.left{
+       top: -476px;
+       right: -359px;
+     }
+     &.right{
+       top: -476px;
+       right: -359px;
+     }
+   }
+   &#L1{
+     &.left{
+       top: -90px;
+       left: -132px;
+       &.Transradial{
+         top: -90px;
+         left: -133px;
+       }
+     }
+     &.right{
+       top: -144px;
+       left: 105px;
+     }
+   }
+   &#L2{
+     &.left{
+       top: -265px;
+       right: 79px;
+       &.Transradial{
+         top: -209px;
+         right: 97px;
+       }
+     }
+     &.right{
+       top: -262px;
+       right: 118px;
+     }
+   }
+   &#L3{
+     &.left{
+       top: -406px;
+       right: 44px;
+     }
+     &.right{
+       top: -406px;
+       right: 44px;
+     }
+   }
+   &#L4{
+     &.left{
+       top: -436px;
+       right: 156px;
+     }
+     &.right{
+       top: -436px;
+       right: 156px;
+     }
+   }
+  }
 }
 
 label{

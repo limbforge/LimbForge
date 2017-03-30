@@ -37,13 +37,13 @@ class NameArea extends React.Component {
           <div className="col-xs-6">
             <label>
               <input onChange={this.props.updateGender} type="radio" name="fb" value="male" checked={selected_gender == "male" ? "checked" : ""}/>
-              <img src={selected_gender == "male" ? this.props.man_diagram_selected : this.props.man_diagram }/>
+              <img  width="130px" src={selected_gender == "male" ? this.props.man_diagram_selected : this.props.man_diagram }/>
             </label>
           </div>
           <div className="col-xs-6">
             <label>
               <input onChange={this.props.updateGender} type="radio" name="fb" value="female" checked={selected_gender == "female" ? "checked" : ""}/>
-              <img src={selected_gender == "female" ? this.props.woman_diagram_selected : this.props.woman_diagram  }/>
+              <img width="130px" src={selected_gender == "female" ? this.props.woman_diagram_selected : this.props.woman_diagram  }/>
             </label>
           </div>
         </div>
