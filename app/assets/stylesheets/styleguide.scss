@@ -85,6 +85,10 @@ button{
   &.cta{
     background-color: $blue;
   }
+  &.close{
+    float: right;
+    width: 50px;
+  }
 }
 
 //FOOTER
