@@ -33,7 +33,6 @@ function init() {
 
   var grid = new THREE.GridHelper( 25, 50, 0x0f2045, 0x0f2045 );
   grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
-  scene.add(grid);
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setClearColor( 0xffffff );

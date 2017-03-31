@@ -11,6 +11,7 @@ class LimbforgeForm extends React.Component {
     this.state = {
       components: undefined,
       tds: undefined,
+      isLoading: false,
       measurements: undefined,
       showNameArea: true,
       showAmputationLevelArea: false,
@@ -63,6 +64,7 @@ class LimbforgeForm extends React.Component {
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
     this.updateSpecs = this.updateSpecs.bind(this);
     this.updateComponentSpec = this.updateComponentSpec.bind(this);
+    this.updateLoading = this.updateLoading.bind(this);
   }
   updateComponentSpec(component_id){
     var newState = this.state;
@@ -107,6 +109,15 @@ class LimbforgeForm extends React.Component {
     });
   }
 
+  updateLoading(){
+    if (this.state.isLoading){
+      this.setState({isLoading: false});
+    }
+    else{
+      this.setState({isLoading: true});
+    }
+  }
+
   getComponents(componentType) {
     const url = this.props.components_search_path + "?query="+componentType;
     $.ajax({
@@ -129,22 +140,22 @@ class LimbforgeForm extends React.Component {
     });
   }
 
-  //GET STLS
   getStls(stls) {
-    return new Promise((resolve, reject) => {
-      let data = JSON.stringify({
-        component: this.state.specs.component,
-        orientation: this.state.specs.side,
-        C4: this.state.specs.C4,
-        L1: this.state.specs.L1,
-        TD: this.state.specs.TD
-      });
-      console.log('sending parameters as '+data)
-      var form = $('<form method="GET" action="http://lf.fusion360.io/api/limbforge">');
-      form.append($("<input type='hidden' name='parameters' value='"+data+"'>"));
-      $('body').append(form);
-      form.submit();
-    });
+    var xhr = new XMLHttpRequest();
+
+    var url = 'https://lf.fusion360.io/api/limbforge?parameters=%7B%22component%22%3A1%2C%22orientation%22%3A%22left%22%2C%22C4%22%3A250%2C%22L1%22%3A250%2C%22TD%22%3A%22phone%22%7D';
+    xhr.open('GET', url, true);
+    xhr.responseType = "blob";
+    this.updateLoading();
+    var new_this = this;
+    xhr.onreadystatechange = function (){
+      if (xhr.readyState === 4) {
+        var blob = xhr.response;
+        new_this.updateLoading();
+        saveAs(blob, "filename.zip");
+      }
+    };
+    xhr.send();
   }
 
   createZip() {
@@ -156,10 +167,8 @@ class LimbforgeForm extends React.Component {
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
     const zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + this.state.specs.side + "_" + formatted_date + ".zip";
     const stls = [];
-
-    this.getStls(stls).then(() => {
-      console.log('it worked!');
-    });
+    this.updateLoading();
+    this.getStls(stls);
   }
 
   translateValueL1(input) {
@@ -381,12 +390,15 @@ class LimbforgeForm extends React.Component {
           <SubmitArea
             createZip={this.createZip}
             measurements={this.state.measurements}
+            isLoading={this.state.isLoading}
+            loadingImg={this.props.images.loading_img}
           />
         </div>
         <MeasurementModal
           imageURL={imageURL}
           measurements={this.state.measurements}
         />
+        <LimbforgeFooter />
       </div>
     );
   }

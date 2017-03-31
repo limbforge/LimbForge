@@ -1,4 +1,5 @@
 <div id='devise' class="container">
+  <%= devise_error_messages! %>
   <div class="form-container center password">
     <a class="blue-txt home" href='http://enablecommunityfoundation.org/'>home</a>
     <a class="blue-txt new-account" href="<%= new_session_path(resource_name) %>"> login</a>
@@ -6,7 +7,6 @@
     <p class="header">Limbforge_password_reset</p>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= devise_error_messages! %>
 
       <div class="field">
         <%= f.email_field :email, placeholder: 'email', autocomplete: "off" %>

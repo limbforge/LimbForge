@@ -13,6 +13,13 @@
   }
 }
 
+.loading-gif{
+  width: $standard-padding;
+  position: absolute;
+  left: 400px;
+  top: 7px;
+}
+
 #limbforge-links{
   position: absolute;
   color: $white;
