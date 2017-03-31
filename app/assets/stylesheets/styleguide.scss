@@ -188,136 +188,204 @@ p{
    }
    &#C1{
      &.left{
-       top: -99px;
-       right: -188px;
        &.Transradial{
          top: -173px;
          right: 46px;
        }
+       &.Transhumeral{
+         top: -83px;
+         right: -188px;
+       }
      }
      &.right{
-       top: -186px;
-       right: -146px;
+       &.Transradial{
+         top: -96px;
+         right: -360px;
+       }
+       &.Transhumeral{
+         top: -82px;
+         right: -132px;
+       }
      }
    }
    &#C2{
      &.left{
-       top: -176px;
-       right: -187px;
        &.Transradial{
          top: -168px;
          left: -45px;
        }
+       &.Transhumeral{
+         top: -155px;
+         right: -187px;
+       }
      }
      &.right{
-       top: -177px;
-       right: -146px;
+       &.Transradial{
+         top: -170px;
+         right: -360px;
+       }
+       &.Transhumeral{
+         top: -155px;
+         right: -132px;
+       }
      }
    }
    &#C3{
      &.left{
-       top: -255px;
-       left: 186px;
        &.Transradial{
          top: -162px;
          left: -46px;
        }
+       &.Transhumeral{
+         top: -227px;
+         left: 186px;
+       }
      }
      &.right{
-       top: -163px;
-       left: -45px;
+       &.Transradial{
+         top: -245px;
+         left: 360px;
+       }
+       &.Transhumeral{
+         top: -227px;
+         left: 132px;
+       }
      }
    }
    &#C4{
      &.left{
-       top: -321px;
-       right: 48px;
        &.Transradial{
          top: -256px;
          right: -364px;
        }
+       &.Transhumeral{
+         top: -290px;
+         right: 32px;
+       }
      }
      &.right{
-       top: -319px;
-       right: -374px;
+       &.Transradial{
+         right: 41px;
+         top: -257px;
+       }
+       &.Transhumeral{
+         top: -289px;
+         right: -353px;
+       }
      }
    }
    &#C5{
      &.left{
-       top: -403px;
-       left: -58px;
+       &.Transhumeral{
+         top: -363px;
+         left: -32px;
+       }
      }
      &.right{
-       top: -403px;
-       left: -58px;
+       &.Transhumeral{
+         top: -366px;
+         left: 352px;
+       }
      }
    }
    &#C6{
      &.left{
-       top: -490px;
-       left: -58px;
+       &.Transhumeral{
+         top: -443px;
+         left: -32px;
+       }
      }
      &.right{
-       top: -490px;
-       left: -58px;
+       &.Transhumeral{
+         top: -445px;
+         left: 352px;
+       }
      }
    }
    &#C7{
      &.left{
-       top: -476px;
-       right: -359px;
+       &.Transhumeral{
+         top: -439px;
+         right: -336px;
+       }
      }
      &.right{
-       top: -476px;
-       right: -359px;
+       &.Transhumeral{
+         top: -439px;
+         right: 23px;
+       }
      }
    }
    &#L1{
      &.left{
-       top: -90px;
-       left: -132px;
        &.Transradial{
          top: -90px;
          left: -133px;
        }
+       &.Transhumeral{
+         top: -122px;
+         left: -295px;
+       }
      }
      &.right{
-       top: -144px;
-       left: 105px;
+       &.Transradial{
+         left: -77px;
+         top: -97px;
+       }
+       &.Transhumeral{
+         top: -122px;
+         left: 88px;
+       }
      }
    }
    &#L2{
      &.left{
-       top: -265px;
-       right: 79px;
        &.Transradial{
          top: -209px;
          right: 97px;
        }
+       &.Transhumeral{
+         top: -230px;
+         right: 79px;
+       }
      }
      &.right{
-       top: -262px;
-       right: 118px;
+       &.Transradial{
+         top: -212px;
+         right: 114px;
+       }
+       &.Transhumeral{
+         top: -231px;
+         right: 132px;
+       }
      }
    }
    &#L3{
      &.left{
-       top: -406px;
-       right: 44px;
+       &.Transhumeral{
+         top: -345px;
+         right: 121px;
+       }
      }
      &.right{
-       top: -406px;
-       right: 44px;
+       &.Transhumeral{
+         top: -362px;
+         right: 44px;
+       }
      }
    }
    &#L4{
      &.left{
-       top: -436px;
-       right: 156px;
+       &.Transhumeral{
+         top: -388px;
+         right: 3px;
+       }
      }
      &.right{
-       top: -436px;
-       right: 156px;
+       &.Transhumeral{
+         top: -394px;
+         right: 156px;
+       }
      }
    }
   }
