@@ -144,7 +144,7 @@ class LimbforgeForm extends React.Component {
   getStls(stls) {
     var xhr = new XMLHttpRequest();
 
-    var url = 'http://lf.fusion360.io/api/limbforge?parameters=%7B%22component%22%3A1%2C%22orientation%22%3A%22left%22%2C%22C4%22%3A250%2C%22L1%22%3A250%2C%22TD%22%3A%22phone%22%7D';
+    var url = 'https://lf.fusion360.io/api/limbforge?parameters=%7B%22component%22%3A1%2C%22orientation%22%3A%22left%22%2C%22C4%22%3A250%2C%22L1%22%3A250%2C%22TD%22%3A%22phone%22%7D';
     xhr.open('GET', url, true);
     xhr.responseType = "blob";
     this.updateLoading();
@@ -152,7 +152,6 @@ class LimbforgeForm extends React.Component {
     xhr.onreadystatechange = function (){
       if (xhr.readyState === 4) {
         var blob = xhr.response;
-        console.log('All done, VanillaJS');
         new_this.updateLoading();
         saveAs(blob, "filename.zip");
       }
