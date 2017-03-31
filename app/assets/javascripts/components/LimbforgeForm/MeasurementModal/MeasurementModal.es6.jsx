@@ -3,6 +3,11 @@ class MeasurementModal extends React.Component {
     super(props);
   }
   render() {
+    var style = {
+      maxWidth: '400px',
+      display: 'block',
+      margin: '0 auto',
+    };
     var modal = this.props.measurements == undefined ?
     <div>stuff goes here</div> :
     <div className="modal-dialog">
@@ -12,10 +17,7 @@ class MeasurementModal extends React.Component {
           <h4 className="modal-title">How to measure</h4>
         </div>
         <div className="modal-body">
-          <img src={this.props.imageURL}/>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+          <img style={style} src={this.props.imageURL}/>
         </div>
       </div>
     </div>;

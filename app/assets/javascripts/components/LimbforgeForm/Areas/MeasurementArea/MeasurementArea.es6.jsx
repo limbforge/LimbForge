@@ -30,9 +30,9 @@ class MeasurementArea extends React.Component {
     var cMeasurementInputs = C_measurements === undefined ? "" : C_measurements.map((option) => {
       return (
         <div key={option.name}>
-          <p className="label nested-label c">{option.name}</p>
+          <p className="label nested-label measurement-icon c">{option.name}</p>
           <div className="measurement-container">
-            <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range} name={option.name}/>
+            <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.Xcm"} name={option.name}/>
           </div>
         </div>
       );
@@ -40,17 +40,20 @@ class MeasurementArea extends React.Component {
     var lMeasurementInputs = L_measurements == undefined ? "" : L_measurements.map((option) => {
       return (
         <div key={option.name}>
-          <p className="label nested-label l">{option.name}</p>
+          <p className="label nested-label measurement-icon l">{option.name}</p>
           <div className="measurement-container">
-            <input id={option.name} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={option.lower_range + "-" + option.upper_range } name={option.name}/>
+            <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.Xcm"} name={option.name}/>
           </div>
         </div>
       );
     });
+    var style = {
+      height: '528px'
+    };
     var measurementArea = this.props.measurements === undefined ? "measurements" :
-      <div className="tab-padding">
+      <div className="tab-padding" style={style}>
         <div className="row">
-          <div>
+          <div style={style}>
             <img className="documentation" data-toggle="modal" data-target="#measurementModal" src={this.props.imageURL}/>
             <div className="col-xs-6">
               {cMeasurementInputs}
@@ -60,7 +63,6 @@ class MeasurementArea extends React.Component {
             </div>
           </div>
         </div>
-        <p className="note">* All measurements are in cm</p>
       </div>;
 
       return measurementArea;

@@ -53,7 +53,6 @@ class LimbforgeForm extends React.Component {
         },
       }
     };
-
     this.createZip = this.createZip.bind(this);
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
@@ -236,7 +235,7 @@ class LimbforgeForm extends React.Component {
         loader.load(s3url, (geometry) => {
           const mesh = new THREE.Mesh( geometry, material );
           mesh.name = 'terminalDevice';
-          mesh.position.set( 0, 0, 3.3 );
+          mesh.position.set( 5, 0, 3.3 );
           mesh.rotation.set(0, Math.PI, -Math.PI/2 );
           mesh.scale.set( .02, .02, .02 );
 
@@ -260,9 +259,9 @@ class LimbforgeForm extends React.Component {
           const mesh = new THREE.Mesh( geometry, material );
           mesh.name = 'device';
           if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
-            mesh.position.set( 0, 0, 0.0 );
+            mesh.position.set( 5, 0, 0.0 );
           } else {
-            mesh.position.set( 0, 0, 3.3 );
+            mesh.position.set( 5, 0, 3.3 );
           }
 
           mesh.rotation.set( 0, 0, 0 );
@@ -370,6 +369,8 @@ class LimbforgeForm extends React.Component {
             updateAvailableAreas={this.updateAvailableAreas}
             updateSelectedArea={this.updateSelectedArea}
             imageURL={imageURL}
+            side={this.state.specs.side}
+            amputationLevel={this.state.specs.amputationLevel}
             measurements={this.state.measurements}
             updateDisplay={this.updateDisplay}
           />

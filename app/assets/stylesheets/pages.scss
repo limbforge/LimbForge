@@ -22,10 +22,13 @@
   overflow-x: hidden;
   height: 100vh;
   background-color: $white;
-  width: 392px;
+  width: 600px;
   padding: $standard-padding/2;
   position:  fixed;
   z-index: 2;
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
   .fname{
     padding-right: 0;
     input{
@@ -83,11 +86,14 @@
     }
   }
   img{
-    width: 100%;
+    max-width: 350px;
+    display: block;
+    margin: 0 auto;
     &.documentation{
       cursor: pointer;
       padding: 0 $standard-padding/2 $standard-padding/2;
       margin-bottom: -50px;
+      height: 440px;
     }
     &.logo{
       max-width: 27px;
@@ -107,6 +113,12 @@
     border: none;
     padding: $standard-padding - 10;
     letter-spacing: $base-letter-spacing;
+  }
+}
+.td-area{
+  margin-top: -140px;
+  @media (max-width: $screen-sm-max) {
+    margin-top: 0px;
   }
 }
 

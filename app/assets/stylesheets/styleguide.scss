@@ -85,6 +85,10 @@ button{
   &.cta{
     background-color: $blue;
   }
+  &.close{
+    float: right;
+    width: 50px;
+  }
 }
 
 //FOOTER
@@ -165,11 +169,231 @@ p{
       margin-top: 0px;
       margin-bottom: -40px;
     }
+    &.measurement-icon{
+      display: none;
+      @media (max-width: $screen-xs-max) {
+        display: block;
+      }
+    }
   }
 }
 
 .measurement-container{
   padding-left: 55px;
+  input{
+   padding: $standard-padding/6;
+   max-width: 80px;
+   position: relative;
+   font-size: 16px;
+   height: 34px;
+   @media (max-width: $screen-xs-max) {
+     top: auto !important;
+     right: auto !important;
+     left: auto !important;
+   }
+   &#C1{
+     &.left{
+       &.Transradial{
+         top: -173px;
+         right: 46px;
+       }
+       &.Transhumeral{
+         top: -83px;
+         right: -188px;
+       }
+     }
+     &.right{
+       &.Transradial{
+         top: -96px;
+         right: -360px;
+       }
+       &.Transhumeral{
+         top: -82px;
+         right: -132px;
+       }
+     }
+   }
+   &#C2{
+     &.left{
+       &.Transradial{
+         top: -168px;
+         left: -45px;
+       }
+       &.Transhumeral{
+         top: -155px;
+         right: -187px;
+       }
+     }
+     &.right{
+       &.Transradial{
+         top: -170px;
+         right: -360px;
+       }
+       &.Transhumeral{
+         top: -155px;
+         right: -132px;
+       }
+     }
+   }
+   &#C3{
+     &.left{
+       &.Transradial{
+         top: -162px;
+         left: -46px;
+       }
+       &.Transhumeral{
+         top: -227px;
+         left: 186px;
+       }
+     }
+     &.right{
+       &.Transradial{
+         top: -245px;
+         left: 360px;
+       }
+       &.Transhumeral{
+         top: -227px;
+         left: 132px;
+       }
+     }
+   }
+   &#C4{
+     &.left{
+       &.Transradial{
+         top: -256px;
+         right: -364px;
+       }
+       &.Transhumeral{
+         top: -290px;
+         right: 32px;
+       }
+     }
+     &.right{
+       &.Transradial{
+         right: 41px;
+         top: -257px;
+       }
+       &.Transhumeral{
+         top: -289px;
+         right: -353px;
+       }
+     }
+   }
+   &#C5{
+     &.left{
+       &.Transhumeral{
+         top: -363px;
+         left: -32px;
+       }
+     }
+     &.right{
+       &.Transhumeral{
+         top: -366px;
+         left: 352px;
+       }
+     }
+   }
+   &#C6{
+     &.left{
+       &.Transhumeral{
+         top: -443px;
+         left: -32px;
+       }
+     }
+     &.right{
+       &.Transhumeral{
+         top: -445px;
+         left: 352px;
+       }
+     }
+   }
+   &#C7{
+     &.left{
+       &.Transhumeral{
+         top: -439px;
+         right: -336px;
+       }
+     }
+     &.right{
+       &.Transhumeral{
+         top: -439px;
+         right: 23px;
+       }
+     }
+   }
+   &#L1{
+     &.left{
+       &.Transradial{
+         top: -90px;
+         left: -133px;
+       }
+       &.Transhumeral{
+         top: -122px;
+         left: -295px;
+       }
+     }
+     &.right{
+       &.Transradial{
+         left: -77px;
+         top: -97px;
+       }
+       &.Transhumeral{
+         top: -122px;
+         left: 88px;
+       }
+     }
+   }
+   &#L2{
+     &.left{
+       &.Transradial{
+         top: -209px;
+         right: 97px;
+       }
+       &.Transhumeral{
+         top: -230px;
+         right: 79px;
+       }
+     }
+     &.right{
+       &.Transradial{
+         top: -212px;
+         right: 114px;
+       }
+       &.Transhumeral{
+         top: -231px;
+         right: 132px;
+       }
+     }
+   }
+   &#L3{
+     &.left{
+       &.Transhumeral{
+         top: -345px;
+         right: 121px;
+       }
+     }
+     &.right{
+       &.Transhumeral{
+         top: -362px;
+         right: 44px;
+       }
+     }
+   }
+   &#L4{
+     &.left{
+       &.Transhumeral{
+         top: -388px;
+         right: 3px;
+       }
+     }
+     &.right{
+       &.Transhumeral{
+         top: -394px;
+         right: 156px;
+       }
+     }
+   }
+  }
 }
 
 label{
