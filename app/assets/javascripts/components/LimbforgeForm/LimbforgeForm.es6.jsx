@@ -142,25 +142,22 @@ class LimbforgeForm extends React.Component {
   }
 
   getStls(stls) {
-    let data = JSON.stringify({
-      component: this.state.specs.component,
-      orientation: this.state.specs.side,
-      C4: this.state.specs.C4,
-      L1: this.state.specs.L1,
-      TD: this.state.specs.TD
-    });
-    debugger;
-    $.ajax({
-      url: "http://lf.fusion360.io/api/limbforge",
-      type: 'GET',
-      data: {parameters:data},
-      success: (data) => {
-        this.updateLoading();
-      },
-      error: (error) => {
-        console.log('getTD error', error, data);
+    var xhr = new XMLHttpRequest();
+
+    var url = 'http://lf.fusion360.io/api/limbforge?parameters=%7B%22component%22%3A1%2C%22orientation%22%3A%22left%22%2C%22C4%22%3A250%2C%22L1%22%3A250%2C%22TD%22%3A%22phone%22%7D';
+    xhr.open('GET', url, true);
+    xhr.responseType = "blob";
+    this.updateLoading();
+    var new_this = this;
+    xhr.onreadystatechange = function (){
+      if (xhr.readyState === 4) {
+        var blob = xhr.response;
+        console.log('All done, VanillaJS');
+        new_this.updateLoading();
+        saveAs(blob, "filename.zip");
       }
-    })
+    };
+    xhr.send();
   }
 
   createZip() {
@@ -393,16 +390,15 @@ class LimbforgeForm extends React.Component {
           <SubmitArea
             createZip={this.createZip}
             measurements={this.state.measurements}
+            isLoading={this.state.isLoading}
+            loadingImg={this.props.images.loading_img}
           />
         </div>
         <MeasurementModal
           imageURL={imageURL}
           measurements={this.state.measurements}
         />
-        <LimbforgeFooter
-          loadingImg={this.props.images.loading_img}
-          isLoading={this.state.isLoading}
-        />
+        <LimbforgeFooter />
       </div>
     );
   }
