@@ -141,9 +141,18 @@ class LimbforgeForm extends React.Component {
   }
 
   getStls(stls) {
-    var xhr = new XMLHttpRequest();
 
-    var url = 'https://lf.fusion360.io/api/limbforge?parameters=%7B%22component%22%3A1%2C%22orientation%22%3A%22left%22%2C%22C4%22%3A250%2C%22L1%22%3A250%2C%22TD%22%3A%22phone%22%7D';
+    let params = {
+      component: this.state.specs.component,
+      orientation: this.state.specs.side,
+      C4: this.state.specs.C4,
+      L1: this.state.specs.L1,
+      TD: this.state.specs.TD,
+    };
+    paramString = encodeURI(JSON.stringify(params));
+    var url = `https://lf.fusion360.io/api/limbforge?parameters=${paramString}`;
+
+    var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = "blob";
     this.updateLoading();
