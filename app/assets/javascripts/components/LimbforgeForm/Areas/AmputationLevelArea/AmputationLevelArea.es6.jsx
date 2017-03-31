@@ -38,13 +38,23 @@ class AmputationLevelArea extends React.Component {
     };
 
     const imagedivStyle = {
-      marginBottom: '-300px',
+      marginBottom: '60px',
+      minHeight: '448px',
+    };
+    const imagedivStyle2 = {
+      marginBottom: '40px',
     };
 
     const selectorStyle = {
       marginBottom: '-230px',
-      position: 'relative',
-      top: '-365px',
+      position: 'absolute',
+      top: '83',
+    };
+
+    const selectorStyle2 = {
+      marginBottom: '-230px',
+      position: 'absolute',
+      top: '110',
     };
 
     const selectedSide = {
@@ -122,7 +132,7 @@ class AmputationLevelArea extends React.Component {
     );
 
     const femaleSelect = (
-      <svg style={selectorStyle} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
+      <svg style={selectorStyle2} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
 
         <rect
           onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
@@ -198,7 +208,7 @@ class AmputationLevelArea extends React.Component {
             </form>
           </div>
         </div>
-        <div className="col-xs-12" style={imagedivStyle}>
+        <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
           <p className="label amputation">Select Amputation Level</p>
           <img id="limb-select-img" style={imageStyle} src={imageURL}/>
           {genderSelect}

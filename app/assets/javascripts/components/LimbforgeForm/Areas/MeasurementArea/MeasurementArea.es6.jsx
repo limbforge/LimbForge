@@ -48,10 +48,13 @@ class MeasurementArea extends React.Component {
         </div>
       );
     });
+    var style = {
+      minHeight: '528px'
+    };
     var measurementArea = this.props.measurements === undefined ? "measurements" :
       <div className="tab-padding">
         <div className="row">
-          <div>
+          <div style={style}>
             <img className="documentation" data-toggle="modal" data-target="#measurementModal" src={this.props.imageURL}/>
             <div className="col-xs-6">
               {cMeasurementInputs}
