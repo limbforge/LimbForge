@@ -28,7 +28,6 @@ class MeasurementArea extends React.Component {
     };
 
     var cMeasurementInputs = C_measurements === undefined ? "" : C_measurements.map((option) => {
-      debugger;
       return (
         <div key={option.name}>
           <p className="label nested-label measurement-icon c">{option.name}</p>
@@ -49,10 +48,10 @@ class MeasurementArea extends React.Component {
       );
     });
     var style = {
-      minHeight: '528px'
+      height: '528px'
     };
     var measurementArea = this.props.measurements === undefined ? "measurements" :
-      <div className="tab-padding">
+      <div className="tab-padding" style={style}>
         <div className="row">
           <div style={style}>
             <img className="documentation" data-toggle="modal" data-target="#measurementModal" src={this.props.imageURL}/>
