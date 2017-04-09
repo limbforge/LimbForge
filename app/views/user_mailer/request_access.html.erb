@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hey Admin,</p>
+    <p><%= @user.email %> wants access to the Limbforge tool. If you don't want to give them access please ignore this message.</p>
+    <p>If you do want to give them access and to notify them of their access, open your console and run these commands in order:</p>
+    </br>
+    </br>
+    <ul>
+      <li><p>heroku run rails console --app limbforge</p></li>
+      <li><p>user = User.find_by_email('<%= @user.email %>')</p></li>
+      <li><p>user.update_column('has_access', true)</p></li>
+      <li><p>UserMailer.access_granted(user).deliver_now</p></li>
+    </ul>
+    </br>
+    </br>
+    <p>Happy <%= DateTime.current.strftime('%A') %>,</p>
+    <p> Limbforge.org </p>
+  </body>
+</html>

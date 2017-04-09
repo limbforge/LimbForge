@@ -215,3 +215,25 @@
     padding-top: $standard-padding/6;
   }
 }
+
+#access{
+  color: $white;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a{
+    letter-spacing: 2px;
+    background-color: $blue;
+    color: $white;
+    padding: $standard-padding/3;
+    margin: $standard-padding/3;
+  }
+  h1{
+    font-size: 5vw;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+  }
+}
