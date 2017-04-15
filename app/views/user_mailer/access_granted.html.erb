@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hey <%= @user.email %>,</p>
+    <p>You now have access to the Limbforge App!</p>
+    </br>
+    <a href='https://limbforge.herokuapp.com/'>Visit Limbforge to get started</a>
+    </br>
+    <p>Happy <%= DateTime.current.strftime('%A') %>,</p>
+    <p>Limbforge.org </p>
+  </body>
+</html>

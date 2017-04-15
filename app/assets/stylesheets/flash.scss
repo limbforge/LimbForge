@@ -1,0 +1,22 @@
+@import "styleguide-variables";
+
+#flash-message-alert{
+  background-color: $alert-blue;
+  color: $white;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 20px 0;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  #flash-message-alert-close{
+    float: right;
+    padding-right: 30px;
+    font-size: 30px;
+    position: relative;
+    top: 6px;
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+}
