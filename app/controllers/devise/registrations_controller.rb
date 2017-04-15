@@ -21,7 +21,9 @@ class Devise::RegistrationsController < DeviseController
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
+        UserMailer.request_access(current_user).deliver_now
+        sign_out current_user
+        redirect_to "/", :flash => { :success => "Access Requested! We will get back to you soon." }
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!

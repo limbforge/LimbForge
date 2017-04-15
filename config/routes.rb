@@ -27,8 +27,6 @@ Rails.application.routes.draw do
   get '/search_components' => 'components#search', as: :search_components
   get '/search_measurements' => 'measurements#search', as: :search_measurements
   get '/search_tds' => 'terminal_devices#search', as: :search_tds
-  get '/request_access' => 'pages#request_access', as: :request_access
-  get '/access_requested' => 'pages#access_requested', as: :access_requested
 
   get '/google6c79871a733902b4.html' => proc { |env| [200, {}, ["google-site-verification: google6c79871a733902b4.html"]] }
 
