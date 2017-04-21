@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
-  default from: 'learnmore@limbforge.org'
+  default from: 'kaitlynhova@gmail.com'
 
   def request_access(user)
     @user = user
-    mail(to: 'learnmore@limbforge.org', subject: 'Limbforge app access request')
+    mail(to: 'kaitlynhova@gmail.com', subject: 'Limbforge app access request')
   end
 
   def access_granted(user)

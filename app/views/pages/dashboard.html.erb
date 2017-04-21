@@ -1,7 +1,31 @@
 <%= render 'pages/dashboardnav'%>
-<div id="dashboard">
+<div id="dashboard" class="access-requests">
+  <p id="notice"><%= notice %></p>
   <div class="container">
-    <h1>This is the Dashboard</h1>
-    <p>Checkout the links in the admin nav above ^^</p>
+    <div class="row">
+      <h1>Access Requests</h1>
+      <% if @requests.length == 0 %>
+        <p> No requests! You will be emailed at learnmore@limbforge.org when new ones come up. </p>
+      <%end%>
+      <% if @requests.length > 0 %>
+        <div class="col-xs-9">
+          <h3> Name</h3>
+        </div>
+      <%end%>
+    </div>
+
+    <% @requests.each do |request| %>
+      <div class="row bar">
+        <div class="col-sm-9">
+          <p><strong><%= request.email %></strong></p>
+        </div>
+        <div class="col-sm-3">
+          <p class="buttons">
+            <%= link_to 'Deny', delete_request_path(:request => request ) , class: "link deny"%>
+            <%= link_to 'Accept', accept_request_path(:request => request ) , class: "link accept" %>
+          </p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

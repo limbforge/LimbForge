@@ -1,15 +1,7 @@
 Hey Admin,
 
 <%= @user.email %> wants access to the Limbforge tool. If you don't want to give them access please ignore this message.
-If you do want to give them access and to notify them of their access, open your console and run these commands in order:
-
-heroku run rails console --app limbforge
-
-user = User.find_by_email('<%= @user.email %>')
-
-user.update_column('has_access', true)
-
-UserMailer.access_granted(user).deliver_now
+If you do want to give them access and to notify them of their access, go to the Limbforge.org admin dashboard at <%= ActionMailer::Base.default_url_options[:host] %> and visit the "access requests" tab.
 
 Happy <%= DateTime.current.strftime('%A') %>,
 Limbforge.org
