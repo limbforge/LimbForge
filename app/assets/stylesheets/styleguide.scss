@@ -12,8 +12,21 @@
   }
 }
 
+.no-padding{
+  padding: 0;
+}
+
 body{
-  background-color: $black;
+  background-color: $white;
+  &#devise{
+    background-color: $black;
+  }
+  &#sessions{
+    background-color: $black;
+  }
+  &.new{
+    background-color: $black;
+  }
 }
 
 //LINKS
@@ -40,9 +53,21 @@ html{
     line-height: $base-line-height;
     .link{
       color: $white;
+      background-color: $blue;
       border-bottom: 0px;
       box-shadow: none;
       padding: $standard-padding/6;
+      float: right;
+      position: relative;
+      top: $standard-padding/-10;
+      margin-left: $standard-padding/2;
+      &.index{
+        float: none;
+        width: 32%;
+        display: inline-block;
+        margin: 0;
+        text-align: center;
+      }
     }
   }
   a{

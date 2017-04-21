@@ -1,28 +1,32 @@
 <%= render 'pages/dashboardnav'%>
-<p id="notice"><%= notice %></p>
-<div class="container form-padding">
-  <h1>Terminal Devices</h1>
-  <div class="row">
-    <div class="col-xs-3">
-      <h3>Name</h3>
-    </div>
-  </div>
-
-  <% @terminal_devices.each do |terminal_device| %>
+<div id="dashboard">
+  <p id="notice"><%= notice %></p>
+  <div class="container">
     <div class="row">
-      <div class="col-xs-3">
-        <p><strong><%= terminal_device.name %></strong></p>
+      <h1>Terminal Devices</h1>
+      <div class="col-sm-12 no-padding">
+        <a class="add-button" href="<%= new_terminal_device_path%>">
+          <button>Add new Terminal Device</button>
+        </a>
       </div>
-      <div class="col-xs-9">
-        <p>
-          <%= link_to 'Show', terminal_device , class: "link"%>
-          <%= link_to 'Edit', edit_terminal_device_path(terminal_device), class: "link" %>
-          <%= link_to 'Delete', terminal_device, method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
-        </p>
+      <div class="col-sm-7">
+        <h3> Name</h3>
       </div>
     </div>
-  <% end %>
-  <a href="<%= new_terminal_device_path%>">
-    <button>Add new Terminal Device</button>
-  </a>
+
+    <% @terminal_devices.each do |terminal_device| %>
+      <div class="row bar">
+        <div class="col-sm-7">
+          <p><strong><%= terminal_device.name %></strong></p>
+        </div>
+        <div class="col-sm-5">
+          <p>
+            <%= link_to 'Show', terminal_device , class: "link index"%>
+            <%= link_to 'Edit', edit_terminal_device_path(terminal_device), class: "link index" %>
+            <%= link_to 'Delete', terminal_device, method: :delete, data: { confirm: 'Are you sure?' }, class: "link index" %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
