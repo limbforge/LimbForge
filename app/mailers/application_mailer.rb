@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "kaitlynhova@gmail.com"
+  default from: "learnmore@limbforge.org"
   layout 'mailer'
 end
