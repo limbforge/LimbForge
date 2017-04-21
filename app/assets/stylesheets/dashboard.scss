@@ -68,7 +68,10 @@
     top: 11px;
   }
   .signout{
-    margin-left: $standard-padding/2;
+    position: absolute;
+    left: 0;
+    top: 70px;
+    left: $standard-padding;
   }
   ul{
     padding-left: 0;
@@ -76,16 +79,21 @@
     float: right;
     @media (max-width: $screen-xs-max) {
       float: none;
-      display: none;
     }
     li{
       background-color: $black;
       color: $white;
-      padding: $standard-padding/1.5;
+      padding: $standard-padding/1.5 $standard-padding/2;
       display: inline-block;
       margin-right: $standard-padding/-6;
       @media (max-width: $screen-xs-max) {
         padding: $standard-padding/2 9.7px;
+        display: none;
+        &.limbforge{
+          display: inline-block;
+           float: right;
+           padding: $standard-padding/1.5;
+        }
       }
       a{
         color: $white;
