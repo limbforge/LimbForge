@@ -97,6 +97,11 @@ html{
   }
 }
 
+//ERRORS
+#error_explanation{
+  padding: 0 $standard-padding;
+}
+
 //BUTTON STYLES
 button{
   border: 0;
