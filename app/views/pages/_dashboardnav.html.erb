@@ -8,7 +8,7 @@
     <ul>
       <li class="<%= params[:controller] == "pages" ? "active" : ""%>"> <%= link_to "Requests", access_requests_path %></li>
       <li class="<%= params[:controller] == "components" ? "active" : ""%>"> <%= link_to "Components", components_path %></li>
-      <li class="<%= params[:controller] == "terminal_device" ? "active" : ""%>"><%= link_to "TDs", terminal_devices_path %></li>
+      <li class="<%= params[:controller] == "terminal_devices" ? "active" : ""%>"><%= link_to "TDs", terminal_devices_path %></li>
       <li class="<%= params[:controller] == "measurements" ? "active" : ""%>"><%= link_to "Measurements", measurements_path %></li>
       <li class="<%= params[:controller] == "amputation_levels" ? "active" : ""%>"><%= link_to "Levels", amputation_levels_path %></li>
       <li class="limbforge"><%= link_to "Limbforge", limbforge_path %></li>

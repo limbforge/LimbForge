@@ -16,10 +16,10 @@
 
     <% @amputation_levels.order('name ASC').each do |amputation| %>
       <div class="row bar">
-        <div class="col-xs-7">
+        <div class="col-sm-7">
           <p><strong><%= amputation.name %></strong></p>
         </div>
-        <div class="col-xs-5">
+        <div class="col-sm-5">
           <p>
             <%= link_to 'Show', amputation , class: "link index"%>
             <%= link_to 'Edit', edit_amputation_level_path(amputation), class: "link index" %>
