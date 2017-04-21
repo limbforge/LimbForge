@@ -7,7 +7,7 @@
     <p>Hey <%= @user.email %>,</p>
     <p>You now have access to the Limbforge App!</p>
     </br>
-    <a href='https://limbforge.herokuapp.com/'>Visit Limbforge to get started</a>
+    <p>Visit <%= ActionMailer::Base.default_url_options[:host] %> to get started</p>
     </br>
     <p>Happy <%= DateTime.current.strftime('%A') %>,</p>
     <p>Limbforge.org </p>

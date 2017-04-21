@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   get '/search_components' => 'components#search', as: :search_components
   get '/search_measurements' => 'measurements#search', as: :search_measurements
   get '/search_tds' => 'terminal_devices#search', as: :search_tds
+  get '/access_requests' => 'pages#dashboard', as: :access_requests
+  get '/access_requests/delete' => 'pages#delete_request', as: :delete_request
+  get '/access_requests/accept' => 'pages#accept_request', as: :accept_request
+
 
   get '/google6c79871a733902b4.html' => proc { |env| [200, {}, ["google-site-verification: google6c79871a733902b4.html"]] }
 

@@ -1,34 +1,129 @@
 @import "styleguide-variables";
 
 #dashboard{
-  min-height: 500px;
+  min-height: 100vh;
+  background-color: $light-gray;
+  padding-top: $standard-padding*3;
+  .bar{
+    background-color: $white;
+    padding: $standard-padding/2 0;
+    margin-bottom: 20px;
+    p{
+      margin: 0;
+      padding-top: $standard-padding/5;
+    }
+    strong{
+      position: relative;
+      top: 2px;
+    }
+  }
+  .add-button{
+    margin-top: $standard-padding/2;
+    button{
+      margin-top: 0;
+    }
+  }
+  button{
+    max-width: $standard-padding*10;
+  }
+  &.access-requests{
+    .buttons{
+      display: flex;
+    }
+    .link{
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      @media (max-width: $screen-xs-max) {
+        float: none;
+      }
+      &.accept{
+        background-color: $green;
+      }
+      &.deny{
+        background-color: $red;
+      }
+    }
+  }
 }
 #dashboard-nav{
-  background-color: $regular-gray;
+  background-color: $black;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: $standard-padding*2;
+  h1{
+    position: relative;
+    top: -23px;
+    left: 65px;
+    width: 100px;
+    color: $white;
+    font-size: 25px;
+    margin: 0;
+  }
+  img{
+    max-width: 40px;
+    position: relative;
+    left: 15px;
+    top: 11px;
+  }
+  .signout{
+    position: absolute;
+    left: 0;
+    top: 70px;
+    left: $standard-padding;
+  }
   ul{
     padding-left: 0;
     margin-bottom: 0;
+    float: right;
+    @media (max-width: $screen-xs-max) {
+      float: none;
+    }
     li{
-      background-color: $regular-gray;
+      background-color: $black;
       color: $white;
-      padding: $standard-padding/2;
+      padding: $standard-padding/1.5 $standard-padding/2;
       display: inline-block;
+      margin-right: $standard-padding/-6;
       @media (max-width: $screen-xs-max) {
         padding: $standard-padding/2 9.7px;
+        display: none;
+        &.limbforge{
+          display: inline-block;
+           float: right;
+           padding: $standard-padding/1.5;
+        }
       }
       a{
         color: $white;
         font-family: $base-font-family;
         letter-spacing: 2px;
+        border-bottom: 0;
+        box-shadow: none;
         @media (max-width: $screen-xs-max) {
           font-size: 12px;
           letter-spacing: 1;
         }
+        &:hover{
+          background-color: $black;
+        }
       }
       &.active{
-        background-color: $white;
+        background-color: $regular-gray;
         a{
-          color: $regular-gray;
+          color: $white;
+          &:hover{
+            background-color: transparent;
+          }
+        }
+      }
+      &.limbforge{
+        background-color: $blue;
+        a{
+          &:hover{
+            background-color: transparent;
+          }
         }
       }
     }

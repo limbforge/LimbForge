@@ -21,6 +21,7 @@ class Devise::RegistrationsController < DeviseController
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
+        current_user.update_column('access_requested', true)
         UserMailer.request_access(current_user).deliver_now
         sign_out current_user
         redirect_to "/", :flash => { :success => "Access Requested! We will get back to you soon." }
