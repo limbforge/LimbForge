@@ -20,18 +20,7 @@ class Devise::SessionsController < DeviseController
       self.resource = warden.authenticate!(auth_options)
       sign_in(resource_name, resource)
       yield resource if block_given?
-      if current_user.has_access
-        if current_user.admin
-          redirect_to admin_dashboard_path
-        else
-          respond_with resource, location: after_sign_in_path_for(resource)
-        end
-      else
-        current_user.update_column('access_requested', true)
-        UserMailer.request_access(current_user).deliver_now
-        sign_out current_user
-        redirect_to "/", :flash => { :success => "Access Requested! We will get back to you soon." }
-      end
+      redirect_to after_sign_in_path_for(resource)
     end
   end
 
