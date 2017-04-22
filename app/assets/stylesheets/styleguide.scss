@@ -106,7 +106,8 @@ html{
 button{
   border: 0;
   color: $white;
-  font-weight: bold;
+  font-weight: 300;
+  font-size: $mobile-p-font-size;
   background: $blue;
   margin-top: $standard-padding;
   padding: 12px $standard-padding/1.5;
