@@ -12,7 +12,7 @@ class SubmitArea extends React.Component {
     var submitArea = this.props.measurements == undefined ? '' :
       <div id="download-area" className="row tab-padding">
         <div className="col-xs-12">
-          <input type="submit" className="download" style={style} value={loadingval}/>
+        <p>Interested in testing LimbForge in your practice?  Reach out to the team at <a href="mailto:beta@limbforge.org?Subject=Beta%20testing%20request" target="_top">beta@limbforge.org</a> to discuss beta testing!</p>
         </div>
       </div>;
     return (
