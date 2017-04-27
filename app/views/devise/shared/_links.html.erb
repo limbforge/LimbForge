@@ -1,5 +1,5 @@
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <a href="<%= new_password_path(resource_name) %>"><p class="blue-txt password-reset">Forgot password?</p></a>
+  <a href="<%= new_password_path(resource_name) %>"><p class="blue-txt password-reset">forgot password?</p></a>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
