@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   before_filter :check_for_admin,   :only => [:dashboard, :delete_request, :accept_request]
+  before_filter :check_for_session,   :only => [:limbforge]
+
   def dashboard
     @requests = User.where(:access_requested => true)
   end
@@ -25,6 +27,12 @@ class PagesController < ApplicationController
   def check_for_admin
     if !current_user.admin
       redirect_to limbforge_path
+    end
+  end
+
+  def check_for_session
+    if !current_user
+      redirect_to new_user_session_path
     end
   end
 end
