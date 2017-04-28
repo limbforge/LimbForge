@@ -161,7 +161,7 @@ class LimbforgeForm extends React.Component {
       if (xhr.readyState === 4) {
         var blob = xhr.response;
         new_this.updateLoading();
-        saveAs(blob, "filename.zip");
+        saveAs(blob, "LimbForge.zip");
       }
     };
     xhr.send();
