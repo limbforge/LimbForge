@@ -5,16 +5,6 @@ class AmputationLevelArea extends React.Component {
     this.handleAreaClick = this.handleAreaClick.bind(this);
   }
 
-  isSupportedAmputationLevel(level) {
-    switch (level.toLowerCase()) {
-      case 'transradial':
-      case 'transhumeral':
-        return true;
-      default:
-        return false;
-    }
-  }
-
   updateSide(side) {
     if (this.props.specs.side !== side) {
       const newSpecs = this.props.specs;
@@ -24,7 +14,6 @@ class AmputationLevelArea extends React.Component {
   }
 
   loadSvg() {
-
     const imageName = "al_" + this.props.specs.gender + "_" + this.props.specs.amputationLevel.toLowerCase().split(' ').join('_') + "_" + this.props.specs.side.charAt(0).toUpperCase();
 
     const imageURL = this.props.images[imageName];
@@ -232,14 +221,14 @@ class AmputationLevelArea extends React.Component {
         levelSelected = level;
       }
       return (
-        <option disabled={this.isSupportedAmputationLevel(level.name) ? "" : "disabled"} value={level.name} key={level.id} >
-          {level.name} {this.isSupportedAmputationLevel(level.name) ? "" : "(coming soon)"}
+        <option disabled={level.has_devices ? "" : "disabled"} value={level.name} key={level.id} >
+          {level.name} {level.has_devices ? "" : "(coming soon)"}
         </option>
       );
     });
 
-    const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected.name) ? {} : { background: "grey" };
-    const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected.name);
+    const buttonStyle = levelSelected !== undefined && levelSelected.has_devices ? {} : { background: "grey" };
+    const buttonDisabled = levelSelected === undefined || !levelSelected.has_devices;
     return (
       <div id="AmputationLevel" className="row tab-padding">
         {this.loadSvg()}
@@ -249,7 +238,7 @@ class AmputationLevelArea extends React.Component {
             style={buttonStyle}
             onClick={() => {
               this.props.updateAvailableAreas('prosthesis');
-              this.props.getComponents(levelSelected.id);
+              this.props.getComponents(levelSelected.slug);
             }}
             disabled={buttonDisabled}>CONTINUE
           </button>

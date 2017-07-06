@@ -9,9 +9,9 @@ class MetaToggle extends React.Component {
           <p className="description">{this.props.option.description}</p>
           <p><strong>by:</strong> {this.props.option.creator} </p>
           <p><strong>uses:</strong> {this.props.option.uses} </p>
-          <p><strong>type:</strong> {this.props.option.component_type} </p>
+          <p><strong>type:</strong> {this.props.option.componentType} </p>
           <p><strong>weight:</strong> {this.props.option.weight} </p>
-          <p><strong>printTime:</strong> {this.props.option.print_time} </p>
+          <p><strong>printTime:</strong> {this.props.option.printTime} </p>
         </div>
       </div> : "";
     return (

@@ -16,9 +16,9 @@ class ComponentListItem extends React.Component {
   }
   render() {
     return(
-      <div className="device" value={this.props.option.id} key={this.props.option.name}>
-        <div className="device-img" onClick={() => this.props.updateMeasurementsAndTds(this.props.option.id)} style={{ backgroundImage: 'url(' + this.props.option.icon + ")" }}></div>
-        <h2 onClick={() => this.props.updateMeasurementsAndTds(this.props.option.id)} >{this.props.option.name}</h2>
+      <div className="device" value={this.props.option.slug} key={this.props.option.slug}>
+        <div className="device-img" onClick={() => this.props.updateMeasurementsAndTds(this.props.option.slug)} style={{ backgroundImage: 'url(' + this.props.option.icon + ")" }}></div>
+        <h2 onClick={() => this.props.updateMeasurementsAndTds(this.props.option.slug)} >{this.props.option.name}</h2>
         <p className="show-more" onClick={this.toggleMeta}>show more <span className={this.state.showMeta ? "up" : "down"}></span></p>
         <MetaToggle showMeta={this.state.showMeta} option={this.props.option}/>
       </div>

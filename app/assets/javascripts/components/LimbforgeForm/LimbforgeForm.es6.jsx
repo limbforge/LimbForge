@@ -17,6 +17,7 @@ class LimbforgeForm extends React.Component {
       showAmputationLevelArea: false,
       showComponentArea: false,
       showMeasurementArea: false,
+      amputationLevels: [],
       specs: {
         gender: "male",
         component: undefined,
@@ -65,27 +66,29 @@ class LimbforgeForm extends React.Component {
     this.updateSpecs = this.updateSpecs.bind(this);
     this.updateComponentSpec = this.updateComponentSpec.bind(this);
     this.updateLoading = this.updateLoading.bind(this);
+    this.getAmputationLevels = this.getAmputationLevels.bind(this);
+    this.getAmputationLevels();
   }
-  updateComponentSpec(component_id){
+  updateComponentSpec(component_slug){
     var newState = this.state;
-    var component_object = $.grep(this.state.components, function(e){ return e.id == component_id; });
+    var component_object = $.grep(this.state.components, function(e){ return e.slug == component_slug; });
     newState.specs.component_object = component_object[0];
     this.setState({specs: newState.specs});
   }
   // When we select a component, we want to grab the components list of measurements and tds
-  updateMeasurementsAndTds(component_id) {
+  updateMeasurementsAndTds(component_slug) {
     const newState = this.state;
-    newState.specs.component = component_id;
+    newState.specs.component = component_slug;
     newState.specs.TD = "phone";
-    this.updateComponentSpec(component_id);
-    const tdsUrl = this.props.tds_search_path + "?query=" + component_id;
-    const measurementsUrl = this.props.measurements_search_path + "?query=" + component_id;
+    this.updateComponentSpec(component_slug);
+    const tdsUrl = 'https://fusion360.io/api/ui/terminalDevices?device=' + component_slug;
+    const measurementsUrl = 'https://fusion360.io/api/ui/measurements?device=' + component_slug;
 
     $.ajax({
       url: tdsUrl,
       dataType: 'json',
       success: (data) => {
-        newState.tds = data;
+        newState.tds = data.terminalDevices;
       },
       error: (error) => {
         console.log('getTD error', error, tdsUrl);
@@ -96,7 +99,7 @@ class LimbforgeForm extends React.Component {
         url: measurementsUrl,
         dataType: 'json',
         success: (data) => {
-          newState.measurements = data;
+          newState.measurements = data.measurements;
           newState.availableAreas.prosthesis.selected = false;
           newState.availableAreas.prosthesis.available = true;
           newState.availableAreas.measurements.selected = true;
@@ -119,20 +122,33 @@ class LimbforgeForm extends React.Component {
   }
 
   getComponents(componentType) {
-    const url = this.props.components_search_path + "?query="+componentType;
+    const url = 'https://fusion360.io/api/ui/components?amputationLevel=' + componentType;
     $.ajax({
       url,
       dataType: 'json',
       success: (data) => {
           const newState = {
-          components: data,
+          components: data.components,
           tds: undefined,
           measurements: undefined,
           showAmputationLevelArea: false,
           showComponentArea: true
         };
-
         this.setState(newState);
+      },
+      error: (error) => {
+        console.log('get components error', error, url);
+      }
+    });
+  }
+
+  getAmputationLevels() {
+    const url = 'https://fusion360.io/api/ui/amputationLevels'
+    $.ajax({
+      url,
+      dataType: 'json',
+      success: (data) => {
+        this.setState({amputationLevels: data.amputationLevels});
       },
       error: (error) => {
         console.log('get components error', error, url);
@@ -247,7 +263,7 @@ class LimbforgeForm extends React.Component {
 
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url =  this.state.specs.component_object.folder == "xhparm" ? "" : 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.side + '/td_' + this.state.specs.TD + '_' + this.state.specs.side + '.stl';
+      const s3url =  this.state.specs.component_object.folder == "xhparm" ? "" : 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD.toLowerCase() + '/' + this.state.specs.side + '/td_' + this.state.specs.TD.toLowerCase() + '_' + this.state.specs.side + '.stl';
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
@@ -369,7 +385,7 @@ class LimbforgeForm extends React.Component {
             selectedGender={this.state.specs.gender}
             updateSpecs={this.updateSpecs}
             getComponents={this.getComponents}
-            levels={this.props.levels}
+            levels={this.state.amputationLevels}
             components_search_path={this.props.components_search_path}
             images={this.props.images}
             specs={this.state.specs}
