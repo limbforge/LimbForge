@@ -37,13 +37,13 @@ class AmputationLevelArea extends React.Component {
     const selectorStyle = {
       marginBottom: '-230px',
       position: 'absolute',
-      top: '83',
+      top: '83px',
     };
 
     const selectorStyle2 = {
       marginBottom: '-230px',
       position: 'absolute',
-      top: '110',
+      top: '110px',
     };
 
     const selectedSide = {
