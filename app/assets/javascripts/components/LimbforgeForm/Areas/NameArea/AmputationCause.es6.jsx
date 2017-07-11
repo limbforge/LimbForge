@@ -15,6 +15,7 @@ class AmputationCause extends React.Component {
   render() {
     const reasons = [
       "Congenital",
+      "Diabetes",
       "Traffic accident",
       "Cancer",
       "Burn",
