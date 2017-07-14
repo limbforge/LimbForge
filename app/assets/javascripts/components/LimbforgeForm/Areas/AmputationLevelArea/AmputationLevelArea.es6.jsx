@@ -7,7 +7,6 @@ class AmputationLevelArea extends React.Component {
   isSupportedAmputationLevel(level) {
     switch (level.toLowerCase()) {
       case 'transradial':
-      case 'transhumeral':
         return true;
       default:
         return false;
