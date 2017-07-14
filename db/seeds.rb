@@ -92,7 +92,6 @@ forearm = Component.create(
   {
     name: 'Forearm r20',
     version: 20,
-    icon:  'http://s3.amazonaws.com/limbforgeimages/components/icons/000/000/003/original/ecf.jpg',
     creator: 'Limbforge',
     component_type: 'forearm',
     weight: '200-300g',
@@ -101,9 +100,9 @@ forearm = Component.create(
     print_time: '5-8 hours'
   }
 )
-xra.amputation_levels += [ transradial ]
-xra.measurements += [ l1, l2, c1, c2, c3, c4 ]
-xra.terminal_devices +=[ standard_td ]
+forearm.amputation_levels += [ transradial ]
+forearm.measurements += [ l1, l2, c1, c2, c3, c4 ]
+forearm.terminal_devices +=[ standard_td ]
 
 
 # USERS
