@@ -24,9 +24,9 @@ class LimbforgeForm extends React.Component {
         amputationLevel: "Transcarpal",
         selected_wrist_size: 1,
         side: "left",
-        C1: 18,
-        C4: 28,
-        L1: 27,
+        C1: "18",
+        C4: "28",
+        L1: "27",
         TD: undefined,
         wrist_sizes: [
           {
@@ -178,17 +178,6 @@ class LimbforgeForm extends React.Component {
   }
 
   getStls(stls) {
-
-    let params = {
-      component: this.state.specs.component,
-      orientation: this.state.specs.side,
-      C1: this.state.specs.C1,
-      C4: this.state.specs.C4,
-      L1: this.state.specs.L1,
-      TD: this.state.specs.TD,
-    };
-
-    paramString = encodeURI(JSON.stringify(params));
     var urls =
     [
       'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl',
@@ -265,7 +254,6 @@ class LimbforgeForm extends React.Component {
     zip.generateAsync({type:"blob"})
     .then(function callback(blob) {
       // see FileSaver.js
-      debugger;
       newThis.updateLoading();
       saveAs(blob, "Limbforge.zip");
     }, function (e) {
@@ -307,7 +295,6 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      debugger;
       const s3url =  'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
