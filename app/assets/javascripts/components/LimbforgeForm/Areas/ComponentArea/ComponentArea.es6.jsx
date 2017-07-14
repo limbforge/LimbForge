@@ -4,7 +4,7 @@ class ComponentArea extends React.Component {
     if (this.props.components != undefined){
       this.props.components.map((option) => {
         componentOptions.push(
-          <ComponentListItem option={option} updateMeasurementsAndTds={this.props.updateMeasurementsAndTds}/>
+          <ComponentListItem key={option} option={option} updateMeasurementsAndTds={this.props.updateMeasurementsAndTds}/>
         );
       });
     }

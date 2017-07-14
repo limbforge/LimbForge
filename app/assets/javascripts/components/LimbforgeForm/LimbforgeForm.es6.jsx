@@ -22,11 +22,11 @@ class LimbforgeForm extends React.Component {
         component: undefined,
         component_object: undefined,
         amputationLevel: "Transcarpal",
-        selected_wrist_size: 0,
+        selected_wrist_size: 1,
         side: "left",
-        C1: 160,
-        C4: 260,
-        L1: 250,
+        C1: 18,
+        C4: 28,
+        L1: 27,
         TD: undefined,
         wrist_sizes: [
           {
@@ -84,6 +84,8 @@ class LimbforgeForm extends React.Component {
     this.updateSpecs = this.updateSpecs.bind(this);
     this.updateComponentSpec = this.updateComponentSpec.bind(this);
     this.updateLoading = this.updateLoading.bind(this);
+    this.roundUpNumber = this.roundUpNumber.bind(this);
+    this.roundDownNumber = this.roundDownNumber.bind(this);
   }
   updateComponentSpec(component_id){
     var newState = this.state;
@@ -159,6 +161,22 @@ class LimbforgeForm extends React.Component {
     });
   }
 
+  roundUpNumber(input){
+    // removing decimal from number
+    var base_num = parseFloat(parseFloat(input).toFixed(1).toString().replace(".", ""));
+    // round up to nearest 5
+    var result = (Math.ceil(base_num/5)*5);
+    return result
+  }
+
+  roundDownNumber(input){
+    // removing decimal from number
+    var base_num = parseFloat(parseFloat(input).toFixed(1).toString().replace(".", ""));
+    // round down to nearest 5
+    var result = (Math.floor(base_num/5)*5);
+    return result
+  }
+
   getStls(stls) {
 
     let params = {
@@ -173,8 +191,8 @@ class LimbforgeForm extends React.Component {
     paramString = encodeURI(JSON.stringify(params));
     var urls =
     [
-      'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${+this.state.specs.C1*10}_C4-${this.state.specs.C4*10}_L1-${this.state.specs.L1*10}.stl',
-      'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.state.specs.C1*10}.stl',
+      'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl',
+      'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl',
       'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
     ];
 
@@ -199,15 +217,19 @@ class LimbforgeForm extends React.Component {
   }
 
   createZip() {
+    if (this.state.specs.L1 > 32 || this.state.specs.L1 < 19) throw alert("Expected L1 size to be a number between 19cm - 32cm");
+    if (this.state.specs.C1 > 18 || this.state.specs.C1 < 14.5) throw alert("Expected C1 size to be a number between 14.5cm - 18cm");
+    if (this.state.specs.C4 > 28 || this.state.specs.C4 < 20) throw alert("Expected C4 size to be a number between 20cm - 28cm");
+    this.updateLoading();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
     var urls = [
       {
-        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${+this.state.specs.C1*10}_C4-${this.state.specs.C4*10}_L1-${this.state.specs.L1*10}.stl`,
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
         name: `FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
       },
       {
-        link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.state.specs.C1*10}.stl`,
+        link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl`,
         name: `TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
       },
       {
@@ -239,30 +261,16 @@ class LimbforgeForm extends React.Component {
     });
 
     // when everything has been downloaded, we can trigger the dl
+    newThis = this;
     zip.generateAsync({type:"blob"})
     .then(function callback(blob) {
       // see FileSaver.js
-      saveAs(blob, "example.zip");
+      debugger;
+      newThis.updateLoading();
+      saveAs(blob, "Limbforge.zip");
     }, function (e) {
       console.log('oh noes', e);
     });
-    this.updateLoading();
-  }
-
-  translateValueL1(input) {
-    // removing decimal from number
-    const base_num = parseFloat(input.toFixed(1).toString().replace(".", ""));
-    // round up to nearest 5
-    const result = (((Math.ceil(base_num/5)*5)/10)*10);
-    return result
-  }
-
-  translateValueC4(input) {
-    // removing decimal from number
-    const base_num = parseFloat(input.toFixed(1).toString().replace(".", ""));
-    // round down to nearest 5
-    const result = ((Math.floor(base_num / 5) * 5) / 10) * 10;
-    return result
   }
   updateSpecs(specs) {
     this.setState({ specs });
@@ -276,7 +284,7 @@ class LimbforgeForm extends React.Component {
 
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.state.specs.C1 +'.stl';
+      const s3url =  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.roundDownNumber(this.state.specs.C1) +'.stl';
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
@@ -299,7 +307,8 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' +this.state.specs.C1+ '_C4-'+ this.state.specs.C4 + '_L1-'+ this.state.specs.L1+ '.stl';
+      debugger;
+      const s3url =  'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
