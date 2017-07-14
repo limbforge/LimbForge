@@ -97,6 +97,7 @@ forearm = Component.create(
     weight: '200-300g',
     description: 'Limbforge forearm.',
     uses: 'transradial',
+    folder: 'forearm-QTC',
     print_time: '5-8 hours'
   }
 )
