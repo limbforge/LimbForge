@@ -83,47 +83,28 @@ c4 = Measurement.create(
 # TERMINAL DEVICES
 
 standard_td = TerminalDevice.create(
-  name: 'standard'
-)
-
-phone_td = TerminalDevice.create(
-  name: 'phone'
+  name: 'PDT-a'
 )
 
 # COMPONENTS
 
-xra = Component.create(
+forearm = Component.create(
   {
-    name: 'XRA arm',
-    icon:  'http://s3.amazonaws.com/limbforgeimages/components/icons/000/000/003/original/ecf.jpg?1485496825',
+    name: 'Forearm r20',
+    version: 20,
+    icon:  'http://s3.amazonaws.com/limbforgeimages/components/icons/000/000/003/original/ecf.jpg',
     creator: 'Limbforge',
-    component_type: 'active, VO, VC',
-    weight: '280-380g',
-    description: 'The XRA Arm is a lightweight, cosmetic transradial device that can be configured to be either VO or VC. uses:  passive cosmetic',
-    uses: 'picking up small objects, supporting grasps',
-    print_time: '16-22hrs'
+    component_type: 'forearm',
+    weight: '200-300g',
+    description: 'Limbforge forearm.',
+    uses: 'transradial',
+    print_time: '5-8 hours'
   }
 )
 xra.amputation_levels += [ transradial ]
 xra.measurements += [ l1, l2, c1, c2, c3, c4 ]
-xra.terminal_devices +=[ phone_td, standard_td ]
+xra.terminal_devices +=[ standard_td ]
 
-xrp = Component.create(
-  {
-    name: 'XRP arm',
-    icon:  'http://s3.amazonaws.com/limbforgeimages/components/icons/000/000/003/original/ecf.jpg?1485496825',
-    creator: 'Limbforge',
-    component_type: 'passive',
-    weight: '250-350g',
-    description: 'The XRP Arm is a lightweight, highly cosmetic passive device with several terminal device options. uses:  passive cosmetic, social functions',
-    uses: 'social occasions, supporting objects',
-    print_time: '14-20hrs'
-  }
-)
-
-xrp.amputation_levels += [ transradial ]
-xrp.measurements += [ l1, l2, c1, c2, c3, c4 ]
-xrp.terminal_devices +=[ phone_td, standard_td ]
 
 # USERS
 

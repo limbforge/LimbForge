@@ -22,10 +22,30 @@ class LimbforgeForm extends React.Component {
         component: undefined,
         component_object: undefined,
         amputationLevel: "Transcarpal",
+        selected_wrist_size: 0,
         side: "left",
-        C4: 250,
+        C1: 160,
+        C4: 260,
         L1: 250,
         TD: undefined,
+        wrist_sizes: [
+          {
+            title: "very loose",
+            value: "1"
+          },
+          {
+            title: "loose",
+            value: "2"
+          },
+          {
+            title: "tight",
+            value: "3"
+          },
+          {
+            title: "very tight",
+            value: "4"
+          },
+        ]
       },
       availableAreas: {
         patient: {
@@ -57,7 +77,6 @@ class LimbforgeForm extends React.Component {
     this.createZip = this.createZip.bind(this);
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
-    this.updateGender = this.updateGender.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
     this.getStls = this.getStls.bind(this);
     this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
@@ -124,7 +143,7 @@ class LimbforgeForm extends React.Component {
       url,
       dataType: 'json',
       success: (data) => {
-          const newState = {
+        const newState = {
           components: data,
           tds: undefined,
           measurements: undefined,
@@ -145,39 +164,89 @@ class LimbforgeForm extends React.Component {
     let params = {
       component: this.state.specs.component,
       orientation: this.state.specs.side,
+      C1: this.state.specs.C1,
       C4: this.state.specs.C4,
       L1: this.state.specs.L1,
       TD: this.state.specs.TD,
     };
+
     paramString = encodeURI(JSON.stringify(params));
-    var url = `https://lf.fusion360.io/api/limbforge?parameters=${paramString}`;
+    var urls =
+    [
+      'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${+this.state.specs.C1*10}_C4-${this.state.specs.C4*10}_L1-${this.state.specs.L1*10}.stl',
+      'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.state.specs.C1*10}.stl',
+      'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
+    ];
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = "blob";
+    urls.forEach(function(url) {
+      xhr.open('GET', url, true);
+      xhr.responseType = "blob";
+    });
+
     this.updateLoading();
     var new_this = this;
+
     xhr.onreadystatechange = function (){
       if (xhr.readyState === 4) {
         var blob = xhr.response;
         new_this.updateLoading();
         saveAs(blob, "LimbForge.zip");
+        this.updateLoading();
       }
     };
     xhr.send();
   }
 
   createZip() {
-    if (typeof this.state.specs.L1 != "number" || this.state.specs.L1 > 320 || this.state.specs.L1 < 180) throw alert("Expected L1 size to be a number between 18cm - 32cm");
-    if (typeof this.state.specs.C4 != "number" || this.state.specs.C4 > 280 || this.state.specs.C4 < 200) throw alert("Expected C4 size to be a number between 20cm - 28cm");
-
-    const zip = new JSZip();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
-    const zipFilename = $('#lname').val() + "_" + $('#fname').val() + "_forearm_" + this.state.specs.side + "_" + formatted_date + ".zip";
-    const stls = [];
+    var urls = [
+      {
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${+this.state.specs.C1*10}_C4-${this.state.specs.C4*10}_L1-${this.state.specs.L1*10}.stl`,
+        name: `FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
+      },
+      {
+        link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.state.specs.C1*10}.stl`,
+        name: `TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
+      },
+      {
+        link: `https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl`,
+        name: `WRIST_r12_PL${this.state.specs.selected_wrist_size}`
+      }
+    ];
+    /**
+    * Fetch the content and return the associated promise.
+    * @param {String} url the url of the content to fetch.
+    * @return {Promise} the promise containing the data.
+    */
+    function urlToPromise(url) {
+      return new Promise(function(resolve, reject) {
+        JSZipUtils.getBinaryContent(url, function (err, data) {
+          if(err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
+      });
+    }
+
+    var zip = new JSZip();
+    urls.forEach((url) => {
+      var filename = url.name + '.stl';
+      zip.file(filename, urlToPromise(url.link), {binary:true});
+    });
+
+    // when everything has been downloaded, we can trigger the dl
+    zip.generateAsync({type:"blob"})
+    .then(function callback(blob) {
+      // see FileSaver.js
+      saveAs(blob, "example.zip");
+    }, function (e) {
+      console.log('oh noes', e);
+    });
     this.updateLoading();
-    this.getStls(stls);
   }
 
   translateValueL1(input) {
@@ -195,66 +264,26 @@ class LimbforgeForm extends React.Component {
     const result = ((Math.floor(base_num / 5) * 5) / 10) * 10;
     return result
   }
-
   updateSpecs(specs) {
     this.setState({ specs });
   }
 
   updateDisplay(event) {
-    //if side selector changed
-    if (event.target.value == "right" || event.target.value == "left") {
-      const newSpecs = this.state.specs;
-      newSpecs.side =event.target.value;
-      this.setState({specs: newSpecs});
-    }
-    //if terminal devices selector changed
-    else if (event.target.id == "terminal-devices-select"){
-      if (this.state.specs.TD != undefined || this.state.specs.TD != ""){
-        const newSpecs = this.state.specs;
-        newSpecs.TD = event.target.value;
-        this.setState({specs: newSpecs});
-      } else {
-        const newSpecs = this.state.specs;
-        newSpecs.TD = undefined;
-        this.setState({specs: newSpecs});
-      }
-      //if L1 Changed
-    } else if (event.target.name == "L1") {
-      const L1Value = Number(event.target.value);
-      const L1Measurements = this.state.measurements.find((measurement) => {
-        return measurement.name == "L1";
-      });
-      if (L1Measurements && L1Measurements.lower_range < L1Value && L1Measurements.upper_range > L1Value) {
-        const newSpecs = this.state.specs;
-        newSpecs.L1 = this.translateValueL1(L1Value);
-        this.setState({ specs: newSpecs });
-      }
-    }
-
-    //if C4 Changed
-    else if (event.target.name == "C4") {
-      const C4Value = Number(event.target.value);
-      const C4Measurements = this.state.measurements.find((measurement) => {
-        return measurement.name == "C4";
-      });
-      if (C4Measurements && C4Measurements.lower_range < C4Value && C4Measurements.upper_range > C4Value) {
-        const newSpecs = this.state.specs;
-        newSpecs.C4 = this.translateValueC4(C4Value);
-        this.setState({ specs: newSpecs });
-      }
-    }
+    newSpec = this.state.specs;
+    newSpec[event.target.id] = event.target.parentElement.getAttribute('class') != "measurement-container" ? event.target.getAttribute('value') : event.target.value;
+    this.setState({specs: newSpec});
   }
 
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url =  this.state.specs.component_object.folder == "xhparm" ? "" : 'https://s3.amazonaws.com/limbforgestls/td/' + this.state.specs.TD + '/' + this.state.specs.side + '/td_' + this.state.specs.TD + '_' + this.state.specs.side + '.stl';
+      const s3url =  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.state.specs.C1 +'.stl';
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
           const mesh = new THREE.Mesh( geometry, material );
           mesh.name = 'terminalDevice';
           mesh.position.set( 5, 0, 3.3 );
-          mesh.rotation.set(0, Math.PI, -Math.PI/2 );
+          mesh.rotation.set(0, Math.PI, -Math.PI);
           mesh.scale.set( .02, .02, .02 );
 
           mesh.castShadow = true;
@@ -270,7 +299,7 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      const s3url =  this.state.specs.component_object.folder == "xhparm" ? 'https://s3.amazonaws.com/limbforgestls/forearm/xhparm/xhparm.stl' : 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.side + '/forearm_ebearm_' + this.state.specs.side + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
+      const s3url =  'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' +this.state.specs.C1+ '_C4-'+ this.state.specs.C4 + '_L1-'+ this.state.specs.L1+ '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
@@ -293,11 +322,6 @@ class LimbforgeForm extends React.Component {
         });
       }
     }
-  }
-  updateGender(e){
-    newState = this.state;
-    newState.specs.gender = e.target.value;
-    this.setState(newState);
   }
 
   toggleNameArea(){
@@ -325,7 +349,7 @@ class LimbforgeForm extends React.Component {
       for (const key of Object.keys(availableAreas)) {
         // Toggle the selected area and set everything else to false
         if (key === area) {
-        // If we click on an open area, this will make sure it closes
+          // If we click on an open area, this will make sure it closes
           if (availableAreas[area].selected) {
             availableAreas[key].selected = false;
           } else {
@@ -346,68 +370,70 @@ class LimbforgeForm extends React.Component {
     var imageURL = this.props.images[imageName];
     return (
       <div>
-        <div id="limbforge">
-          <img className="logo" src={this.props.logo_img} />
-          <h1 id="title">LIMBFORGE</h1>
-          <a href={this.props.sign_out_path} data-method="delete"> sign out </a>
-          <NameArea
-            gender={this.state.specs.gender}
-            availableAreas={this.state.availableAreas}
-            updateAvailableAreas={this.updateAvailableAreas}
-            updateSelectedArea={this.updateSelectedArea}
-            showNameArea={this.state.showNameArea}
-            man_diagram={this.props.images.man_diagram}
-            man_diagram_selected={this.props.images.man_diagram_selected}
-            woman_diagram={this.props.images.woman_diagram}
-            woman_diagram_selected={this.props.images.woman_diagram_selected}
-            updateGender={this.updateGender}
-            />
-          <AmputationLevelArea
-            availableAreas={this.state.availableAreas}
-            updateAvailableAreas={this.updateAvailableAreas}
-            updateSelectedArea={this.updateSelectedArea}
-            selectedGender={this.state.specs.gender}
-            updateSpecs={this.updateSpecs}
-            getComponents={this.getComponents}
-            levels={this.props.levels}
-            components_search_path={this.props.components_search_path}
-            images={this.props.images}
-            specs={this.state.specs}
-          />
-          <ComponentArea
-            availableAreas={this.state.availableAreas}
-            updateAvailableAreas={this.updateAvailableAreas}
-            updateSelectedArea={this.updateSelectedArea}
-            updateMeasurementsAndTds={this.updateMeasurementsAndTds}
-            updateDisplay={this.updateDisplay}
-            components={this.state.components}
-          />
-          <MeasurementArea
-            availableAreas={this.state.availableAreas}
-            updateAvailableAreas={this.updateAvailableAreas}
-            updateSelectedArea={this.updateSelectedArea}
-            imageURL={imageURL}
-            side={this.state.specs.side}
-            amputationLevel={this.state.specs.amputationLevel}
-            measurements={this.state.measurements}
-            updateDisplay={this.updateDisplay}
-          />
-          <TdArea
-            updateDisplay={this.updateDisplay}
-            tds={this.state.tds}
-          />
-          <SubmitArea
-            createZip={this.createZip}
-            measurements={this.state.measurements}
-            isLoading={this.state.isLoading}
-            loadingImg={this.props.images.loading_img}
-          />
-        </div>
-        <MeasurementModal
-          imageURL={imageURL}
-          measurements={this.state.measurements}
-        />
-        <LimbforgeFooter />
+      <div id="limbforge">
+      <img className="logo" src={this.props.logo_img} />
+      <h1 id="title">LIMBFORGE</h1>
+      <a href={this.props.sign_out_path} data-method="delete"> sign out </a>
+      <NameArea
+      gender={this.state.specs.gender}
+      availableAreas={this.state.availableAreas}
+      updateAvailableAreas={this.updateAvailableAreas}
+      updateSelectedArea={this.updateSelectedArea}
+      showNameArea={this.state.showNameArea}
+      man_diagram={this.props.images.man_diagram}
+      man_diagram_selected={this.props.images.man_diagram_selected}
+      woman_diagram={this.props.images.woman_diagram}
+      woman_diagram_selected={this.props.images.woman_diagram_selected}
+      updateDisplay={this.updateDisplay}
+      />
+      <AmputationLevelArea
+      availableAreas={this.state.availableAreas}
+      updateAvailableAreas={this.updateAvailableAreas}
+      updateDisplay={this.updateDisplay}
+      updateSelectedArea={this.updateSelectedArea}
+      selectedGender={this.state.specs.gender}
+      updateSpecs={this.updateSpecs}
+      getComponents={this.getComponents}
+      levels={this.props.levels}
+      components_search_path={this.props.components_search_path}
+      images={this.props.images}
+      specs={this.state.specs}
+      />
+      <ComponentArea
+      availableAreas={this.state.availableAreas}
+      updateAvailableAreas={this.updateAvailableAreas}
+      updateSelectedArea={this.updateSelectedArea}
+      updateMeasurementsAndTds={this.updateMeasurementsAndTds}
+      updateDisplay={this.updateDisplay}
+      components={this.state.components}
+      />
+      <MeasurementArea
+      availableAreas={this.state.availableAreas}
+      updateAvailableAreas={this.updateAvailableAreas}
+      updateSelectedArea={this.updateSelectedArea}
+      imageURL={imageURL}
+      side={this.state.specs.side}
+      amputationLevel={this.state.specs.amputationLevel}
+      measurements={this.state.measurements}
+      updateDisplay={this.updateDisplay}
+      />
+      <TdArea
+      updateDisplay={this.updateDisplay}
+      tds={this.state.tds}
+      wrist_sizes= {this.state.specs.wrist_sizes}
+      />
+      <SubmitArea
+      createZip={this.createZip}
+      measurements={this.state.measurements}
+      isLoading={this.state.isLoading}
+      loadingImg={this.props.images.loading_img}
+      />
+      </div>
+      <MeasurementModal
+      imageURL={imageURL}
+      measurements={this.state.measurements}
+      />
+      <LimbforgeFooter />
       </div>
     );
   }

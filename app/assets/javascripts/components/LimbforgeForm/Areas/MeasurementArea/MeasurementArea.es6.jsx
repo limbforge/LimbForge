@@ -32,7 +32,7 @@ class MeasurementArea extends React.Component {
         <div key={option.name}>
           <p className="label nested-label measurement-icon c">{option.name}</p>
           <div className="measurement-container">
-            <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.Xcm"} name={option.name}/>
+            <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="integer" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.Xcm"} name={option.name}/>
           </div>
         </div>
       );
@@ -42,7 +42,7 @@ class MeasurementArea extends React.Component {
         <div key={option.name}>
           <p className="label nested-label measurement-icon l">{option.name}</p>
           <div className="measurement-container">
-            <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="text" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.Xcm"} name={option.name}/>
+            <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="integer" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.Xcm"} name={option.name}/>
           </div>
         </div>
       );

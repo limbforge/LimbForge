@@ -16,16 +16,25 @@ class TdArea extends React.Component {
     <div className="row">
       <div className="col-xs-12">
         <p className="label">Terminal Devices</p>
-        <select id="terminal-devices-select" onChange={this.props.updateDisplay}>
+        <select id="TD" onChange={this.props.updateDisplay}>
           {tdOptions}
         </select>
       </div>
     </div>
     : '';
 
+    var wristArea = (this.props.tds !== undefined && Array.isArray(this.props.tds) && this.props.tds.length > 0) ?
+    <div>
+      <WristArea
+        updateDisplay={this.props.updateDisplay}
+        wrist_sizes= {this.props.wrist_sizes}
+      />
+    </div> : '';
+
     return (
       <div className="tab-padding td-area">
         {tdArea}
+        {wristArea}
       </div>
     )
   }

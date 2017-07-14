@@ -1,7 +1,6 @@
 class AmputationLevelArea extends React.Component {
   constructor(props) {
     super(props);
-    this.updateSide = this.updateSide.bind(this);
     this.handleAreaClick = this.handleAreaClick.bind(this);
   }
 
@@ -12,14 +11,6 @@ class AmputationLevelArea extends React.Component {
         return true;
       default:
         return false;
-    }
-  }
-
-  updateSide(side) {
-    if (this.props.specs.side !== side) {
-      const newSpecs = this.props.specs;
-      newSpecs.side = side;
-      this.props.updateSpecs(newSpecs);
     }
   }
 
@@ -48,7 +39,7 @@ class AmputationLevelArea extends React.Component {
     const selectorStyle = {
       marginBottom: '-230px',
       position: 'absolute',
-      top: '83',
+      top: '83px',
     };
 
     const selectorStyle2 = {
@@ -195,15 +186,15 @@ class AmputationLevelArea extends React.Component {
       <div>
         <div className="col-xs-12">
           <div id="sides" className="row">
-            <form action="" onChange={this.updateSide}>
+            <form action="">
               <div className="label col-xs-4">
                 <p className="label">SIDE:</p>
               </div>
-              <div className="col-xs-4" onClick={() => {this.updateSide('left')}}>
-                <div className="row" style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>Left</div>
+              <div className="col-xs-4" value="left">
+                <div id="side" className="row" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>Left</div>
               </div>
-              <div className="col-xs-4" onClick={() => {this.updateSide('right')}}>
-                <div className="row" style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>Right</div>
+              <div value="right" className="col-xs-4" onClick={this.props.updateDisplay}>
+                <div id="side" className="row" value="right" onClick={this.props.updateDisplay} style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>Right</div>
               </div>
             </form>
           </div>
