@@ -20,11 +20,11 @@ class NameArea extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="fname col-xs-6">
-            <input id="fname" type="text" placeholder="First" name="name"/>
+          <div className="fname string col-xs-6">
+            <input id="fname" className="" type="text" onChange={this.props.updateDisplay} placeholder="First" name="name"/>
           </div>
-          <div className="lname col-xs-6">
-            <input id="lname" type="text" placeholder="Last" name="name"/>
+          <div className="lname string col-xs-6">
+            <input id="lname" className="" onChange={this.props.updateDisplay} type="text" placeholder="Last" name="name"/>
           </div>
         </div>
         <AmputationCause />
@@ -36,13 +36,13 @@ class NameArea extends React.Component {
         <div id="gender-select" className="row">
           <div className="col-xs-6">
             <label>
-              <input id="gender" onChange={this.props.updateDisplay} type="radio" name="fb" value="male" checked={selected_gender == "male" ? "checked" : ""}/>
+              <input id="gender"  onClick={this.props.updateDisplay} type="radio" name="fb" value="male" checked={selected_gender == "male" ? "checked" : ""}/>
               <img  width="130px" height="172px" src={selected_gender == "male" ? this.props.man_diagram_selected : this.props.man_diagram }/>
             </label>
           </div>
           <div className="col-xs-6">
             <label>
-              <input id="gender" onChange={this.props.updateDisplay} type="radio" name="fb" value="female" checked={selected_gender == "female" ? "checked" : ""}/>
+              <input id="gender" onClick={this.props.updateDisplay} type="radio" name="fb" value="female" checked={selected_gender == "female" ? "checked" : ""}/>
               <img width="130px" height="172px" src={selected_gender == "female" ? this.props.woman_diagram_selected : this.props.woman_diagram  }/>
             </label>
           </div>

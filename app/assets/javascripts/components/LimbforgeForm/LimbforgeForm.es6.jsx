@@ -18,6 +18,8 @@ class LimbforgeForm extends React.Component {
       showComponentArea: false,
       showMeasurementArea: false,
       specs: {
+        fname: "",
+        lname: "",
         gender: "male",
         component: undefined,
         component_object: undefined,
@@ -212,18 +214,20 @@ class LimbforgeForm extends React.Component {
     this.updateLoading();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+    const name = this.state.specs.fname == "" ? this.state.specs.lname + "_" : this.state.specs.fname + "_" + this.state.specs.lname + "_";
+    const patientName = name == "_" ? "" : name;
     var urls = [
       {
         link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
-        name: `FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
+        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
       },
       {
         link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl`,
-        name: `TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
+        name: `${patientName.toUpperCase()}TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
       },
       {
         link: `https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl`,
-        name: `WRIST_r12_PL${this.state.specs.selected_wrist_size}`
+        name: `${patientName.toUpperCase()}WRIST_r12_PL${this.state.specs.selected_wrist_size}`
       }
     ];
     /**
@@ -255,7 +259,7 @@ class LimbforgeForm extends React.Component {
     .then(function callback(blob) {
       // see FileSaver.js
       newThis.updateLoading();
-      saveAs(blob, "Limbforge.zip");
+      saveAs(blob, patientName + "limbforge_files.zip");
     }, function (e) {
       console.log('oh noes', e);
     });
@@ -266,7 +270,8 @@ class LimbforgeForm extends React.Component {
 
   updateDisplay(event) {
     newSpec = this.state.specs;
-    newSpec[event.target.id] = event.target.parentElement.getAttribute('class') != "measurement-container" ? event.target.getAttribute('value') : event.target.value;
+    const eventClass = event.target.parentElement.getAttribute('class') == null ? "" : event.target.parentElement.getAttribute('class');
+    newSpec[event.target.id] = !eventClass.includes("string") ? event.target.getAttribute('value') : event.target.value;
     this.setState({specs: newSpec});
   }
 
