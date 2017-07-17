@@ -12,7 +12,7 @@ class WristArea extends React.Component {
     });
     return (
       <div>
-        <div className="measurement-container">
+        <div className="string">
         <p className="label">Wrist Options</p>
           <select id="selected_wrist_size" onChange={this.props.updateDisplay}>
             {plOptions}
