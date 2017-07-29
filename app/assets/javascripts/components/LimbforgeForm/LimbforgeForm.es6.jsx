@@ -20,6 +20,10 @@ class LimbforgeForm extends React.Component {
       specs: {
         fname: "",
         lname: "",
+        PL_1: 0,
+        PL_2: 0,
+        PL_3: 0,
+        PL_4: 0,
         gender: "male",
         component: undefined,
         component_object: undefined,
@@ -230,6 +234,15 @@ class LimbforgeForm extends React.Component {
         name: `${patientName.toUpperCase()}WRIST_r12_PL${this.state.specs.selected_wrist_size}`
       }
     ];
+    for (var i=0; i< this.state.specs.wrist_sizes.length; i++) {
+      if (this.state.specs["PL_" + (i + 1)] > 0) {
+        urls.push(
+          { link: "https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-" + (i + 1) +".stl",
+            name: "WRIST_COUPLER_" + this.state.specs.wrist_sizes[i]["title"].replace(/\s+/g,"_").toUpperCase()
+          }
+        )
+      }
+    }
     /**
     * Fetch the content and return the associated promise.
     * @param {String} url the url of the content to fetch.
@@ -269,6 +282,7 @@ class LimbforgeForm extends React.Component {
   }
 
   updateDisplay(event) {
+    debugger;
     newSpec = this.state.specs;
     const eventClass = event.target.parentElement.getAttribute('class') == null ? "" : event.target.parentElement.getAttribute('class');
     newSpec[event.target.id] = !eventClass.includes("string") ? event.target.getAttribute('value') : event.target.value;

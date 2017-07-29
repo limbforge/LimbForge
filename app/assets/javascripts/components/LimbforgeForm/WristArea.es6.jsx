@@ -5,18 +5,18 @@ class WristArea extends React.Component {
   render() {
     var plOptions = this.props.wrist_sizes.map((pl) => {
       return (
-        <option value={pl.value} key={pl.value} >
-          {pl.title}
-        </option>
+        <div>
+          <input type="checkbox" id={"PL_" + pl.value} value={pl.value} key={pl.value} onChange={this.props.updateDisplay}>
+          </input>
+          <p className="wrist-title">{pl.title}</p>
+        </div>
       );
     });
     return (
       <div>
         <div className="string">
         <p className="label">Wrist Options</p>
-          <select id="selected_wrist_size" onChange={this.props.updateDisplay}>
-            {plOptions}
-          </select>
+          {plOptions}
         </div>
       </div>
     )
