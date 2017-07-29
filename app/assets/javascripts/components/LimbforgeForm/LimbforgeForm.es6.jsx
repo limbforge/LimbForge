@@ -282,7 +282,6 @@ class LimbforgeForm extends React.Component {
   }
 
   updateDisplay(event) {
-    debugger;
     newSpec = this.state.specs;
     const eventClass = event.target.parentElement.getAttribute('class') == null ? "" : event.target.parentElement.getAttribute('class');
     newSpec[event.target.id] = !eventClass.includes("string") ? event.target.getAttribute('value') : event.target.value;
