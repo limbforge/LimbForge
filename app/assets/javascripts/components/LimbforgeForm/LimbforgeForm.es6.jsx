@@ -203,7 +203,12 @@ class LimbforgeForm extends React.Component {
   }
 
   getStls(stls) {
-    var urls =
+    var urls = this.state.specs.amputationLevel == 'Transhumeral' ?
+    [
+      'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}.stl',
+      'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl',
+      'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
+    ] :
     [
       'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl',
       'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl',
@@ -241,8 +246,8 @@ class LimbforgeForm extends React.Component {
     const patientName = name == "_" ? "" : name;
     var urls = [
       {
-        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
-        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1-${this.roundUpNumber(this.state.specs.L1)}'}.stl`,
+        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
       },
       {
         link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl`,
@@ -332,7 +337,9 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
+      const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
+        'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '.stl' :
+        'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
