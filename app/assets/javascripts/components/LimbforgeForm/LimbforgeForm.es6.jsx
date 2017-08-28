@@ -454,6 +454,7 @@ class LimbforgeForm extends React.Component {
       <TdArea
       updateDisplay={this.updateDisplay}
       tds={this.state.tds}
+      specs={this.state.specs}
       wrist_sizes= {this.state.specs.wrist_sizes}
       />
       <SubmitArea
