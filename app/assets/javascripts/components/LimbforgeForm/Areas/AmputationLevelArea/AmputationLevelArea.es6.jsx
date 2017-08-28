@@ -5,18 +5,13 @@ class AmputationLevelArea extends React.Component {
   }
 
   isSupportedAmputationLevel(level) {
-    switch (level.toLowerCase()) {
-      case 'transradial':
-        return true;
-      default:
-        return false;
-    }
+    var levelSlug = level.toLowerCase().replace(/\s/g, '');
+    var hasDevices = this.props.availableLevels.filter(function(n){ return n['slug'] == levelSlug })[0]
+    return hasDevices['has_devices'];
   }
 
   loadSvg() {
-
     const imageName = "al_" + this.props.specs.gender + "_" + this.props.specs.amputationLevel.toLowerCase().split(' ').join('_') + "_" + this.props.specs.side.charAt(0).toUpperCase();
-
     const imageURL = this.props.images[imageName];
     const imageStyle = {
       pointerEvents: 'none',

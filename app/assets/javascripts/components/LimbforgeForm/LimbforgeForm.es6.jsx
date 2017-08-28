@@ -8,11 +8,13 @@ class LimbforgeForm extends React.Component {
       td: undefined,
       devices: undefined,
     };
+    this.getAvailableLevels();
     this.state = {
       components: undefined,
       tds: undefined,
       isLoading: false,
       measurements: undefined,
+      availableLevels: undefined,
       showNameArea: true,
       showAmputationLevelArea: false,
       showComponentArea: false,
@@ -80,6 +82,7 @@ class LimbforgeForm extends React.Component {
         },
       }
     };
+    this.getAvailableLevels = this.getAvailableLevels.bind(this);
     this.createZip = this.createZip.bind(this);
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
@@ -107,7 +110,6 @@ class LimbforgeForm extends React.Component {
     this.updateComponentSpec(component_id);
     const tdsUrl = this.props.tds_search_path + "?query=" + component_id;
     const measurementsUrl = this.props.measurements_search_path + "?query=" + component_id;
-
     $.ajax({
       url: tdsUrl,
       dataType: 'json',
@@ -145,10 +147,27 @@ class LimbforgeForm extends React.Component {
     }
   }
 
+  getAvailableLevels(){
+    const url = "https://fusion360.io/api/ui/amputationLevels";
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: (data) => {
+        const newState = {
+          availableLevels: data['amputationLevels']
+        };
+        this.setState(newState);
+      },
+      error: (error) => {
+        console.log('get available levels error', error, url);
+      }
+    });
+  }
+
   getComponents(componentType) {
     const url = this.props.components_search_path + "?query="+componentType;
     $.ajax({
-      url,
+      url: url,
       dataType: 'json',
       success: (data) => {
         const newState = {
@@ -402,6 +421,7 @@ class LimbforgeForm extends React.Component {
       />
       <AmputationLevelArea
       availableAreas={this.state.availableAreas}
+      availableLevels={this.state.availableLevels}
       updateAvailableAreas={this.updateAvailableAreas}
       updateDisplay={this.updateDisplay}
       updateSelectedArea={this.updateSelectedArea}
