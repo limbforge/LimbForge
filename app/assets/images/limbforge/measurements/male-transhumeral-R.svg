@@ -308,19 +308,15 @@
 <circle class="st3" cx="591" cy="449.5" r="22.5"/>
 <polygon class="st4" points="415.7,310.2 443,351.8 388.5,351.8 "/>
 <line class="st5" x1="441.3" y1="281.3" x2="459.2" y2="478.7"/>
-<rect x="434.8" y="280.3" transform="matrix(0.9959 -9.028638e-02 9.028638e-02 0.9959 -23.5946 40.9917)" class="st4" width="13" height="2"/>
-<rect x="452.7" y="477.7" transform="matrix(0.9959 -9.028638e-02 9.028638e-02 0.9959 -41.3438 43.4138)" class="st4" width="13" height="2"/>
+<rect x="434.8" y="280.3" transform="matrix(0.9959 -9.028781e-02 9.028781e-02 0.9959 -23.5951 40.9923)" class="st4" width="13" height="2"/>
+<rect x="452.7" y="477.7" transform="matrix(0.9959 -9.028781e-02 9.028781e-02 0.9959 -41.3445 43.4147)" class="st4" width="13" height="2"/>
 <line class="st6" x1="565.4" y1="366.4" x2="448.2" y2="378.7"/>
-<line class="st5" x1="429.1" y1="380" x2="438" y2="479.6"/>
-<rect x="422.6" y="379" transform="matrix(0.996 -8.924285e-02 8.924285e-02 0.996 -32.1995 39.8101)" class="st4" width="13" height="2"/>
-<rect x="431.5" y="478.6" transform="matrix(0.996 -8.941531e-02 8.941531e-02 0.996 -41.1295 41.0853)" class="st4" width="13" height="2"/>
 <line class="st6" x1="442.2" y1="290.4" x2="564.4" y2="276.2"/>
 <line class="st6" x1="459.2" y1="461.9" x2="568" y2="452.2"/>
 <line class="st6" x1="202.5" y1="358.1" x2="109" y2="356.6"/>
 <line class="st5" x1="207.2" y1="283" x2="205.9" y2="364.7"/>
-<rect x="206.2" y="276.5" transform="matrix(1.535797e-02 -0.9999 0.9999 1.535797e-02 -78.9641 485.9078)" class="st4" width="2" height="13"/>
-<rect x="204.9" y="358.2" transform="matrix(1.535797e-02 -0.9999 0.9999 1.535797e-02 -161.9403 565.0353)" class="st4" width="2" height="13"/>
-<polygon class="st4" points="400,408.9 427.3,450.5 372.7,450.5 "/>
+<rect x="206.2" y="276.6" transform="matrix(1.535769e-02 -0.9999 0.9999 1.535769e-02 -79.0336 485.8928)" class="st4" width="2" height="13"/>
+<rect x="204.9" y="358.3" transform="matrix(1.535769e-02 -0.9999 0.9999 1.535769e-02 -161.9904 565.0162)" class="st4" width="2" height="13"/>
 <polygon class="st4" points="238.7,295.5 266,337 211.4,337 "/>
 <circle class="st3" cx="392.6" cy="507.5" r="22.5"/>
 <circle class="st3" cx="392.5" cy="586.7" r="22.5"/>
@@ -328,17 +324,16 @@
 <polygon class="st4" points="575.3,554.6 602.6,596.2 548,596.2 "/>
 <line class="st5" x1="540.2" y1="487.3" x2="539.5" y2="667"/>
 <rect x="531.6" y="484.3" class="st4" width="13" height="2"/>
-<rect x="538.5" y="660.5" transform="matrix(4.014273e-03 -1 1 4.014273e-03 -129.6744 1203.8199)" class="st4" width="2" height="13"/>
+<rect x="538.5" y="660.5" transform="matrix(4.014241e-03 -1 1 4.014241e-03 -129.6664 1203.8069)" class="st4" width="2" height="13"/>
 <line class="st6" x1="532.7" y1="573.6" x2="415.5" y2="586"/>
 <line class="st6" x1="419.9" y1="503.2" x2="524.3" y2="490.7"/>
 <line class="st6" x1="419.9" y1="657" x2="529.1" y2="657"/>
 <text transform="matrix(1 0 0 1 69.94 362.51)" class="st1 st7 st8">C7</text>
 <text transform="matrix(1 0 0 1 575.11 283.71)" class="st1 st7 st8">C6</text>
-<text transform="matrix(1 0 0 1 574.96 372.93)" class="st1 st7 st8">C5</text>
+<text transform="matrix(1 0 0 1 574.96 372.9299)" class="st1 st7 st8">C5</text>
 <text transform="matrix(1 0 0 1 575.66 458.04)" class="st1 st7 st8">C4</text>
 <text transform="matrix(1 0 0 1 403.62 346.17)" class="st1 st7 st8">L3</text>
-<text transform="matrix(1 0 0 1 387.41 446.4)" class="st1 st7 st8">L2</text>
-<text transform="matrix(1 0 0 1 225.83 332.43)" class="st1 st7 st8">L4</text>
+<text transform="matrix(1 0 0 1 225.83 332.4299)" class="st1 st7 st8">L4</text>
 <text transform="matrix(1 0 0 1 379.24 516.02)" class="st1 st7 st8">C3</text>
 <text transform="matrix(1 0 0 1 377.09 595.22)" class="st1 st7 st8">C2</text>
 <text transform="matrix(1 0 0 1 376.79 665.32)" class="st1 st7 st8">C1</text>
