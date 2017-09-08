@@ -270,7 +270,7 @@ class LimbforgeForm extends React.Component {
   loadNewDevices() {
     if (this.state.specs.component != undefined){
       // LOAD NEW devices
-      const s3url =  this.state.specs.component_object.folder == "xhparm" ? 'https://s3.amazonaws.com/limbforgestls/forearm/xhparm/xhparm.stl' : 'https://s3.amazonaws.com/limbforgestls/forearm/ebearm/'+ this.state.specs.side + '/forearm_ebearm_' + this.state.specs.side + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
+      const s3url =  this.state.specs.component_object.folder == "xhparm" ? 'https://s3.amazonaws.com/limbforgestls/forearm/xhparm/xhparm.stl' : 'https://s3.amazonaws.com/limbforgestls/EbeArm/Ebe_forearm_'+ this.state.specs.side.charAt(0).toUpperCase() + '/forearm_' + this.state.specs.side.charAt(0).toUpperCase() + '_C4-'+ this.state.specs.C4 +'_L1-'+ this.state.specs.L1  + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
