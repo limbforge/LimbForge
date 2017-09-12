@@ -385,7 +385,7 @@ class LimbforgeForm extends React.Component {
           } else {
             mesh.position.set( 5, 0, 9 );
           }
-          mesh.rotation.set( 0, 0, 0 );
+          mesh.rotation.set( 0, 0, 6 );
           mesh.scale.set( .02, .02, .02 );
 
           mesh.castShadow = true;
