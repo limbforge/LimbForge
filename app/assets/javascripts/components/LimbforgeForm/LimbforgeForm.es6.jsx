@@ -313,10 +313,9 @@ class LimbforgeForm extends React.Component {
     newSpec[event.target.id] = !eventClass.includes("string") ? event.target.getAttribute('value') : event.target.value;
     this.setState({specs: newSpec});
   }
-
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.roundDownNumber(this.state.specs.C1) +'.stl';
+      const s3url =  this.state.specs.amputationLevel != 'Transhumeral' ? 'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.roundDownNumber(this.state.specs.C1) +'.stl' :  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-150.stl';
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
@@ -342,26 +341,84 @@ class LimbforgeForm extends React.Component {
       const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
         'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/preview/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C4-' + this.roundDownNumber(this.state.specs.C4) + '_C6-'+ this.roundDownNumber(this.state.specs.C6) + '_L2-'+ this.roundDownNumber(this.state.specs.L2) + '.stl' :
         'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
-      if (this.downloaded.devices !== s3url) {
-        this.downloaded.devices = s3url;
+      var transhumeralForearm = 'https://s3.amazonaws.com/limbforgestls/forearm/forearm-xh-a/r1/build/L/info_C1-150_C4-240_L1-270.stl';
+      var transhumeralElbow = 'https://s3.amazonaws.com/limbforgestls/elbow/1DOF_A/r6/preview/L/preview.stl';
+      if (this.state.specs.amputationLevel == 'Transhumeral'){
+
         loader.load(s3url, (geometry) => {
+          const mesh2 = new THREE.Mesh( geometry, material );
+          mesh2.name = 'upperarm';
+          if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
+            mesh2.position.set( 5, 0, 0.0 );
+          } else {
+            mesh2.position.set( 5, 0, 10);
+          }
+          mesh2.rotation.set( 0, 0, 0 );
+          mesh2.scale.set( .02, .02, .02 );
+
+          mesh2.castShadow = true;
+          mesh2.receiveShadow = false;
+          scene.add( mesh2 );
+        });
+
+        loader.load(transhumeralForearm, (geometry) => {
+          const mesh1 = new THREE.Mesh( geometry, material );
+          mesh1.name = 'forearm';
+          if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
+            mesh1.position.set( 5, 0, 0.0 );
+          } else {
+            mesh1.position.set( 5, 0, 3.3 );
+          }
+          mesh1.rotation.set( 0, 0, 0 );
+          mesh1.scale.set( .02, .02, .02 );
+
+          mesh1.castShadow = true;
+          mesh1.receiveShadow = false;
+          scene.add( mesh1 );
+        });
+        
+        loader.load(transhumeralElbow, (geometry) => {
           const mesh = new THREE.Mesh( geometry, material );
-          mesh.name = 'device';
+          mesh.name = 'elbow';
           if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
             mesh.position.set( 5, 0, 0.0 );
           } else {
-            mesh.position.set( 5, 0, 3.3 );
+            mesh.position.set( 5, 0, 9 );
           }
-
           mesh.rotation.set( 0, 0, 0 );
           mesh.scale.set( .02, .02, .02 );
 
           mesh.castShadow = true;
           mesh.receiveShadow = false;
-          scene.remove(scene.getObjectByName('device'));
           scene.add( mesh );
-          renderThreeJS();
         });
+        scene.remove(scene.getObjectByName('device'));
+        renderThreeJS();
+      }
+      else{
+        scene.remove(scene.getObjectByName('upperarm'));
+        scene.remove(scene.getObjectByName('forearm'));
+        scene.remove(scene.getObjectByName('elbow'));
+        if (this.downloaded.devices !== s3url) {
+          this.downloaded.devices = s3url;
+          loader.load(s3url, (geometry) => {
+            const mesh = new THREE.Mesh( geometry, material );
+            mesh.name = 'device';
+            if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
+              mesh.position.set( 5, 0, 0.0 );
+            } else {
+              mesh.position.set( 5, 0, 3.3 );
+            }
+            mesh.rotation.set( 0, 0, 0 );
+            mesh.scale.set( .02, .02, .02 );
+  
+            mesh.castShadow = true;
+            mesh.receiveShadow = false;
+            scene.remove(scene.getObjectByName('device'));
+            scene.add( mesh );
+            renderThreeJS();
+          });
+        }
       }
     }
   }

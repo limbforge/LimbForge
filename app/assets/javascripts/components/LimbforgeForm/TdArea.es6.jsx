@@ -21,7 +21,6 @@ class TdArea extends React.Component {
 
     var tdArea = (showDevices) ?
     <div className="row">
-      {elbowArea}
       <div className="col-xs-12">
         <p className="label">Terminal Devices</p>
         <select id="TD" onChange={this.props.updateDisplay}>
@@ -33,10 +32,12 @@ class TdArea extends React.Component {
 
     var wristArea = (showDevices) ?
       <div className="row">
-        <WristArea
-        updateDisplay={this.props.updateDisplay}
-        wrist_sizes= {this.props.wrist_sizes}
-        />
+        <div className="col-xs-12">
+          <WristArea
+          updateDisplay={this.props.updateDisplay}
+          wrist_sizes= {this.props.wrist_sizes}
+          />
+        </div>
       </div> : '';
 
     var forearmArea = (this.props.level == "Transhumeral") && showDevices  ?
@@ -48,7 +49,6 @@ class TdArea extends React.Component {
 
     return (
       <div className="tab-padding td-area">
-        {forearmArea}
         {wristArea}
         {tdArea}
       </div>
