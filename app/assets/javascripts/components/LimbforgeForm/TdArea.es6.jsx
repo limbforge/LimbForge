@@ -3,6 +3,7 @@ class TdArea extends React.Component {
     super(props);
   }
   render() {
+    var showDevices = this.props.tds !== undefined && Array.isArray(this.props.tds) && this.props.tds.length > 0;
     var tdOptions = this.props.tds == undefined ? '' : this.props.tds.map((td) => {
       return (
         <option value={td.name} key={td.name} >
@@ -10,17 +11,16 @@ class TdArea extends React.Component {
         </option>
       );
     });
-    var elbowArea = this.props.specs.amputationLevel == 'Transhumeral' ? 
-      <div className="col-xs-12">
+    var elbowArea = (this.props.level == "Transhumeral") && showDevices  ? 
+      <div className="row">
         <p className="label">Elbow Devices</p>
         <select id="Elbow">
           <option>Select Elbow</option>
         </select>
       </div> : '';
 
-    var tdArea = (this.props.tds !== undefined && Array.isArray(this.props.tds) && this.props.tds.length > 0) ?
+    var tdArea = (showDevices) ?
     <div className="row">
-      <p>* Enter measurements above in increments of .5cm *</p>
       {elbowArea}
       <div className="col-xs-12">
         <p className="label">Terminal Devices</p>
@@ -31,18 +31,26 @@ class TdArea extends React.Component {
     </div>
     : '';
 
-    var wristArea = (this.props.tds !== undefined && Array.isArray(this.props.tds) && this.props.tds.length > 0) ?
-      <div>
+    var wristArea = (showDevices) ?
+      <div className="row">
         <WristArea
         updateDisplay={this.props.updateDisplay}
         wrist_sizes= {this.props.wrist_sizes}
         />
       </div> : '';
 
+    var forearmArea = (this.props.level == "Transhumeral") && showDevices  ?
+    <div className="row">
+      <ForearmArea
+      updateDisplay={this.props.updateDisplay}
+      />
+    </div> : '';
+
     return (
       <div className="tab-padding td-area">
-        {tdArea}
+        {forearmArea}
         {wristArea}
+        {tdArea}
       </div>
     )
   }
