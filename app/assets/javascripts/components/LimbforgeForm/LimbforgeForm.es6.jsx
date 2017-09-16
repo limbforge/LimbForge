@@ -248,10 +248,6 @@ class LimbforgeForm extends React.Component {
     const patientName = name == "_" ? "" : name;
     var urls = [
       {
-        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1-${this.roundUpNumber(this.state.specs.L1)}'}.stl`,
-        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
-      },
-      {
         link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl`,
         name: `${patientName.toUpperCase()}TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
       },
@@ -260,6 +256,18 @@ class LimbforgeForm extends React.Component {
         name: `${patientName.toUpperCase()}WRIST_r12_PL${this.state.specs.selected_wrist_size}`
       }
     ];
+    if (this.state.specs.amputationLevel == 'Transhumeral'){
+      urls.concat({
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}.stl`,
+        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
+      });
+    }
+    else{
+      urls.concat({
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}'.stl`,
+        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
+      });
+    }
     for (var i=0; i< this.state.specs.wrist_sizes.length; i++) {
       if (this.state.specs["PL_" + (i + 1)] > 0) {
         urls.push(

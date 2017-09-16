@@ -10,7 +10,7 @@
       <li class="<%= params[:controller] == "terminal_devices" ? "active" : ""%>"><%= link_to "TDs", terminal_devices_path %></li>
       <li class="<%= params[:controller] == "measurements" ? "active" : ""%>"><%= link_to "Measurements", measurements_path %></li>
       <li class="<%= params[:controller] == "amputation_levels" ? "active" : ""%>"><%= link_to "Levels", amputation_levels_path %></li>
-      <li class="limbforge"><%= link_to "Limbforge", limbforge_path %></li>
+      <li class="limbforge"><%= link_to "LimbForge", limbforge_path %></li>
     </ul>
   </div>
   <a class="signout" href="<%= destroy_user_session_path%>" data-method="delete">sign out </a>
