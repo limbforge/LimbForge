@@ -49,7 +49,6 @@ class TdArea extends React.Component {
     return (
       <div className="tab-padding td-area">
         {forearmArea}
-        {wristArea}
         {tdArea}
       </div>
     )

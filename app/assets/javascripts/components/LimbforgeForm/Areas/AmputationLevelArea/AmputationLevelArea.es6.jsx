@@ -107,11 +107,11 @@ class AmputationLevelArea extends React.Component {
 
         <rect
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
-          x="-0.4" y="397" opacity="0.3" fill="#1578B5" width="600.1" height="91.4" stroke="#ffffff" strokeWidth="5px"/>
+          x="-0.4" y="397" opacity="0.3" fill="#1578B5" width="600.1" height="43.4" stroke="#ffffff" strokeWidth="5px"/>
         <circle
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
           fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="443" r="14"
+          cx="40.6" cy="419" r="14"
         />
       </svg>
     );
@@ -165,11 +165,11 @@ class AmputationLevelArea extends React.Component {
 
         <rect
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
-          x="-0.4" y="338" opacity="0.3" fill="#1578B5" width="600.1" height="91.4" stroke="#ffffff" strokeWidth="5px"/>
+          x="-0.4" y="338" opacity="0.3" fill="#1578B5" width="600.1" height="34.4" stroke="#ffffff" strokeWidth="5px"/>
         <circle
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
           fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="385" r="14"
+          cx="40.6" cy="355" r="14"
         />
       </svg>
     );

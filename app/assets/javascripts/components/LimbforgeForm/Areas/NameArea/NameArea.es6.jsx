@@ -21,10 +21,10 @@ class NameArea extends React.Component {
         </div>
         <div className="row">
           <div className="fname string col-xs-6">
-            <input id="fname" className="" type="text" onChange={this.props.updateDisplay} placeholder="First" name="name"/>
+            <input id="lname" className="" onChange={this.props.updateDisplay} type="text" placeholder="Last" name="name"/>
           </div>
           <div className="lname string col-xs-6">
-            <input id="lname" className="" onChange={this.props.updateDisplay} type="text" placeholder="Last" name="name"/>
+            <input id="fname" className="" type="text" onChange={this.props.updateDisplay} placeholder="First" name="name"/>
           </div>
         </div>
         <AmputationCause />

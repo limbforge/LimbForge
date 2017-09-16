@@ -75,7 +75,7 @@ class MeasurementArea extends React.Component {
       <div>
         <div onClick={()=> this.props.updateSelectedArea('measurements')} className={classes}>
           <div>
-            <h2>Measurements</h2>
+            <h2>Configuration</h2>
             <span className="arrow"></span>
           </div>
         </div>

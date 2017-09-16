@@ -268,14 +268,12 @@ class LimbforgeForm extends React.Component {
         name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
       });
     }
-    for (var i=0; i< this.state.specs.wrist_sizes.length; i++) {
-      if (this.state.specs["PL_" + (i + 1)] > 0) {
-        urls.push(
-          { link: "https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-" + (i + 1) +".stl",
-            name: "WRIST_COUPLER_" + this.state.specs.wrist_sizes[i]["title"].replace(/\s+/g,"_").toUpperCase()
-          }
-        )
-      }
+    for (var i=0; i< 4; i++) {
+      urls.push(
+        { link: "https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-" + (i + 1) +".stl",
+          name: "WRIST_COUPLER_" + this.state.specs.wrist_sizes[i]["title"].replace(/\s+/g,"_").toUpperCase()
+        }
+      )
     }
     /**
     * Fetch the content and return the associated promise.
@@ -423,7 +421,6 @@ class LimbforgeForm extends React.Component {
       <div id="limbforge">
       <img className="logo" src={this.props.logo_img} />
       <h1 id="title">LIMBFORGE</h1>
-      <a href={this.props.sign_out_path} data-method="delete"> sign out </a>
       <NameArea
       gender={this.state.specs.gender}
       availableAreas={this.state.availableAreas}
