@@ -47,10 +47,12 @@ class NameArea extends React.Component {
             </label>
           </div>
         </div>
-        <div className="row">
+        <div id="date" className="row">
           <div className="col-xs-12">
             <p className="nested-label">Date of Amputation</p>
-            <input type="text" data-provide='datepicker' />
+            <input className="col-xs-4" type="number" placeholder="# Day"/>
+            <input className="col-xs-4 month-input" type="number" placeholder="# Month"/>
+            <input className="col-xs-4" type="number" placeholder="# Year"/>
           </div>
         </div>
         <div className="row">

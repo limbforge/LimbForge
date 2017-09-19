@@ -4,6 +4,13 @@
   margin: 0;
 }
 
+#date{
+  .month-input{
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
 #AmputationLevel{
   button{
     margin-top: $standard-padding/3;
