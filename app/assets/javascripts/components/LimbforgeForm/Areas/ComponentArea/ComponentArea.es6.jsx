@@ -25,7 +25,7 @@ class ComponentArea extends React.Component {
     return(
       <div>
         <div onClick={()=>this.props.updateSelectedArea('prosthesis')} className={classes}>
-          <h2>Prosthesis</h2>
+          <h2>Configuration</h2>
           <span className="arrow"></span>
           <span className="line"></span>
         </div>

@@ -72,7 +72,7 @@ class NameArea extends React.Component {
     return (
       <div>
         <div onClick={()=>this.props.updateSelectedArea('patient')} className={classes}>
-          <h2>Patient</h2>
+          <h2>Patient Info</h2>
           <span className="arrow"></span>
         </div>
         {this.props.availableAreas.patient.selected ? this.renderNameArea() : ''}
