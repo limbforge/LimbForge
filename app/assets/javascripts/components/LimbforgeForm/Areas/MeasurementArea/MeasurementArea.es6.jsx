@@ -79,6 +79,7 @@ class MeasurementArea extends React.Component {
             <span className="arrow"></span>
           </div>
         </div>
+        {this.props.availableAreas.measurements.selected ? this.renderMeasurementArea() : ''}
       </div>
     )
   }
