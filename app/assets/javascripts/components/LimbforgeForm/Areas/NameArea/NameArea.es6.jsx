@@ -63,7 +63,6 @@ class NameArea extends React.Component {
         <div className="ui-widget">
           <input id="tags" />
         </div>
-        <button style={{cursor: "pointer"}} onClick={() => {this.props.updateAvailableAreas('amputation')}}>CONTINUE</button>
       </div>
     );
   }
@@ -77,6 +76,20 @@ class NameArea extends React.Component {
           <span className="arrow"></span>
         </div>
         {this.props.availableAreas.patient.selected ? this.renderNameArea() : ''}
+        <AmputationLevelArea
+          availableAreas={this.props.availableAreas}
+          availableLevels={this.props.availableLevels}
+          updateAvailableAreas={this.props.updateAvailableAreas}
+          updateDisplay={this.props.updateDisplay}
+          updateSelectedArea={this.props.updateSelectedArea}
+          selectedGender={this.props.selectedGender}
+          updateSpecs={this.props.updateSpecs}
+          getComponents={this.props.getComponents}
+          levels={this.props.levels}
+          components_search_path={this.props.components_search_path}
+          images={this.props.images}
+          specs={this.props.specs}
+        />
       </div>
     )
   }

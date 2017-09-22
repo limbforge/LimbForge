@@ -424,30 +424,25 @@ class LimbforgeForm extends React.Component {
       <img className="logo" src={this.props.logo_img} />
       <h1 id="title">LIMBFORGE</h1>
       <NameArea
-      gender={this.state.specs.gender}
-      availableAreas={this.state.availableAreas}
-      updateAvailableAreas={this.updateAvailableAreas}
-      updateSelectedArea={this.updateSelectedArea}
-      showNameArea={this.state.showNameArea}
-      man_diagram={this.props.images.man_diagram}
-      man_diagram_selected={this.props.images.man_diagram_selected}
-      woman_diagram={this.props.images.woman_diagram}
-      woman_diagram_selected={this.props.images.woman_diagram_selected}
-      updateDisplay={this.updateDisplay}
-      />
-      <AmputationLevelArea
-      availableAreas={this.state.availableAreas}
-      availableLevels={this.state.availableLevels}
-      updateAvailableAreas={this.updateAvailableAreas}
-      updateDisplay={this.updateDisplay}
-      updateSelectedArea={this.updateSelectedArea}
-      selectedGender={this.state.specs.gender}
-      updateSpecs={this.updateSpecs}
-      getComponents={this.getComponents}
-      levels={this.props.levels}
-      components_search_path={this.props.components_search_path}
-      images={this.props.images}
-      specs={this.state.specs}
+        gender={this.state.specs.gender}
+        availableLevels={this.state.availableLevels}
+        availableAreas={this.state.availableAreas}
+        updateAvailableAreas={this.updateAvailableAreas}
+        updateSelectedArea={this.updateSelectedArea}
+        showNameArea={this.state.showNameArea}
+        man_diagram={this.props.images.man_diagram}
+        man_diagram_selected={this.props.images.man_diagram_selected}
+        woman_diagram={this.props.images.woman_diagram}
+        woman_diagram_selected={this.props.images.woman_diagram_selected}
+        updateDisplay={this.updateDisplay}
+        availableLevels={this.state.availableLevels}
+        selectedGender={this.state.specs.gender}
+        updateSpecs={this.updateSpecs}
+        getComponents={this.getComponents}
+        levels={this.props.levels}
+        components_search_path={this.props.components_search_path}
+        images={this.props.images}
+        specs={this.state.specs}
       />
       <ComponentArea
       availableAreas={this.state.availableAreas}

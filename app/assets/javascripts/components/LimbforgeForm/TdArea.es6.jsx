@@ -21,7 +21,6 @@ class TdArea extends React.Component {
 
     var tdArea = (showDevices) ?
     <div className="row">
-      {elbowArea}
       <div className="col-xs-12">
         <p className="label">Terminal Devices</p>
         <select id="TD" onChange={this.props.updateDisplay}>
@@ -48,7 +47,6 @@ class TdArea extends React.Component {
 
     return (
       <div className="tab-padding td-area">
-        {forearmArea}
         {tdArea}
       </div>
     )

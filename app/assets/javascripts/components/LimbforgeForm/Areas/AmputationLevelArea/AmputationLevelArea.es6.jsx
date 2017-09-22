@@ -6,7 +6,7 @@ class AmputationLevelArea extends React.Component {
 
   isSupportedAmputationLevel(level) {
     var levelSlug = level.toLowerCase().replace(/\s/g, '');
-    var hasDevices = this.props.availableLevels.filter(function(n){ return n['slug'] == levelSlug })[0]
+    var hasDevices = this.props.availableLevels ? this.props.availableLevels.filter(function(n){ return n['slug'] == levelSlug })[0] : '';
     return hasDevices['has_devices'];
   }
 
@@ -244,15 +244,9 @@ class AmputationLevelArea extends React.Component {
   }
 
   render() {
-    const classes = this.props.availableAreas.amputation.selected ? 'accordion-head active' : 'accordion-head';
-
     return (
       <div>
-        <div onClick={()=>this.props.updateSelectedArea('amputation')} className={classes}>
-          <h2>Amputation</h2>
-          <span className="arrow"></span>
-        </div>
-        {this.props.availableAreas.amputation.selected ? this.loadAmutationLevelArea() : ""}
+        {this.props.availableAreas.patient.selected ? this.loadAmutationLevelArea() : ""}
       </div>
     );
   }
