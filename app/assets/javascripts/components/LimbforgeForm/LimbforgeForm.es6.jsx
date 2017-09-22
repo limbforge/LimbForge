@@ -254,7 +254,7 @@ class LimbforgeForm extends React.Component {
       {
         link: `https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl`,
         name: `${patientName.toUpperCase()}WRIST_r12_PL${this.state.specs.selected_wrist_size}`
-      }
+      },
     ];
     if (this.state.specs.amputationLevel == 'Transhumeral'){
       urls.concat({
@@ -297,6 +297,8 @@ class LimbforgeForm extends React.Component {
       var filename = url.name + '.stl';
       zip.file(filename, urlToPromise(url.link), {binary:true});
     });
+
+    zip.file('instructions.txt', urlToPromise('https://s3-us-west-2.amazonaws.com/limbforgedocs/instructions.txt'), {binary:true});
 
     // when everything has been downloaded, we can trigger the dl
     newThis = this;
