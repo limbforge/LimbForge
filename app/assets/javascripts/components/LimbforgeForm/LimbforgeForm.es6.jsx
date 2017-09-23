@@ -257,16 +257,17 @@ class LimbforgeForm extends React.Component {
       },
     ];
     if (this.state.specs.amputationLevel == 'Transhumeral'){
-      urls.concat({
+      urls.push({
         link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}.stl`,
         name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
       });
     }
     else{
-      urls.concat({
-        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}'.stl`,
-        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
+      urls.push({
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
+        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
       });
+      debugger;
     }
     for (var i=0; i< 4; i++) {
       urls.push(
@@ -293,7 +294,9 @@ class LimbforgeForm extends React.Component {
     }
 
     var zip = new JSZip();
+    debugger;
     urls.forEach((url) => {
+      debugger;
       var filename = url.name + '.stl';
       zip.file(filename, urlToPromise(url.link), {binary:true});
     });
