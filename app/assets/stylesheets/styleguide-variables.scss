@@ -14,6 +14,8 @@ $red:             #df3f3f;
 $green:           #299665;
 
 $black:           #000000;
+$border:          #bfbfbf;
+$placeholder:     #757575;
 
 //alert background-colors
 $alert-blue:            rgba(21,120,181,.8);
@@ -26,6 +28,7 @@ $area-padding: $standard-padding*2 $standard-padding;
 $base-font-color:         $dark-gray;
 $base-line-height:        $standard-padding;
 $base-letter-spacing:     $standard-padding/10;
+$input-and-label-size:    13px;
 //headers
 $base-h-font-family:    "din-2014";
 $base-h-letter-spacing: $standard-padding/30;

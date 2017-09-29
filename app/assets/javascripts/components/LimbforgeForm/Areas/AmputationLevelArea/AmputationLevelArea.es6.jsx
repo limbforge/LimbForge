@@ -46,6 +46,7 @@ class AmputationLevelArea extends React.Component {
       background: '#1578b5',
       cursor: 'pointer',
       color: '#ffffff',
+      fontSize: '13px',
       padding: '12px',
       textAlign: 'center'
     };
@@ -54,6 +55,7 @@ class AmputationLevelArea extends React.Component {
       background: '#ffffff',
       cursor: 'pointer',
       color: '#000000',
+      fontSize: '13px',
       padding: '12px',
       textAlign: 'center'
     };

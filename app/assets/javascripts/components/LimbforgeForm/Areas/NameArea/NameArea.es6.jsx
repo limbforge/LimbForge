@@ -8,10 +8,13 @@ class NameArea extends React.Component {
       source: availableCities
     });
   }
-
+  limitDigits(num, event){
+    if (event.target.value.length > num) {
+      event.target.value = event.target.value.slice(0, -1)
+    }
+  }
   renderNameArea() {
     var selected_gender = this.props.gender;
-
     return (
       <div className="tab-padding">
         <div className="row">
@@ -50,9 +53,9 @@ class NameArea extends React.Component {
         <div id="date" className="row">
           <div className="col-xs-12">
             <p className="nested-label">Date of Amputation</p>
-            <input className="col-xs-4" type="number" placeholder="# Day"/>
-            <input className="col-xs-4 month-input" type="number" placeholder="# Month"/>
-            <input className="col-xs-4" type="number" placeholder="# Year"/>
+            <input className="col-xs-4" type="number" onChange={ (event) => this.limitDigits(2, event)} placeholder="day"/>
+            <input className="col-xs-4 month-input" onChange={(event) => this.limitDigits(2, event)} type="number" placeholder="month"/>
+            <input className="col-xs-4" type="number" onChange={(event) => this.limitDigits(4,event)} placeholder="year"/>
           </div>
         </div>
         <div className="row">
@@ -72,7 +75,7 @@ class NameArea extends React.Component {
     return (
       <div>
         <div onClick={()=>this.props.updateSelectedArea('patient')} className={classes}>
-          <h2>Patient Info</h2>
+          <h2>Patient Information</h2>
           <span className="arrow"></span>
         </div>
         {this.props.availableAreas.patient.selected ? this.renderNameArea() : ''}

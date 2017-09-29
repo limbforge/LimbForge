@@ -173,7 +173,7 @@ p{
     color: $base-font-color;
     display: block;
     text-align: left;
-    font-size: 16px;
+    font-size: $input-and-label-size;
     font-weight: 500;
     padding: $standard-padding/2 0 $standard-padding/3;
     margin: 0;
@@ -184,7 +184,7 @@ p{
   &.nested-label{
     padding: 0;
     margin-top: $standard-padding/2;
-    font-size: 16px;
+    font-size: $input-and-label-size;
     font-weight: 500;
     margin-bottom: 0;
     &.c{
@@ -224,7 +224,8 @@ p{
    padding: $standard-padding/6;
    max-width: 80px;
    position: relative;
-   font-size: 16px;
+   font-size: $input-and-label-size;
+   text-transform: lowercase;
    height: 34px;
    @media (max-width: $screen-xs-max) {
      top: auto !important;
@@ -442,11 +443,13 @@ label{
 }
 
 input{
-  border: 1px solid $dark-gray;
+  border: 1px solid $border;
   border-radius: 0;
   letter-spacing: 2px;
   padding: $standard-padding/3;
   width: 100%;
+  font-size: $input-and-label-size;
+  text-transform: lowercase;
   &:focus{
     outline: none;
   }
@@ -468,6 +471,13 @@ input{
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 textarea{
   -webkit-appearance: none;
   resize: none;
@@ -482,12 +492,15 @@ select{
   outline: none;
   text-transform: capitalize;
   font-family: $base-font-family;
+  text-transform: lowercase;
+  font-size: $input-and-label-size;
+  color: $placeholder;
   background-color: $white;
   background-repeat: no-repeat;
   padding: $standard-padding/3;
   -webkit-appearance: none;
   border-radius: 0;
-  border: 1px solid $dark-gray;
+  border: 1px solid $border;
   background-image: url(asset_path("limbforge/dropdown.svg"));
   background-size: 30px;
   background-position: 98%;

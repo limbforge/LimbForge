@@ -62,7 +62,7 @@
 }
 
 .device{
-  border: 1px solid $black;
+  border: 1px solid $border;
   cursor: pointer;
   margin-bottom: $standard-padding/2;
   .description{
@@ -90,10 +90,12 @@
     padding: 0 $standard-padding/2 $standard-padding/2 $standard-padding/2;
     p{
       line-height: 18px;
+      font-size: $input-and-label-size;
     }
   }
   .show-more{
     margin-bottom: $standard-padding/6;
+    font-size: $input-and-label-size;
     cursor: pointer;
     span{
       &.down{
