@@ -425,7 +425,7 @@ class LimbforgeForm extends React.Component {
       <div>
       <div id="limbforge">
       <img className="logo" src={this.props.logo_img} />
-      <h1 id="title">LIMBFORGE</h1>
+      <h1 id="title">LimbForge</h1>
       <NameArea
         gender={this.state.specs.gender}
         availableLevels={this.state.availableLevels}
