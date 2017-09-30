@@ -18,6 +18,7 @@ class ManTorso extends React.Component {
       var fillColor = this.props.selected_gender == "male" ? "#1578b5" : "#bfbfbf";
       var imgStyle = {
         width: "130px",
+        transition: '.5s',
         fill: this.state.hover ? '#6c9bb9' : fillColor
       };
       return(
