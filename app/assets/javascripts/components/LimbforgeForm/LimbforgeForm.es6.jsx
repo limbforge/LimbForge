@@ -27,6 +27,8 @@ class LimbforgeForm extends React.Component {
         PL_3: 0,
         PL_4: 0,
         gender: "male",
+        man_hover: false,
+        woman_hover: false,
         component: undefined,
         component_object: undefined,
         amputationLevel: "Transcarpal",
@@ -321,7 +323,6 @@ class LimbforgeForm extends React.Component {
     newSpec[event.target.id] = !eventClass.includes("string") ? event.target.getAttribute('value') : event.target.value;
     this.setState({specs: newSpec});
   }
-
   loadTD() {
     if (this.state.specs.TD != undefined){
       const s3url =  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.roundDownNumber(this.state.specs.C1) +'.stl';
