@@ -430,10 +430,6 @@ class LimbforgeForm extends React.Component {
         updateAvailableAreas={this.updateAvailableAreas}
         updateSelectedArea={this.updateSelectedArea}
         showNameArea={this.state.showNameArea}
-        man_diagram={this.props.images.man_diagram}
-        man_diagram_selected={this.props.images.man_diagram_selected}
-        woman_diagram={this.props.images.woman_diagram}
-        woman_diagram_selected={this.props.images.woman_diagram_selected}
         updateDisplay={this.updateDisplay}
         availableLevels={this.state.availableLevels}
         selectedGender={this.state.specs.gender}
