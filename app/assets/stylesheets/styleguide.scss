@@ -225,7 +225,6 @@ p{
    max-width: 80px;
    position: relative;
    font-size: $input-and-label-size;
-   text-transform: lowercase;
    height: 34px;
    @media (max-width: $screen-xs-max) {
      top: auto !important;
@@ -449,7 +448,6 @@ input{
   padding: $standard-padding/3;
   width: 100%;
   font-size: $input-and-label-size;
-  text-transform: lowercase;
   &:focus{
     outline: none;
   }
@@ -492,7 +490,6 @@ select{
   outline: none;
   text-transform: capitalize;
   font-family: $base-font-family;
-  text-transform: lowercase;
   font-size: $input-and-label-size;
   color: $placeholder;
   background-color: $white;

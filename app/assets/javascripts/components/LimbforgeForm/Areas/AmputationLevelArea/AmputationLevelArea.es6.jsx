@@ -22,8 +22,16 @@ class AmputationLevelArea extends React.Component {
       zIndex: '-1',
     };
 
+    const imageStyleFemale = {
+      pointerEvents: 'none',
+      userSelect: 'none',
+      marginBottom: '-93px',
+      marginTop: '-59px',
+      position: 'relative',
+      zIndex: '-1',
+    }
+
     const imagedivStyle = {
-      marginBottom: '60px',
       minHeight: '448px',
     };
     const imagedivStyle2 = {
@@ -33,13 +41,13 @@ class AmputationLevelArea extends React.Component {
     const selectorStyle = {
       marginBottom: '-230px',
       position: 'absolute',
-      top: '80px',
+      top: '69px',
     };
 
     const selectorStyle2 = {
       marginBottom: '-230px',
       position: 'absolute',
-      top: '108',
+      top: '69px',
     };
 
     const selectedSide = {
@@ -186,20 +194,20 @@ class AmputationLevelArea extends React.Component {
           <div id="sides" className="row">
             <form action="">
               <div className="label col-xs-4">
-                <p className="label">SIDE:</p>
+                <p className="label">Side:</p>
               </div>
               <div className="col-xs-4" value="left">
-                <div id="side" className="row" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>Left</div>
+                <div id="side" className="row" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>left</div>
               </div>
               <div value="right" className="col-xs-4" onClick={this.props.updateDisplay}>
-                <div id="side" className="row" value="right" onClick={this.props.updateDisplay} style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>Right</div>
+                <div id="side" className="row" value="right" onClick={this.props.updateDisplay} style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>right</div>
               </div>
             </form>
           </div>
         </div>
         <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
           <p className="label amputation">Select Amputation Level</p>
-          <img id="limb-select-img" style={imageStyle} src={imageURL}/>
+          <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
           {genderSelect}
         </div>
       </div>

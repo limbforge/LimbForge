@@ -48,6 +48,7 @@
     padding-left: 0;
   }
   .accordion-head{
+    letter-spacing: 0;
     cursor: pointer;
     padding-top: $standard-padding;
     &.active{
