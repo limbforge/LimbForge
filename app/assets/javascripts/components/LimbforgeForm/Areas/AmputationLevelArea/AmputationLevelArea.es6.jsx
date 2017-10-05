@@ -69,120 +69,143 @@ class AmputationLevelArea extends React.Component {
     };
     var rectangleStyleDefault = "#bfbfbf";
     var rectangleStyleHover = "#6c9bb9";
-    var rectangleStyleSelected = "#1578b5";
+    var rectangleStyleSelected = "#207fd3";
     const maleSelect = (
       <svg style={selectorStyle} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
-
+        <circle
+          onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
+          fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="84.6" r="14"/>
         <rect
           onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
           x="-0.4" y="0.000" opacity="0.3" fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="149px" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
-          fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="84.6" r="14"/>
-
+          onClick = { () => { this.handleAreaClick('Transhumeral') }}
+          fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="224" r="14"
+        />
         <rect
           onClick = { () => { this.handleAreaClick('Transhumeral') }}
           x="-0.4" y="148" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transhumeral' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="150" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Transhumeral') }}
-          fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="224" r="14"
+          onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
+          fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="340" r="14"
         />
-
         <rect
           onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
           x="-0.4" y="297" opacity="0.3" fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="83" stroke="#ffffff" strokeWidth="5px"/>
-        <circle
-          onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
-          fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="340" r="14"
-        />
 
+        <circle
+          onClick = { () => { this.handleAreaClick('Transradial') }}
+          fill={this.props.specs.amputationLevel === 'Transradial' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="424" r="14"
+        />
         <rect
           onClick = { () => { this.handleAreaClick('Transradial') }}
           x="-0.4" y="379" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transradial' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="90" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Transradial') }}
-          fill={this.props.specs.amputationLevel === 'Transradial' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="424" r="14"
+          onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
+          fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="490" r="14"
         />
-
         <rect
           onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
           x="0" y="468" opacity="0.3" fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="46" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
-          fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="490" r="14"
+          onClick = { () => { this.handleAreaClick('Transcarpal') }}
+          fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="546" r="14"
         />
-
         <rect
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
           x="-0.4" y="513" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transcarpal' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="62" stroke="#ffffff" strokeWidth="5px"/>
-        <circle
-          onClick = { () => { this.handleAreaClick('Transcarpal') }}
-          fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="546" r="14"
-        />
       </svg>
     );
 
     const femaleSelect = (
       <svg style={selectorStyle2} version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 599.3 692.7">
-
+        <circle
+          onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
+          fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="73" r="14"/>
         <rect
           onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
           x="-0.4" y="0.000" opacity="0.3" fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="136px" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
-          fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="73" r="14"/>
-
+          onClick = { () => { this.handleAreaClick('Transhumeral') }}
+          fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="200" r="14"
+        />
         <rect
           onClick = { () => { this.handleAreaClick('Transhumeral') }}
           x="-0.4" y="136" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transhumeral' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="117px" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Transhumeral') }}
-          fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="200" r="14"
+          onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
+          fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="294" r="14"
         />
-
         <rect
           onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
           x="-0.4" y="253" opacity="0.3" fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="78.4" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
-          fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="294" r="14"
+          onClick = { () => { this.handleAreaClick('Transradial') }}
+          fill={this.props.specs.amputationLevel === 'Transradial' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="368" r="14"
         />
-
         <rect
           onClick = { () => { this.handleAreaClick('Transradial') }}
           x="-0.4" y="331" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transradial' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="70" stroke="#ffffff" strokeWidth="5px"/>
-        <circle
-          onClick = { () => { this.handleAreaClick('Transradial') }}
-          fill={this.props.specs.amputationLevel === 'Transradial' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="368" r="14"
-        />
 
+        <circle
+          onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
+          fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="420" r="14"
+        />
         <rect
           onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
           x="-0.4" y="401" opacity="0.3" fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="38" stroke="#ffffff" strokeWidth="5px"/>
+        
         <circle
-          onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
-          fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="420" r="14"
+          onClick = { () => { this.handleAreaClick('Transcarpal') }}
+          fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#207fd3' : '#ffffff'}
+          stroke='#207fd3'
+          stroke-width="1px"
+          cx="40.6" cy="464" r="14"
         />
-
         <rect
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
           x="-0.4" y="439" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transcarpal' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="65.4" stroke="#ffffff" strokeWidth="5px"/>
-        <circle
-          onClick = { () => { this.handleAreaClick('Transcarpal') }}
-          fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#000000' : '#ffffff'}
-          cx="40.6" cy="464" r="14"
-        />
+
       </svg>
     );
 

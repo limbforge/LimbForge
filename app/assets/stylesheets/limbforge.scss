@@ -24,6 +24,19 @@
     margin-top: $standard-padding/2;
     margin-bottom: $standard-padding*-1;
   }
+  circle{
+    &:hover{
+      & + rect {
+        fill: $hover-blue;
+      }
+    }
+  }
+  rect{
+    transition: .5s;
+    &:hover{
+      fill: $hover-blue;
+    }
+  }
 }
 
 .loading-gif{
