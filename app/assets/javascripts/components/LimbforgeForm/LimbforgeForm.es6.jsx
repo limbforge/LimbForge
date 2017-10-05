@@ -301,6 +301,7 @@ class LimbforgeForm extends React.Component {
     });
 
     zip.file('instructions.txt', urlToPromise('https://s3-us-west-2.amazonaws.com/limbforgedocs/instructions.txt'), {binary:true});
+    zip.file('Passive.Transradial.Device.Assembly.Manual.pdf', urlToPromise('https://s3-us-west-2.amazonaws.com/limbforgedocs/Passive.Transradial.Device.Assembly.Manual.pdf'), {binary:true});
 
     // when everything has been downloaded, we can trigger the dl
     newThis = this;
