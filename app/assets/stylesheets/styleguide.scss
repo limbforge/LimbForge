@@ -497,6 +497,7 @@ select{
   outline: none;
   font-family: $base-font-family;
   font-size: $input-and-label-size;
+  text-transform: lowercase;
   color: $placeholder;
   background-color: $white;
   background-repeat: no-repeat;
