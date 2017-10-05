@@ -66,7 +66,7 @@ class NameArea extends React.Component {
         </div>
         <div id="date" className="row">
           <div className="col-xs-12">
-            <p className="nested-label">Date of Amputation</p>
+            <p className="nested-label amputation-date">Date of Amputation</p>
             <input className="col-xs-4" type="number" onChange={ (event) => this.limitDigits(2, event)} placeholder="day"/>
             <input className="col-xs-4 month-input" onChange={(event) => this.limitDigits(2, event)} type="number" placeholder="month"/>
             <input className="col-xs-4" type="number" onChange={(event) => this.limitDigits(4,event)} placeholder="year"/>

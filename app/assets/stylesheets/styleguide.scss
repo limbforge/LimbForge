@@ -187,6 +187,9 @@ p{
     font-size: $input-and-label-size;
     font-weight: 500;
     margin-bottom: 0;
+    &.amputation-date{
+      margin-top: -10px;
+    }
     &.c{
       background-color: $blue;
       color: $white;
@@ -492,7 +495,6 @@ textarea{
 select{
   width: 100%;
   outline: none;
-  text-transform: capitalize;
   font-family: $base-font-family;
   font-size: $input-and-label-size;
   color: $placeholder;
