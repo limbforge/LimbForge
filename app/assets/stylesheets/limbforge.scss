@@ -5,6 +5,9 @@
 }
 
 #date{
+  input{
+    letter-spacing: 0;
+  }
   .month-input{
     border-left: 0;
     border-right: 0;
@@ -67,16 +70,22 @@
 #sides{
   margin: 0;
   margin-top: $standard-padding;
+  width: 100%;
   .label{
     padding-left: 0;
     margin-top: 0;
+  }
+  .side-select{
+    margin-top: $standard-padding*-1;
   }
 }
 
 .selected-level{
   color: $blue;
-  margin-top: $standard-padding/1.5;
-  font-size: $input-and-label-size;
+}
+
+.coming-soon{
+  color: $red;
 }
 
 .outer-drag-container-arrow{

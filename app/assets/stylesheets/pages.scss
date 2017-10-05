@@ -19,11 +19,11 @@
 #limbforge{
   webkit-transform: translateZ(0);
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: scroll;
   height: 100vh;
   background-color: $white;
   width: 480px;
-  padding: $standard-padding/2;
+  padding: $standard-padding/3;
   position:  fixed;
   z-index: 2;
   @media (max-width: $screen-xs-max) {

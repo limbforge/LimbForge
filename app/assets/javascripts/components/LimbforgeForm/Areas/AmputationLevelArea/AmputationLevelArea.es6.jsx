@@ -60,7 +60,7 @@ class AmputationLevelArea extends React.Component {
     };
 
     const notSelectedSide = {
-      background: '#ffffff',
+      background: '#bfbfbf',
       cursor: 'pointer',
       color: '#000000',
       fontSize: '13px',
@@ -216,20 +216,20 @@ class AmputationLevelArea extends React.Component {
         <div className="col-xs-12">
           <div id="sides" className="row">
             <form action="">
-              <div className="label col-xs-4">
-                <p className="label">Side:</p>
+              <div>
+                <p className="nested-label side-select">Select Amputation Side:</p>
               </div>
-              <div className="col-xs-4" value="left">
+              <div className="col-xs-6" value="left">
                 <div id="side" className="row" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>left</div>
               </div>
-              <div value="right" className="col-xs-4" onClick={this.props.updateDisplay}>
-                <div id="side" className="row" value="right" onClick={this.props.updateDisplay} style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>right</div>
+              <div value="right" className="col-xs-6" onClick={this.props.updateDisplay}>
+                <div id="side" className="row right" value="right" onClick={this.props.updateDisplay} style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>right</div>
               </div>
             </form>
           </div>
         </div>
         <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
-          <p className="label amputation">Select Amputation Level</p>
+          <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "" : "coming soon"}</span></p>
           <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
           {genderSelect}
         </div>
@@ -264,7 +264,6 @@ class AmputationLevelArea extends React.Component {
       <div id="AmputationLevel" className="row tab-padding">
         {this.loadSvg()}
         <div className="col-xs-12">
-          <p>{this.props.specs.amputationLevel}</p>
           <button
             style={buttonStyle}
             onClick={() => {
