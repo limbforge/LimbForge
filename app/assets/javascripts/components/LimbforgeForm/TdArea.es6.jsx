@@ -27,6 +27,13 @@ class TdArea extends React.Component {
           {tdOptions}
         </select>
       </div>
+      <div className="col-xs-12">
+        <p className="label">Nozzle Width</p>
+        <select id="Nozzle" onChange={this.props.updateDisplay}>
+          <option key="0.4">0.4 mm</option>
+          <option key="0.6">0.6 mm</option>
+        </select>
+      </div>
     </div>
     : '';
 
