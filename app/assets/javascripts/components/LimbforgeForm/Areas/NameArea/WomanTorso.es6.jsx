@@ -15,7 +15,7 @@ class WomanTorso extends React.Component {
       }
     }
     render() {
-      var fillColor = this.props.selected_gender == "female" ? "#207fd3" : "#bfbfbf";
+      var fillColor = this.props.selected_gender == "female" ? "#357dc1" : "#bfbfbf";
       var imgStyle = {
         width: "130px",
         transition: '.5s',

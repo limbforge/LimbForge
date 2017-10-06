@@ -82,10 +82,12 @@
 
 .selected-level{
   color: $blue;
+  text-transform: lowercase;
 }
 
 .coming-soon{
   color: $red;
+  font-size: 10px;
 }
 
 .outer-drag-container-arrow{

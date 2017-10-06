@@ -51,7 +51,7 @@ class AmputationLevelArea extends React.Component {
     };
 
     const selectedSide = {
-      background: '#1578b5',
+      background: '#357dc1',
       cursor: 'pointer',
       color: '#ffffff',
       fontSize: '13px',
@@ -62,7 +62,7 @@ class AmputationLevelArea extends React.Component {
     const notSelectedSide = {
       background: '#bfbfbf',
       cursor: 'pointer',
-      color: '#000000',
+      color: '#ffffff',
       fontSize: '13px',
       padding: '12px',
       textAlign: 'center'
@@ -75,7 +75,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
           fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="84.6" r="14"/>
         <rect
@@ -85,7 +85,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Transhumeral') }}
           fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="224" r="14"
         />
@@ -96,7 +96,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
           fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="340" r="14"
         />
@@ -107,7 +107,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Transradial') }}
           fill={this.props.specs.amputationLevel === 'Transradial' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="424" r="14"
         />
@@ -118,7 +118,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
           fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="490" r="14"
         />
@@ -129,13 +129,13 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
           fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="546" r="14"
         />
         <rect
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
-          x="-0.4" y="513" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transcarpal' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="62" stroke="#ffffff" strokeWidth="5px"/>
+          x="-0.4" y="513" opacity="0.3" fill={this.props.specs.amputationLevel === 'Transcarpal' ? rectangleStyleSelected : rectangleStyleDefault} width="600.1" height="80" stroke="#ffffff" strokeWidth="5px"/>
       </svg>
     );
 
@@ -144,7 +144,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Shoulder Disarticulation') }}
           fill={this.props.specs.amputationLevel === 'Shoulder Disarticulation' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="73" r="14"/>
         <rect
@@ -154,7 +154,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Transhumeral') }}
           fill={this.props.specs.amputationLevel === 'Transhumeral' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="200" r="14"
         />
@@ -165,7 +165,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Elbow Disarticulation') }}
           fill={this.props.specs.amputationLevel === 'Elbow Disarticulation' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="294" r="14"
         />
@@ -176,7 +176,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Transradial') }}
           fill={this.props.specs.amputationLevel === 'Transradial' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="368" r="14"
         />
@@ -187,7 +187,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Wrist Disarticulation') }}
           fill={this.props.specs.amputationLevel === 'Wrist Disarticulation' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="420" r="14"
         />
@@ -198,7 +198,7 @@ class AmputationLevelArea extends React.Component {
         <circle
           onClick = { () => { this.handleAreaClick('Transcarpal') }}
           fill={this.props.specs.amputationLevel === 'Transcarpal' ? '#207fd3' : '#ffffff'}
-          stroke='#207fd3'
+          stroke='#357dc1'
           strokeWidth="1px"
           cx="40.6" cy="464" r="14"
         />
@@ -229,7 +229,7 @@ class AmputationLevelArea extends React.Component {
           </div>
         </div>
         <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
-          <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "" : "coming soon"}</span></p>
+          <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "" : "(coming soon)"}</span></p>
           <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
           {genderSelect}
         </div>
