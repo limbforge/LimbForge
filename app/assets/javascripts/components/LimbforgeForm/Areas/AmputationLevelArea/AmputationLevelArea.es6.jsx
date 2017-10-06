@@ -210,7 +210,7 @@ class AmputationLevelArea extends React.Component {
     );
 
     var genderSelect = this.props.selectedGender == "male" ? maleSelect : femaleSelect;
-
+    var comingSoon = this.props.specs.amputationLevel != "" && !this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "(coming soon)" : "";
     return (
       <div>
         <div className="col-xs-12">
@@ -229,7 +229,7 @@ class AmputationLevelArea extends React.Component {
           </div>
         </div>
         <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
-          <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "" : "(coming soon)"}</span></p>
+          <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{comingSoon}</span></p>
           <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
           {genderSelect}
         </div>

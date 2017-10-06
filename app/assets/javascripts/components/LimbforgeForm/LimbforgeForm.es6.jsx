@@ -31,7 +31,7 @@ class LimbforgeForm extends React.Component {
         woman_hover: false,
         component: undefined,
         component_object: undefined,
-        amputationLevel: "Transcarpal",
+        amputationLevel: "",
         selected_wrist_size: 1,
         side: "left",
         C1: "18",
