@@ -131,11 +131,12 @@ button{
   color: $white;
   font-weight: 300;
   font-size: $mobile-p-font-size;
+  font-family: $button-font-family;
   background: $blue;
   margin-top: $standard-padding;
   padding: 12px $standard-padding/1.5;
   width: 100%;
-  letter-spacing: $base-letter-spacing;
+  letter-spacing: 0;
   &.cta{
     background-color: $blue;
   }
@@ -486,7 +487,7 @@ input{
     font-size: $mobile-font-size;
     font-weight: bold;
     letter-spacing: 0px;
-    width: auto;
+    width: 100%;
   }
 }
 

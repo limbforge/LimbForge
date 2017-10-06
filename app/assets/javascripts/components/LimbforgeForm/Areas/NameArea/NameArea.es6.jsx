@@ -9,7 +9,10 @@ class NameArea extends React.Component {
   }
   limitDigits(num, event){
     if (event.target.value.length > num) {
-      event.target.value = event.target.value.slice(0, -1)
+      event.target.value = event.target.value.slice(0, -1);
+      if (event.target.nextSibling){
+        event.target.nextSibling.focus();
+      }
     }
   }
   renderNameArea() {

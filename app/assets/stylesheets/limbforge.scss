@@ -21,7 +21,7 @@
     font-weight: bold;
     font-size: $mobile-font-size;
     letter-spacing: 0px;
-    width: auto;
+    width: 100%;
   }
   .label{
     margin-top: $standard-padding/2;
@@ -59,7 +59,7 @@
   button{
     float: right;
     color: $white;
-    font-family: $base-h-font-family;
+    font-family: $button-font-family;
     font-weight: 600;
     background-color: $blue;
     margin-top: 0;
