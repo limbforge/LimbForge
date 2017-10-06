@@ -7,6 +7,9 @@ class NameArea extends React.Component {
       source: availableCities
     });
   }
+  stopScroll(event){
+    event.preventDefault();
+  }
   limitDigits(num, event){
     if (event.target.value.length > num) {
       event.target.value = event.target.value.slice(0, -1);
@@ -35,9 +38,9 @@ class NameArea extends React.Component {
         <div id="date" className="row">
           <div className="col-xs-12">
             <p className="nested-label">Date of Birth</p>
-            <input className="col-xs-4" type="number" onChange={ (event) => this.limitDigits(2, event)} placeholder="day"/>
-            <input className="col-xs-4 month-input" onChange={(event) => this.limitDigits(2, event)} type="number" placeholder="month"/>
-            <input className="col-xs-4" type="number" onChange={(event) => this.limitDigits(4,event)} placeholder="year"/>
+            <input className="col-xs-4" type="number" onWheel={this.stopScroll} onChange={ (event) => this.limitDigits(2, event)} placeholder="day"/>
+            <input className="col-xs-4 month-input" onWheel={this.stopScroll} onChange={(event) => this.limitDigits(2, event)} type="number" placeholder="month"/>
+            <input className="col-xs-4" type="number" onWheel={this.stopScroll} onChange={(event) => this.limitDigits(4,event)} placeholder="year"/>
           </div>
         </div>
         <div className="row">
@@ -70,9 +73,9 @@ class NameArea extends React.Component {
         <div id="date" className="row">
           <div className="col-xs-12">
             <p className="nested-label amputation-date">Date of Amputation</p>
-            <input className="col-xs-4" type="number" onChange={ (event) => this.limitDigits(2, event)} placeholder="day"/>
-            <input className="col-xs-4 month-input" onChange={(event) => this.limitDigits(2, event)} type="number" placeholder="month"/>
-            <input className="col-xs-4" type="number" onChange={(event) => this.limitDigits(4,event)} placeholder="year"/>
+            <input className="col-xs-4" type="number" onWheel={this.stopScroll} onChange={ (event) => this.limitDigits(2, event)} placeholder="day"/>
+            <input className="col-xs-4 month-input" onWheel={this.stopScroll} onChange={(event) => this.limitDigits(2, event)} type="number" placeholder="month"/>
+            <input className="col-xs-4" type="number" onWheel={this.stopScroll} onChange={(event) => this.limitDigits(4,event)} placeholder="year"/>
           </div>
         </div>
         <AmputationCause />
