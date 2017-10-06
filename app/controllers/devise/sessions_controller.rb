@@ -1,3 +1,4 @@
+include StaffHelper
 class Devise::SessionsController < DeviseController
   prepend_before_action :require_no_authentication, only: [:new, :create]
   prepend_before_action :allow_params_authentication!, only: :create
@@ -11,6 +12,11 @@ class Devise::SessionsController < DeviseController
     yield resource if block_given?
     respond_with(resource, serialize_options(resource))
   end
+  
+  # Limbforge staff check
+  def works_for_limbforge?
+    staffList.include?(current_user.email)
+  end
 
   # POST /resource/sign_in
   def create
@@ -20,6 +26,9 @@ class Devise::SessionsController < DeviseController
       self.resource = warden.authenticate!(auth_options)
       sign_in(resource_name, resource)
       yield resource if block_given?
+      if works_for_limbforge?
+        current_user.update_column('has_access', true)
+      end
       if current_user.has_access
         if current_user.admin
           redirect_to admin_dashboard_path

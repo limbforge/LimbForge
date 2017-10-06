@@ -1,3 +1,4 @@
+include StaffHelper
 class Devise::RegistrationsController < DeviseController
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy]
@@ -21,10 +22,16 @@ class Devise::RegistrationsController < DeviseController
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        current_user.update_column('access_requested', true)
-        UserMailer.request_access(current_user).deliver_now
-        sign_out current_user
-        redirect_to "/", :flash => { :success => "Access Requested! We will get back to you soon." }
+        if works_for_limbforge?
+          current_user.update_column('access_requested', false)
+          current_user.update_column('has_access', true)
+          redirect_to limbforge_path
+        else
+          current_user.update_column('access_requested', true)
+          UserMailer.request_access(current_user).deliver_now
+          sign_out current_user
+          redirect_to "/", :flash => { :success => "Access Requested! We will get back to you soon." }
+        end
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
@@ -39,6 +46,11 @@ class Devise::RegistrationsController < DeviseController
   # GET /resource/edit
   def edit
     render :edit
+  end
+
+  # Limbforge staff check
+  def works_for_limbforge?
+    staffList.include?(current_user.email)
   end
 
   # PUT /resource
