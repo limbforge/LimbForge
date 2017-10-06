@@ -8,6 +8,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'AvenirNextCondensed-Regular';
+  src: url('AvenirNextCondensed-Regular.eot?#iefix') format('embedded-opentype'),  url('AvenirNextCondensed-Regular.woff') format('woff'), url('AvenirNextCondensed-Regular.ttf')  format('truetype'), url('AvenirNextCondensed-Regular.svg#AvenirNextCondensed-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirNext-BoldCond';
+  src: url('AvenirNext-BoldCond.eot?#iefix') format('embedded-opentype'),  url('AvenirNext-BoldCond.woff') format('woff'), url('AvenirNext-BoldCond.ttf')  format('truetype'), url('AvenirNext-BoldCond.svg#AvenirNext-BoldCond') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 //AREA STYLES
 .area{
   padding:$area-padding;
