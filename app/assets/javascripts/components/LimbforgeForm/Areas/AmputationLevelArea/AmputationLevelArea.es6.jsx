@@ -211,9 +211,9 @@ class AmputationLevelArea extends React.Component {
 
     var genderSelect = this.props.selectedGender == "male" ? maleSelect : femaleSelect;
     var comingSoon = this.props.specs.amputationLevel != "" && !this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "(coming soon)" : "";
-    var selectLevel = this.props.selectedGender == "" ? "" : 
+    var selectLevel = (this.props.selectedGender == "") || (this.props.specs.side == "")  ? "" : 
       <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
-        <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{comingSoon}</span></p>
+        <p className="label amputation">Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{comingSoon}</span></p>
         <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
         {genderSelect}
       </div>;
@@ -223,7 +223,7 @@ class AmputationLevelArea extends React.Component {
           <div id="sides" className="row">
             <form action="">
               <div>
-                <p className="nested-label side-select">Select Amputation Side:</p>
+                <p className="nested-label side-select">Side:</p>
               </div>
               <div className="col-xs-6" value="left">
                 <div id="side" className="row left" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>left</div>
