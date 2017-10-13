@@ -22,12 +22,6 @@ class TdArea extends React.Component {
     var tdArea = (showDevices) ?
     <div className="row">
       <div className="col-xs-12">
-        <p className="label">Terminal Devices</p>
-        <select id="TD" onChange={this.props.updateDisplay}>
-          {tdOptions}
-        </select>
-      </div>
-      <div className="col-xs-12">
         <p className="label">Nozzle Width</p>
         <select id="Nozzle" onChange={this.props.updateDisplay}>
           <option key="0.4">0.4 mm</option>
