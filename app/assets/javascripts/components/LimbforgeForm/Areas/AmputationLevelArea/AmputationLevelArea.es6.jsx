@@ -226,7 +226,7 @@ class AmputationLevelArea extends React.Component {
                 <p className="nested-label side-select">Select Amputation Side:</p>
               </div>
               <div className="col-xs-6" value="left">
-                <div id="side" className="row" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>left</div>
+                <div id="side" className="row left" value="left" onClick={this.props.updateDisplay} style={this.props.specs.side === "left" ? selectedSide : notSelectedSide }>left</div>
               </div>
               <div value="right" className="col-xs-6" onClick={this.props.updateDisplay}>
                 <div id="side" className="row right" value="right" onClick={this.props.updateDisplay} style={this.props.specs.side === "right" ? selectedSide : notSelectedSide}>right</div>
