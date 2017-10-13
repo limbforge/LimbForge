@@ -15,11 +15,10 @@ class ManTorso extends React.Component {
       }
     }
     render() {
-      var fillColor = this.props.selected_gender == "male" ? "#357dc1" : "#bfbfbf";
+      var fillColor = this.props.selected_gender == "male" ? "#207fd3" : "#bfbfbf";
       var imgStyle = {
         width: "130px",
-        transition: '.5s',
-        fill: this.state.hover ? '#6c9bb9' : fillColor
+        fill: this.state.hover ? '#207fd3' : fillColor
       };
       return(
         <svg onMouseEnter={this.hoverState} onMouseLeave={this.hoverState} style={imgStyle} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

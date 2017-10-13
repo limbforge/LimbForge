@@ -26,7 +26,7 @@ class LimbforgeForm extends React.Component {
         PL_2: 0,
         PL_3: 0,
         PL_4: 0,
-        gender: "male",
+        gender: "",
         man_hover: false,
         woman_hover: false,
         component: undefined,
