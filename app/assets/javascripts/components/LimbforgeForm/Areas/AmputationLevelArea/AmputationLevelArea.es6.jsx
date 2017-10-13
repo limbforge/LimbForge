@@ -211,6 +211,12 @@ class AmputationLevelArea extends React.Component {
 
     var genderSelect = this.props.selectedGender == "male" ? maleSelect : femaleSelect;
     var comingSoon = this.props.specs.amputationLevel != "" && !this.isSupportedAmputationLevel(this.props.specs.amputationLevel) ? "(coming soon)" : "";
+    var selectLevel = this.props.selectedGender == "" ? "" : 
+      <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
+        <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{comingSoon}</span></p>
+        <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
+        {genderSelect}
+      </div>;
     return (
       <div>
         <div className="col-xs-12">
@@ -228,11 +234,7 @@ class AmputationLevelArea extends React.Component {
             </form>
           </div>
         </div>
-        <div className="col-xs-12" style={this.props.specs.gender == "male" ? imagedivStyle : imagedivStyle2}>
-          <p className="label amputation">Select Amputation Level: <span className="selected-level">{this.props.specs.amputationLevel}</span> <span className="coming-soon">{comingSoon}</span></p>
-          <img id="limb-select-img" style={this.props.specs.gender == "male" ? imageStyle : imageStyleFemale} src={imageURL}/>
-          {genderSelect}
-        </div>
+        {selectLevel}
       </div>
     );
   }
@@ -260,18 +262,20 @@ class AmputationLevelArea extends React.Component {
 
     const buttonStyle = levelSelected !== undefined && this.isSupportedAmputationLevel(levelSelected.name) ? {} : { background: "grey" };
     const buttonDisabled = levelSelected === undefined || !this.isSupportedAmputationLevel(levelSelected.name);
+    var continueButton = this.props.specs.amputationLevel == "" ? "" :          
+      <button
+        style={buttonStyle}
+        onClick={() => {
+          this.props.updateAvailableAreas('prosthesis');
+          this.props.getComponents(levelSelected.id);
+        }}
+        disabled={buttonDisabled}>CONTINUE
+    </button>;
     return (
       <div id="AmputationLevel" className="row tab-padding">
         {this.loadSvg()}
         <div className="col-xs-12">
-          <button
-            style={buttonStyle}
-            onClick={() => {
-              this.props.updateAvailableAreas('prosthesis');
-              this.props.getComponents(levelSelected.id);
-            }}
-            disabled={buttonDisabled}>CONTINUE
-          </button>
+          {continueButton}
         </div>
       </div>
     );

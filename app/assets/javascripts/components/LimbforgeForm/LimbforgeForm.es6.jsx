@@ -33,7 +33,7 @@ class LimbforgeForm extends React.Component {
         component_object: undefined,
         amputationLevel: "",
         selected_wrist_size: 1,
-        side: "left",
+        side: "",
         C1: "18",
         C4: "24",
         C6: "25",
