@@ -39,6 +39,7 @@ class LimbforgeForm extends React.Component {
         C6: "25",
         L1: "27",
         L2: "30",
+        L4: "16",
         TD: undefined,
         wrist_sizes: [
           {
@@ -247,9 +248,10 @@ class LimbforgeForm extends React.Component {
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
     const name = this.state.specs.fname == "" ? this.state.specs.lname + "_" : this.state.specs.fname + "_" + this.state.specs.lname + "_";
     const patientName = name == "_" ? "" : name;
+    var revision = this.state.specs.gender == "male" ? 1 : 17;
     var urls = [
       {
-        link: `https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl`,
+        link: `https://s3.amazonaws.com/limbforgestls/TD/${this.state.specs.gender.charAt(0)}PTD1/r${revision}/build/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_L4-${this.roundDownNumber(this.state.specs.L4)}.stl`,
         name: `${patientName.toUpperCase()}TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
       },
       {
@@ -325,16 +327,15 @@ class LimbforgeForm extends React.Component {
   }
   loadTD() {
     if (this.state.specs.TD != undefined){
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/PTD-a/'+ this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-'+ this.roundDownNumber(this.state.specs.C1) +'.stl';
+      var revision = this.state.specs.gender == "male" ? 1 : 17;
+      const s3url =  'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.gender.charAt(0) + 'PTD1/r'+ revision +'/preview/L/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_L4-'+ this.roundDownNumber(this.state.specs.L4) + '.stl'
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
           const mesh = new THREE.Mesh( geometry, material );
           mesh.name = 'terminalDevice';
           mesh.position.set( 5, 0, 3.3 );
-          mesh.rotation.set(0, Math.PI, -Math.PI);
           mesh.scale.set( .02, .02, .02 );
-
           mesh.castShadow = true;
           mesh.receiveShadow = false;
           scene.remove(scene.getObjectByName('terminalDevice'));
