@@ -21,7 +21,6 @@ class ComponentArea extends React.Component {
 
   render() {
     var classes =  this.props.availableAreas.prosthesis.selected ? 'accordion-head active' : 'accordion-head';
-
     return(
       <div>
         <div onClick={()=>this.props.updateSelectedArea('prosthesis')} className={classes}>
@@ -29,6 +28,16 @@ class ComponentArea extends React.Component {
           <span className="arrow"></span>
           <span className="line"></span>
         </div>
+        <MeasurementDiagram
+          availableAreas={this.props.availableAreas}
+          updateAvailableAreas={this.props.updateAvailableAreas}
+          updateSelectedArea={this.props.updateSelectedArea}
+          imageURL={this.props.imageURL}
+          side={this.props.side}
+          amputationLevel={this.props.amputationLevel}
+          measurements={this.props.measurements}
+          updateDisplay={this.props.updateDisplay}
+        />
         {this.props.availableAreas.prosthesis.selected ? this.renderComponents() : ''}
       </div>
     )

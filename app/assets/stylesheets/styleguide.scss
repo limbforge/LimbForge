@@ -241,10 +241,11 @@ p{
   input{
    padding: $standard-padding/6;
    max-width: 80px;
-   position: relative;
+   position: absolute;
    font-size: $input-and-label-size;
    height: 34px;
    @media (max-width: $screen-xs-max) {
+     position: relative;
      top: auto !important;
      right: auto !important;
      left: auto !important;
@@ -252,8 +253,8 @@ p{
    &#C1{
      &.left{
        &.Transradial{
-          top: -95px;
-          right: 93px;
+          top: -72px;
+          right: 142px;
        }
        &.Transhumeral{
          top: -183px;
@@ -262,8 +263,8 @@ p{
      }
      &.right{
        &.Transradial{
-          top: -94px;
-          right: -290px;
+        top: -74px;
+        right: -227px;
        }
        &.Transhumeral{
          top: -184px;
@@ -274,8 +275,8 @@ p{
    &#C2{
      &.left{
        &.Transradial{
-          top: -173px;
-          left: -93px;
+          top: -114px;
+          left: -21px;
        }
        &.Transhumeral{
          top: -119px;
@@ -284,8 +285,8 @@ p{
      }
      &.right{
        &.Transradial{
-          top: -167px;
-          right: -290px;
+          top: -114px;
+          right: -226px;
        }
        &.Transhumeral{
          top: -121px;
@@ -296,8 +297,8 @@ p{
    &#C3{
      &.left{
        &.Transradial{
-          top: -252px;
-          left: -93px;
+          top: -156px;
+          left: -23px;
        }
        &.Transhumeral{
          top: -192px;
@@ -306,8 +307,8 @@ p{
      }
      &.right{
        &.Transradial{
-          top: -241px;
-          left: 289px;
+        top: -156px;
+        left: 347px;
        }
        &.Transhumeral{
          top: -193px;
@@ -318,8 +319,8 @@ p{
    &#C4{
      &.left{
        &.Transradial{
-          top: -218px;
-          right: -265px;
+          top: -131px;
+          right: -225px;
        }
        &.Transhumeral{
          top: -254px;
@@ -328,8 +329,8 @@ p{
      }
      &.right{
        &.Transradial{
-          right: 67px;
-          top: -224px;
+          right: 138px;
+          top: -136px;     
        }
        &.Transhumeral{
          top: -253px;
@@ -382,8 +383,8 @@ p{
    &#L1{
      &.left{
        &.Transradial{
-         top: -90px;
-         left: -133px;
+          top: -43px;
+          left: -65px;
        }
        &.Transhumeral{
          top: -122px;
@@ -392,8 +393,8 @@ p{
      }
      &.right{
        &.Transradial{
-         left: -89px;
-         top: -88px;
+          left: -37px;
+          top: -75px;
        }
        &.Transhumeral{
          top: -122px;
@@ -404,8 +405,8 @@ p{
    &#L2{
      &.left{
        &.Transradial{
-         top: -209px;
-         right: 97px;
+        top: -102px;
+        right: 144px;
        }
        &.Transhumeral{
          top: -230px;
@@ -414,8 +415,8 @@ p{
      }
      &.right{
        &.Transradial{
-         top: -212px;
-         right: 114px;
+          top: -112px;
+          right: 173px;
        }
        &.Transhumeral{
          top: -231px;
@@ -425,6 +426,10 @@ p{
    }
    &#L3{
      &.left{
+       &.Transradial{
+        top: -58px;
+        left: 133px;
+       }
        &.Transhumeral{
          top: -345px;
          right: 121px;
@@ -439,12 +444,20 @@ p{
    }
    &#L4{
      &.left{
+       &.Transradial{
+        top: -60px;
+        left: 130px;
+       }
        &.Transhumeral{
          top: -388px;
          right: 3px;
        }
      }
      &.right{
+       &.Transradial{
+        right: 313px;
+        top: -58px;
+       }
        &.Transhumeral{
          top: -394px;
          right: 156px;

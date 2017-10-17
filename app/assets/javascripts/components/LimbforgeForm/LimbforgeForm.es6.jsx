@@ -181,7 +181,6 @@ class LimbforgeForm extends React.Component {
           showAmputationLevelArea: false,
           showComponentArea: true
         };
-
         this.setState(newState);
       },
       error: (error) => {
@@ -448,6 +447,10 @@ class LimbforgeForm extends React.Component {
       updateMeasurementsAndTds={this.updateMeasurementsAndTds}
       updateDisplay={this.updateDisplay}
       components={this.state.components}
+      imageURL={imageURL}
+      side={this.state.specs.side}
+      amputationLevel={this.state.specs.amputationLevel}
+      measurements={this.state.measurements}
       />
       <MeasurementArea
       availableAreas={this.state.availableAreas}

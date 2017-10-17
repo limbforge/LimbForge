@@ -97,6 +97,11 @@
       padding: 0 $standard-padding/2 $standard-padding/2;
       margin-bottom: -50px;
       height: 440px;
+      position: relative;
+      top: $standard-padding;
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: $standard-padding;
+      }
     }
     &.logo{
       max-width: 300px;
