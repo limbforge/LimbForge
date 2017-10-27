@@ -180,7 +180,8 @@ class LimbforgeForm extends React.Component {
           showComponentArea: true,
         };
         this.setState(newState);
-        
+        // STATIC FIX: when the user has selected the transradial level, show this arm! (id = 3)
+        this.updateMeasurementsAndTds(3);
       },
       error: (error) => {
         console.log('get components error', error, url);
