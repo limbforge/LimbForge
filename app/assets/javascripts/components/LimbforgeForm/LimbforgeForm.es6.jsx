@@ -328,7 +328,7 @@ class LimbforgeForm extends React.Component {
   loadTD() {
     if (this.state.specs.TD != undefined){
       var revision = this.state.specs.gender == "male" ? 1 : 17;
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.gender.charAt(0) + 'PTD1/r'+ revision +'/preview/L/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_L4-'+ this.roundDownNumber(this.state.specs.L4) + '.stl'
+      const s3url =  'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.gender.charAt(0) + 'PTD1/r'+ revision +'/preview/'+ this.state.specs.side.charAt(0).toUpperCase() +'/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_L4-'+ this.roundDownNumber(this.state.specs.L4) + '.stl'
       if (this.downloaded.td !== s3url) {
         this.downloaded.td = s3url;
         loader.load(s3url, (geometry) => {
