@@ -98,7 +98,7 @@ class MeasurementDiagram extends React.Component {
         height: '528px'
       };
       var measurementArea = 
-        <div className="tab-padding" style={style}>
+        <div id="measurements" className="tab-padding" style={style}>
           <div className="row">
             <div style={style}>
               <img className="documentation" data-target="#measurementModal" src={this.props.imageURL}/>
@@ -109,6 +109,9 @@ class MeasurementDiagram extends React.Component {
                 {lMeasurementInputs}
               </div>
             </div>
+          </div>
+          <div onClick={()=>this.props.updateSelectedArea('submit')}>
+            <button className="continue-submit">CONTINUE</button>
           </div>
         </div>;
   

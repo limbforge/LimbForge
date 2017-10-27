@@ -83,7 +83,7 @@ class LimbforgeForm extends React.Component {
         },
         submit: {
           selected: false,
-          available: false,
+          available: true,
         },
       }
     };
@@ -131,9 +131,6 @@ class LimbforgeForm extends React.Component {
         dataType: 'json',
         success: (data) => {
           newState.measurements = data;
-          newState.availableAreas.prosthesis.selected = false;
-          newState.availableAreas.prosthesis.available = true;
-          newState.availableAreas.measurements.selected = true;
           this.setState(newState);
         },
         error: (error) => {
@@ -180,9 +177,10 @@ class LimbforgeForm extends React.Component {
           tds: undefined,
           measurements: undefined,
           showAmputationLevelArea: false,
-          showComponentArea: true
+          showComponentArea: true,
         };
         this.setState(newState);
+        
       },
       error: (error) => {
         console.log('get components error', error, url);
@@ -214,7 +212,7 @@ class LimbforgeForm extends React.Component {
       'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
     ] :
     [
-      'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl',
+      'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl',
       'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl',
       'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
     ];
@@ -267,8 +265,8 @@ class LimbforgeForm extends React.Component {
     }
     else{
       urls.push({
-        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
-        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
+        link: `https://s3.amazonaws.com/limbforgestls/forearm-QTC/r20/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
+        name: `${patientName.toUpperCase()}FOREARM_r20_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
       });
     }
     for (var i=0; i< 4; i++) {
@@ -351,7 +349,7 @@ class LimbforgeForm extends React.Component {
       // LOAD NEW devices
       const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
         'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/preview/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C4-' + this.roundDownNumber(this.state.specs.C4) + '_C6-'+ this.roundDownNumber(this.state.specs.C6) + '_L2-'+ this.roundDownNumber(this.state.specs.L2) + '.stl' :
-        'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r' + this.state.specs.component_object.version + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
+        'https://s3.amazonaws.com/limbforgestls/'+ this.state.specs.component_object.folder + '/r20' + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
       if (this.downloaded.devices !== s3url) {
         this.downloaded.devices = s3url;
         loader.load(s3url, (geometry) => {
@@ -465,12 +463,14 @@ class LimbforgeForm extends React.Component {
       />
       <TdArea
       updateDisplay={this.updateDisplay}
+      availableAreas={this.state.availableAreas}
       tds={this.state.tds}
       level={this.state.specs.amputationLevel}
       specs={this.state.specs}
       wrist_sizes= {this.state.specs.wrist_sizes}
       />
       <SubmitArea
+      availableAreas={this.state.availableAreas}
       createZip={this.createZip}
       measurements={this.state.measurements}
       isLoading={this.state.isLoading}

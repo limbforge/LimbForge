@@ -3,7 +3,7 @@ class TdArea extends React.Component {
     super(props);
   }
   render() {
-    var showDevices = this.props.tds !== undefined && Array.isArray(this.props.tds) && this.props.tds.length > 0;
+    var showNozzle = this.props.availableAreas["submit"].selected;
     var tdOptions = this.props.tds == undefined ? '' : this.props.tds.map((td) => {
       return (
         <option value={td.name} key={td.name} >
@@ -19,7 +19,7 @@ class TdArea extends React.Component {
         </select>
       </div> : '';
 
-    var tdArea = (showDevices) ?
+    var tdArea = (showNozzle) ?
     <div className="row">
       <div className="col-xs-12">
         <p className="label">Nozzle Width</p>
@@ -30,14 +30,6 @@ class TdArea extends React.Component {
       </div>
     </div>
     : '';
-
-    var wristArea = (showDevices) ?
-      <div className="row">
-        <WristArea
-        updateDisplay={this.props.updateDisplay}
-        wrist_sizes= {this.props.wrist_sizes}
-        />
-      </div> : '';
 
     var forearmArea = (this.props.level == "Transhumeral") && showDevices  ?
     <div className="row">

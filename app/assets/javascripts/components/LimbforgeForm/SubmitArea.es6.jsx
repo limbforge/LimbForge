@@ -9,7 +9,7 @@ class SubmitArea extends React.Component {
     var style = {
       backgroundImage: `url(${loadinggif})`
     };
-    var submitArea = this.props.measurements == undefined ? '' :
+    var submitArea = !this.props.availableAreas["submit"].selected ? '' :
       <div id="download-area" className="row tab-padding">
         <div className="col-xs-12">
           <input type="submit" style={style} onClick={this.props.createZip} value={loadingval}/>
