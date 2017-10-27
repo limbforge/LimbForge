@@ -45,15 +45,15 @@ class NameArea extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <p className="nested-label">City of Residence</p>
+            <p className="nested-label">Residence</p>
           </div>
         </div>
-        <div className="ui-widget">
-          <input id="tags" />
+        <div className="residence">
+          <input id="tags" placeholder="city, country" />
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <p className="nested-label">Select Gender</p>
+            <p className="nested-label">Gender</p>
           </div>
         </div>
         <div id="gender-select" className="row">

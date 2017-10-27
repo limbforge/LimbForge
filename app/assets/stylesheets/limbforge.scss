@@ -83,9 +83,15 @@
   }
   .left{
     border-right: $standard-padding/5 solid #ffffff;
+    &:hover{
+      background-color: $blue !important;
+    }
   }
   .right{
     border-left: $standard-padding/5 solid #ffffff;
+    &:hover{
+      background-color: $blue !important;
+    }
   }
   .side-select{
     margin-top: $standard-padding*-1;
