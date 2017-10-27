@@ -6,8 +6,14 @@ class AmputationLevelArea extends React.Component {
 
   isSupportedAmputationLevel(level) {
     var levelSlug = level.toLowerCase().replace(/\s/g, '');
-    var hasDevices = this.props.availableLevels ? this.props.availableLevels.filter(function(n){ return n['slug'] == levelSlug })[0] : '';
-    return hasDevices['has_devices'];
+    //this is a static fix, since the Amputation level Shift endpoint is down right now
+    if (levelSlug == "transradial") {
+      return true
+    }
+    else{
+      var hasDevices = this.props.availableLevels ? this.props.availableLevels.filter(function(n){ return n['slug'] == levelSlug })[0] : '';
+      return hasDevices['has_devices'];
+    }
   }
 
   loadSvg() {
