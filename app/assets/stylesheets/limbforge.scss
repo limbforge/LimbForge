@@ -69,7 +69,8 @@
 
 #measurements{
   button{
-    margin-top: $standard-padding*-1;
+    display: block;
+    margin-top: $standard-padding/-1.5;
   }
 }
 

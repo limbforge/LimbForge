@@ -53,7 +53,7 @@ class NameArea extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <p className="nested-label">Gender</p>
+            <p className="nested-label">Anatomy: <span className="selected-level">{selected_gender}</span></p>
           </div>
         </div>
         <div id="gender-select" className="row">

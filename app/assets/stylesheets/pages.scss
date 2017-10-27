@@ -23,6 +23,7 @@
   height: 100vh;
   background-color: $white;
   width: 480px;
+  border-right: 1px solid $gray;
   padding: $standard-padding/3;
   position:  fixed;
   z-index: 2;
