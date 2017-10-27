@@ -5,11 +5,11 @@
   </head>
   <body>
     <p>Hey Admin,</p>
-    <p><%= @user.email %> wants access to the Limbforge tool. If you don't want to give them access please ignore this message.</p>
+    <p><%= @user.email %> wants access to the LimbForge tool. If you don't want to give them access please ignore this message.</p>
     <p>If you do want to give them access, log into the <%= ActionMailer::Base.default_url_options[:host] %>'s admin dashboard and give them access under the "access requests" tab.</p>
     </br>
     </br>
     <p>Happy <%= DateTime.current.strftime('%A') %>,</p>
-    <p> Limbforge.org </p>
+    <p> LimbForge.org </p>
   </body>
 </html>
