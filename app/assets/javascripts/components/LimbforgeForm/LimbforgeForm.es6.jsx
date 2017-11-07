@@ -251,12 +251,8 @@ class LimbforgeForm extends React.Component {
     var urls = [
       {
         link: `https://s3.amazonaws.com/limbforgestls/TD/${this.state.specs.gender.charAt(0)}PTD1/r${revision}/build/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_L4-${this.roundDownNumber(this.state.specs.L4)}.stl`,
-        name: `${patientName.toUpperCase()}TERMINAL DEVICE_r15_C1=${this.state.specs.C1}`
-      },
-      {
-        link: `https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl`,
-        name: `${patientName.toUpperCase()}WRIST_r12_PL${this.state.specs.selected_wrist_size}`
-      },
+        name: `${patientName.toUpperCase()}TERMINAL DEVICE_r15_C1=${this.state.specs.C1}_L4=${this.state.specs.L4}`
+      }
     ];
     if (this.state.specs.amputationLevel == 'Transhumeral'){
       urls.push({
