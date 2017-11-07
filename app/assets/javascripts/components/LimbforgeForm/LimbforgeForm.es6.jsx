@@ -41,6 +41,7 @@ class LimbforgeForm extends React.Component {
         L2: "30",
         L4: "16",
         TD: undefined,
+        nozzle_width: 0.4,
         wrist_sizes: [
           {
             title: "very loose",
@@ -95,6 +96,7 @@ class LimbforgeForm extends React.Component {
     this.getStls = this.getStls.bind(this);
     this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
+    this.updateNozzleWidth = this.updateNozzleWidth.bind(this);
     this.updateSpecs = this.updateSpecs.bind(this);
     this.updateComponentSpec = this.updateComponentSpec.bind(this);
     this.updateLoading = this.updateLoading.bind(this);
@@ -106,6 +108,11 @@ class LimbforgeForm extends React.Component {
     var component_object = $.grep(this.state.components, function(e){ return e.id == component_id; });
     newState.specs.component_object = component_object[0];
     this.setState({specs: newState.specs});
+  }
+  updateNozzleWidth(event){
+    var newState = this.state;
+    newState.specs.nozzle_width = event.target.value;
+    this.setState(newState);
   }
   // When we select a component, we want to grab the components list of measurements and tds
   updateMeasurementsAndTds(component_id) {
@@ -256,14 +263,14 @@ class LimbforgeForm extends React.Component {
     ];
     if (this.state.specs.amputationLevel == 'Transhumeral'){
       urls.push({
-        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}.stl`,
-        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}`
+        link: `https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_nz=${this.state.specs.nozzle_width}.stl`,
+        name: `${patientName.toUpperCase()}FOREARM_r${this.state.specs.component_object.version}_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}${this.state.specs.amputationLevel == 'Transhumeral' ? '' : '_L1=${this.state.specs.L1}'}_nz=${this.state.specs.nozzle_width}`
       });
     }
     else{
       urls.push({
         link: `https://s3.amazonaws.com/limbforgestls/forearm-QTC/r20/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl`,
-        name: `${patientName.toUpperCase()}FOREARM_r20_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}`
+        name: `${patientName.toUpperCase()}FOREARM_r20_${this.state.specs.side.charAt(0).toUpperCase()}_C1=${this.state.specs.C1}_C4=${this.state.specs.C4}_L1=${this.state.specs.L1}_nz=${this.state.specs.nozzle_width}`
       });
     }
     for (var i=0; i< 4; i++) {
@@ -465,6 +472,7 @@ class LimbforgeForm extends React.Component {
       level={this.state.specs.amputationLevel}
       specs={this.state.specs}
       wrist_sizes= {this.state.specs.wrist_sizes}
+      updateNozzleWidth={this.updateNozzleWidth}
       />
       <SubmitArea
       availableAreas={this.state.availableAreas}
