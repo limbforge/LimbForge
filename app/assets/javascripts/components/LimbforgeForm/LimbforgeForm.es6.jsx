@@ -337,7 +337,7 @@ class LimbforgeForm extends React.Component {
           const mesh = new THREE.Mesh( geometry, material );
           mesh.name = 'terminalDevice';
           mesh.position.set( 5, 0, 3.3 );
-          mesh.scale.set( .02, .02, .02 );
+          mesh.scale.set( .04, .04, .04 );
           mesh.castShadow = true;
           mesh.receiveShadow = false;
           scene.remove(scene.getObjectByName('terminalDevice'));
@@ -366,7 +366,7 @@ class LimbforgeForm extends React.Component {
           }
 
           mesh.rotation.set( 0, 0, 0 );
-          mesh.scale.set( .02, .02, .02 );
+          mesh.scale.set( .04, .04, .04 );
 
           mesh.castShadow = true;
           mesh.receiveShadow = false;
