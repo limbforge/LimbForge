@@ -63,7 +63,7 @@ function init() {
   controls.target.set( 0, 1.2, 2 );
   controls.update();
   window.addEventListener( 'resize', onWindowResize, false );
-
+  controls.enableZoom = false;
 }
 
 function onWindowResize() {
