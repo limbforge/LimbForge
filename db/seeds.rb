@@ -109,7 +109,7 @@ forearm.terminal_devices +=[ standard_td ]
 # USERS
 
 User.create({
-  email:'admin@hovalabs.com',
+  email:'lf@ergdyne.com',
   password: 'password',
   access_requested: false,
   has_access: true,
