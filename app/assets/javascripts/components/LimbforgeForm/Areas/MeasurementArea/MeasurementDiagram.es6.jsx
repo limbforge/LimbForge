@@ -34,9 +34,14 @@ class MeasurementDiagram extends React.Component {
         return (
           <div key={option.name}>
             <p className="label nested-label measurement-icon c">{option.name}</p>
-            <div className="measurement-container string">
-              <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="integer" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.X cm"} name={option.name}/>
-            </div>
+            <MeasurementInput
+              name={option.name}
+              side = {this.props.side}
+              amputationLevel={this.props.amputationLevel}
+              updateDisplay={this.props.updateDisplay}
+              max = {option.upper_range}
+              min = {option.lower_range}
+            />
           </div>
         );
       });
@@ -44,9 +49,14 @@ class MeasurementDiagram extends React.Component {
         return (
           <div key={option.name}>
             <p className="label nested-label measurement-icon l">{option.name}</p>
-            <div className="measurement-container string">
-              <input id={option.name} className={this.props.side + " " + this.props.amputationLevel} type="integer" onChange={this.props.updateDisplay} max={option.upper_range} min={option.lower_range} placeholder={"XX.X cm"} name={option.name}/>
-            </div>
+            <MeasurementInput
+              name={option.name}
+              side = {this.props.side}
+              amputationLevel={this.props.amputationLevel}
+              updateDisplay={this.props.updateDisplay}
+              max = {option.upper_range}
+              min = {option.lower_range}
+            />
           </div>
         );
       });
