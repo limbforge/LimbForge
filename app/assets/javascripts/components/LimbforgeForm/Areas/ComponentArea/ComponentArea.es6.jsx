@@ -20,6 +20,7 @@ class ComponentArea extends React.Component {
   }
 
   render() {
+    console.log("CA measurements", this.props.measurements)
     var classes =  this.props.availableAreas.prosthesis.selected ? 'accordion-head active' : 'accordion-head';
     return(
       <div>

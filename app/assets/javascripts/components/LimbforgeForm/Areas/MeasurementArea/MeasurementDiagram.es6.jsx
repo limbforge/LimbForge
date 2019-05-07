@@ -5,60 +5,15 @@ class MeasurementDiagram extends React.Component {
     componentWillReceiveProps(nextProps) {
     }
     renderMeasurementArea() {
-      var transradial_measurements = [
-        {
-          lower_range: 18,
-          measurement_unit: "cm",
-          name: "L1",
-          step: 0.5,
-          upper_range: 32,
-        },
-        {
-          lower_range: 20,
-          measurement_unit: "cm",
-          name: "L2",
-          step: 0.5,
-          upper_range: 28,
-        },
-        {
-          lower_range: 13,
-          measurement_unit: "cm",
-          name: "L4",
-          step: 0.5,
-          upper_range: 19,
-        },
-        {
-          lower_range: 20,
-          measurement_unit: "cm",
-          name: "C4",
-          step: 0.5,
-          upper_range: 28,
-        },
-        {
-          lower_range: 20,
-          measurement_unit: "cm",
-          name: "C3",
-          step: 0.5,
-          upper_range: 28,
-        },
-        {
-          lower_range: 20,
-          measurement_unit: "cm",
-          name: "C2",
-          step: 0.5,
-          upper_range: 28,
-        },
-        {
-          lower_range: 14,
-          measurement_unit: "cm",
-          name: "C1",
-          step: 0.5,
-          upper_range: 18,
-        },
-      ];
+
       var C_measurements = [];
       var L_measurements = [];
-      C_measurements = transradial_measurements.map(x => {
+      var measurements = [];
+      //make sure measurements have been defined
+      if(this.props.measurements){
+        measurements = this.props.measurements
+      }
+      C_measurements = measurements.map(x => {
         if (x.name.charAt(0) == "C") {
           return x;
         }
@@ -66,14 +21,15 @@ class MeasurementDiagram extends React.Component {
         return n != undefined;
       });
   
-      L_measurements = transradial_measurements.map(x => {
+      L_measurements = measurements.map(x => {
         if (x.name.charAt(0) == "L") {
           return x;
         }
       }).filter(n => {
         return n != undefined
       });
-  
+
+      //can probably add initial range check here
       var cMeasurementInputs = C_measurements === undefined ? "" : C_measurements.map((option) => {
         return (
           <div key={option.name}>

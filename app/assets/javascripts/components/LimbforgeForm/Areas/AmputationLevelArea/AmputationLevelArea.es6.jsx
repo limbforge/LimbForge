@@ -272,7 +272,6 @@ class AmputationLevelArea extends React.Component {
       <button
         style={buttonStyle}
         onClick={() => {
-          console.log("on click", levelSelected.id)
           this.props.updateAvailableAreas('prosthesis');
           this.props.getComponents(levelSelected.id);
         }}
