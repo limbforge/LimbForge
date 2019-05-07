@@ -8,7 +8,6 @@ class LimbforgeForm extends React.Component {
       td: undefined,
       devices: undefined,
     };
-    this.getAvailableLevels();
     this.state = {
       components: undefined,
       tds: undefined,
@@ -88,7 +87,6 @@ class LimbforgeForm extends React.Component {
         },
       }
     };
-    this.getAvailableLevels = this.getAvailableLevels.bind(this);
     this.createZip = this.createZip.bind(this);
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
@@ -119,6 +117,7 @@ class LimbforgeForm extends React.Component {
     const newState = this.state;
     newState.specs.component = component_id;
     newState.specs.TD = "phone";
+    console.log(component_id)
     this.updateComponentSpec(component_id);
     const tdsUrl = this.props.tds_search_path + "?query=" + component_id;
     const measurementsUrl = this.props.measurements_search_path + "?query=" + component_id;
@@ -127,6 +126,7 @@ class LimbforgeForm extends React.Component {
       dataType: 'json',
       success: (data) => {
         newState.tds = data;
+        console.log('REQUEST td', data);
       },
       error: (error) => {
         console.log('getTD error', error, tdsUrl);
@@ -138,6 +138,8 @@ class LimbforgeForm extends React.Component {
         dataType: 'json',
         success: (data) => {
           newState.measurements = data;
+          console.log('URL', measurementsUrl)
+          console.log('REQUEST measurements', data);
           this.setState(newState);
         },
         error: (error) => {
@@ -156,29 +158,19 @@ class LimbforgeForm extends React.Component {
     }
   }
 
-  getAvailableLevels(){
-    const url = "https://fusion360.io/api/ui/amputationLevels";
-    $.ajax({
-      url: url,
-      dataType: 'json',
-      success: (data) => {
-        const newState = {
-          availableLevels: data['amputationLevels']
-        };
-        this.setState(newState);
-      },
-      error: (error) => {
-        console.log('get available levels error', error, url);
-      }
-    });
-  }
+
 
   getComponents(componentType) {
+    //componentType is an id and comes in from AmputationLevelArea, somewhat arbitrary as the levels aren't bound to the DB
+    //Compontnet type is not what it needs to be
+    console.log("Component type = ", componentType)
+
     const url = this.props.components_search_path + "?query="+componentType;
     $.ajax({
       url: url,
       dataType: 'json',
       success: (data) => {
+        console.log('REQUEST components', data);
         const newState = {
           components: data,
           tds: undefined,
@@ -187,8 +179,12 @@ class LimbforgeForm extends React.Component {
           showComponentArea: true,
         };
         this.setState(newState);
-        // STATIC FIX: when the user has selected the transradial level, show this arm! (id = 3)
-        this.updateMeasurementsAndTds(3);
+        
+        
+        //This is a hack, I am not sure if components_search_path would return more than one
+        //But since it is a list, I will just take the first one
+        console.log("the component", this.state.components[0].id)
+        this.updateMeasurementsAndTds(this.state.components[0].id);
       },
       error: (error) => {
         console.log('get components error', error, url);
@@ -246,6 +242,7 @@ class LimbforgeForm extends React.Component {
   }
 
   createZip() {
+    //Hardwired ... :(
     if (this.state.specs.L1 > 32 || this.state.specs.L1 < 19) throw alert("Expected L1 size to be a number between 19cm - 32cm");
     if (this.state.specs.C1 > 18 || this.state.specs.C1 < 14.5) throw alert("Expected C1 size to be a number between 14.5cm - 18cm");
     if (this.state.specs.C4 > 28 || this.state.specs.C4 < 20) throw alert("Expected C4 size to be a number between 20cm - 28cm");
@@ -420,8 +417,10 @@ class LimbforgeForm extends React.Component {
   render() {
     this.loadNewDevices();
     this.loadTD();
+    console.log("PROPS", this.props.measurements_search_path)
     var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel.toLowerCase() + "_" + this.state.specs.side.charAt(0).toUpperCase();
     var imageURL = this.props.images[imageName];
+    console.log('Measurements',this.state.measurements);
     return (
       <div>
       <div id="limbforge">
