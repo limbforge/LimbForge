@@ -13,7 +13,7 @@ class MeasurementInput extends React.Component {
         }else{
             this.setState({color:"red"})
         }
-        this.props.updateDisplay
+        this.props.updateDisplay(event)
     }
 
     render() {

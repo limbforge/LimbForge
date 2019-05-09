@@ -1,11 +1,40 @@
 class MeasurementDiagram extends React.Component {
     constructor(props) {
       super(props);
+      this.state = {
+        validInputs: false
+      }
+      this.checkInputs = this.checkInputs.bind(this)
     }
     componentWillReceiveProps(nextProps) {
     }
-    renderMeasurementArea() {
 
+    checkInputs(event){
+
+      this.props.updateDisplay(event)
+
+      console.log("check inputs")
+
+      var check = false
+      
+      check = this.props.measurements.reduce((acc, cv, ci, arr)=>{
+        if(acc){
+          console.log("cv", cv)
+          var v = this.props.specs[cv.name]
+          console.log(v)
+          return (cv.lower_range <= v && v <= cv.upper_range)
+        }else{
+          console.log("Skipped", cv)
+          return false
+        }
+      },true)
+
+      console.log("Check2 ",check)
+
+      this.setState({validInputs:check})
+    }
+    renderMeasurementArea() {
+      console.log("Render C1", this.props.specs[`C1`])
       var C_measurements = [];
       var L_measurements = [];
       var measurements = [];
@@ -38,7 +67,7 @@ class MeasurementDiagram extends React.Component {
               name={option.name}
               side = {this.props.side}
               amputationLevel={this.props.amputationLevel}
-              updateDisplay={this.props.updateDisplay}
+              updateDisplay={this.checkInputs}
               max = {option.upper_range}
               min = {option.lower_range}
             />
@@ -76,8 +105,13 @@ class MeasurementDiagram extends React.Component {
               </div>
             </div>
           </div>
+          {//make only available if measurements are correct
+          }
           <div onClick={()=>this.props.updateSelectedArea('submit')}>
-            <button className="continue-submit">CONTINUE</button>
+            <button className="continue-submit"
+            style={this.state.validInputs? {} : { background: "grey" }}
+            disabled={!this.state.validInputs}
+            >CONTINUE</button>
           </div>
         </div>;
   

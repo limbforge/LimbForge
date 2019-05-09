@@ -34,10 +34,12 @@ class LimbforgeForm extends React.Component {
         selected_wrist_size: 1,
         side: "",
         C1: "15",
+        C2: "24",
+        C3: "24",
         C4: "24",
         C6: "25",
         L1: "27",
-        L2: "30",
+        L2: "28",
         L4: "16",
         TD: undefined,
         nozzle_width: 0.4,
@@ -105,6 +107,7 @@ class LimbforgeForm extends React.Component {
     var newState = this.state;
     var component_object = $.grep(this.state.components, function(e){ return e.id == component_id; });
     newState.specs.component_object = component_object[0];
+    console.log("New spec", newState.specs)
     this.setState({specs: newState.specs});
   }
   updateNozzleWidth(event){
@@ -204,6 +207,8 @@ class LimbforgeForm extends React.Component {
   }
 
   getStls(stls) {
+    //URLs are mapped using state, so as long as the stat is updated, the links should
+    console.log("Get STLS")
     var urls = this.state.specs.amputationLevel == 'Transhumeral' ?
     [
       'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}.stl',
@@ -237,16 +242,13 @@ class LimbforgeForm extends React.Component {
   }
 
   createZip() {
-    //Hardwired ... :(
-    if (this.state.specs.L1 > 32 || this.state.specs.L1 < 19) throw alert("Expected L1 size to be a number between 19cm - 32cm");
-    if (this.state.specs.C1 > 18 || this.state.specs.C1 < 14.5) throw alert("Expected C1 size to be a number between 14.5cm - 18cm");
-    if (this.state.specs.C4 > 28 || this.state.specs.C4 < 20) throw alert("Expected C4 size to be a number between 20cm - 28cm");
     this.updateLoading();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
     const name = this.state.specs.fname == "" ? this.state.specs.lname + "_" : this.state.specs.fname + "_" + this.state.specs.lname + "_";
     const patientName = name == "_" ? "" : name;
     var revision = this.state.specs.gender == "male" ? 1 : 17;
+    ///OH, another set up urls....
     var urls = [
       {
         link: `https://s3.amazonaws.com/limbforgestls/TD/${this.state.specs.gender.charAt(0)}PTD1/r${revision}/build/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_L4-${this.roundDownNumber(this.state.specs.L4)}.stl`,
@@ -295,6 +297,7 @@ class LimbforgeForm extends React.Component {
       zip.file(filename, urlToPromise(url.link), {binary:true});
     });
 
+    //These are the files we want another download for?
     zip.file('instructions.txt', urlToPromise('https://s3-us-west-2.amazonaws.com/limbforgedocs/instructions.txt'), {binary:true});
     zip.file('Passive.Transradial.Device.Assembly.Manual.pdf', urlToPromise('https://s3-us-west-2.amazonaws.com/limbforgedocs/Passive.Transradial.Device.Assembly.Manual.pdf'), {binary:true});
 
@@ -313,10 +316,13 @@ class LimbforgeForm extends React.Component {
     this.setState({ specs });
   }
 
+ 
+
   updateDisplay(event) {
     newSpec = this.state.specs;
     const eventClass = event.target.parentElement.getAttribute('class') == null ? "" : event.target.parentElement.getAttribute('class');
     newSpec[event.target.id] = !eventClass.includes("string") ? event.target.getAttribute('value') : event.target.value;
+
     this.setState({specs: newSpec});
   }
   loadTD() {
@@ -341,8 +347,10 @@ class LimbforgeForm extends React.Component {
   }
 
   loadNewDevices() {
+    console.log("LOAD new Devices")
     if (this.state.specs.component != undefined){
-      // LOAD NEW devices
+      
+
       const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
         'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r' + this.state.specs.component_object.version + '/preview/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C4-' + this.roundDownNumber(this.state.specs.C4) + '_C6-'+ this.roundDownNumber(this.state.specs.C6) + '_L2-'+ this.roundDownNumber(this.state.specs.L2) + '.stl' :
         'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r20' + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
@@ -446,6 +454,7 @@ class LimbforgeForm extends React.Component {
       side={this.state.specs.side}
       amputationLevel={this.state.specs.amputationLevel}
       measurements={this.state.measurements}
+      specs={this.state.specs}
       />
       <MeasurementArea
       availableAreas={this.state.availableAreas}

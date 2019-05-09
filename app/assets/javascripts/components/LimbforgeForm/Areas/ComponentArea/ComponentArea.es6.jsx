@@ -37,6 +37,7 @@ class ComponentArea extends React.Component {
           amputationLevel={this.props.amputationLevel}
           measurements={this.props.measurements}
           updateDisplay={this.props.updateDisplay}
+          specs={this.props.specs}
         />
         {/* add the line underneath this if you want to show component options */}
         {/* {this.props.availableAreas.prosthesis.selected ? this.renderComponents() : ''}*/}
