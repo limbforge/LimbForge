@@ -12,12 +12,9 @@ class LimbforgeForm extends React.Component {
       components: undefined,
       tds: undefined,
       isLoading: false,
+      loadSTL: false,
       measurements: undefined,
       availableLevels: undefined,
-      showNameArea: true,
-      showAmputationLevelArea: false,
-      showComponentArea: false,
-      showMeasurementArea: false,
       specs: {
         fname: "",
         lname: "",
@@ -44,22 +41,10 @@ class LimbforgeForm extends React.Component {
         TD: undefined,
         nozzle_width: 0.4,
         wrist_sizes: [
-          {
-            title: "very loose",
-            value: "1"
-          },
-          {
-            title: "loose",
-            value: "2"
-          },
-          {
-            title: "tight",
-            value: "3"
-          },
-          {
-            title: "very tight",
-            value: "4"
-          },
+          {title: "very loose", value: "1"},
+          {title: "loose", value: "2"},
+          {title: "tight",value: "3"},
+          {title: "very tight",value: "4"},
         ]
       },
       availableAreas: {
@@ -102,22 +87,22 @@ class LimbforgeForm extends React.Component {
     this.roundUpNumber = this.roundUpNumber.bind(this);
     this.roundDownNumber = this.roundDownNumber.bind(this);
   }
+
   updateComponentSpec(component_id){
-    //in use
     var newState = this.state;
     var component_object = $.grep(this.state.components, function(e){ return e.id == component_id; });
     newState.specs.component_object = component_object[0];
     this.setState({specs: newState.specs});
   }
+
   updateNozzleWidth(event){
-    //in use
     var newState = this.state;
     newState.specs.nozzle_width = event.target.value;
     this.setState(newState);
   }
+
   // When we select a component, we want to grab the components list of measurements and tds
   updateMeasurementsAndTds(component_id) {
-    //in use
     const newState = this.state;
     newState.specs.component = component_id;
     newState.specs.TD = "phone";
@@ -150,16 +135,15 @@ class LimbforgeForm extends React.Component {
   }
 
   updateLoading(){
-    //in use
+    console.log("Loading", this.state.isLoading)
     if (this.state.isLoading){
       this.setState({isLoading: false});
     }
     else{
       this.setState({isLoading: true});
     }
+    console.log("Loading", this.state.isLoading)
   }
-
-
 
   getComponents(componentType) {
     //componentType is an id and comes in from AmputationLevelArea
@@ -207,8 +191,7 @@ class LimbforgeForm extends React.Component {
     return result
   }
  
-  createZip() {
-    //in use
+  createZip() {  
     this.updateLoading();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
@@ -279,11 +262,10 @@ class LimbforgeForm extends React.Component {
       console.log('oh noes', e);
     });
   }
+
   updateSpecs(specs) {
     this.setState({ specs });
   }
-
- 
 
   updateDisplay(event) {
     newSpec = this.state.specs;
@@ -292,62 +274,60 @@ class LimbforgeForm extends React.Component {
 
     this.setState({specs: newSpec});
   }
+
   loadTD() {
-    if (this.state.specs.TD != undefined){
-      var revision = this.state.specs.gender == "male" ? 1 : 17;
-      const s3url =  'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.gender.charAt(0) + 'PTD1/r'+ revision +'/preview/'+ this.state.specs.side.charAt(0).toUpperCase() +'/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_L4-'+ this.roundDownNumber(this.state.specs.L4) + '.stl'
-      if (this.downloaded.td !== s3url) {
-        this.downloaded.td = s3url;
-        loader.load(s3url, (geometry) => {
-          const mesh = new THREE.Mesh( geometry, material );
-          mesh.name = 'terminalDevice';
-          mesh.position.set( 5, 0, 3.3 );
-          mesh.scale.set( .04, .04, .04 );
-          mesh.castShadow = true;
-          mesh.receiveShadow = false;
-          scene.remove(scene.getObjectByName('terminalDevice'));
-          scene.add( mesh );
-          renderThreeJS();
-        });
+    if(this.state.loadSTL){
+      if (this.state.specs.TD != undefined){
+        var revision = this.state.specs.gender == "male" ? 1 : 17;
+        const s3url =  'https://s3.amazonaws.com/limbforgestls/TD/' + this.state.specs.gender.charAt(0) + 'PTD1/r'+ revision +'/preview/'+ this.state.specs.side.charAt(0).toUpperCase() +'/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_L4-'+ this.roundDownNumber(this.state.specs.L4) + '.stl'
+        if (this.downloaded.td !== s3url) {
+          this.downloaded.td = s3url;
+          loader.load(s3url, (geometry) => {
+            const mesh = new THREE.Mesh( geometry, material );
+            mesh.name = 'terminalDevice';
+            mesh.position.set( 5, 0, 3.3 );
+            mesh.scale.set( .04, .04, .04 );
+            mesh.castShadow = true;
+            mesh.receiveShadow = false;
+            scene.remove(scene.getObjectByName('terminalDevice'));
+            scene.add( mesh );
+            renderThreeJS();
+          });
+        }
       }
     }
   }
 
   loadNewDevices() {
-    if (this.state.specs.component != undefined){
-      
+    console.log("Load new devices")
+    if(this.state.loadSTL){
+      if (this.state.specs.component != undefined){
+        const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
+          'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r' + this.state.specs.component_object.version + '/preview/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C4-' + this.roundDownNumber(this.state.specs.C4) + '_C6-'+ this.roundDownNumber(this.state.specs.C6) + '_L2-'+ this.roundDownNumber(this.state.specs.L2) + '.stl' :
+          'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r20' + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
+        if (this.downloaded.devices !== s3url) {
+          this.downloaded.devices = s3url;
+          loader.load(s3url, (geometry) => {
+            const mesh = new THREE.Mesh( geometry, material );
+            mesh.name = 'device';
+            if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
+              mesh.position.set( 5, 0, 0.0 );
+            } else {
+              mesh.position.set( 5, 0, 3.3 );
+            }
 
-      const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
-        'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r' + this.state.specs.component_object.version + '/preview/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C4-' + this.roundDownNumber(this.state.specs.C4) + '_C6-'+ this.roundDownNumber(this.state.specs.C6) + '_L2-'+ this.roundDownNumber(this.state.specs.L2) + '.stl' :
-        'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r20' + '/' + this.state.specs.side.charAt(0).toUpperCase() + '/info_C1-' + this.roundDownNumber(this.state.specs.C1) + '_C4-'+ this.roundDownNumber(this.state.specs.C4) + '_L1-'+ this.roundUpNumber(this.state.specs.L1) + '.stl';
-      if (this.downloaded.devices !== s3url) {
-        this.downloaded.devices = s3url;
-        loader.load(s3url, (geometry) => {
-          const mesh = new THREE.Mesh( geometry, material );
-          mesh.name = 'device';
-          if (this.state.specs.TD == undefined || this.state.specs.TD == "" ) {
-            mesh.position.set( 5, 0, 0.0 );
-          } else {
-            mesh.position.set( 5, 0, 3.3 );
-          }
+            mesh.rotation.set( 0, 0, 0 );
+            mesh.scale.set( .04, .04, .04 );
 
-          mesh.rotation.set( 0, 0, 0 );
-          mesh.scale.set( .04, .04, .04 );
-
-          mesh.castShadow = true;
-          mesh.receiveShadow = false;
-          scene.remove(scene.getObjectByName('device'));
-          scene.add( mesh );
-          renderThreeJS();
-        });
+            mesh.castShadow = true;
+            mesh.receiveShadow = false;
+            scene.remove(scene.getObjectByName('device'));
+            scene.add( mesh );
+            renderThreeJS();
+          });
+        }
       }
     }
-  }
-
-  toggleNameArea(){
-    console.log("toggle name area")
-    this.setState({showNameArea: false});
-    this.setState({showAmputationLevelArea: true});
   }
 
   // Whenever the form reaches a checkpoint, update the ability for that part of the form to be selected
@@ -393,70 +373,69 @@ class LimbforgeForm extends React.Component {
     var imageURL = this.props.images[imageName];
     return (
       <div>
-      <div id="limbforge">
-      <img className="logo" src={this.props.logo_img} />
-      <NameArea
-        gender={this.state.specs.gender}
-        availableLevels={this.state.availableLevels}
+        <div id="limbforge">
+        <img className="logo" src={this.props.logo_img} />
+        <div>{"Hello"}</div>
+        <NameArea
+          gender={this.state.specs.gender}
+          availableLevels={this.state.availableLevels}
+          availableAreas={this.state.availableAreas}
+          updateAvailableAreas={this.updateAvailableAreas}
+          updateSelectedArea={this.updateSelectedArea}
+          showNameArea={this.state.showNameArea}
+          updateDisplay={this.updateDisplay}
+          availableLevels={this.state.availableLevels}
+          selectedGender={this.state.specs.gender}
+          updateSpecs={this.updateSpecs}
+          getComponents={this.getComponents}
+          levels={this.props.levels}
+          components_search_path={this.props.components_search_path}
+          images={this.props.images}
+          specs={this.state.specs}
+        />
+        <ComponentArea
         availableAreas={this.state.availableAreas}
         updateAvailableAreas={this.updateAvailableAreas}
         updateSelectedArea={this.updateSelectedArea}
-        showNameArea={this.state.showNameArea}
+        updateMeasurementsAndTds={this.updateMeasurementsAndTds}
         updateDisplay={this.updateDisplay}
-        availableLevels={this.state.availableLevels}
-        selectedGender={this.state.specs.gender}
-        updateSpecs={this.updateSpecs}
-        getComponents={this.getComponents}
-        levels={this.props.levels}
-        components_search_path={this.props.components_search_path}
-        images={this.props.images}
+        components={this.state.components}
+        imageURL={imageURL}
+        side={this.state.specs.side}
+        amputationLevel={this.state.specs.amputationLevel}
+        measurements={this.state.measurements}
         specs={this.state.specs}
-      />
-      <ComponentArea
-      availableAreas={this.state.availableAreas}
-      updateAvailableAreas={this.updateAvailableAreas}
-      updateSelectedArea={this.updateSelectedArea}
-      updateMeasurementsAndTds={this.updateMeasurementsAndTds}
-      updateDisplay={this.updateDisplay}
-      components={this.state.components}
-      imageURL={imageURL}
-      side={this.state.specs.side}
-      amputationLevel={this.state.specs.amputationLevel}
-      measurements={this.state.measurements}
-      specs={this.state.specs}
-      />
-      <MeasurementArea
-      availableAreas={this.state.availableAreas}
-      updateAvailableAreas={this.updateAvailableAreas}
-      updateSelectedArea={this.updateSelectedArea}
-      imageURL={imageURL}
-      side={this.state.specs.side}
-      amputationLevel={this.state.specs.amputationLevel}
-      measurements={this.state.measurements}
-      updateDisplay={this.updateDisplay}
-      />
-      <TdArea
-      updateDisplay={this.updateDisplay}
-      availableAreas={this.state.availableAreas}
-      tds={this.state.tds}
-      level={this.state.specs.amputationLevel}
-      specs={this.state.specs}
-      wrist_sizes= {this.state.specs.wrist_sizes}
-      updateNozzleWidth={this.updateNozzleWidth}
-      />
-      <SubmitArea
-      availableAreas={this.state.availableAreas}
-      createZip={this.createZip}
-      measurements={this.state.measurements}
-      isLoading={this.state.isLoading}
-      loadingImg={this.props.images.loading_img}
-      />
-      </div>
-      <MeasurementModal
-      imageURL={imageURL}
-      measurements={this.state.measurements}
-      />
-      <LimbforgeFooter />
+        />
+        <MeasurementArea
+        availableAreas={this.state.availableAreas}
+        updateAvailableAreas={this.updateAvailableAreas}
+        updateSelectedArea={this.updateSelectedArea}
+        imageURL={imageURL}
+        side={this.state.specs.side}
+        amputationLevel={this.state.specs.amputationLevel}
+        measurements={this.state.measurements}
+        updateDisplay={this.updateDisplay}
+        />
+        <TdArea
+        updateDisplay={this.updateDisplay}
+        availableAreas={this.state.availableAreas}
+        tds={this.state.tds}
+        level={this.state.specs.amputationLevel}
+        specs={this.state.specs}
+        wrist_sizes= {this.state.specs.wrist_sizes}
+        updateNozzleWidth={this.updateNozzleWidth}
+        />
+        <SubmitArea
+        availableAreas={this.state.availableAreas}
+        createZip={this.createZip}
+        measurements={this.state.measurements}
+        isLoading={this.state.isLoading}
+        loadingImg={this.props.images.loading_img}
+        />
+        </div>
+        
+        <LimbforgeFooter />
+        <div>{"Good bye"}</div>
       </div>
     );
   }
