@@ -93,7 +93,6 @@ class LimbforgeForm extends React.Component {
     this.getComponents = this.getComponents.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.updateMeasurementsAndTds = this.updateMeasurementsAndTds.bind(this);
-    this.getStls = this.getStls.bind(this);
     this.updateAvailableAreas = this.updateAvailableAreas.bind(this);
     this.updateSelectedArea = this.updateSelectedArea.bind(this);
     this.updateNozzleWidth = this.updateNozzleWidth.bind(this);
@@ -104,19 +103,21 @@ class LimbforgeForm extends React.Component {
     this.roundDownNumber = this.roundDownNumber.bind(this);
   }
   updateComponentSpec(component_id){
+    //in use
     var newState = this.state;
     var component_object = $.grep(this.state.components, function(e){ return e.id == component_id; });
     newState.specs.component_object = component_object[0];
-    console.log("New spec", newState.specs)
     this.setState({specs: newState.specs});
   }
   updateNozzleWidth(event){
+    //in use
     var newState = this.state;
     newState.specs.nozzle_width = event.target.value;
     this.setState(newState);
   }
   // When we select a component, we want to grab the components list of measurements and tds
   updateMeasurementsAndTds(component_id) {
+    //in use
     const newState = this.state;
     newState.specs.component = component_id;
     newState.specs.TD = "phone";
@@ -149,6 +150,7 @@ class LimbforgeForm extends React.Component {
   }
 
   updateLoading(){
+    //in use
     if (this.state.isLoading){
       this.setState({isLoading: false});
     }
@@ -161,7 +163,6 @@ class LimbforgeForm extends React.Component {
 
   getComponents(componentType) {
     //componentType is an id and comes in from AmputationLevelArea
-
     const url = this.props.components_search_path + "?query="+componentType;
     $.ajax({
       url: url,
@@ -205,43 +206,9 @@ class LimbforgeForm extends React.Component {
     var result = (Math.floor(base_num/5)*5);
     return result
   }
-
-  getStls(stls) {
-    //URLs are mapped using state, so as long as the stat is updated, the links should
-    console.log("Get STLS")
-    var urls = this.state.specs.amputationLevel == 'Transhumeral' ?
-    [
-      'https://s3.amazonaws.com/limbforgestls/${this.state.specs.component_object.folder}/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}.stl',
-      'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl',
-      'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
-    ] :
-    [
-      'https://s3.amazonaws.com/limbforgestls/forearm-QTC/r${this.state.specs.component_object.version}/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}_C4-${this.roundDownNumber(this.state.specs.C4)}_L1-${this.roundUpNumber(this.state.specs.L1)}.stl',
-      'https://s3.amazonaws.com/limbforgestls/PTD-a/${this.state.specs.side.charAt(0).toUpperCase()}/info_C1-${this.roundDownNumber(this.state.specs.C1)}.stl',
-      'https://s3.amazonaws.com/limbforgestls/QTC-coupler/r12/info_PL-${this.state.specs.selected_wrist_size}.stl'
-    ];
-
-    var xhr = new XMLHttpRequest();
-    urls.forEach(function(url) {
-      xhr.open('GET', url, true);
-      xhr.responseType = "blob";
-    });
-
-    this.updateLoading();
-    var new_this = this;
-
-    xhr.onreadystatechange = function (){
-      if (xhr.readyState === 4) {
-        var blob = xhr.response;
-        new_this.updateLoading();
-        saveAs(blob, "LimbForge.zip");
-        this.updateLoading();
-      }
-    };
-    xhr.send();
-  }
-
+ 
   createZip() {
+    //in use
     this.updateLoading();
     const today = new Date();
     const formatted_date =  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
@@ -347,7 +314,6 @@ class LimbforgeForm extends React.Component {
   }
 
   loadNewDevices() {
-    console.log("LOAD new Devices")
     if (this.state.specs.component != undefined){
       
 
@@ -379,12 +345,14 @@ class LimbforgeForm extends React.Component {
   }
 
   toggleNameArea(){
+    console.log("toggle name area")
     this.setState({showNameArea: false});
     this.setState({showAmputationLevelArea: true});
   }
 
   // Whenever the form reaches a checkpoint, update the ability for that part of the form to be selected
   updateAvailableAreas(area) {
+    //used early
     const availableAreas = this.state.availableAreas;
     for (const key of Object.keys(availableAreas)) {
       const value = availableAreas[key];
@@ -396,6 +364,7 @@ class LimbforgeForm extends React.Component {
   }
 
   updateSelectedArea(area) {
+    //used later
     // Don't update unless the areas being passed in is available
     if (this.state.availableAreas[area].available) {
       const availableAreas = this.state.availableAreas;

@@ -10,31 +10,21 @@ class MeasurementDiagram extends React.Component {
     }
 
     checkInputs(event){
-
+      //Update values
       this.props.updateDisplay(event)
-
-      console.log("check inputs")
-
       var check = false
       
       check = this.props.measurements.reduce((acc, cv, ci, arr)=>{
         if(acc){
-          console.log("cv", cv)
           var v = this.props.specs[cv.name]
-          console.log(v)
-          return (cv.lower_range <= v && v <= cv.upper_range)
+          return (v && cv.lower_range <= v && v <= cv.upper_range)
         }else{
-          console.log("Skipped", cv)
           return false
         }
       },true)
-
-      console.log("Check2 ",check)
-
       this.setState({validInputs:check})
     }
     renderMeasurementArea() {
-      console.log("Render C1", this.props.specs[`C1`])
       var C_measurements = [];
       var L_measurements = [];
       var measurements = [];
