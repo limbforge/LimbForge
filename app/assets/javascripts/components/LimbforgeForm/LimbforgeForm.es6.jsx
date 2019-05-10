@@ -382,68 +382,70 @@ class LimbforgeForm extends React.Component {
     return (
       <div>
         <div id="limbforge">
-        <img className="logo" src={this.props.logo_img} />
-        <FormHeader loadSTL={this.state.loadSTL} toggleSTL={this.toggleSTL}/>
-        <NameArea
-          gender={this.state.specs.gender}
-          availableLevels={this.state.availableLevels}
+          <img className="logo" src={this.props.logo_img} />
+          
+          <NameArea
+            gender={this.state.specs.gender}
+            availableLevels={this.state.availableLevels}
+            availableAreas={this.state.availableAreas}
+            updateAvailableAreas={this.updateAvailableAreas}
+            updateSelectedArea={this.updateSelectedArea}
+            showNameArea={this.state.showNameArea}
+            updateDisplay={this.updateDisplay}
+            availableLevels={this.state.availableLevels}
+            selectedGender={this.state.specs.gender}
+            updateSpecs={this.updateSpecs}
+            getComponents={this.getComponents}
+            levels={this.props.levels}
+            components_search_path={this.props.components_search_path}
+            images={this.props.images}
+            specs={this.state.specs}
+          />
+          <ComponentArea
           availableAreas={this.state.availableAreas}
           updateAvailableAreas={this.updateAvailableAreas}
           updateSelectedArea={this.updateSelectedArea}
-          showNameArea={this.state.showNameArea}
+          updateMeasurementsAndTds={this.updateMeasurementsAndTds}
           updateDisplay={this.updateDisplay}
-          availableLevels={this.state.availableLevels}
-          selectedGender={this.state.specs.gender}
-          updateSpecs={this.updateSpecs}
-          getComponents={this.getComponents}
-          levels={this.props.levels}
-          components_search_path={this.props.components_search_path}
-          images={this.props.images}
+          components={this.state.components}
+          imageURL={imageURL}
+          side={this.state.specs.side}
+          amputationLevel={this.state.specs.amputationLevel}
+          measurements={this.state.measurements}
           specs={this.state.specs}
-        />
-        <ComponentArea
-        availableAreas={this.state.availableAreas}
-        updateAvailableAreas={this.updateAvailableAreas}
-        updateSelectedArea={this.updateSelectedArea}
-        updateMeasurementsAndTds={this.updateMeasurementsAndTds}
-        updateDisplay={this.updateDisplay}
-        components={this.state.components}
-        imageURL={imageURL}
-        side={this.state.specs.side}
-        amputationLevel={this.state.specs.amputationLevel}
-        measurements={this.state.measurements}
-        specs={this.state.specs}
-        />
-        <MeasurementArea
-        availableAreas={this.state.availableAreas}
-        updateAvailableAreas={this.updateAvailableAreas}
-        updateSelectedArea={this.updateSelectedArea}
-        imageURL={imageURL}
-        side={this.state.specs.side}
-        amputationLevel={this.state.specs.amputationLevel}
-        measurements={this.state.measurements}
-        updateDisplay={this.updateDisplay}
-        />
-        <TdArea
-        updateDisplay={this.updateDisplay}
-        availableAreas={this.state.availableAreas}
-        tds={this.state.tds}
-        level={this.state.specs.amputationLevel}
-        specs={this.state.specs}
-        wrist_sizes= {this.state.specs.wrist_sizes}
-        updateNozzleWidth={this.updateNozzleWidth}
-        />
-        <SubmitArea
-        availableAreas={this.state.availableAreas}
-        createZip={this.createZip}
-        measurements={this.state.measurements}
-        isLoading={this.state.isLoading}
-        loadingImg={this.props.images.loading_img}
-        />
+          />
+          <MeasurementArea
+          availableAreas={this.state.availableAreas}
+          updateAvailableAreas={this.updateAvailableAreas}
+          updateSelectedArea={this.updateSelectedArea}
+          imageURL={imageURL}
+          side={this.state.specs.side}
+          amputationLevel={this.state.specs.amputationLevel}
+          measurements={this.state.measurements}
+          updateDisplay={this.updateDisplay}
+          />
+          <TdArea
+          updateDisplay={this.updateDisplay}
+          availableAreas={this.state.availableAreas}
+          tds={this.state.tds}
+          level={this.state.specs.amputationLevel}
+          specs={this.state.specs}
+          wrist_sizes= {this.state.specs.wrist_sizes}
+          updateNozzleWidth={this.updateNozzleWidth}
+          />
+          <SubmitArea
+          availableAreas={this.state.availableAreas}
+          createZip={this.createZip}
+          measurements={this.state.measurements}
+          isLoading={this.state.isLoading}
+          loadingImg={this.props.images.loading_img}
+          />
+
+          <FormExtras loadSTL={this.state.loadSTL} toggleSTL={this.toggleSTL}/>
         </div>
         
         <LimbforgeFooter />
-        <div>{"Good bye"}</div>
+        
       </div>
     );
   }

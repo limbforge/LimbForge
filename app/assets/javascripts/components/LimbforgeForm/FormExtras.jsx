@@ -1,4 +1,4 @@
-class FormHeader extends React.Component {
+class FormExtras extends React.Component {
   constructor(props){
     super(props)
 
