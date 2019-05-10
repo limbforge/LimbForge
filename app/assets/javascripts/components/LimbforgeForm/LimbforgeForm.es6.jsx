@@ -86,6 +86,13 @@ class LimbforgeForm extends React.Component {
     this.updateLoading = this.updateLoading.bind(this);
     this.roundUpNumber = this.roundUpNumber.bind(this);
     this.roundDownNumber = this.roundDownNumber.bind(this);
+    this.toggleSTL = this.toggleSTL.bind(this)
+  }
+
+  toggleSTL(){
+    console.log("Toggle STL")
+    var b = !this.state.loadSTL
+    this.setState({loadSTL:b})
   }
 
   updateComponentSpec(component_id){
@@ -369,13 +376,14 @@ class LimbforgeForm extends React.Component {
   render() {
     this.loadNewDevices();
     this.loadTD();
+    
     var imageName = "diagram_" + this.state.specs.gender + "_" + this.state.specs.amputationLevel.toLowerCase() + "_" + this.state.specs.side.charAt(0).toUpperCase();
     var imageURL = this.props.images[imageName];
     return (
       <div>
         <div id="limbforge">
         <img className="logo" src={this.props.logo_img} />
-        <div>{"Hello"}</div>
+        <FormHeader loadSTL={this.state.loadSTL} toggleSTL={this.toggleSTL}/>
         <NameArea
           gender={this.state.specs.gender}
           availableLevels={this.state.availableLevels}
