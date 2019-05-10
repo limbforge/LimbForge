@@ -90,7 +90,6 @@ class LimbforgeForm extends React.Component {
   }
 
   toggleSTL(){
-    console.log("Toggle STL")
     var b = !this.state.loadSTL
     this.setState({loadSTL:b})
   }
@@ -142,14 +141,12 @@ class LimbforgeForm extends React.Component {
   }
 
   updateLoading(){
-    console.log("Loading", this.state.isLoading)
     if (this.state.isLoading){
       this.setState({isLoading: false});
     }
     else{
       this.setState({isLoading: true});
     }
-    console.log("Loading", this.state.isLoading)
   }
 
   getComponents(componentType) {
@@ -306,7 +303,6 @@ class LimbforgeForm extends React.Component {
   }
 
   loadNewDevices() {
-    console.log("Load new devices")
     if(this.state.loadSTL){
       if (this.state.specs.component != undefined){
         const s3url =  this.state.specs.amputationLevel == 'Transhumeral' ? 
@@ -441,7 +437,7 @@ class LimbforgeForm extends React.Component {
           loadingImg={this.props.images.loading_img}
           />
 
-          <FormExtras loadSTL={this.state.loadSTL} toggleSTL={this.toggleSTL}/>
+          <ExtrasArea loadSTL={this.state.loadSTL} toggleSTL={this.toggleSTL}/>
         </div>
         
         <LimbforgeFooter />
