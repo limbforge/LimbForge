@@ -29,6 +29,15 @@ l1 = Measurement.create(
   instructions: 'instructions go here'
 )
 
+l4 = Measurement.create(
+  name: 'L4',
+  step: 0.5,
+  upper_range: 25,
+  measurement_unit: "cm",
+  lower_range: 14,
+  default: 18,
+  instructions: 'instructions go here'
+)
 
 l2 = Measurement.create(
   name: 'L2',
@@ -102,17 +111,27 @@ forearm = Component.create(
   }
 )
 forearm.amputation_levels += [ transradial ]
-forearm.measurements += [ l1, l2, c1, c2, c3, c4 ]
+forearm.measurements += [ l1, l2, l4, c1, c2, c3, c4 ]
 forearm.terminal_devices +=[ standard_td ]
 
 
 # USERS
 
 User.create({
-  email:'lf@ergdyne.com',
+  email:'admin@limbforge.org',
   password: 'password',
   access_requested: false,
   has_access: true,
   password_confirmation: 'password',
   admin: true
+})
+
+
+User.create({
+  email:'user@limbforge.org',
+  password: 'password',
+  access_requested: false,
+  has_access: true,
+  password_confirmation: 'password',
+  admin: false
 })

@@ -40,6 +40,8 @@ brew services start postgresql
 #  pg_ctl -D /usr/local/var/postgres start
 rake db:create
 rake db:migrate
+#if db:migrate did not populate the seed data, then run
+rake db:seed 
 pg_restore -cOd limbforge_development ~/Desktop/latest.dump
 ```
 

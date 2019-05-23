@@ -18,10 +18,6 @@ class LimbforgeForm extends React.Component {
       specs: {
         fname: "",
         lname: "",
-        PL_1: 0,
-        PL_2: 0,
-        PL_3: 0,
-        PL_4: 0,
         gender: "",
         man_hover: false,
         woman_hover: false,
@@ -370,6 +366,8 @@ class LimbforgeForm extends React.Component {
   }
 
   render() {
+    console.log(this.state.availableLevels)
+    console.log(this.state.specs.amputationLevel)
     this.loadNewDevices();
     this.loadTD();
     
